@@ -38,6 +38,12 @@
 - 西交官方三维校园介绍：<https://nic.xjtu.edu.cn/wlfw/wlfw/xnxy.htm>。
 - 建筑基础数据署名保留： © OpenStreetMap contributors / ODbL 1.0；无授权照片被包含在仓库。
 
+## 前端细节验收
+
+本轮运行真实 Taste-Skill app inspector，并进行至少一次“观察 → 修复 → 重看”的移动端 UI 循环。修复了全屏按钮误判为 emoji、标题层级、部分过小的操作标签、按钮装饰阴影和手机详情卡滚动条。390×844 的最终截图以 `final-mobile-library.png` 为准，显示完整地点详情和底部动作按钮，无永久滚动条覆盖。
+
+最终 inspector 仍为 **1 FAIL / 3 WARN**：通用检查器没有识别此 WebGL 地图工作台的标题位置（页面可见品牌标题和地图说明，作为产品例外待继续审视）；89% 可见文字小于 13px、暖色背景以及开发服务器检测属于告警。自动检查结果保存于 `taste-final-v3/report.json`，不是人类审美认证。没有借用未授权的 Designeer 图像素材。
+
 ## 自动化和部署检查
 
 执行：`npm run verify`、`npm run build`、`git diff --check`、桌面/窄屏无界面 Edge WebGL 截图。发布后须复查 Pages 文件 HTTP 200、GitHub workflow 成功、实际在线画面。

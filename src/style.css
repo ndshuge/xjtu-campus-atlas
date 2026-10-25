@@ -17,3 +17,5 @@ body:has(#detail:not([hidden])) .intro,body:has(#detail:not([hidden])) .view-tit
 .identity h1{margin:0;font-weight:inherit}
 :is(.list-heading,.place small,.explorer-foot,.explorer-foot button,.layers p,.mini-panel>div:first-child,.mini-panel small,.mini-legend,.toolbar button span,footer,.attribution,.attribution button,.detail .detail-type,.detail-stats span,.detail-stats small,.evidence,.notice,.detail-link,.label,.walk-note span,.walk-note button,.tour-hud button,dialog .data-counts,.intro .eyebrow,.intro p,.interaction-hint,.text-btn,.identity small){font-size:11px}
 .map-square,.label,.toolbar button,.zoom-control button{box-shadow:none}
+.walk-note,.walk-note kbd,#tour-step{font-size:11px}
+@media(max-width:768px){.detail{max-height:56dvh;scrollbar-width:none}.detail::-webkit-scrollbar{width:0;display:none}}
