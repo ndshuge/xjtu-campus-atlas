@@ -1,85 +1,56 @@
 import * as THREE from 'three';
-import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {boxGeometry} from './geo.js';
+import {architectureBatch,stoneMaterial,glassMaterial} from './architecture-kit.js';
 
-/**
- * Interpreted architectural detailing of XJTU Main Building E.
- * Matches the existing OSM footprint and estimated height; not a survey/BIM.
- * Independent facade surfaces preserve the selectable OSM building mesh.
- */
+export function mainTowerMassing(footprint,height,baseY){
+ const [x0,z0,x1,z1]=footprint,w=x1-x0,d=z1-z0,cx=(x0+x1)/2,cz=(z0+z1)/2;
+ // Actual open portal, not a dark rectangle stuck on a solid box.
+ return{bodyHeight:height-18.5,piers:[
+  [x0+3.6,baseY+height-18.5,cz,7.2,18.5,d],
+  [x1-3.6,baseY+height-18.5,cz,7.2,18.5,d],
+  [cx,baseY+height-3.1,cz,w,3.1,d]
+ ],portal:{centerX:cx,bottom:baseY+height-18.5,top:baseY+height-3.1,width:w-14.4}};
+}
 export function createMainTowerFacade({footprint,height,baseY}){
-  const [x0,z0,x1,z1]=footprint;
-  const cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0;
-  if(!(w>12&&d>12&&height>20))throw Error('Unexpected main tower dimensions');
-  const group=new THREE.Group();
-  group.name='XJTU main E — interpreted architectural details';
-  const parts={stone:[],glass:[],frame:[],shade:[]};
-  const add=(kind,x,y,z,a,b,c)=>{
-    if([x,y,z,a,b,c].some(n=>!Number.isFinite(n))||a<=0||b<=0||c<=0)throw Error('Invalid main tower facade part');
-    parts[kind].push(boxGeometry(x,y,z,a,b,c));
-  };
-  // Distinctive tall blue-glass center and pale stone piers, seen in campus photos.
-  // Both faces are decorated: the captured facade orientation is not surveyed.
-  const glazedW=Math.min(21,w*.6),glassStart=baseY+10,glassTop=baseY+height-11;
-  for(const face of [-1,1]){
-    const z=face>0?z1+.09:z0-.09;
-    const gf=z+face*.10,outline=z+face*.29;
-    add('glass',cx,glassStart,gf,glazedW,glassTop-glassStart,.28);
-    for(let i=0;i<=6;i++){
-      const x=cx-glazedW/2+glazedW*i/6;
-      add('frame',x,glassStart,outline,.19,glassTop-glassStart,.36);
-    }
-    for(let y=glassStart+3.7;y<glassTop-.5;y+=3.7)
-      add('frame',cx,y,outline,glazedW,.18,.36);
-    const pierOffset=glazedW/2+1.2;
-    for(const side of [-1,1])
-      add('stone',cx+side*pierOffset,baseY+8,z+face*.22,1.35,height-10,.85);
-    // Entrance vestibule and restrained canopy.
-    add('glass',cx,baseY+1.2,z+face*.35,Math.min(17,glazedW),7,.34);
-    add('frame',cx,baseY+7.9,z+face*.6,Math.min(19,glazedW+2),.45,1.5);
-    for(let i=-2;i<=2;i++)
-      add('frame',cx+i*3,baseY+1.1,z+face*.64,.15,6.8,.36);
-    // Upper framed visual opening. Backed by dark glass to avoid making an
-    // unsupported claim that an actual void/transparent passage is modeled.
-    const portalBase=baseY+height-15;
-    add('shade',cx,portalBase,z+face*.12,glazedW*.78,11.5,.35);
-    add('stone',cx,baseY+height-3.2,z+face*.38,glazedW*.9,1.3,1.25);
-    for(const side of [-1,1])
-      add('stone',cx+side*glazedW*.45,portalBase,z+face*.38,1.35,12.8,1.4);
+ const [x0,z0,x1,z1]=footprint,cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0;
+ const b=architectureBatch('Main E / stone frame, glazing and open roof portal',{
+  stone:stoneMaterial('#c8bbae'),glass:glassMaterial('#344c5d'),
+  frame:new THREE.MeshStandardMaterial({color:'#80898a',metalness:.4,roughness:.48}),
+  shade:new THREE.MeshStandardMaterial({color:'#6a6b65',roughness:.85})
+ });
+ const top=baseY+height-19.0,bottom=baseY+11,glassW=w*.48;
+ for(const side of [-1,1]){
+  const z=side<0?z0-.13:z1+.13;
+  b.box('glass',cx,bottom,z,glassW,top-bottom,.22);
+  for(let i=0;i<=6;i++)b.box('frame',cx-glassW/2+i*glassW/6,bottom,z+side*.17,.10,top-bottom,.22);
+  for(let y=bottom+2.95;y<top-.5;y+=3.15){
+   b.box('stone',cx,y,z+side*.20,glassW,.36,.36);
+   b.box('frame',cx,y+.45,z+side*.22,glassW,.08,.18);
   }
-  // Side facade bands provide depth in the orbital camera (not only front decals).
-  const facadeSideWidth=d*.72;
-  for(const side of [-1,1]){
-    const x=side>0?x1+.09:x0-.09;
-    for(let i=0;i<5;i++){
-      const z=cz-facadeSideWidth/2+(i+.5)*facadeSideWidth/5;
-      add('glass',x,baseY+13,z,.21,height-23,facadeSideWidth/7.5);
-      add('frame',x+side*.23,baseY+13,z,.32,height-23,.12);
-    }
+  for(const s of [-1,1]){
+   b.box('stone',cx+s*(glassW/2+1.2),baseY+1,z+side*.25,1.45,height-3,.70);
+   b.box('glass',cx+s*(w/2-3.0),baseY+8.0,z,2.6,height-12,.20);
   }
-
-  const mats={
-    stone:new THREE.MeshStandardMaterial({color:'#c4c6b8',roughness:.85}),
-    glass:new THREE.MeshStandardMaterial({color:'#3d727b',roughness:.23,metalness:.3,emissive:'#10282d',emissiveIntensity:.09}),
-    frame:new THREE.MeshStandardMaterial({color:'#778b87',roughness:.48,metalness:.22}),
-    shade:new THREE.MeshStandardMaterial({color:'#243e47',roughness:.7,metalness:.04})
-  };
-  for(const [kind,geos] of Object.entries(parts)){
-    if(!geos.length)continue;
-    const geo=mergeGeometries(geos,false);
-    geos.forEach(g=>g.dispose());
-    if(!geo)throw Error('Unable to batch main tower geometry');
-    const mesh=new THREE.Mesh(geo,mats[kind]);
-    mesh.name='Main building E / '+kind;
-    mesh.castShadow=kind==='stone';
-    mesh.receiveShadow=true;
-    group.add(mesh);
+  b.box('glass',cx,baseY+.9,z+side*.1,17,8.5,.22);
+  for(let i=-2;i<=2;i++)b.box('frame',cx+i*3.1,baseY+.8,z+side*.35,.16,8.6,.35);
+  b.box('stone',cx,baseY+9.4,z+side*.35,23,.75,1.6);
+  b.box('stone',cx,top-.2,z+side*.35,w-4,.8,1.1);
+  // Recessed inner portal surfaces and an open balustrade behind the opening.
+  b.box('shade',cx,baseY+height-18.2,z-side*1.2,w-13.8,.3,2);
+  for(let i=-4;i<=4;i++)b.box('frame',cx+i*2.3,baseY+height-18,z-side*2.0,.10,1.1,.10);
+  b.box('frame',cx,baseY+height-16.9,z-side*2.0,20,.10,.12);
+ }
+ for(const side of [-1,1]){
+  const x=side<0?x0-.13:x1+.13;
+  for(let i=0;i<7;i++){
+   const z=z0+3+(i+.5)*(d-6)/7;
+   b.box('glass',x,baseY+8,z,.20,height-12,2.6);
   }
-  group.userData={
-    sourceFootprint:'OpenStreetMap building 263624057',
-    heightPolicy:'existing estimated height, no new measurement',
-    accurateSurvey:false,
-    designIntent:'photo-informed approximated facade'
-  };
-  return group;
+  for(let y=baseY+11;y<baseY+height-4;y+=3.15)b.box('stone',x+side*.12,y,cz,.35,.34,d-3);
+ }
+ // Lightweight roof trellis observed in the front and aerial references.
+ for(let i=0;i<11;i++)b.box('frame',x0+2+i*(w-4)/10,baseY+height-1.20,cz,.18,1.1,d*.92);
+ b.box('frame',cx,baseY+height-1.20,z0+1,w-2,.22,.22);
+ b.box('frame',cx,baseY+height-1.20,z1-1,w-2,.22,.22);
+ const g=b.finish();g.userData={sourceFootprint:'OSM 263624057',referenceDates:['2012-11-06','2025-07-25'],estimated:true,openPortal:true,heightPolicy:'existing 80.5m body estimate; lightweight rooftop detailing, not surveyed'};
+ return g;
 }
