@@ -9,3 +9,12 @@ Files:
 Both image file pages explicitly specify **Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**, https://creativecommons.org/licenses/by-sa/4.0/. Preview copies are resized to 960 pixels; no edits to scene content were made. The images are separately licensed under CC BY-SA 4.0; no other assets in this repository automatically inherit that license.
 
 Please attribute **Liuxingy**, link the specific Wikimedia Commons original and CC BY-SA 4.0 license, and note if future image modifications are made. The project embeds only reduced previews and does not claim authorship of these images.
+
+## North and south gate photos (2011)
+
+These Commons files are historical photographic references, not 2026 live conditions or measurable 3D scans. Both are unmodified scene content as Commons-provided 960px thumbnails.
+
+- `north-gate-2011.jpg` — **XJTU Main Gate.JPG**; photographer **IronBlood**; 2011-04-08; original https://commons.wikimedia.org/wiki/File:XJTU_Main_Gate.JPG
+- `south-gate-2011.jpg` — **XJTU Gate.jpg**; photographer **Jucember**; 2011-08-19; original https://commons.wikimedia.org/wiki/File:XJTU_Gate.jpg
+
+Both use **CC BY-SA 3.0 Unported**, https://creativecommons.org/licenses/by-sa/3.0/. Retain author credit, original file links, and license links in the interface. These photographs remain separately licensed; using them does not make our approximate 3D meshes true architectural records. The source images have only been resized by the Commons thumbnail service.

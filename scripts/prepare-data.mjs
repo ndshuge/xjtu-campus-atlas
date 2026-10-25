@@ -46,7 +46,7 @@ for(const e of es){const t=e.tags||{};
   if(e.type==='relation'&&!e.members?.some(m=>m.geometry))continue;let points;try{points=poly(e);}catch{continue;}if(!points||points.length<4)continue;const center=centroid(points);if(!onCampus(center))continue;let kind=t.natural==='water'?'water':t.leisure==='pitch'?'pitch':/wood|tree_row|scrub/.test(t.natural||'')?'wood':/grass|meadow|forest/.test(t.landuse||'')||t.leisure==='park'||t.leisure==='garden'?'green':t.highway==='pedestrian'?'plaza':null;
   if(kind)surfaces.push({id:`${e.type}/${e.id}`,name:t.name||'',points,center,kind,sport:t.sport||null,area:area(points),tags:t});
  }
- if(e.type==='node'&&t.name&&Number.isFinite(e.lat)){const position=project(e);if(onCampus(position)||t.name==='西安交通大学北门')pois.push({id:`node/${e.id}`,name:t.name,position,tags:t,lon:e.lon,lat:e.lat});}
+ if(e.type==='node'&&t.name&&Number.isFinite(e.lat)){const position=project(e);if(onCampus(position)||t.name==='西安交通大学北门'||(t.barrier==='gate'&&position[0]>-510&&position[0]<800&&position[1]>-640&&position[1]<620))pois.push({id:`node/${e.id}`,name:t.name,position,tags:t,lon:e.lon,lat:e.lat});}
 }
 const landmarksExtra=[
  {match:'腾飞塔',name:'腾飞塔',category:'culture',description:'校园中轴上的标志性纪念塔。位置来自 OSM 节点；塔身、台阶与雕塑为示意建模。'},

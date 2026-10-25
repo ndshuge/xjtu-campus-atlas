@@ -49,7 +49,7 @@ export function createNorthGate(position,baseY=1.1){
   ctx.fillStyle='#26302d';ctx.font='bold '+fontSize+'px Arial,"Microsoft YaHei",sans-serif';
   ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,512,80);
   const map=new THREE.CanvasTexture(c);map.colorSpace=THREE.SRGBColorSpace;
-  add(new THREE.PlaneGeometry(wide,2.4),new THREE.MeshBasicMaterial({map,transparent:true,side:THREE.DoubleSide}),'gate lettering',atX,atY,atZ);
+  const lettering=add(new THREE.PlaneGeometry(wide,2.4),new THREE.MeshBasicMaterial({map,transparent:true,side:THREE.DoubleSide}),'gate lettering',atX,atY,atZ);lettering.rotation.y=Math.PI;
  }
  sign('交通大学',25,x-18,baseY+8.0,z-6.7,90);
  sign('JIAOTONG UNIVERSITY',27,x+18,baseY+8.1,z-6.7,58);
