@@ -56,6 +56,21 @@ export function createLibraryFacade({centerX,stairFrontZ,steppedCenterZ,baseY,fo
  b.box('stone',centerX,baseY+10.25,front+.12,31,2.25,.75);
  b.box('roof',centerX,baseY+12.4,front+.25,32,.38,1.05);
  for(let i=0;i<7;i++)b.box('steps',centerX,baseY-.02,front+1.0+i*.85,33-i*.18,.16+(6-i)*.13,.88);
+ // Photo-informed entrance articulation: a recessed vestibule, paired glass
+ // leaves, mullion transoms and a substantial projecting stone threshold.
+ // Source photos confirm a glazed principal facade; this is not a surveyed plan.
+ b.box('roof',centerX,baseY+9.94,front+.8,29.5,.34,2.6);
+ for(const side of [-1,1]){
+  b.box('stone',centerX+side*13.95,baseY+4.65,front+.45,.75,9.4,1.2);
+  b.box('mullion',centerX+side*6.65,baseY+4.45,front+.43,.22,8.5,.22);
+ }
+ for(let bay=-3;bay<=3;bay++){
+  const bx=centerX+bay*3.28;
+  b.box('mullion',bx,baseY+3.8,front+.38,.10,6.65,.24);
+  b.box('mullion',bx,baseY+6.85,front+.40,3.2,.12,.24);
+  if(bay!==0)b.box('glass',bx+1.61,baseY+1.72,front+.39,3.0,3.05,.13);
+ }
+ b.box('roof',centerX,baseY+.12,front+.6,26.8,.24,1.35);
  const group=b.finish();
  const sign=labelTexture('钱学森图书馆',{background:'#cbbfb0',color:'#222a2c'});
  if(sign){const plaque=new THREE.Mesh(new THREE.PlaneGeometry(26,1.8),new THREE.MeshStandardMaterial({map:sign,roughness:.8}));plaque.position.set(centerX,baseY+11.4,front+.52);plaque.name='Library name / typographic approximation';group.add(plaque);}
