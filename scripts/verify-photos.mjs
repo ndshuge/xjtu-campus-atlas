@@ -14,10 +14,12 @@ for(const file of photos){
 }
 const inscription=fs.readFileSync(path.join(project,'public','assets','reference','north-gate-calligraphy-crop.png'));
 assert(inscription.length>8000&&inscription[0]===0x89&&inscription.subarray(1,4).toString()==='PNG','Missing real-source north gate inscription crop');
+const southCrop=fs.readFileSync(path.join(project,'public','assets','reference','south-gate-signage-crop.png'));
+assert(southCrop.length>7000&&southCrop[0]===0x89&&southCrop.subarray(1,4).toString()==='PNG','Missing South Gate photographic facade crop');
 const license=fs.readFileSync(path.join(project,'public','assets','reference','README.md'),'utf8');
 assert(license.includes('Liuxingy')&&license.includes('https://creativecommons.org/licenses/by-sa/4.0/'),'Library photo attribution is incomplete');
 assert(license.includes('IronBlood')&&license.includes('Jucember')&&license.includes('https://creativecommons.org/licenses/by-sa/3.0/'),'Gate photo attribution is incomplete');
-assert(license.includes('north-gate-calligraphy-crop.png')&&license.includes('adapted derivative'),'Adapted calligraphy source and share-alike license must be documented');
+assert(license.includes('north-gate-calligraphy-crop.png')&&license.includes('south-gate-signage-crop.png')&&license.includes('adapted derivative'),'Adapted gate textures and share-alike license must be documented');
 const html=fs.readFileSync(path.join(project,'index.html'),'utf8');
 for(const id of ['detail-peek','detail-photo-shortcut','detail-walk-shortcut','detail-expand','close-detail-mobile'])
  assert(html.includes(id),`Missing interactive mobile UI: ${id}`);

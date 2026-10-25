@@ -16,30 +16,21 @@ export function createSouthGate(position,baseY=1.1){
   mesh.castShadow=true;mesh.receiveShadow=true;group.add(mesh);return mesh;
  };
  // Broad southern nameplate and low plinth, with clearly differentiated massing.
- add(new THREE.BoxGeometry(47,.42,3),edges,'sign plinth',x,baseY+.21,z+2.5);
- add(new THREE.BoxGeometry(46.5,2.7,2.3),plaque,'red granite sign wall',x,baseY+1.66,z+2.7);
- add(new THREE.BoxGeometry(46.8,.23,2.5),edges,'sign cap',x,baseY+3.12,z+2.7);
+ add(new THREE.BoxGeometry(27,.42,3),edges,'sign plinth',x,baseY+.21,z+2.5);
+ add(new THREE.BoxGeometry(26.5,3.65,2.3),plaque,'red granite sign wall',x,baseY+2.05,z+2.7);
+ add(new THREE.BoxGeometry(26.8,.23,2.5),edges,'sign cap',x,baseY+3.94,z+2.7);
  // Central seal, simplified circular representation.
- const medallion=add(new THREE.CylinderGeometry(.93,.93,.14,64),gold,'center university seal',x,baseY+1.85,z+3.92);
- medallion.rotation.x=Math.PI/2;
- const medInner=add(new THREE.CylinderGeometry(.69,.69,.15,64),edges,'seal inner medallion',x,baseY+1.85,z+4.04);
- medInner.rotation.x=Math.PI/2;
- function lettering(text,cx,sz,color='#e0c47f'){
-  const c=document.createElement('canvas');c.width=1536;c.height=220;
-  const ctx=c.getContext('2d');ctx.clearRect(0,0,c.width,c.height);
-  ctx.fillStyle=color;ctx.textAlign='center';ctx.textBaseline='middle';
-  ctx.font='bold '+sz+'px Arial,"Microsoft YaHei",sans-serif';
-  ctx.fillText(text,768,113);
-  const map=new THREE.CanvasTexture(c);map.colorSpace=THREE.SRGBColorSpace;
-  add(new THREE.PlaneGeometry(22,2.1),new THREE.MeshBasicMaterial({map,transparent:true,side:THREE.DoubleSide}),'name inscription',cx,baseY+2.03,z+3.93);
- }
- lettering('西安交通大学',x-12.4,130);
- lettering("XI'AN JIAOTONG UNIVERSITY",x+12.6,88);
+ // The historical photographic facade texture includes the central university seal.
+ // Photo facade includes historic real calligraphy, bilingual name and seal.
+ const historicTexture=new THREE.TextureLoader().load((import.meta.env?.BASE_URL||'./')+'assets/reference/south-gate-signage-crop.png');
+ historicTexture.colorSpace=THREE.SRGBColorSpace;historicTexture.anisotropy=8;
+ const historicFacade=add(new THREE.PlaneGeometry(26.3,3.5),new THREE.MeshBasicMaterial({map:historicTexture,side:THREE.DoubleSide}),'2011 photographed south gate signage',x,baseY+2.05,z+3.97);
+ historicFacade.castShadow=false;
  // Fence beside the sign, not an invented solid wall spanning the whole road.
  for(const side of [-1,1]){
-  add(new THREE.BoxGeometry(20,1.2,.16),frame,'side guard rail',x+side*34,baseY+1.3,z);
-  for(let j=-9;j<=9;j+=2){
-   add(new THREE.BoxGeometry(.11,1.4,.16),frame,'guard rail spindle',x+side*34+j,baseY+1.1,z);
+  add(new THREE.BoxGeometry(11,1.2,.16),frame,'side guard rail',x+side*20,baseY+1.3,z);
+  for(let j=-5;j<=5;j+=2){
+   add(new THREE.BoxGeometry(.11,1.4,.16),frame,'guard rail spindle',x+side*20+j,baseY+1.1,z);
   }
  }
  // Low entrance building behind the sign, reminiscent of the distinct

@@ -43,6 +43,7 @@ try{
  const southGate=createSouthGate(gates.find(g=>g.name==='南门').position,1.1);
  const southBox=new THREE.Box3().setFromObject(southGate);
  assert(southGate.children.some(c=>c.name==='red granite sign wall'));
+ assert(southGate.children.some(c=>c.name==='2011 photographed south gate signage'));
  assert(southGate.children.some(c=>c.name==='roof lantern'));
  assert(southBox.max.y<20&&southBox.min.y>0);
  console.log(JSON.stringify({passed:true,otherGateCount:tested,hasNorth:true,northBounds:[box.min.toArray(),box.max.toArray()]}));
