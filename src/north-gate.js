@@ -50,12 +50,12 @@ export function createNorthGate(position,baseY=1.1){
   ctx.fillStyle='#303633';ctx.font='bold '+font+'px Arial,"Microsoft YaHei",sans-serif';
   ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(txt,800,104);
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;
-  const mesh=add(new THREE.PlaneGeometry(w,2.15),new THREE.MeshBasicMaterial({map:t,transparent:true,depthWrite:false,side:THREE.DoubleSide}),'front facade inscription',px,baseY+8.65,z+front-.24);
+  const mesh=add(new THREE.PlaneGeometry(w,2.15),new THREE.MeshBasicMaterial({map:t,transparent:true,depthWrite:false,side:THREE.FrontSide}),'front facade inscription',px,baseY+8.65,z+front-.24);
   mesh.rotation.y=Math.PI;mesh.castShadow=false;
  }
  const calligraphy=new THREE.TextureLoader().load((import.meta.env?.BASE_URL||'/')+'assets/reference/north-gate-calligraphy-crop.png');
  calligraphy.colorSpace=THREE.SRGBColorSpace;calligraphy.anisotropy=8;
- const photographed=add(new THREE.PlaneGeometry(26,2.38),new THREE.MeshBasicMaterial({map:calligraphy,side:THREE.DoubleSide,depthWrite:false}),'2011 photographed north gate inscription',x+16.8,baseY+8.6,z-6.58);
+ const photographed=add(new THREE.PlaneGeometry(26,2.38),new THREE.MeshBasicMaterial({map:calligraphy,side:THREE.FrontSide,depthWrite:false}),'2011 photographed north gate inscription',x+16.8,baseY+8.6,z-6.58);
  photographed.rotation.y=Math.PI;photographed.castShadow=false;
  sign('JIAOTONG UNIVERSITY',29,x-16.8,90);
  g.userData={accuracy:'2011-photo-informed approximation, not surveyed',source:'Wikimedia Commons XJTU Main Gate.JPG / IronBlood'};

@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "viewport": 390,
+  "shift": {
+    "x": 61,
+    "y": 18
+  },
+  "matched": [
+    {
+      "name": "腾飞塔",
+      "dx": 61,
+      "dy": 18
+    },
+    {
+      "name": "西北门",
+      "dx": 54,
+      "dy": 15
+    },
+    {
+      "name": "主楼E座",
+      "dx": 68,
+      "dy": 23
+    }
+  ],
+  "note": "CDP Edge touchscreen emulation; does not substitute real iPhone Safari"
+}
