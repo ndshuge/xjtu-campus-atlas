@@ -7,6 +7,7 @@ import {makeGroundPattern} from './ground-pattern.js';
 import {makeCanopyTexture} from './foliage-texture.js';
 import {createSurfaceTexture} from './surface-textures.js';
 import {findSafeWalkStart} from './walk-placement.js';
+import {createFourInventionsMarker} from './four-inventions.js';
 import {Sky} from 'three/addons/objects/Sky.js';
 import {BASE,shape,flat,extrude,pointIn,pointSegment,bounds,ribbon,rng,boxGeometry,rectangle} from './geo.js';
 
@@ -43,7 +44,7 @@ export class CampusWorld{
  }
  buildSurfaces(){
   const groups={wood:[],green:[],water:[],pitch:[],plaza:[]};
-  for(const s of this.data.surfaces){groups[s.kind].push(flat(s.points,BASE+.02));if(s.kind==='pitch')this.buildPitch(s);if(s.name){const hit=this.mesh(flat(s.points,BASE+.13),new THREE.MeshBasicMaterial({visible:false,side:THREE.DoubleSide}),{receive:false});hit.userData.place={...s,position:s.center,category:s.kind==='pitch'?'sports':'culture',categoryName:s.kind==='pitch'?'运动场地':'校园景观',description:'边界与名称来自 OSM；设施与场地纹理为程序化示意。'};this.pickables.push(hit);}}
+  for(const s of this.data.surfaces){if(s.kind==='pitch')this.buildPitch(s);else groups[s.kind].push(flat(s.points,BASE+.02));if(s.name){const hit=this.mesh(flat(s.points,BASE+.13),new THREE.MeshBasicMaterial({visible:false,side:THREE.DoubleSide}),{receive:false});hit.userData.place={...s,position:s.center,category:s.kind==='pitch'?'sports':'culture',categoryName:s.kind==='pitch'?'运动场地':'校园景观',description:'边界与名称来自 OSM；设施与场地纹理为程序化示意。'};this.pickables.push(hit);}}
   this.groundPattern=makeGroundPattern();this.merge(groups.green,this.mat('#a4bd91',{map:this.groundPattern}));this.merge(groups.wood,this.mat('#a5bc90',{map:this.groundPattern}));this.merge(groups.plaza,this.mat('#dbd9c7',{map:this.pavers}));
   this.waterMaterial=this.mat('#85afa7',{roughness:.24,metalness:.20,map:this.waterTexture});this.merge(groups.water,this.waterMaterial);
   const shoreline=[];for(const s of this.data.surfaces.filter(s=>s.kind==='water'))for(let i=0;i<s.points.length;i++){const a=s.points[i],b=s.points[(i+1)%s.points.length];if(Math.hypot(b[0]-a[0],b[1]-a[1])>.1)shoreline.push(ribbon([a,b],.85,BASE+.089));}
@@ -51,28 +52,30 @@ export class CampusWorld{
   this.merge(groups.pitch,this.mat('#748e63'));
  }
  buildPitch(s){const [x0,z0,x1,z1]=bounds(s.points),cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0;let pos=[];
-  const line=(a,b)=>pos.push(a[0],BASE+.105,a[1],b[0],BASE+.105,b[1]);
+  // Each pitch owns exactly one base; avoid drawing a coincident generic surface.
+  if(s.name!=='东田径场')this.mesh(flat(s.points,BASE+.065),this.mat(s.sport==='soccer'?'#789963':'#80986a'));
+  const line=(a,b)=>pos.push(a[0],BASE+.22,a[1],b[0],BASE+.22,b[1]);
   const rect=(x,z,rw,rd)=>{const p=rectangle(x,z,rw,rd);for(let i=1;i<p.length;i++)line(p[i-1],p[i]);};
   const circle=(x,z,r,n=48)=>{for(let i=0;i<n;i++)line([x+Math.cos(i/n*Math.PI*2)*r,z+Math.sin(i/n*Math.PI*2)*r],[x+Math.cos((i+1)/n*Math.PI*2)*r,z+Math.sin((i+1)/n*Math.PI*2)*r]);};
   if(s.name==='东田径场'){
    // The surveyed perimeter determines the stadium footprint; lane striping is schematic.
-   this.mesh(flat(s.points,BASE+.035),this.mat('#b87661'));
-   const fw=w*.64,fd=d*.67;this.mesh(flat(rectangle(cx,cz,fw,fd),BASE+.055),this.mat('#789a65'));
-   const r=fw/2+3,straight=Math.max(0,(fd-fw)/2);for(let k=0;k<6;k++){const rr=r+k*1.65;let pts=[];for(let i=0;i<=96;i++){const t=i/96*Math.PI*2;pts.push([cx+Math.cos(t)*rr,cz+Math.sin(t)*rr+(Math.sin(t)>0?straight:-straight)]);}for(let i=1;i<pts.length;i++)line(pts[i-1],pts[i]);}
+   this.mesh(flat(s.points,BASE+.065),this.mat('#b87661',{polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1}));
+   const fw=w*.64,fd=d*.67;this.mesh(flat(rectangle(cx,cz,fw,fd),BASE+.115),this.mat('#789a65'));
+   const r=fw/2+3,straight=Math.max(0,(fd-fw)/2);for(let k=0;k<6;k++){const rr=r+k*1.65;const half=[];for(let i=0;i<=48;i++){const t=i/48*Math.PI;half.push([cx+Math.cos(t)*rr,cz+straight+Math.sin(t)*rr]);}for(let i=1;i<half.length;i++)line(half[i-1],half[i]);const lower=[];for(let i=0;i<=48;i++){const t=Math.PI+i/48*Math.PI;lower.push([cx+Math.cos(t)*rr,cz-straight+Math.sin(t)*rr]);}line(half[half.length-1],lower[0]);for(let i=1;i<lower.length;i++)line(lower[i-1],lower[i]);line(lower[lower.length-1],half[0]);}
    rect(cx,cz,fw*.88,fd*.89);line([cx-fw*.44,cz],[cx+fw*.44,cz]);circle(cx,cz,fw*.11);
    rect(cx,cz-fd*.34,fw*.5,fd*.2);rect(cx,cz+fd*.34,fw*.5,fd*.2);
    for(let j=0;j<4;j++)this.mesh(boxGeometry(cx+w*.45,BASE+1+j*1.1,cz,3.2,1.15,d*.72),this.mat(j%2?'#c0c7b1':'#d3d6c3'));
   }else if(s.sport==='soccer'){
-   for(let j=0;j<8;j++)if(j%2===0)this.mesh(flat(rectangle(cx,z0+(j+.5)*d/8,w*.93,d/8),BASE+.045),this.mat('#8da876'));
+   for(let j=0;j<8;j++)if(j%2===0)this.mesh(flat(rectangle(cx,z0+(j+.5)*d/8,w*.93,d/8),BASE+.115),this.mat('#8da876'));
    rect(cx,cz,w*.9,d*.91);line([cx-w*.45,cz],[cx+w*.45,cz]);circle(cx,cz,Math.min(w,d)*.14);rect(cx,z0+d*.15,w*.5,d*.21);rect(cx,z1-d*.15,w*.5,d*.21);
   }else if(w>10&&d>10){
    const sport=s.sport||'tennis';const unit=sport==='basketball'?15:11;const nx=Math.max(1,Math.floor(w/unit));const nz=Math.max(1,Math.floor(d/(sport==='tennis'?26:28)));
    for(let i=0;i<nx;i++)for(let j=0;j<nz;j++){const ux=x0+(i+.5)*w/nx,uz=z0+(j+.5)*d/nz;rect(ux,uz,w/nx*.82,d/nz*.88);line([ux-w/nx*.41,uz],[ux+w/nx*.41,uz]);if(sport==='basketball')circle(ux,uz,Math.min(w/nx,d/nz)*.14,20);else{line([ux-w/nx*.26,uz-d/nz*.44],[ux-w/nx*.26,uz+d/nz*.44]);line([ux+w/nx*.26,uz-d/nz*.44],[ux+w/nx*.26,uz+d/nz*.44]);}}
   }
-  if(pos.length){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));this.scene.add(new THREE.LineSegments(g,new THREE.LineBasicMaterial({color:'#ebe8cf',transparent:true,opacity:.8})));}
+  if(pos.length){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));const marks=new THREE.LineSegments(g,new THREE.LineBasicMaterial({color:'#ebe8cf',transparent:false,depthTest:true,depthWrite:false}));marks.renderOrder=6;this.scene.add(marks);}
  }
  buildRoads(){const curb=[],roads=[],paths=[],mark=[];for(const r of this.data.roads){const foot=/footway|path|steps|cycleway/.test(r.kind);if(foot){paths.push(ribbon(r.points,r.width,BASE+.115));continue;}curb.push(ribbon(r.points,r.width+2.5,BASE+.075));roads.push(ribbon(r.points,r.width,BASE+.125));
-  if(r.width>=6){let offset=0;for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<.1)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=offset;t<len-1;t+=12)mark.push(ribbon([[a[0]+dx*t,a[1]+dz*t],[a[0]+dx*Math.min(t+3,len),a[1]+dz*Math.min(t+3,len)]],.22,BASE+.079));offset=(offset-len)%12;if(offset<0)offset+=12;}}
+  if(r.width>=6){let offset=0;for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<.1)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=offset;t<len-1;t+=12)mark.push(ribbon([[a[0]+dx*t,a[1]+dz*t],[a[0]+dx*Math.min(t+3,len),a[1]+dz*Math.min(t+3,len)]],.22,BASE+.175));offset=(offset-len)%12;if(offset<0)offset+=12;}}
   }this.merge(curb,this.mat('#dfdeca',{map:this.pavers}));this.merge(roads,this.mat('#9baba3',{map:this.asphalt}));this.merge(paths,this.mat('#d3cdb7',{map:this.pavers}));this.merge(mark,this.mat('#e5dfbd'));
  }
  buildingMat(){const m=this.mat('#f0e9d2',{vertexColors:true,roughness:.82});m.onBeforeCompile=s=>{
@@ -127,6 +130,11 @@ export class CampusWorld{
  }
  addClock(x,y,z,r){const cv=document.createElement('canvas');cv.width=cv.height=128;const c=cv.getContext('2d');c.fillStyle='#dce2d1';c.beginPath();c.arc(64,64,61,0,Math.PI*2);c.fill();c.strokeStyle='#526555';c.lineWidth=3;for(let i=0;i<12;i++){const a=i/12*Math.PI*2;c.beginPath();c.moveTo(64+Math.sin(a)*48,64-Math.cos(a)*48);c.lineTo(64+Math.sin(a)*55,64-Math.cos(a)*55);c.stroke();}c.lineWidth=5;c.beginPath();c.moveTo(64,31);c.lineTo(64,64);c.lineTo(91,77);c.stroke();const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;const m=new THREE.MeshBasicMaterial({map:tx,transparent:true});const o=this.mesh(new THREE.PlaneGeometry(r*2,r*2),m,{receive:false});o.position.set(x,y,z);}
  buildLandmarks(){
+  const plaza=this.data.interpretive.find(p=>p.id==='interpretive/four-inventions');
+  if(plaza&&!this.blocked(plaza.position,3)){
+   this.fourInventionsMarker=createFourInventionsMarker(plaza.position);
+   this.scene.add(this.fourInventionsMarker);
+  }
   const stone=this.mat('#e6ddc4'),white=this.mat('#ece6d3'),gold=this.mat('#af9163',{metalness:.45,roughness:.4});this.landmarkGroup=new THREE.Group();this.scene.add(this.landmarkGroup);
   const tower=this.data.landmarks.find(p=>p.name==='腾飞塔');if(tower){const [x,z]=tower.position;for(let i=0;i<4;i++)this.mesh(boxGeometry(x,BASE+i*.7,z,18-i*3,.7,14-i*2),stone,{parent:this.landmarkGroup});
    for(let i=0;i<3;i++){const g=new THREE.ConeGeometry(i===0?2.9:2.2,i===0?29:23,3);g.translate(x+(i-1)*2.8,BASE+3+(i===0?14.5:11.5),z);const o=this.mesh(g,white,{cast:true,parent:this.landmarkGroup});o.userData.place=tower;this.pickables.push(o);}
@@ -252,11 +260,11 @@ export class CampusWorld{
  startTour(stops){this.exitWalk();this.setAuto(false);this.tour={stops,index:-1,paused:false,next:0};this.nextTour();}
  nextTour(){if(!this.tour)return;const t=this.tour;t.index=(t.index+1)%t.stops.length;const p=t.stops[t.index];this.focus(p);this.onSelect(p,false);t.next=performance.now()+8000;this.onTour?.(t);}
  endTour(){if(this.tour){this.tour=null;this.onTour?.(null);}}
- updateLabels(){const used=[];const dist=this.camera.position.distanceTo(this.controls.target);for(const item of this.labelItems){const selected=item.place.id===this.selectedPlace?.id;let visible=this.labelsEnabled&&this.mode!=='walk'&&(selected||item.priority<11||dist<600&&item.priority<45||dist<320);if(visible){const v=this.proj.copy(item.pos).project(this.camera);const x=(v.x+1)/2*this.width,y=(1-v.y)/2*this.height;const w=Math.min(180,item.place.name.length*10+22);visible=v.z<1&&v.z>-1&&x>w/2+6&&x<this.width-w/2-8&&y>99&&y<this.height-105;if(visible&&!selected){if(this.width>768&&x<327)visible=false;if(this.width>768&&x>this.width-220&&y>this.height-315)visible=false;if(used.some(r=>Math.abs(r.x-x)<(r.w+w)/2+9&&Math.abs(r.y-y)<31))visible=false;}if(visible){item.el.style.left=x+'px';item.el.style.top=y+'px';used.push({x,y,w});}}item.el.hidden=!visible;}}
+ updateLabels(){const used=[];const dist=this.camera.position.distanceTo(this.controls.target);for(const item of this.labelItems){const selected=item.place.id===this.selectedPlace?.id;let visible=this.labelsEnabled&&this.mode!=='walk'&&(selected||item.priority<11||dist<600&&item.priority<45||dist<320);if(visible){const v=this.proj.copy(item.pos).project(this.camera);const x=(v.x+1)/2*this.width,y=(1-v.y)/2*this.height;const w=Math.min(180,item.place.name.length*10+22);visible=v.z<1&&v.z>-1&&x>w/2+6&&x<this.width-w/2-8&&y>99&&y<this.height-105;if(visible&&!selected){if(this.width>768&&x<327)visible=false;if(this.width>768&&x>this.width-220&&y>this.height-315)visible=false;if(used.some(r=>Math.abs(r.x-x)<(r.w+w)/2+13&&Math.abs(r.y-y)<35)){item.overlapFrames=(item.overlapFrames||0)+1;if(item.overlapFrames>10)visible=false;}else item.overlapFrames=0;}if(visible){const smooth=item.screen&&Math.hypot(x-item.screen.x,y-item.screen.y)<170;const sx=smooth?item.screen.x*.46+x*.54:x,sy=smooth?item.screen.y*.46+y*.54:y;item.screen={x:sx,y:sy};item.el.style.left=Math.round(sx)+'px';item.el.style.top=Math.round(sy)+'px';used.push({x:sx,y:sy,w});}}item.el.hidden=!visible;}}
  drawMinimap(){const canvas=document.querySelector('#minimap');if(!canvas||innerWidth<=768)return;const c=canvas.getContext('2d'),w=canvas.width,h=canvas.height;const scale=Math.min((w-18)/1210,(h-15)/1180);const ox=132,oz=150;const cv=p=>[p[0]*scale+ox,p[1]*scale+oz];this.miniTransform={scale,ox,oz};c.clearRect(0,0,w,h);const poly=(ps,color,stroke)=>{c.beginPath();ps.forEach((p,i)=>{const [x,y]=cv(p);i?c.lineTo(x,y):c.moveTo(x,y);});c.closePath();if(color){c.fillStyle=color;c.fill();}if(stroke){c.strokeStyle=stroke;c.lineWidth=1.5;c.stroke();}};for(const p of this.data.boundary)poly(p,'#e0e6d4','#839a72');for(const s of this.data.surfaces)poly(s.points,s.kind==='water'?'#9bbdb2':s.kind==='pitch'?'#a1b783':'#b8caa3');for(const r of this.data.roads.filter(r=>r.campus)){c.beginPath();r.points.forEach((p,i)=>{const q=cv(p);i?c.lineTo(...q):c.moveTo(...q);});c.strokeStyle='#f2efdf';c.lineWidth=Math.max(1,r.width*scale);c.stroke();}for(const b of this.data.buildings)poly(b.points,b.id===this.selectedPlace?.id?'#65875a':'#b1b89e');const cp=cv([this.controls.target.x,this.controls.target.z]);c.strokeStyle='#6d8c56';c.lineWidth=1.3;c.beginPath();c.arc(...cp,13,0,Math.PI*2);c.stroke();c.fillStyle='#507842';c.beginPath();c.arc(...cp,3,0,Math.PI*2);c.fill();const cam=cv([this.camera.position.x,this.camera.position.z]);c.strokeStyle='#557c4855';c.beginPath();c.moveTo(...cp);c.lineTo(...cam);c.stroke();}
  animate(){requestAnimationFrame(()=>this.animate());if(document.hidden||this.contextLost)return;this.timer.update();const rawDt=this.timer.getDelta(),dt=Math.min(rawDt,.1),now=performance.now();this.frames++;if(rawDt>0){this.frameTimes.push(rawDt);if(this.frameTimes.length>120)this.frameTimes.shift();this.fps=this.frameTimes.length/this.frameTimes.reduce((a,b)=>a+b,0);}if(this.mode==='walk')this.moveWalk(dt);else if(this.flight){const f=this.flight,t=f.duration===0?1:Math.min((now-f.start)/f.duration,1),e=t*t*(3-2*t);this.camera.position.lerpVectors(f.from,f.to,e);this.controls.target.lerpVectors(f.targetFrom,f.targetTo,e);this.camera.lookAt(this.controls.target);if(t===1){this.flight=null;this.controls.enabled=true;this.controls.update();}}else this.controls.update(dt);
   if(this.tour&&!this.tour.paused&&now>this.tour.next)this.nextTour();
-  this.renderer.render(this.scene,this.camera);if(this.frames%3===0)this.updateLabels();if(this.frames%10===0){this.drawMinimap();const needle=document.querySelector('#compass-needle');needle.style.transform=`rotate(${-this.controls.getAzimuthalAngle()*180/Math.PI}deg)`;document.querySelector('#view-height').textContent=this.mode==='walk'?'地面 · 2 m':`视点 ${Math.round(this.camera.position.y)} m`;}if(this.frames%60===0)this.container.dataset.runtime=JSON.stringify(this.diagnostics());
+  this.renderer.render(this.scene,this.camera);this.updateLabels();if(this.frames%10===0){this.drawMinimap();const needle=document.querySelector('#compass-needle');needle.style.transform=`rotate(${-this.controls.getAzimuthalAngle()*180/Math.PI}deg)`;document.querySelector('#view-height').textContent=this.mode==='walk'?'地面 · 2 m':`视点 ${Math.round(this.camera.position.y)} m`;}if(this.frames%60===0)this.container.dataset.runtime=JSON.stringify(this.diagnostics());
  }
  diagnostics(){return{buildings:this.data.buildings.length,roads:this.data.roads.length,surfaces:this.data.surfaces.length,trees:this.treeCount,drawCalls:this.renderer.info.render.calls,triangles:this.renderer.info.render.triangles,geometries:this.renderer.info.memory.geometries,textures:this.renderer.info.memory.textures,fps:Math.round(this.fps),sceneLoadMs:Math.round(this.loadMs),mode:this.mode,walkStart:this.walkStart||null,light:this.lightMode,selected:this.selectedPlace?.name||null,webgl:'WebGL 2',camera:this.camera.position.toArray(),target:this.controls.target.toArray(),contextLost:!!this.contextLost,walkSpawn:this.walkSpawn||null,visibleLabels:this.labelItems.filter(l=>!l.el.hidden).length,reducedMotion:this.reduced,finiteGeometry:[...this.buildingMesh.geometry.attributes.position.array].every(Number.isFinite)};}
 }

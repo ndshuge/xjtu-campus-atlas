@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import * as THREE from 'three';
+import {pointIn} from '../src/geo.js';
+import {createFourInventionsMarker} from '../src/four-inventions.js';
+
+const data=JSON.parse(fs.readFileSync(new URL('../public/data/campus.json',import.meta.url),'utf8'));
+const plaza=data.interpretive.find(p=>p.id==='interpretive/four-inventions');
+assert(plaza,'The source dataset must include the square');
+assert(data.boundary.some(b=>pointIn(plaza.position,b)),'Square must lie within the campus');
+assert(!data.buildings.some(b=>pointIn(plaza.position,b.points)),'Square must not occupy an OSM building');
+const art=createFourInventionsMarker(plaza.position);
+assert(art.children.length>=8,'Missing identifiable sculptural geometry');
+const bounds=new THREE.Box3().setFromObject(art);
+assert(bounds.min.y>0&&bounds.max.y<18,'Landmark footprint or height unreasonable');
+for(const part of art.children)assert([...part.geometry.attributes.position.array].every(Number.isFinite),'Non-finite landmark coordinate');
+const src=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
+assert(src.includes("if(s.kind==='pitch')this.buildPitch(s);else"),'Do not double-render stadium ground');
+assert(src.includes('BASE+.22'),'Pitch lines must clear the field material');
+assert(src.includes('this.updateLabels();'),'Labels must update every frame during motion');
+assert(src.includes('item.screen.x*.46'),'Projected labels must use coordinate easing');
+console.log(JSON.stringify({passed:true,plaza:plaza.position,parts:art.children.length,stadiumLayering:true,labelSmoothing:true}));

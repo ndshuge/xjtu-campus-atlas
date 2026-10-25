@@ -55,7 +55,7 @@ const landmarksExtra=[
 for(const l of landmarksExtra){const p=pois.find(p=>p.name===l.match);if(p)l.position=p.position,l.id=p.id,l.lat=p.lat,l.lon=p.lon;}
 const southGate=roads.find(r=>/友谊/.test(r.name));
 // Four Inventions Square: a named public place on the university plan. Its center is interpretive.
-const interpretive=[{id:'interpretive/four-inventions',name:'四大发明广场',position:project({lon:108.97896,lat:34.24712}),category:'culture',description:'官方平面图确认的中轴广场。定位为依校园中轴推定的示意中心，不是测绘点位。',source:'official-map-interpretive'}];
+const interpretive=[{id:'interpretive/four-inventions',name:'四大发明广场',position:project({lon:108.97896,lat:34.24730}),category:'culture',description:'官方平面图确认的中轴广场。定位为依校园中轴推定的示意中心，不是测绘点位。',source:'official-map-interpretive'}];
 const data={schema:1,title:'西安交通大学 · 兴庆校区',origin,projection:{type:'local-equirectangular',units:'metres',x:'east',z:'south',metresPerDegree:[mx,mz]},boundary,buildings,roads,surfaces,pois,landmarks:landmarksExtra.filter(l=>l.position),interpretive,metadata:{retrieved:'2026-10-25',osmTimestamp:raw.osm3s.timestamp_osm_base,osmRelation:17568632,license:'ODbL-1.0',attribution:'© OpenStreetMap contributors',source:'https://www.openstreetmap.org/relation/17568632',officialMap:'https://vi.xjtu.edu.cn/qt/jddt.htm',notes:['仅兴庆校区；不含雁塔、曲江与创新港。','全部建筑基底源自 OSM，可能缺失未被贡献者绘制的新建筑。','无高度标签时按 OSM 层数或建筑类别估算；立面、屋顶、单株树木、纪念塔外观为示意。','地形采用平面近似，非 BIM、倾斜摄影或测绘成果。','OSM 与官方新图存在建设和名称时效差异，逐建筑展示已知提示。']}};
 data.projection.scaleModel='WGS84 ellipsoid prime-vertical and meridional radii at origin latitude';
 data.metadata.notes[2]='图书馆南楼最高体量参考学校2016年文献49.75m；其余高度按OSM层数、类别或地标估算。立面、屋顶、单株树木与纪念塔外观为示意。';
