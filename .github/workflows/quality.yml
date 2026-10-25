@@ -1,0 +1,32 @@
+name: Verify XJTU Campus 3D
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - name: Validate maps, landmarks, attribution and facade geometry
+        run: npm run verify
+      - name: Build GitHub Pages output
+        run: npm run build
+      - name: Ensure website evidence and OSM attribution are present
+        run: |
+          test -s docs/RESEARCH.md
+          test -s docs/REALISM_UPGRADE_20261025.md
+          test -s DESIGN_SOURCES.md
+          test -s dist/index.html
+          test -s dist/data/campus.json
+          grep -q "openstreetmap.org/copyright" dist/index.html

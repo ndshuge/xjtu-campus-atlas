@@ -1,0 +1,1092 @@
+{
+ "url": "http://127.0.0.1:18865/",
+ "at": "2026-10-25T05:16:39.243Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    1
+   ],
+   "motion": {
+    "elements": 23,
+    "css": 1,
+    "transitions": 21,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 900,
+     "screens": 1,
+     "words": 110,
+     "img": 0,
+     "video": 0,
+     "canvas": 2,
+     "svg": 9,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [
+      "⛶"
+     ],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "梧桐深处， 再见西交 。",
+     "words": 3,
+     "chars": 12,
+     "lines": 2,
+     "size": 43,
+     "vw": 3,
+     "font": "STSong",
+     "weight": 500,
+     "tracking": 0.07,
+     "leading": 1.27,
+     "top": 150,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": null,
+    "headings": [
+     {
+      "text": "梧桐深处， 再见西交。",
+      "words": 2,
+      "chars": 11,
+      "lines": 2,
+      "size": 43.2,
+      "vw": 3,
+      "font": "STSong",
+      "weight": 500,
+      "tracking": 0.069,
+      "leading": 1.27,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.16,
+      "top": 150,
+      "tag": "h1",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 1,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 0,
+     "medianWords": null,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Microsoft YaHei UI",
+       "share": 0.73,
+       "mono": false
+      },
+      {
+       "family": "Georgia",
+       "share": 0.13,
+       "mono": false
+      },
+      {
+       "family": "Consolas",
+       "share": 0.1,
+       "mono": true
+      },
+      {
+       "family": "STSong",
+       "share": 0.03,
+       "mono": false
+      },
+      {
+       "family": "STKaiti",
+       "share": 0.02,
+       "mono": false
+      }
+     ],
+     "familyCount": 5,
+     "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      16,
+      18,
+      19,
+      20,
+      23,
+      26,
+      43
+     ],
+     "sizeCount": 13,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 43.2,
+      "vw": 3,
+      "font": "STSong",
+      "text": "梧桐深处，再见西交"
+     },
+     "monoShare": 0.1,
+     "monoProseShare": 0.1,
+     "monoFamilies": [
+      "Consolas"
+     ],
+     "monoSamples": [
+      "34°14′50″ N 108°58′45″ E",
+      "XINGQING CAMPUS"
+     ],
+     "microLabels": 1,
+     "microLabelShare": 0.039,
+     "microSamples": [
+      "XINGQING CAMPUS"
+     ],
+     "upperShare": 0.1,
+     "centerShare": 0.2,
+     "smallText": 6
+    },
+    "eyebrows": [
+     {
+      "text": "34°14′50″ N 108°58′45″ E",
+      "above": "梧桐深处， 再见西交。",
+      "upper": false,
+      "tracked": true,
+      "mono": true,
+      "pill": false,
+      "size": 9,
+      "top": 119
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#dce5de",
+     "bodyBgHsl": {
+      "h": 133,
+      "s": 0.15,
+      "l": 0.88
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#253e35",
+       "share": 0.3
+      },
+      {
+       "color": "#657c65",
+       "share": 0.15
+      },
+      {
+       "color": "#45603d",
+       "share": 0.11
+      },
+      {
+       "color": "#87917c",
+       "share": 0.09
+      },
+      {
+       "color": "#607968",
+       "share": 0.06
+      }
+     ],
+     "button": null,
+     "lowContrast": [
+      {
+       "text": "校园地标",
+       "ratio": 3.1,
+       "need": 4.5,
+       "size": 9,
+       "fg": "#87917c",
+       "bg": "#f7f8f3"
+      },
+      {
+       "text": "校园地标",
+       "ratio": 3.1,
+       "need": 4.5,
+       "size": 9,
+       "fg": "#87917c",
+       "bg": "#f7f8f3"
+      },
+      {
+       "text": "校园地标",
+       "ratio": 3.1,
+       "need": 4.5,
+       "size": 9,
+       "fg": "#87917c",
+       "bg": "#f7f8f3"
+      },
+      {
+       "text": "校园地标",
+       "ratio": 3.1,
+       "need": 4.5,
+       "size": 9,
+       "fg": "#87917c",
+       "bg": "#f7f8f3"
+      }
+     ]
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 11,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "button.label → rgba(37, 60, 45, 0.063) 0px 2px 8px 0px",
+      "button.label → rgba(37, 60, 45, 0.063) 0px 2px 8px 0px",
+      "button.label → rgba(37, 60, 45, 0.063) 0px 2px 8px 0px",
+      "button.label → rgba(37, 60, 45, 0.063) 0px 2px 8px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 10,
+     "hairlineSamples": [
+      "div.categories 252px",
+      "button.place 252px",
+      "button.place 252px",
+      "button.place 252px",
+      "button.place 252px"
+     ],
+     "outlinedBoxes": 2,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 1,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 2,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": false,
+     "height": 68,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 900,
+    "margins": {
+     "left": 32,
+     "right": 26
+    },
+    "sections": [
+     {
+      "sel": "div#scene",
+      "tag": "div",
+      "top": 0,
+      "height": 900,
+      "words": 0,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div#labels",
+      "tag": "div",
+      "top": 0,
+      "height": 900,
+      "words": 11,
+      "media": 0,
+      "middle": 28,
+      "heading": null,
+      "left": 459,
+      "right": 550,
+      "textLeft": 478,
+      "textRight": 560,
+      "fullBleed": false,
+      "footer": true,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "梧桐深处， 再见西交。",
+      "size": 43,
+      "top": 150,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 32,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "dark": false,
+    "ground": "#dce5de",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 32,
+     "right": 26
+    },
+    "hero": {
+     "text": "梧桐深处， 再见西交 。",
+     "words": 3,
+     "chars": 12,
+     "lines": 2,
+     "size": 43,
+     "vw": 3,
+     "font": "STSong",
+     "weight": 500,
+     "tracking": 0.07,
+     "leading": 1.27,
+     "top": 150,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 2,
+     "firstScreen": 2,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 2,
+     "radii": [
+      [
+       5,
+       2
+      ]
+     ],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 2,
+     "softShadows": 0,
+     "shadowSamples": [
+      "rgba(37, 62, 53, 0.07) 0px 8px 30px 0px",
+      "rgba(37, 62, 53, 0.07) 0px 8px 30px 0px"
+     ],
+     "glass": 0
+    },
+    "chips": {
+     "count": 1,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 80,
+       "size": 50,
+       "radius": "4px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.89,
+     "tiny": 145,
+     "tinySamples": [
+      "腾飞塔 10px",
+      "钱学森图书馆 10px",
+      "主楼E座 10px",
+      "中心一楼 10px"
+     ],
+     "sizes": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      19,
+      23,
+      24,
+      26,
+      43
+     ]
+    },
+    "title": null,
+    "colourShare": 0.002
+   },
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 1,
+   "filled": [
+    0.98
+   ],
+   "motion": {
+    "elements": 22,
+    "css": 1,
+    "transitions": 20,
+    "scripted": 1,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 844,
+     "screens": 1,
+     "words": 36,
+     "img": 0,
+     "video": 0,
+     "canvas": 2,
+     "svg": 9,
+     "sections": 2,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 0,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "梧桐深处， 再见西交 。",
+     "words": 3,
+     "chars": 12,
+     "lines": 2,
+     "size": 29,
+     "vw": 7.4,
+     "font": "STSong",
+     "weight": 500,
+     "tracking": 0.07,
+     "leading": 1.27,
+     "top": 119,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "h1": null,
+    "headings": [
+     {
+      "text": "交",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 23,
+      "vw": 5.9,
+      "font": "STKaiti",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.09,
+      "top": 25,
+      "tag": "span",
+      "kind": "heading"
+     },
+     {
+      "text": "梧桐深处， 再见西交。",
+      "words": 2,
+      "chars": 11,
+      "lines": 2,
+      "size": 29,
+      "vw": 7.4,
+      "font": "STSong",
+      "weight": 500,
+      "tracking": 0.069,
+      "leading": 1.27,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.4,
+      "top": 119,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "+",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Georgia",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "right",
+      "widthRatio": 0.11,
+      "top": 163,
+      "tag": "button",
+      "kind": "heading"
+     },
+     {
+      "text": "−",
+      "words": 1,
+      "chars": 1,
+      "lines": 1,
+      "size": 26,
+      "vw": 6.7,
+      "font": "Georgia",
+      "weight": 400,
+      "tracking": 0,
+      "leading": 1,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "right",
+      "widthRatio": 0.11,
+      "top": 207,
+      "tag": "button",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 4,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 2,
+     "medianWords": 1,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Microsoft YaHei UI",
+       "share": 0.58,
+       "mono": false
+      },
+      {
+       "family": "Georgia",
+       "share": 0.18,
+       "mono": false
+      },
+      {
+       "family": "Consolas",
+       "share": 0.14,
+       "mono": true
+      },
+      {
+       "family": "STSong",
+       "share": 0.06,
+       "mono": false
+      },
+      {
+       "family": "STKaiti",
+       "share": 0.04,
+       "mono": false
+      }
+     ],
+     "familyCount": 5,
+     "sizes": [
+      6,
+      7,
+      9,
+      10,
+      11,
+      16,
+      18,
+      19,
+      23,
+      26,
+      29
+     ],
+     "sizeCount": 11,
+     "notLoaded": [],
+     "body": null,
+     "measureChars": null,
+     "max": {
+      "size": 29,
+      "vw": 7.4,
+      "font": "STSong",
+      "text": "梧桐深处，再见西交"
+     },
+     "monoShare": 0.14,
+     "monoProseShare": 0.14,
+     "monoFamilies": [
+      "Consolas"
+     ],
+     "monoSamples": [
+      "34°14′50″ N 108°58′45″ E"
+     ],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0.15,
+     "centerShare": 0.36,
+     "smallText": 4
+    },
+    "eyebrows": [
+     {
+      "text": "34°14′50″ N 108°58′45″ E",
+      "above": "梧桐深处， 再见西交。",
+      "upper": false,
+      "tracked": true,
+      "mono": true,
+      "pill": false,
+      "size": 7,
+      "top": 96
+     }
+    ],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#dce5de",
+     "bodyBgHsl": {
+      "h": 133,
+      "s": 0.15,
+      "l": 0.88
+     },
+     "dark": false,
+     "sectionBgs": [],
+     "textColors": [
+      {
+       "color": "#253e35",
+       "share": 0.32
+      },
+      {
+       "color": "#45603d",
+       "share": 0.2
+      },
+      {
+       "color": "#657c65",
+       "share": 0.19
+      },
+      {
+       "color": "#607968",
+       "share": 0.14
+      },
+      {
+       "color": "#59705e",
+       "share": 0.08
+      }
+     ],
+     "button": null,
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 0,
+     "inHero": 0,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": []
+    },
+    "surfaces": {
+     "shadowStatic": 6,
+     "shadowOverlay": 0,
+     "shadowSamples": [
+      "button.label → rgba(37, 60, 45, 0.063) 0px 2px 8px 0px",
+      "header.topbar → rgba(37, 62, 53, 0.07) 0px 8px 30px 0px",
+      "aside#explorer.explorer.collapsed → rgba(37, 62, 53, 0.07) 0px 8px 30px 0px",
+      "div.zoom-control → rgba(37, 62, 53, 0.07) 0px 8px 30px 0px"
+     ],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 0,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 0,
+     "boxRadius": 0,
+     "squareMedia": 1,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 2,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "canvas",
+      "ratio": 1
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": false,
+     "height": 60,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": []
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 844,
+    "margins": {
+     "left": 22,
+     "right": 14
+    },
+    "sections": [
+     {
+      "sel": "div#scene",
+      "tag": "div",
+      "top": 0,
+      "height": 844,
+      "words": 0,
+      "media": 1,
+      "middle": 0,
+      "heading": null,
+      "left": null,
+      "right": null,
+      "textLeft": null,
+      "textRight": null,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     },
+     {
+      "sel": "div#labels",
+      "tag": "div",
+      "top": 0,
+      "height": 844,
+      "words": 8,
+      "media": 0,
+      "middle": 66,
+      "heading": null,
+      "left": 34,
+      "right": 65,
+      "textLeft": 34,
+      "textRight": 65,
+      "fullBleed": false,
+      "footer": true,
+      "hero": true,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "梧桐深处， 再见西交。",
+      "size": 29,
+      "top": 119,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 22,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 2,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "dark": false,
+    "ground": "#dce5de",
+    "sidebar": null,
+    "topbar": null,
+    "canvas": {
+     "left": 15,
+     "right": 14
+    },
+    "hero": {
+     "text": "梧桐深处， 再见西交 。",
+     "words": 3,
+     "chars": 12,
+     "lines": 2,
+     "size": 29,
+     "vw": 7.4,
+     "font": "STSong",
+     "weight": 500,
+     "tracking": 0.07,
+     "leading": 1.27,
+     "top": 119,
+     "tag": "h1",
+     "kind": "heading",
+     "align": "left",
+     "position": "left"
+    },
+    "charts": 0,
+    "layout": {
+     "panels": 0,
+     "firstScreen": 0,
+     "ragged": [],
+     "voids": []
+    },
+    "tiles": 0,
+    "panels": {
+     "count": 0,
+     "radii": [],
+     "heavyBorders": 0,
+     "borderSamples": [],
+     "heavyShadows": 0,
+     "softShadows": 0,
+     "shadowSamples": [],
+     "glass": 0
+    },
+    "chips": {
+     "count": 2,
+     "hues": 1,
+     "samples": [
+      {
+       "hue": 80,
+       "size": 44,
+       "radius": "4px"
+      },
+      {
+       "hue": 85,
+       "size": 52,
+       "radius": "3px"
+      }
+     ]
+    },
+    "numbers": {
+     "cells": 0,
+     "leftAligned": 0,
+     "figures": 0,
+     "tabularShare": null,
+     "kpiMax": null
+    },
+    "rows": null,
+    "chartHues": 0,
+    "placeholders": [],
+    "type": {
+     "under13": 0.9,
+     "tiny": 143,
+     "tinySamples": [
+      "腾飞塔 9px",
+      "钱学森图书馆 9px",
+      "主楼E座 9px",
+      "中心一楼 9px"
+     ],
+     "sizes": [
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      16,
+      19,
+      24,
+      26,
+      29
+     ]
+    },
+    "title": null,
+    "colourShare": 0.012
+   },
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "micro-label",
+   "width": 1440,
+   "message": "1 tiny uppercase letter-spaced label(s): \"XINGQING CAMPUS\"",
+   "fix": "Prefer sentence case at body size."
+  },
+  {
+   "level": "FAIL",
+   "id": "emoji",
+   "width": 1440,
+   "message": "Emoji in the page: ⛶",
+   "fix": "Remove. Use words or real imagery."
+  },
+  {
+   "level": "FAIL",
+   "id": "text-shadow",
+   "width": 1440,
+   "message": "2 text-shadow(s).",
+   "fix": "Remove; fix legibility with a scrim or a different crop.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "contrast",
+   "width": 1440,
+   "message": "Low-contrast text: \"校园地标\" 3.1:1 needs 4.5:1; \"校园地标\" 3.1:1 needs 4.5:1; \"校园地标\" 3.1:1 needs 4.5:1; \"校园地标\" 3.1:1 needs 4.5:1",
+   "fix": "Darken or lighten the text colour."
+  },
+  {
+   "level": "FAIL",
+   "id": "font-count",
+   "width": 1440,
+   "message": "5 typefaces in use (Microsoft YaHei UI, Georgia, Consolas, STSong, STKaiti).",
+   "fix": "Two at most: one display, one text. Often one is enough.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "dev-server",
+   "width": 1440,
+   "message": "This page is served by a development server (Vite, webpack or Next in dev mode).",
+   "fix": "Run the last gate on the production build too (vite build && vite preview, next build && next start, or the built index.html): minifiers and bundlers change the CSS a visitor receives.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "heavy-shadow",
+   "width": 1440,
+   "message": "2 panel shadow(s) heavy enough to read as floating: rgba(37, 62, 53, 0.07) 0px 8px 30px 0px | rgba(37, 62, 53, 0.07) 0px 8px 30px 0px",
+   "fix": "Panels sit on the ground: separate them with a fill one step from the ground or a quiet 1px border. A shadow, if any, is under 8% black with a small blur. Real overlays (menus, dialogs, popovers) may float."
+  },
+  {
+   "level": "FAIL",
+   "id": "tiny-text",
+   "width": 1440,
+   "message": "145 text blocks under 11px: 腾飞塔 10px, 钱学森图书馆 10px, 主楼E座 10px, 中心一楼 10px.",
+   "fix": "Nothing below 11px; secondary text 12px, data 13–14px.",
+   "alsoAt": [
+    390
+   ]
+  },
+  {
+   "level": "FAIL",
+   "id": "no-title",
+   "width": 1440,
+   "message": "The screen has no h1.",
+   "fix": "Name the screen in an h1 at the top of the canvas (18–28px): \"Overview\", \"Payouts\", the project's name.",
+   "alsoAt": [
+    390
+   ]
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "E:\\CHATGPT\\2026-10-25\\3d-github-3d-three-js-openstreetmap\\outputs\\xjtu-campus-3d\\docs\\taste-qa\\desktop-fold.jpg",
+   "pages": [
+    "E:\\CHATGPT\\2026-10-25\\3d-github-3d-three-js-openstreetmap\\outputs\\xjtu-campus-3d\\docs\\taste-qa\\desktop-page-01.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "E:\\CHATGPT\\2026-10-25\\3d-github-3d-three-js-openstreetmap\\outputs\\xjtu-campus-3d\\docs\\taste-qa\\mobile-fold.jpg",
+   "pages": [
+    "E:\\CHATGPT\\2026-10-25\\3d-github-3d-three-js-openstreetmap\\outputs\\xjtu-campus-3d\\docs\\taste-qa\\mobile-page-01.jpg"
+   ],
+   "film": []
+  }
+ ]
+}
