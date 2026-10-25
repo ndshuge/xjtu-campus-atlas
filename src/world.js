@@ -4,6 +4,9 @@ import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {createLibraryFacade} from './library-facade.js';
 import {createMainTowerFacade} from './main-tower-facade.js';
 import {makeGroundPattern} from './ground-pattern.js';
+import {createSurfaceTexture} from './surface-textures.js';
+import {findSafeWalkStart} from './walk-placement.js';
+import {Sky} from 'three/addons/objects/Sky.js';
 import {BASE,shape,flat,extrude,pointIn,pointSegment,bounds,ribbon,rng,boxGeometry,rectangle} from './geo.js';
 
 const PALETTE={academic:'#e3d9bd',living:'#d9bca1',culture:'#e7e2ce',sports:'#d9d7ba',service:'#d1c7a7'};
@@ -21,6 +24,9 @@ export class CampusWorld{
   this.hemi=new THREE.HemisphereLight('#e4f0ec','#777e60',1.75);this.scene.add(this.hemi);
   this.sun=new THREE.DirectionalLight('#fff0cf',2.6);this.sun.position.set(-650,1000,450);this.sun.castShadow=true;this.sun.shadow.mapSize.set(2048,2048);Object.assign(this.sun.shadow.camera,{left:-760,right:850,top:830,bottom:-730,near:10,far:2700});this.sun.shadow.bias=-.00016;this.sun.shadow.normalBias=.55;this.scene.add(this.sun);
   this.fill=new THREE.DirectionalLight('#c5dfe6',.6);this.fill.position.set(600,300,-700);this.scene.add(this.fill);
+  this.sky=new Sky();this.sky.scale.setScalar(4600);this.sky.material.depthWrite=false;this.scene.add(this.sky);
+  const skyUniforms=this.sky.material.uniforms;skyUniforms.turbidity.value=3;skyUniforms.rayleigh.value=.85;skyUniforms.mieCoefficient.value=.003;skyUniforms.mieDirectionalG.value=.78;skyUniforms.sunPosition.value.copy(this.sun.position);
+  this.pavers=createSurfaceTexture('pavers');this.asphalt=createSurfaceTexture('asphalt');this.waterTexture=createSurfaceTexture('water');
   this.ray=new THREE.Raycaster();this.pointer=new THREE.Vector2();this.proj=new THREE.Vector3();this.timer=new THREE.Timer();this.timer.connect(document);this.dimensions=new Map();this.footprintBounds=data.buildings.map(b=>bounds(b.points));
   this.buildGround();this.buildSurfaces();this.buildRoads();this.buildBuildings();this.buildLandmarks();this.buildTrees();this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);this.animate();
   requestAnimationFrame(()=>{this.loadMs=performance.now()-this.startTime;ready?.();});
@@ -37,8 +43,10 @@ export class CampusWorld{
  buildSurfaces(){
   const groups={wood:[],green:[],water:[],pitch:[],plaza:[]};
   for(const s of this.data.surfaces){groups[s.kind].push(flat(s.points,BASE+.02));if(s.kind==='pitch')this.buildPitch(s);if(s.name){const hit=this.mesh(flat(s.points,BASE+.13),new THREE.MeshBasicMaterial({visible:false,side:THREE.DoubleSide}),{receive:false});hit.userData.place={...s,position:s.center,category:s.kind==='pitch'?'sports':'culture',categoryName:s.kind==='pitch'?'运动场地':'校园景观',description:'边界与名称来自 OSM；设施与场地纹理为程序化示意。'};this.pickables.push(hit);}}
-  this.groundPattern=makeGroundPattern();this.merge(groups.green,this.mat('#a4bd91',{map:this.groundPattern}));this.merge(groups.wood,this.mat('#a5bc90',{map:this.groundPattern}));this.merge(groups.plaza,this.mat('#dbd9c7'));
-  this.waterMaterial=this.mat('#76aaa1',{roughness:.25,metalness:.22});this.merge(groups.water,this.waterMaterial);
+  this.groundPattern=makeGroundPattern();this.merge(groups.green,this.mat('#a4bd91',{map:this.groundPattern}));this.merge(groups.wood,this.mat('#a5bc90',{map:this.groundPattern}));this.merge(groups.plaza,this.mat('#dbd9c7',{map:this.pavers}));
+  this.waterMaterial=this.mat('#85afa7',{roughness:.24,metalness:.20,map:this.waterTexture});this.merge(groups.water,this.waterMaterial);
+  const shoreline=[];for(const s of this.data.surfaces.filter(s=>s.kind==='water'))for(let i=0;i<s.points.length;i++){const a=s.points[i],b=s.points[(i+1)%s.points.length];if(Math.hypot(b[0]-a[0],b[1]-a[1])>.1)shoreline.push(ribbon([a,b],.85,BASE+.089));}
+  this.merge(shoreline,this.mat('#b6bdac',{roughness:.84}));
   this.merge(groups.pitch,this.mat('#748e63'));
  }
  buildPitch(s){const [x0,z0,x1,z1]=bounds(s.points),cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0;let pos=[];
@@ -64,7 +72,7 @@ export class CampusWorld{
  }
  buildRoads(){const curb=[],roads=[],paths=[],mark=[];for(const r of this.data.roads){const foot=/footway|path|steps|cycleway/.test(r.kind);if(foot){paths.push(ribbon(r.points,r.width,BASE+.065));continue;}curb.push(ribbon(r.points,r.width+2.5,BASE+.04));roads.push(ribbon(r.points,r.width,BASE+.06));
   if(r.width>=6){let offset=0;for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<.1)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=offset;t<len-1;t+=12)mark.push(ribbon([[a[0]+dx*t,a[1]+dz*t],[a[0]+dx*Math.min(t+3,len),a[1]+dz*Math.min(t+3,len)]],.22,BASE+.079));offset=(offset-len)%12;if(offset<0)offset+=12;}}
-  }this.merge(curb,this.mat('#dfdeca'));this.merge(roads,this.mat('#9baba3'));this.merge(paths,this.mat('#d3cdb7'));this.merge(mark,this.mat('#e5dfbd'));
+  }this.merge(curb,this.mat('#dfdeca',{map:this.pavers}));this.merge(roads,this.mat('#9baba3',{map:this.asphalt}));this.merge(paths,this.mat('#d3cdb7',{map:this.pavers}));this.merge(mark,this.mat('#e5dfbd'));
  }
  buildingMat(){const m=this.mat('#f0e9d2',{vertexColors:true,roughness:.82});m.onBeforeCompile=s=>{
    s.uniforms.uCampusNight=this.night;s.uniforms.uSelected=this.selection;s.uniforms.uHovered=this.hover;s.uniforms.uColorMode=this.colorMode;
@@ -131,10 +139,24 @@ export class CampusWorld{
  textSign(text,x,y,z,w,h){const cv=document.createElement('canvas');cv.width=1024;cv.height=128;const c=cv.getContext('2d');c.fillStyle='#637465';c.fillRect(0,0,1024,128);c.fillStyle='#f3ecd2';c.font='60px "Microsoft YaHei",sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(text,512,65);const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;const o=this.mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tx}),{receive:false});o.position.set(x,y,z);}
  blocked(p,margin=0){for(let i=0;i<this.data.buildings.length;i++){const b=this.footprintBounds[i];if(p[0]<b[0]-margin||p[0]>b[2]+margin||p[1]<b[1]-margin||p[1]>b[3]+margin)continue;const poly=this.data.buildings[i].points;if(pointIn(p,poly)&&!this.data.buildings[i].holes.some(h=>pointIn(p,h)))return true;if(margin>0)for(let j=1;j<poly.length;j++)if(pointSegment(p,poly[j-1],poly[j]).distance<margin)return true;}return false;}
  roadDistance(p){let distance=Infinity;for(const r of this.data.roads)for(let i=1;i<r.points.length;i++){const d=pointSegment(p,r.points[i-1],r.points[i]).distance-r.width/2;if(d<distance)distance=d;}return distance;}
- buildTrees(){const random=rng(1956),trees=[],waters=this.data.surfaces.filter(s=>s.kind==='water');const canPlant=p=>!this.blocked(p,2)&&!waters.some(s=>pointIn(p,s.points));const used=new Set();const add=(x,z,type=0)=>{const key=Math.round(x/5)+','+Math.round(z/5);if(used.has(key))return;used.add(key);trees.push({x,z,h:7+random()*5,r:3.1+random()*2.2,c:random(),type});};
+ buildTrees(){
+   const random=rng(1956),trees=[],waters=this.data.surfaces.filter(s=>s.kind==='water');
+   const lib=this.data.buildings.find(b=>b.osmId===263624481);
+   const bb=lib?bounds(lib.points):null;
+   const entranceAxis=p=>bb&&Math.abs(p[0]-(bb[0]+bb[2])/2)<15&&p[1]>=bb[3]-3&&p[1]<=bb[3]+115;
+
+   const canPlant=p=>!this.blocked(p,2)&&!waters.some(s=>pointIn(p,s.points))&&!entranceAxis(p);const used=new Set();const add=(x,z,type=0)=>{const key=Math.round(x/5)+','+Math.round(z/5);if(used.has(key))return;used.add(key);trees.push({x,z,h:7+random()*5,r:3.1+random()*2.2,c:random(),type});};
   for(const s of this.data.surfaces.filter(s=>s.kind==='wood'||s.kind==='green')){const [x0,z0,x1,z1]=bounds(s.points);const spacing=s.kind==='wood'?11:15;for(let x=x0+4;x<x1;x+=spacing)for(let z=z0+4;z<z1;z+=spacing){const p=[x+(random()-.5)*7,z+(random()-.5)*7];if(pointIn(p,s.points)&&canPlant(p)&&this.roadDistance(p)>1.5&&random()>.08)add(...p,s.kind==='wood'&&random()>.74?1:0);}}
   for(const r of this.data.roads.filter(r=>r.campus&&!/steps|path|footway|cycleway/.test(r.kind))){for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<14)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=7;t<len-3;t+=16)for(const side of [-1,1]){const p=[a[0]+dx*t-dz*(r.width/2+4)*side,a[1]+dz*t+dx*(r.width/2+4)*side];if(this.data.boundary.some(b=>pointIn(p,b))&&canPlant(p)&&this.roadDistance(p)>2.2)add(...p,0);}}}
-  this.trees=new THREE.Group();this.scene.add(this.trees);this.treeCount=trees.length;const n=trees.length;const dummy=new THREE.Object3D();const trunk=new THREE.InstancedMesh(new THREE.CylinderGeometry(.4,.65,1,5),this.mat('#887763'),n);const crown=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?1:2),this.mat('#799957',{roughness:1}),n);const crown2=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),this.mat('#96ab72',{roughness:1}),n);const crown3=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?0:1),this.mat('#839c62',{roughness:1}),n);const colors=['#64834c','#799458','#5b7948','#899f66','#729159'];trees.forEach((t,i)=>{dummy.position.set(t.x,BASE+t.h*.35,t.z);dummy.scale.set(1,t.h*.7,1);dummy.rotation.set(0,0,0);dummy.updateMatrix();trunk.setMatrixAt(i,dummy.matrix);dummy.position.y=BASE+t.h*.77;dummy.scale.set(t.type?t.r*.55:t.r,t.type?t.h*.68:t.h*.42,t.type?t.r*.55:t.r*.9);dummy.rotation.set(t.c*.3,t.c*6,.12*t.c);dummy.updateMatrix();crown.setMatrixAt(i,dummy.matrix);crown.setColorAt(i,new THREE.Color(colors[Math.floor(t.c*colors.length)]));dummy.position.x+=t.r*.5;dummy.position.y+=t.r*.1;dummy.scale.multiplyScalar(.74);dummy.updateMatrix();crown2.setMatrixAt(i,dummy.matrix);crown2.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+1)%colors.length]));dummy.position.set(t.x-t.r*.37,BASE+t.h*.79,t.z+t.r*.27);dummy.scale.set(t.r*.67,t.h*.31,t.r*.72);dummy.rotation.set(-t.c*.13,t.c*5.2,t.c*.16);dummy.updateMatrix();crown3.setMatrixAt(i,dummy.matrix);crown3.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+3)%colors.length]));});for(const m of [trunk,crown,crown2,crown3]){m.castShadow=true;m.receiveShadow=true;m.instanceMatrix.needsUpdate=true;this.trees.add(m);}this.treeCrowns=[crown,crown2,crown3];
+  this.treePositions=trees;this.treeCells=new Map();for(const t of trees){const key=Math.floor(t.x/12)+','+Math.floor(t.z/12);if(!this.treeCells.has(key))this.treeCells.set(key,[]);this.treeCells.get(key).push(t);}this.trees=new THREE.Group();this.scene.add(this.trees);this.treeCount=trees.length;const n=trees.length;const dummy=new THREE.Object3D();const trunk=new THREE.InstancedMesh(new THREE.CylinderGeometry(.4,.65,1,5),this.mat('#887763'),n);const crown=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?1:2),this.mat('#799957',{roughness:1}),n);const crown2=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),this.mat('#96ab72',{roughness:1}),n);const crown3=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?0:1),this.mat('#839c62',{roughness:1}),n);const colors=['#64834c','#799458','#5b7948','#899f66','#729159'];trees.forEach((t,i)=>{dummy.position.set(t.x,BASE+t.h*.35,t.z);dummy.scale.set(1,t.h*.7,1);dummy.rotation.set(0,0,0);dummy.updateMatrix();trunk.setMatrixAt(i,dummy.matrix);dummy.position.y=BASE+t.h*.77;dummy.scale.set(t.type?t.r*.55:t.r,t.type?t.h*.68:t.h*.42,t.type?t.r*.55:t.r*.9);dummy.rotation.set(t.c*.3,t.c*6,.12*t.c);dummy.updateMatrix();crown.setMatrixAt(i,dummy.matrix);crown.setColorAt(i,new THREE.Color(colors[Math.floor(t.c*colors.length)]));dummy.position.x+=t.r*.5;dummy.position.y+=t.r*.1;dummy.scale.multiplyScalar(.74);dummy.updateMatrix();crown2.setMatrixAt(i,dummy.matrix);crown2.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+1)%colors.length]));dummy.position.set(t.x-t.r*.37,BASE+t.h*.79,t.z+t.r*.27);dummy.scale.set(t.r*.67,t.h*.31,t.r*.72);dummy.rotation.set(-t.c*.13,t.c*5.2,t.c*.16);dummy.updateMatrix();crown3.setMatrixAt(i,dummy.matrix);crown3.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+3)%colors.length]));});for(const m of [trunk,crown,crown2,crown3]){m.castShadow=true;m.receiveShadow=true;m.instanceMatrix.needsUpdate=true;this.trees.add(m);}this.treeCrowns=[crown,crown2,crown3];
+   // Narrow evergreen forms add believable species diversity to planted groves.
+   const conifers=trees.filter(t=>t.type===1);
+   if(conifers.length){
+    const pines=new THREE.InstancedMesh(new THREE.ConeGeometry(1,1,8),this.mat('#56734f',{roughness:1}),conifers.length);
+    const arbor=new THREE.Object3D();
+    conifers.forEach((t,i)=>{arbor.position.set(t.x,BASE+t.h*.61,t.z);arbor.scale.set(t.r*.67,t.h*.84,t.r*.67);arbor.rotation.set(0,t.c*6.28,0);arbor.updateMatrix();pines.setMatrixAt(i,arbor.matrix);pines.setColorAt(i,new THREE.Color(['#557450','#4b6549','#64805b'][i%3]));});
+    pines.instanceMatrix.needsUpdate=true;pines.castShadow=!this.isMobile;pines.receiveShadow=true;this.trees.add(pines);
+   }
  }
  buildFurniture(){const lamps=[],benches=[];let k=0;for(const r of this.data.roads.filter(r=>r.campus&&r.width>=6)){for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);const dx=(b[0]-a[0])/(len||1),dz=(b[1]-a[1])/(len||1);for(let t=17;t<len;t+=48){const x=a[0]+dx*t-dz*(r.width/2+1.6),z=a[1]+dz*t+dx*(r.width/2+1.6);if(this.blocked([x,z]))continue;lamps.push({x,z});if(k++%3===0)benches.push(boxGeometry(x-dz*2,BASE+.6,z+dx*2,2.8,.35,.8));}}}this.merge(benches,this.mat('#967b5c'),{cast:true});
   const pole=new THREE.InstancedMesh(new THREE.CylinderGeometry(.1,.16,5.5,5),this.mat('#67786a'),lamps.length);this.lampMaterial=new THREE.MeshStandardMaterial({color:'#f4e5b1',emissive:'#ffd68a',emissiveIntensity:0,roughness:.45});const lamp=new THREE.InstancedMesh(new THREE.SphereGeometry(.55,6,4),this.lampMaterial,lamps.length);const dummy=new THREE.Object3D();lamps.forEach((p,i)=>{dummy.position.set(p.x,BASE+2.75,p.z);dummy.updateMatrix();pole.setMatrixAt(i,dummy.matrix);dummy.position.y=BASE+5.7;dummy.updateMatrix();lamp.setMatrixAt(i,dummy.matrix);});this.scene.add(pole,lamp);
@@ -162,13 +184,70 @@ export class CampusWorld{
  focus(p,fly=true){const i=this.data.buildings.indexOf(p);this.selected=i;this.selectedPlace=p;this.selection.value=i;this.labelItems.forEach(l=>l.el.classList.toggle('selected',l.place.id===p.id));const c=p.center||p.position,h=p.displayHeight||p.height||18;const dim=p.points?bounds(p.points):null;const size=dim?Math.max(dim[2]-dim[0],dim[3]-dim[1]):35;const dist=Math.max(120,size*1.6,h*2.2);this.setAuto(false);if(fly)this.fly([c[0]+dist*.8,c[1]===undefined?dist:Math.max(h+dist*.65,80),c[1]+dist*1.1],[c[0],h*.25,c[1]],1400);}
  clearSelection(){this.selection.value=-1;this.selected=-1;this.selectedPlace=null;this.labelItems.forEach(l=>l.el.classList.remove('selected'));}
  setColors(mode){this.colorMode.value=mode==='natural'?0:1;const attr=this.buildingMesh.geometry.attributes.color,ids=this.buildingMesh.geometry.attributes.buildingIndex;if(mode==='natural')attr.array.set(this.originalColors);else for(let i=0;i<attr.count;i++){const b=this.data.buildings[Math.round(ids.getX(i))];const c=new THREE.Color(mode==='category'?CATEGORY[b.category]:b.heightSource==='official-document-height'?'#6297b9':b.levels?'#79b7a1':'#cda779');if(this.buildingMesh.geometry.attributes.normal.getY(i)>.8)c.multiplyScalar(.85);c.toArray(attr.array,i*3);}attr.needsUpdate=true;}
- lighting(mode){this.lightMode=mode;const night=mode==='night',dusk=mode==='dusk';this.night.value=night?1:dusk?.3:0;this.scene.background.set(SKY[mode]);this.scene.fog.color.set(SKY[mode]);this.scene.fog.near=night?1400:1800;this.ground.material.color.set(night?'#425454':dusk?'#b8b7a2':'#b7c6b4');this.hemi.intensity=night?.75:dusk?1.4:1.75;this.hemi.color.set(night?'#a4c7dc':dusk?'#c4c7d7':'#e4f0ec');this.sun.intensity=night?.4:dusk?2.0:2.6;this.sun.color.set(night?'#9cbed7':dusk?'#ffc79c':'#fff0cf');this.sun.position.set(dusk?-900:-650,dusk?350:1000,450);this.fill.intensity=night?.25:.6;this.lampMaterial.emissiveIntensity=night?2:dusk?.7:0;this.renderer.toneMappingExposure=night?1.0:1.06;document.body.classList.toggle('night',night);}
+ lighting(mode){this.lightMode=mode;const night=mode==='night',dusk=mode==='dusk';this.night.value=night?1:dusk?.3:0;this.scene.background.set(SKY[mode]);this.scene.fog.color.set(SKY[mode]);this.scene.fog.near=night?1400:1800;this.ground.material.color.set(night?'#425454':dusk?'#b8b7a2':'#b7c6b4');this.hemi.intensity=night?.75:dusk?1.4:1.75;this.hemi.color.set(night?'#a4c7dc':dusk?'#c4c7d7':'#e4f0ec');this.sun.intensity=night?.4:dusk?2.0:2.6;this.sun.color.set(night?'#9cbed7':dusk?'#ffc79c':'#fff0cf');this.sun.position.set(dusk?-900:-650,dusk?350:1000,450);this.fill.intensity=night?.25:.6;this.lampMaterial.emissiveIntensity=night?2:dusk?.7:0;this.renderer.toneMappingExposure=night?1.0:1.06;this.sky.visible=!night;this.sky.material.uniforms.sunPosition.value.copy(this.sun.position);this.sky.material.uniforms.rayleigh.value=dusk?1.8:.85;this.sky.material.uniforms.turbidity.value=dusk?7:3;document.body.classList.toggle('night',night);}
  quality(mode){this.renderer.shadowMap.enabled=mode==='high';this.renderer.setPixelRatio(mode==='low'?1:Math.min(devicePixelRatio,this.isMobile?1.5:1.8));this.renderer.setSize(innerWidth,innerHeight);this.buildingMesh.material.needsUpdate=true;}
  nearestRoad(p){let best={distance:Infinity,point:p};for(const r of this.data.roads.filter(r=>r.campus))for(let i=1;i<r.points.length;i++){const q=pointSegment(p,r.points[i-1],r.points[i]);if(q.distance<best.distance&&this.data.boundary.some(b=>pointIn(q.point,b))&&!this.blocked(q.point,1.5)&&!this.data.surfaces.some(s=>s.kind==='water'&&pointIn(q.point,s.points)))best=q;}return best.point;}
- enterWalk(p=null){this.endTour();this.cancelFlight();this.setAuto(false);this.mode='walk';this.controls.enabled=false;this.controls.stopListenToKeyEvents();let destination=p?.center||p?.position||[-31,-520];if(p?.points&&!p.surface&&p.height){const bb=bounds(p.points);destination=[(bb[0]+bb[2])/2,bb[3]+28];}const start=this.nearestRoad(destination);this.camera.fov=62;this.camera.near=.2;this.camera.updateProjectionMatrix();this.camera.position.set(start[0],BASE+2,start[1]);const look=p?(p.center||p.position):[start[0],start[1]+50];this.walkYaw=p?Math.atan2(start[0]-look[0],start[1]-look[1]):Math.PI;this.walkPitch=p?Math.atan2((p.displayHeight||p.height||8)*.32-2,Math.max(20,Math.hypot(start[0]-look[0],start[1]-look[1]))):0;this.applyWalkLook();this.keys.clear();this.onMode('walk');}
+ treeGap([x,z]){
+  const cx=Math.floor(x/12),cz=Math.floor(z/12);let best=20;
+  for(let dx=-1;dx<=1;dx++)for(let dz=-1;dz<=1;dz++){
+   for(const t of this.treeCells?.get((cx+dx)+','+(cz+dz))||[]){
+    best=Math.min(best,Math.hypot(t.x-x,t.z-z));
+   }
+  }
+  return best;
+ }
+ isWalkable(point,margin=.75){
+  if(!this.data.boundary.some(b=>pointIn(point,b))||this.blocked(point,margin))return false;
+  if(this.data.surfaces.some(s=>s.kind==='water'&&pointIn(point,s.points)))return false;
+    return this.treeGap(point)>=margin+.55;
+ }
+ chooseWalkStart(p){
+   const source=p?.center||p?.position||[-31,-520];
+   const facade=p?.points&&!p.surface&&p.height?bounds(p.points):null;
+   const trials=facade?(()=>{
+     const [x0,z0,x1,z1]=facade,cx=(x0+x1)/2,cz=(z0+z1)/2;
+     return [
+       {desired:[cx,z1+56],target:[cx,z1-4],direction:'south'},
+       {desired:[cx,z0-56],target:[cx,z0+4],direction:'north'},
+       {desired:[x1+52,cz],target:[x1-4,cz],direction:'east'},
+       {desired:[x0-52,cz],target:[x0+4,cz],direction:'west'}
+     ];
+   })():[{desired:source,target:p?source:null,direction:'nearby'}];
+   const water=this.data.surfaces.filter(s=>s.kind==='water');
+   const choices=[];
+   for(const trial of trials){
+     const result=findSafeWalkStart({
+       ...trial,roads:this.data.roads,boundaries:this.data.boundary,
+       buildings:this.data.buildings,water,trees:this.treePositions||[],
+       obstacles:[],
+       canBlock:(q,margin)=>this.blocked(q,margin)
+     });
+     if(result)choices.push({...result,...trial});
+     // Prefer the authentic photographed south facade when its view is clear.
+     if(p?.osmId===263624481 && result && !result.fallback)break;
+   }
+   choices.sort((a,b)=>(a.fallback?1000:0)+a.cost-(b.fallback?1000:0)-b.cost);
+   const result=choices[0];
+   if(!result)return null;
+   this.walkSpawn={start:[...result.p],desired:result.desired,target:result.target,kind:result.type,direction:result.direction,fallback:result.fallback};
+   return result.p;
+  }
+ enterWalk(p=null){
+  this.endTour();this.cancelFlight();this.setAuto(false);this.mode='walk';
+  this.controls.enabled=false;this.controls.stopListenToKeyEvents();
+  const start=this.chooseWalkStart(p);
+  if(!start){this.mode='orbit';this.controls.enabled=true;this.controls.listenToKeyEvents(window);this.notify('附近没有安全的地面入口，试试其他建筑。');return false;}
+  this.walkStart=[...start];
+  this.camera.fov=62;this.camera.near=.2;this.camera.updateProjectionMatrix();
+  this.camera.position.set(start[0],BASE+2,start[1]);
+  const look=this.walkSpawn?.target||(p?(p.center||p.position):[start[0],start[1]+50]);
+  this.walkYaw=p?Math.atan2(start[0]-look[0],start[1]-look[1]):Math.PI;
+  this.walkPitch=p?Math.atan2((p.displayHeight||p.height||8)*.32-2,Math.max(20,Math.hypot(start[0]-look[0],start[1]-look[1]))):0;
+  this.applyWalkLook();this.keys.clear();this.onMode('walk');
+ }
  applyWalkLook(){this.camera.rotation.order='YXZ';this.camera.rotation.set(this.walkPitch,this.walkYaw,0);}
  exitWalk(){if(this.mode!=='walk')return;this.mode='orbit';this.camera.fov=39;this.camera.near=.6;this.camera.updateProjectionMatrix();this.controls.enabled=true;this.controls.listenToKeyEvents(window);const forward=new THREE.Vector3();this.camera.getWorldDirection(forward);const target=this.camera.position.clone().add(forward.multiplyScalar(80));target.y=0;this.controls.target.copy(target);this.camera.position.y=Math.max(this.camera.position.y,80);this.controls.update();this.keys.clear();this.onMode('orbit');}
- moveWalk(dt){let f=0,s=0;if(this.keys.has('KeyW')||this.keys.has('ArrowUp'))f++;if(this.keys.has('KeyS')||this.keys.has('ArrowDown'))f--;if(this.keys.has('KeyD')||this.keys.has('ArrowRight'))s++;if(this.keys.has('KeyA')||this.keys.has('ArrowLeft'))s--;if(!f&&!s)return;const norm=Math.hypot(f,s);f/=norm;s/=norm;const step=(this.keys.has('ShiftLeft')||this.keys.has('ShiftRight')?12:5)*Math.min(dt,.06);const dx=(-Math.sin(this.walkYaw)*f+Math.cos(this.walkYaw)*s)*step;const dz=(-Math.cos(this.walkYaw)*f-Math.sin(this.walkYaw)*s)*step;const p=this.camera.position;const valid=(x,z)=>this.data.boundary.some(b=>pointIn([x,z],b))&&!this.blocked([x,z],.65)&&!this.data.surfaces.some(sf=>sf.kind==='water'&&pointIn([x,z],sf.points));if(valid(p.x+dx,p.z))p.x+=dx;if(valid(p.x,p.z+dz))p.z+=dz;p.y=BASE+2;}
+ moveWalk(dt){let f=0,s=0;if(this.keys.has('KeyW')||this.keys.has('ArrowUp'))f++;if(this.keys.has('KeyS')||this.keys.has('ArrowDown'))f--;if(this.keys.has('KeyD')||this.keys.has('ArrowRight'))s++;if(this.keys.has('KeyA')||this.keys.has('ArrowLeft'))s--;if(!f&&!s)return;const norm=Math.hypot(f,s);f/=norm;s/=norm;const step=(this.keys.has('ShiftLeft')||this.keys.has('ShiftRight')?12:5)*Math.min(dt,.06);const dx=(-Math.sin(this.walkYaw)*f+Math.cos(this.walkYaw)*s)*step;const dz=(-Math.cos(this.walkYaw)*f-Math.sin(this.walkYaw)*s)*step;const p=this.camera.position;const valid=(x,z)=>this.isWalkable([x,z],.65);if(valid(p.x+dx,p.z))p.x+=dx;if(valid(p.x,p.z+dz))p.z+=dz;p.y=BASE+2;}
  startTour(stops){this.exitWalk();this.setAuto(false);this.tour={stops,index:-1,paused:false,next:0};this.nextTour();}
  nextTour(){if(!this.tour)return;const t=this.tour;t.index=(t.index+1)%t.stops.length;const p=t.stops[t.index];this.focus(p);this.onSelect(p,false);t.next=performance.now()+8000;this.onTour?.(t);}
  endTour(){if(this.tour){this.tour=null;this.onTour?.(null);}}
@@ -178,5 +257,5 @@ export class CampusWorld{
   if(this.tour&&!this.tour.paused&&now>this.tour.next)this.nextTour();
   this.renderer.render(this.scene,this.camera);if(this.frames%3===0)this.updateLabels();if(this.frames%10===0){this.drawMinimap();const needle=document.querySelector('#compass-needle');needle.style.transform=`rotate(${-this.controls.getAzimuthalAngle()*180/Math.PI}deg)`;document.querySelector('#view-height').textContent=this.mode==='walk'?'地面 · 2 m':`视点 ${Math.round(this.camera.position.y)} m`;}if(this.frames%60===0)this.container.dataset.runtime=JSON.stringify(this.diagnostics());
  }
- diagnostics(){return{buildings:this.data.buildings.length,roads:this.data.roads.length,surfaces:this.data.surfaces.length,trees:this.treeCount,drawCalls:this.renderer.info.render.calls,triangles:this.renderer.info.render.triangles,geometries:this.renderer.info.memory.geometries,textures:this.renderer.info.memory.textures,fps:Math.round(this.fps),sceneLoadMs:Math.round(this.loadMs),mode:this.mode,light:this.lightMode,selected:this.selectedPlace?.name||null,webgl:'WebGL 2',camera:this.camera.position.toArray(),target:this.controls.target.toArray(),contextLost:!!this.contextLost,visibleLabels:this.labelItems.filter(l=>!l.el.hidden).length,reducedMotion:this.reduced,finiteGeometry:[...this.buildingMesh.geometry.attributes.position.array].every(Number.isFinite)};}
+ diagnostics(){return{buildings:this.data.buildings.length,roads:this.data.roads.length,surfaces:this.data.surfaces.length,trees:this.treeCount,drawCalls:this.renderer.info.render.calls,triangles:this.renderer.info.render.triangles,geometries:this.renderer.info.memory.geometries,textures:this.renderer.info.memory.textures,fps:Math.round(this.fps),sceneLoadMs:Math.round(this.loadMs),mode:this.mode,walkStart:this.walkStart||null,light:this.lightMode,selected:this.selectedPlace?.name||null,webgl:'WebGL 2',camera:this.camera.position.toArray(),target:this.controls.target.toArray(),contextLost:!!this.contextLost,walkSpawn:this.walkSpawn||null,visibleLabels:this.labelItems.filter(l=>!l.el.hidden).length,reducedMotion:this.reduced,finiteGeometry:[...this.buildingMesh.geometry.attributes.position.array].every(Number.isFinite)};}
 }
