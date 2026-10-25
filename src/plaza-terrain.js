@@ -5,12 +5,32 @@ import {BASE} from './geo.js';
 // campus OSM footprint grid. NOT an as-built survey or contour elevation.
 // No alteration to the underlying roads, building data or terrain height.
 export const PLAZA_PAVING={left:-76,right:13,south:-42,north:10};
+export function createCourtyardStoneTexture(){
+ if(typeof document==='undefined')return null;
+ const canvas=document.createElement('canvas');canvas.width=canvas.height=256;
+ const ctx=canvas.getContext('2d');if(!ctx)return null;
+ ctx.fillStyle='#d1cdc4';ctx.fillRect(0,0,256,256);
+ // Subtle stone patches and staggered expansion seams, baked as a mipmapped texture.
+ for(let row=0;row<8;row++)for(let col=-1;col<9;col++){
+  const x=col*32+(row%2)*16,y=row*32;
+  const noise=(row*23+col*17+101)%9;
+  ctx.fillStyle='rgb('+[209+noise,205+noise,194+noise].join(',')+')';
+  ctx.fillRect(x+1,y+1,30,30);
+  ctx.fillStyle='rgba(122,116,105,.065)';
+  ctx.fillRect(x+1,y+30,30,1);
+ }
+ const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
+ texture.wrapS=texture.wrapT=THREE.RepeatWrapping;
+ texture.repeat.set(3.2,1.9);texture.anisotropy=8;
+ texture.minFilter=THREE.LinearMipmapLinearFilter;
+ return texture;
+}
 export function buildFourInventionsPaving(scene){
  const {left,right,south,north}=PLAZA_PAVING;
  const group=new THREE.Group();group.name='Four Inventions / courtyard paving inferred from open OSM ground';
- const stone=new THREE.MeshStandardMaterial({color:'#d5d1c4',roughness:1,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});
+ const stone=new THREE.MeshStandardMaterial({color:'#f8f7f4',map:createCourtyardStoneTexture(),roughness:.95,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1});
  const walk=new THREE.MeshStandardMaterial({color:'#e1d9c8',roughness:.96,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-2});
- const joint=new THREE.LineBasicMaterial({color:'#bcb5a7',transparent:true,opacity:.44,depthWrite:false});
+ const joint=new THREE.LineBasicMaterial({color:'#bcb5a7',transparent:true,opacity:.20,depthWrite:false});
  const border=new THREE.MeshStandardMaterial({color:'#aaa898',roughness:1});
  const grass=new THREE.MeshStandardMaterial({color:'#9cae83',roughness:1});
  function slab(name,x,z,w,d,mat,y=BASE+.044){
@@ -29,8 +49,8 @@ export function buildFourInventionsPaving(scene){
  }
  // Fine joint pattern with an intentional surface offset to prevent z-fighting.
  const pts=[];
- for(let x=left+4;x<right-2;x+=5.5){pts.push(new THREE.Vector3(x,BASE+.059,south+.8),new THREE.Vector3(x,BASE+.059,north-.8));}
- for(let z=south+3;z<north-1;z+=5.6){pts.push(new THREE.Vector3(left+.6,BASE+.059,z),new THREE.Vector3(right-.6,BASE+.059,z));}
+ for(let x=left+4;x<right-2;x+=11){pts.push(new THREE.Vector3(x,BASE+.059,south+.8),new THREE.Vector3(x,BASE+.059,north-.8));}
+ for(let z=south+3;z<north-1;z+=11.2){pts.push(new THREE.Vector3(left+.6,BASE+.059,z),new THREE.Vector3(right-.6,BASE+.059,z));}
  const lines=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts),joint);
  lines.name='Paving expansion joints';lines.renderOrder=2;group.add(lines);
  // Tactile stone border is inset inside the known empty corridor; no fake cliffs.
