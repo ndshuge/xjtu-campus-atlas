@@ -12,9 +12,12 @@ for(const file of photos){
  assert(code.includes(file),`Photo not linked: ${file}`);
  assert(code.includes('./assets/reference/'),`Missing asset path prefix for ${file}`);
 }
+const inscription=fs.readFileSync(path.join(project,'public','assets','reference','north-gate-calligraphy-crop.png'));
+assert(inscription.length>8000&&inscription[0]===0x89&&inscription.subarray(1,4).toString()==='PNG','Missing real-source north gate inscription crop');
 const license=fs.readFileSync(path.join(project,'public','assets','reference','README.md'),'utf8');
 assert(license.includes('Liuxingy')&&license.includes('https://creativecommons.org/licenses/by-sa/4.0/'),'Library photo attribution is incomplete');
 assert(license.includes('IronBlood')&&license.includes('Jucember')&&license.includes('https://creativecommons.org/licenses/by-sa/3.0/'),'Gate photo attribution is incomplete');
+assert(license.includes('north-gate-calligraphy-crop.png')&&license.includes('adapted derivative'),'Adapted calligraphy source and share-alike license must be documented');
 const html=fs.readFileSync(path.join(project,'index.html'),'utf8');
 for(const id of ['detail-peek','detail-photo-shortcut','detail-walk-shortcut','detail-expand','close-detail-mobile'])
  assert(html.includes(id),`Missing interactive mobile UI: ${id}`);

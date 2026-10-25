@@ -26,11 +26,17 @@ for(const p of gates){
  tested++;
 }
 const origCanvas=globalThis.document;
+const origLoader=THREE.TextureLoader.prototype.load;
+THREE.TextureLoader.prototype.load=()=>new THREE.Texture();
 globalThis.document={createElement:()=>({width:0,height:0,getContext:()=>({clearRect(){},fillText(){},fillStyle:null,font:null,textAlign:null,textBaseline:null})})};
 try{
  const north=createNorthGate(main.position,1.1);
  assert(north.children.some(c=>c.name==='sweeping white gate roof'));
  assert(north.children.some(c=>c.name==='bronze science relief panel'));
+ assert(north.children.some(c=>c.name==='2011 photographed north gate inscription'));
+ const canopy=north.children.find(c=>c.name==='sweeping white gate roof');
+ assert(canopy.geometry.attributes.uv?.count===canopy.geometry.attributes.position.count,'Curved tile roof UVs must be finite and complete');
+ assert([...canopy.geometry.attributes.position.array].every(Number.isFinite),'Gate fascia contains bad vertices');
  const box=new THREE.Box3().setFromObject(north);
  assert(box.min.x<main.position[0]-25&&box.max.x>main.position[0]+25);
  assert(box.max.y<15);
@@ -40,4 +46,4 @@ try{
  assert(southGate.children.some(c=>c.name==='roof lantern'));
  assert(southBox.max.y<20&&southBox.min.y>0);
  console.log(JSON.stringify({passed:true,otherGateCount:tested,hasNorth:true,northBounds:[box.min.toArray(),box.max.toArray()]}));
-} finally {globalThis.document=origCanvas;}
+} finally {globalThis.document=origCanvas;THREE.TextureLoader.prototype.load=origLoader;}
