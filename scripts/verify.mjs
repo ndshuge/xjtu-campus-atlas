@@ -1,0 +1,36 @@
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {spawnSync} from 'node:child_process';
+import {existsSync} from 'node:fs';
+import {extrude,flat,bounds,pointIn,pointSegment} from '../src/geo.js';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const read=async p=>JSON.parse(await fs.readFile(path.join(root,p),'utf8'));
+const d=await read('public/data/campus.json'),raw=await read('data/source-osm.json');
+let passed=0;const check=(label,fn)=>{fn();passed++;console.log('PASS '+label);};
+const es=raw.elements;const originals=new Map(es.map(e=>[e.type+'/'+e.id,e]));
+const members=new Set(es.filter(e=>e.type==='relation'&&e.tags?.building).flatMap(e=>e.members.map(m=>m.ref)));
+function winding(point,ring){let wn=0;for(let i=1;i<ring.length;i++){const a=ring[i-1],b=ring[i],left=(b[0]-a[0])*(point[1]-a[1])-(point[0]-a[0])*(b[1]-a[1]);if(a[1]<=point[1]&&b[1]>point[1]&&left>0)wn++;else if(a[1]>point[1]&&b[1]<=point[1]&&left<0)wn--;}return wn!==0;}
+function centre(ps){let twiceArea=0,cx=0,cz=0;for(let i=1;i<ps.length;i++){const a=ps[i-1],b=ps[i],cross=a[0]*b[1]-b[0]*a[1];twiceArea+=cross;cx+=(a[0]+b[0])*cross;cz+=(a[1]+b[1])*cross;}return[cx/(3*twiceArea),cz/(3*twiceArea)];}
+const project=p=>[(p.lon-d.origin[0])*d.projection.metresPerDegree[0],(d.origin[1]-p.lat)*d.projection.metresPerDegree[1]];
+function sourcePolygon(e){if(e.geometry)return e.geometry.map(project);let lines=e.members.filter(m=>m.role==='outer'&&m.geometry?.length).map(m=>m.geometry.slice());if(!lines.length)return null;const ring=lines.shift(),eq=(a,b)=>a.lat===b.lat&&a.lon===b.lon;while(lines.length){const index=lines.findIndex(line=>eq(ring.at(-1),line[0])||eq(ring.at(-1),line.at(-1)));assert.ok(index>=0,'relation edges join');let next=lines.splice(index,1)[0];if(!eq(ring.at(-1),next[0]))next.reverse();ring.push(...next.slice(1));}assert.ok(eq(ring[0],ring.at(-1)));return ring.map(project);}
+const sourcePolys=new Map();
+const sourceIds=es.filter(e=>e.tags?.building&&e.tags.building!=='no'&&(e.geometry?.length>=4||e.type==='relation')&&!members.has(e.id)).filter(e=>{const ps=sourcePolygon(e);if(!ps)return false;sourcePolys.set(e.type+'/'+e.id,ps);return d.boundary.some(p=>winding(centre(ps),p));}).map(e=>e.type+'/'+e.id).sort();
+check('independent source footprint ID set',()=>assert.deepEqual(d.buildings.map(b=>b.id).sort(),sourceIds));
+check('snapshot count and height-source accounting',()=>{assert.equal(d.buildings.length,139);assert.equal(d.buildings.filter(b=>b.name!=='未命名建筑').length,114);assert.equal(d.buildings.filter(b=>b.levels).length,12);assert.equal(d.buildings.filter(b=>b.heightSource==='osm-height').length,0);assert.equal(d.buildings.filter(b=>b.heightSource==='official-document-height').length,1);});
+check('WGS84 metric scale and source-coordinate retention',()=>{assert.ok(Math.abs(d.projection.metresPerDegree[0]-92116.20)<.1);assert.ok(Math.abs(d.projection.metresPerDegree[1]-110926.86)<.1);for(const b of d.buildings){const ps=sourcePolys.get(b.id);assert.ok(ps);assert.equal(ps.length,b.points.length);ps.forEach((q,i)=>{assert.ok(Math.hypot(q[0]-b.points[i][0],q[1]-b.points[i][1])<.001);});}});
+check('all rings are closed and coordinates finite',()=>{for(const ps of [...d.boundary,...d.buildings.map(b=>b.points),...d.surfaces.map(s=>s.points)]){assert.deepEqual(ps[0],ps.at(-1));assert.ok(ps.flat().every(Number.isFinite));assert.ok(ps.length>=4);}});
+let triangles=0;
+check('rendered building caps preserve surveyed footprint area',()=>{for(const b of d.buildings){const g=extrude(b.points,b.height);const p=g.attributes.position,n=g.attributes.normal;assert.ok([...p.array].every(Number.isFinite));let cap=0;for(let i=0;i<p.count;i+=3)if(n.getY(i)>.9){cap+=Math.abs((p.getX(i+1)-p.getX(i))*(p.getZ(i+2)-p.getZ(i))-(p.getZ(i+1)-p.getZ(i))*(p.getX(i+2)-p.getX(i)))/2;}assert.ok(Math.abs(cap-b.area)<.1);triangles+=p.count/3;g.dispose();}});
+check('landmarks follow the official campus north-south order',()=>{const z=name=>{const p=[...d.buildings,...d.landmarks,...d.interpretive].find(p=>p.name===name);assert.ok(p,name);return(p.center||p.position)[1];};const zs=['北门','中心一楼','腾飞塔','钱学森图书馆','四大发明广场','主楼E座','思源活动中心'].map(z);for(let i=1;i<zs.length;i++)assert.ok(zs[i]>zs[i-1]);const lib=d.buildings.find(b=>b.name==='钱学森图书馆'),track=d.surfaces.find(s=>s.name==='东田径场');assert.ok(track.center[0]>lib.center[0]);});
+check('documented library height and construction notices',()=>{const lib=d.buildings.find(b=>b.osmId===263624481);assert.equal(lib.height,49.75);assert.match(lib.heightEvidence.source,/news.xjtu.edu.cn/);assert.ok(d.buildings.find(b=>b.osmId===263632771).notice);assert.ok(d.buildings.find(b=>b.osmId===264288694).notice);assert.equal(d.interpretive[0].source,'official-map-interpretive');});
+check('road geometry and surface geometry are finite',()=>{for(const r of d.roads){assert.ok(r.width>0&&r.width<40);assert.ok(r.points.length>=2);assert.ok(r.points.flat().every(Number.isFinite));}for(const s of d.surfaces){const g=flat(s.points);assert.ok([...g.attributes.position.array].every(Number.isFinite));g.dispose();}});
+check('walk entry roads exist outside target building/water footprints',()=>{for(const b of d.buildings){const bb=bounds(b.points),goal=[(bb[0]+bb[2])/2,bb[3]+28];let candidates=0;for(const r of d.roads.filter(r=>r.campus))for(let i=1;i<r.points.length;i++){const q=pointSegment(goal,r.points[i-1],r.points[i]).point;if(d.boundary.some(p=>winding(q,p))&&!d.buildings.some(b=>winding(q,b.points))&&!d.surfaces.some(s=>s.kind==='water'&&winding(q,s.points)))candidates++;}assert.ok(candidates>0,b.name);}});
+check('syntax of all original JavaScript modules',()=>{for(const f of ['src/app.js','src/world.js','src/geo.js','scripts/prepare-data.mjs','scripts/fetch-osm.mjs','scripts/serve.mjs']){const r=spawnSync(process.execPath,['--check',path.join(root,f)],{encoding:'utf8',windowsHide:true});assert.equal(r.status,0,r.stderr);}});
+check('license notices and research references are shipped',()=>{for(const f of ['LICENSE','public/THREE-LICENSE.txt','public/data/README.txt','docs/RESEARCH.md'])assert.ok(existsSync(path.join(root,f)));});
+const html=await fs.readFile(path.join(root,'dist/index.html'),'utf8');
+check('production entry references resolve, including subdirectory hosting',()=>{for(const [,url]of html.matchAll(/(?:src|href)="([^"]+)"/g)){if(url.startsWith('http')||url.startsWith('#')||url==='./')continue;assert.ok(!url.startsWith('/'),'root-absolute reference '+url);assert.ok(!url.includes('..'));}assert.match(html,/lang="zh-CN"/);assert.ok(!html.includes('/@vite/client'));});
+for(const [,url]of html.matchAll(/(?:src|href)="([^"]+)"/g))if(!url.startsWith('http')&&!url.startsWith('#')&&url!=='./')await fs.access(path.join(root,'dist',url));
+await fs.mkdir(path.join(root,'docs'),{recursive:true});await fs.writeFile(path.join(root,'docs/verification.json'),JSON.stringify({passed,failed:0,sourceRecords:es.length,buildings:d.buildings.length,baseBuildingTriangles:triangles,osmTimestamp:d.metadata.osmTimestamp,projection:d.projection,notes:'Independent source/data/geometry checks. Does not prove GPU browser behavior.'},null,2));
+console.log(JSON.stringify({passed,baseBuildingTriangles:triangles}));

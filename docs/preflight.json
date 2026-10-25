@@ -1,0 +1,107 @@
+{
+  "p0": 0,
+  "files": [
+    {
+      "file": "dist\\index.html",
+      "findings": [
+        {
+          "id": "missing-stamp",
+          "severity": "P2",
+          "label": "No /* finesse · … */ build stamp — next run has nothing to rotate against",
+          "fix": "divergence §4.2",
+          "hits": [
+            {
+              "line": 0,
+              "text": "no five-axis stamp in CSS"
+            }
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "src\\style.css",
+      "findings": [
+        {
+          "id": "side-stripe",
+          "severity": "P1",
+          "label": "Side-stripe border (border-left/right > 1px as colored accent)",
+          "fix": "redesign",
+          "count": 1,
+          "hits": [
+            {
+              "line": 2,
+              "text": "border-left:2px solid #b78a56"
+            }
+          ]
+        },
+        {
+          "id": "default-palette-token",
+          "severity": "P2",
+          "label": "Default-category palette token name (--cream/--sand/--paper…)",
+          "fix": "soul",
+          "count": 1,
+          "hits": [
+            {
+              "line": 2,
+              "text": "--paper"
+            }
+          ]
+        },
+        {
+          "id": "inline-color-literal",
+          "severity": "P2",
+          "label": "103 opaque colour literals outside :root (>30) — lift them into named tokens",
+          "fix": "soul",
+          "total": 103,
+          "hits": [
+            {
+              "line": 2,
+              "text": "#a57345"
+            },
+            {
+              "line": 2,
+              "text": "#edf0e6"
+            },
+            {
+              "line": 2,
+              "text": "#879c85"
+            },
+            {
+              "line": 2,
+              "text": "#5e8c62"
+            },
+            {
+              "line": 2,
+              "text": "#607968"
+            },
+            {
+              "line": 2,
+              "text": "#a17454"
+            },
+            {
+              "line": 2,
+              "text": "#59705e"
+            },
+            {
+              "line": 2,
+              "text": "#f0f3e6"
+            }
+          ],
+          "count": 103
+        }
+      ]
+    }
+  ],
+  "notCovered": [
+    "default-category aesthetic (the vibe, not just token names — beige+brass craft, AI purple-glow)",
+    "div-based fake screenshots / fake dashboards",
+    "identical / generic card grids (icon + title + text × N)",
+    "zero imagery on an image-implied brief (food / hotel / fashion / travel)",
+    "glassmorphism / AI-purple-glow used as decoration",
+    "layout-family repetition (§5) and whether the soul is actually distinct",
+    "whether the engine RENDERS real pixels (needs the Playwright runtime pass, not a grep)",
+    "mobile-floor M3/M4 — clickable text wrapping to two lines, long-word overflow at 320px (needs a rendered page at 320, not a grep)",
+    "root-relative asset paths (`/img/x.png`) — dead-ref only resolves file-relative ones; a broken `/…` link needs the real serving root"
+  ]
+}

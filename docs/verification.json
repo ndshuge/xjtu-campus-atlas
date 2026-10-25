@@ -1,0 +1,20 @@
+{
+  "passed": 12,
+  "failed": 0,
+  "sourceRecords": 5836,
+  "buildings": 139,
+  "baseBuildingTriangles": 3860,
+  "osmTimestamp": "2026-10-24T16:27:10Z",
+  "projection": {
+    "type": "local-equirectangular",
+    "units": "metres",
+    "x": "east",
+    "z": "south",
+    "metresPerDegree": [
+      92116.20400304048,
+      110926.86069081243
+    ],
+    "scaleModel": "WGS84 ellipsoid prime-vertical and meridional radii at origin latitude"
+  },
+  "notes": "Independent source/data/geometry checks. Does not prove GPU browser behavior."
+}

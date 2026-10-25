@@ -1,0 +1,5 @@
+node_modules/
+.sites-local/
+*.tar.gz
+*.log
+.DS_Store

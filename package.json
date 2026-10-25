@@ -1,0 +1,16 @@
+{
+  "name": "xjtu-campus-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 18865",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1 --port 18865",
+    "verify": "node scripts/verify.mjs",
+    "data": "node scripts/prepare-data.mjs",
+    "start": "node scripts/serve.mjs"
+  },
+  "dependencies": {"three": "0.186.1"},
+  "devDependencies": {"vite": "8.3.5"}
+}
