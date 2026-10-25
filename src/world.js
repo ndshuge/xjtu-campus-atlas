@@ -4,6 +4,7 @@ import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {createLibraryFacade} from './library-facade.js';
 import {createLibraryClock} from './library-clock.js';
 import {createLibraryForecourt} from './library-forecourt.js';
+import {createLibraryGreenRoofs} from './library-green-roofs.js';
 import {createMainTowerFacade} from './main-tower-facade.js';
 import {createTengfeiTower,createSiyuanStele} from './axis-monuments.js';
 import {createSiyuanCenter,createScienceHall} from './cultural-facades.js';
@@ -161,7 +162,7 @@ export class CampusWorld{
    this.landmarkGroup.add(this.siyuanStele);
   }  const gate=this.data.landmarks.find(p=>p.name==='北门');if(gate){this.northGate=createNorthGate(gate.position,BASE);this.northGateWorldPosition=new THREE.Vector3(gate.position[0],BASE,gate.position[1]);this.landmarkGroup.add(this.northGate);for(const m of this.northGate.children){if(m.name==='outer entry pier'||m.name==='sweeping white gate roof'){m.userData.place=gate;this.pickables.push(m);}}}
   this.secondaryGates=[];for(const entry of getCampusGateEntries(this.data)){const gateGeometry=entry.name==='南门'?createSouthGate(entry.position,BASE):createSecondaryGate({position:visualGatePosition(entry),name:entry.name,baseY:BASE,orientation:Math.PI/2});this.landmarkGroup.add(gateGeometry);this.secondaryGates.push(gateGeometry);}
-   const lib=this.data.buildings.find(b=>b.osmId===263624481);if(lib){const bb=bounds(lib.points);this.libraryFacade=createLibraryFacade({centerX:(bb[0]+bb[2])/2,stairFrontZ:bb[3],steppedCenterZ:bb[3]-21,baseY:BASE});this.scene.add(this.libraryFacade);this.libraryClock=createLibraryClock({centerX:(bb[0]+bb[2])/2,steppedCenterZ:bb[3]-21,baseY:BASE});this.scene.add(this.libraryClock);this.libraryForecourt=createLibraryForecourt({centerX:(bb[0]+bb[2])/2,facadeFrontZ:bb[3],baseY:BASE});this.scene.add(this.libraryForecourt);}
+   const lib=this.data.buildings.find(b=>b.osmId===263624481);if(lib){const bb=bounds(lib.points);this.libraryFacade=createLibraryFacade({centerX:(bb[0]+bb[2])/2,stairFrontZ:bb[3],steppedCenterZ:bb[3]-21,baseY:BASE});this.scene.add(this.libraryFacade);this.libraryClock=createLibraryClock({centerX:(bb[0]+bb[2])/2,steppedCenterZ:bb[3]-21,baseY:BASE});this.scene.add(this.libraryClock);this.libraryForecourt=createLibraryForecourt({centerX:(bb[0]+bb[2])/2,facadeFrontZ:bb[3],baseY:BASE});this.scene.add(this.libraryForecourt);this.libraryGreenRoofs=createLibraryGreenRoofs({centerX:(bb[0]+bb[2])/2,steppedCenterZ:bb[3]-21,baseY:BASE});this.scene.add(this.libraryGreenRoofs);}
   const siyuanCenter=this.data.buildings.find(b=>b.osmId===263624056);
   if(siyuanCenter){this.siyuanCenterFacade=createSiyuanCenter({footprint:bounds(siyuanCenter.points),height:siyuanCenter.height,baseY:BASE});this.scene.add(this.siyuanCenterFacade);}
   const scienceHall=this.data.buildings.find(b=>b.osmId===263632364);
