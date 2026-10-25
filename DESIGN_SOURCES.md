@@ -41,3 +41,9 @@
 - 发布状态：以实际 GitHub main 和 gh-pages 提交 / Pages 访问核验为准，不把本地 dist 当做已上线。
 
 本地隐私原则：不允许上传任何环境文件、令牌、浏览器 Cookie、社交账户或私有聊天资料。静态资源、OSM 署名与第三方声明保留。
+
+## 2026-10-25 · 后续实景素材审查与实际采用
+
+本轮从 Wikimedia Commons **逐张核对图片作者、拍摄时间和 CC BY-SA 4.0 条款**。两张 Liuxingy 的钱学森图书馆照片已转为 960px 预览并随静态站点发布；原始源图和许可链接在 `public/assets/reference/README.md` 中完整记录。它们并非 Designeer 素材，也没有被冒称为官方测绘或 3DGS 训练数据。
+
+体验方向从“全屏地图覆盖半屏大卡片”改为“地图优先的折叠地点栏”，照片对照是按需展开的独立 `<details>`，减少首屏图片加载和层级遮挡。移动视口截图在 `docs/quality-v2/peek-mobile-v2.png`、`docs/quality-v2/photo-sticky-mobile.png`。体验仍有 3D 资产精度、真实性与性能限制；不宣称已完成摄影级重建。

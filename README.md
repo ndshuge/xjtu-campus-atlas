@@ -77,3 +77,13 @@ Three.js 0.186.1 + Vite 8.3.5；建筑挤出后合并为一个可按顶点建筑
 - 本项目代码与程序化资产 MIT；Three.js 完整 MIT 通知在 `public/THREE-LICENSE.txt`。
 
 验收记录见 `docs/ACCEPTANCE.md`，已知数据边界与未来改进见上述精度说明。
+
+## 2026-10-25 · 可复用照片与实景对照
+
+本版增加钱学森图书馆的两张许可来源明确的校园照片，以及移动端“实景 / 步行 / 详情”折叠操作栏。照片仅作为 **2021 年正面**与**2025 年俯拍**的静态参照，不意味着真实模型已使用摄影测量或 3DGS 重建。
+
+- 2021 校园正面：Liuxingy，[西安交通大学 钱学森图书馆和四大发明广场.jpg](https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E5%AE%89%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A6_%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86%E5%92%8C%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA.jpg)。
+- 2025 校园俯拍：Liuxingy，[西交兴庆之俯视钱学森图书馆.jpg](https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E4%BA%A4%E5%85%B4%E5%BA%86%E4%B9%8B%E4%BF%AF%E8%A7%86%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86.jpg)。
+- 两张素材均为 CC BY-SA 4.0，复用与缩略变更情况见 [图片授权明细](public/assets/reference/README.md)，此说明及软件中的摄影署名不能在后续改版中删掉。
+- 移动端选择建筑后只显示简短位置卡，按“详情”展开；图书馆“实景”可直接进入两张照片对照。公开测试链接：`?photos=1#钱学森图书馆`。
+- 截图、回归结果与尚未满足的照片级还原要求见 [质量报告](docs/quality-v2/REPORT.md)。

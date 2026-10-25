@@ -44,6 +44,22 @@
 
 最终 inspector 仍为 **1 FAIL / 3 WARN**：通用检查器没有识别此 WebGL 地图工作台的标题位置（页面可见品牌标题和地图说明，作为产品例外待继续审视）；89% 可见文字小于 13px、暖色背景以及开发服务器检测属于告警。自动检查结果保存于 `taste-final-v3/report.json`，不是人类审美认证。没有借用未授权的 Designeer 图像素材。
 
+## 第四轮增量：真实照片对照与移动端信息布局
+
+- 手机端选中地标时默认使用 **紧凑地点条**，保留建筑主体视野；点“详情”展开，点“步行”进入附近安全漫游。
+- 图书馆新增“实景”入口，直达两张 Liuxingy 许可照片，并提供单独原图链接、CC BY-SA 4.0 署名和缩图说明；资源本地打包且仅在照片列表打开时懒加载。
+- 手机端照片展开期间，地点名称、步行/收起和关闭操作保持 sticky 可见，解决之前滚动后无法直接退出的问题。
+- 与许可相关的新测试：`scripts/verify-photos.mjs` 检查两张 JPEG 完整性、源码引用、CC 作者/协议明细与移动端控制元素。
+- 核验截图：`docs/quality-v2/peek-mobile-v2.png`（默认紧凑）及 `docs/quality-v2/photo-sticky-mobile.png`（真实照片）。
+- 照片为 2021 / 2025 年不同日期的静态影像，不能宣称与 2026 建筑现状完全一致；该功能是**真实资料参考**，不是高斯泼溅或实时街景。
+
+## 第五轮增量：植物层次、真实照片许可与现场视觉验收
+
+- `src/foliage-texture.js` 使用本地确定性程序生成树冠纹理；复用纹理实例，不引入图库下载或单株独立渲染对象。树冠绿色经轻量重新配平，减轻过暗的球形树效果。
+- 新增照片 `public/assets/reference/library-front-2021.jpg`（约 117KB）与 `library-aerial-2025.jpg`（约 235KB），各自可通过图书馆详情在需要时延迟加载；作者、原始链接、缩图变更与 CC BY-SA 4.0 声明见 `public/assets/reference/README.md`。
+- QA：`docs/quality-v2/peek-mobile-v2.png` 验收默认紧凑信息栏；`photo-sticky-mobile.png` 验收真实照片模式下的固定标题与关闭入口；`foliage-refresh-desktop.png` 为树木更新后的浏览器截图。
+- 文档与预览照片不意味着已获得官方 3D 模型、建筑尺度、周边 360° 连续影像或地面 3DGS 数据。后续应继续根据实景照片对建筑细节和多视角建模做严格核对。
+
 ## 自动化和部署检查
 
 执行：`npm run verify`、`npm run build`、`git diff --check`、桌面/窄屏无界面 Edge WebGL 截图。发布后须复查 Pages 文件 HTTP 200、GitHub workflow 成功、实际在线画面。

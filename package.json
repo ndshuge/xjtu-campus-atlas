@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1 --port 18865",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 18865",
-    "verify": "node scripts/verify.mjs && node scripts/verify-facade.mjs && node scripts/verify-walk.mjs",
+    "verify": "node scripts/verify.mjs && node scripts/verify-facade.mjs && node scripts/verify-walk.mjs && node scripts/verify-photos.mjs",
     "data": "node scripts/prepare-data.mjs",
     "start": "node scripts/serve.mjs"
   },
