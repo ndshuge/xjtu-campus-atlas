@@ -60,3 +60,5 @@ body:has(#detail:not([hidden])) .intro,body:has(#detail:not([hidden])) .view-tit
  .detail #close-detail{display:none}
  .detail #close-detail-mobile{display:flex;position:static;flex-shrink:0;align-items:center;justify-content:center;width:31px;min-width:31px;height:38px;padding:0;font-size:22px;color:#526a58;background:transparent}
 }
+/* Keep iOS pinch gestures inside the map, not the entire document. */
+html,body{overscroll-behavior:none}#scene{overflow:hidden;touch-action:none;contain:layout paint}#scene canvas{touch-action:none;-webkit-user-select:none;user-select:none}
