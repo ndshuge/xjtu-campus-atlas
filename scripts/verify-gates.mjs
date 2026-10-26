@@ -22,7 +22,8 @@ for(const p of gates){
  const b=new THREE.Box3().setFromObject(mesh);
  assert(Number.isFinite(b.min.x)&&Number.isFinite(b.max.z));
  assert(b.max.y<=7&&b.min.y>=1);
- assert(mesh.children.length>=6);
+ assert.equal(mesh.children.length,6,'Unverified side gates must use only neutral location markers');
+ assert(!mesh.children.some(c=>/canopy|limestone|decorative/i.test(c.name)),'Invented side-gate facade');
  tested++;
 }
 const origCanvas=globalThis.document;
@@ -36,8 +37,15 @@ try{
  assert(north.children.some(c=>c.name==='abstract science orbit'),'Northern natural-science relief interpretation missing');
  assert(north.children.some(c=>c.name==='abstract engineering gear'),'Northern engineering relief interpretation missing');
  assert(north.children.some(c=>c.name==='2011 photographed north gate inscription'));
+ const chinese=north.children.find(c=>c.name==='2011 photographed north gate inscription');
+ const english=north.children.find(c=>c.name==='front facade inscription');
+ // North exterior is viewed along +Z, thus increasing model X projects screen-left.
+ assert(chinese.position.x>english.position.x,'Chinese must appear left of English in exterior photo view');
+ assert(north.userData.accuracy.includes('not surveyed'),'Gate cannot claim 2026 as-built accuracy');
  const canopy=north.children.find(c=>c.name==='sweeping white gate roof');
  assert(canopy.geometry.attributes.uv?.count===canopy.geometry.attributes.position.count,'Curved tile roof UVs must be finite and complete');
+ const heights=canopy.geometry.attributes.position;
+ assert(heights.getY(0)>heights.getY(72),'Roof ends must rise above central sweep');
  assert([...canopy.geometry.attributes.position.array].every(Number.isFinite),'Gate fascia contains bad vertices');
  const box=new THREE.Box3().setFromObject(north);
  assert(box.min.x<main.position[0]-25&&box.max.x>main.position[0]+25);
@@ -46,7 +54,15 @@ try{
  const southBox=new THREE.Box3().setFromObject(southGate);
  assert(southGate.children.some(c=>c.name==='red granite sign wall'));
  assert(southGate.children.some(c=>c.name==='2011 photographed south gate signage'));
- assert(southGate.children.some(c=>c.name==='roof lantern'));
- assert(southBox.max.y<20&&southBox.min.y>0);
+ assert(!southGate.children.some(c=>c.name==='roof lantern'),'Unsurveyed building should not block southern approach');
+ assert(southBox.max.y<12&&southBox.min.y>0);
+ // The two independent mapped South Gate vehicle/pedestrian lanes must not be
+ // covered by the modelled 2011 name wall. Lane width here is a test envelope,
+ // not a certified clearance or as-built road dimension.
+ const sign=southGate.children.find(c=>c.name==='red granite sign wall');
+ const signBox=new THREE.Box3().setFromObject(sign);
+ for(const node of south)assert(node.position[0]>signBox.max.x+2.25||node.position[0]<signBox.min.x-2.25,
+  'South Gate photograph wall intersects an OSM passage lane');
+ assert(!southGate.children.some(c=>c.name==='side guard rail'),'Invented road-blocking rail reintroduced');
  console.log(JSON.stringify({passed:true,otherGateCount:tested,hasNorth:true,northBounds:[box.min.toArray(),box.max.toArray()]}));
 } finally {globalThis.document=origCanvas;THREE.TextureLoader.prototype.load=origLoader;}
