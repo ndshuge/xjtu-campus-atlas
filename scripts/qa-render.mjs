@@ -45,7 +45,7 @@ async function inspectInteractions(){
  const panMetres=Math.hypot(...pan.target.map((v,i)=>v-initial.target[i]));
  const walkMetres=Math.hypot(...walkAfter.camera.map((v,i)=>v-walkBefore.camera[i]));
  const result={panMetres,pinchDistanceBefore:distance(pan),pinchDistanceAfter:distance(pinch),pageScale:scale,labelSampleCount:labelSamples[0].length,labelDriftPx:labelDrift,walkMetres,walkMode:walkAfter.mode,returnMode:(await evaluate('window.campusDiagnostics()')).mode};
- result.passed=panMetres>1&&distance(pinch)<distance(pan)*.98&&scale===1&&labelSamples[0].length>0&&labelDrift<=2&&walkAfter.mode==='walk'&&walkMetres>1&&result.returnMode==='orbit';
+ result.passed=panMetres>1&&distance(pinch)<distance(pan)*.98&&scale===1&&labelSamples.every(sample=>sample.length<=3)&&labelDrift<=2&&walkAfter.mode==='walk'&&walkMetres>1&&result.returnMode==='orbit';
  return result;
 }
 async function mouseClick(selector){
