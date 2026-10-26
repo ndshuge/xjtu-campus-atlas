@@ -1,0 +1,153 @@
+{
+  "as_of": "2026-10-26",
+  "base_sha": "36170135addd3c16bebf2f179607e5ee4574043a",
+  "policy": "Evidence metadata only; no models or photos imported",
+  "schema": [
+    "id",
+    "name",
+    "source_and_download_landing",
+    "campus_assignment",
+    "model_creation_or_publication",
+    "format",
+    "rights",
+    "threejs_conversion_cost"
+  ],
+  "records": [
+    {
+      "id": "A01",
+      "name": "2011 SketchUp legacy",
+      "source_and_download_landing": "https://hehuan2112.github.io/file/other/2011-etm-vc.pdf",
+      "campus_assignment": "XJTU; Xingqing per-building unresolved",
+      "model_creation_or_publication": "2011 or earlier",
+      "format": "skp suggested, source unavailable",
+      "rights": "PERMISSION_REQUIRED",
+      "threejs_conversion_cost": "high"
+    },
+    {
+      "id": "A02",
+      "name": "2012-13 GIS XQ 3D",
+      "source_and_download_landing": "https://news.xjtu.edu.cn/info/1033/10170.htm",
+      "campus_assignment": "Xingqing confirmed",
+      "model_creation_or_publication": "2012-13 project, individual unknown",
+      "format": "unknown",
+      "rights": "PERMISSION_REQUIRED",
+      "threejs_conversion_cost": "high"
+    },
+    {
+      "id": "A03",
+      "name": "2013 Qian Xuesen interior",
+      "source_and_download_landing": "https://news.xjtu.edu.cn/info/1033/10170.htm",
+      "campus_assignment": "Xingqing confirmed",
+      "model_creation_or_publication": "by 2013-05-08",
+      "format": "unknown",
+      "rights": "PERMISSION_REQUIRED",
+      "threejs_conversion_cost": "high"
+    },
+    {
+      "id": "A04",
+      "name": "XJTUMC recon",
+      "source_and_download_landing": "https://www.mualliance.cn/report-2022",
+      "campus_assignment": "Xingqing confirmed",
+      "model_creation_or_publication": "2021-23 phases",
+      "format": "Minecraft source unavailable",
+      "rights": "PERMISSION_REQUIRED",
+      "threejs_conversion_cost": "high"
+    },
+    {
+      "id": "A05",
+      "name": "XJTU campus plan/history",
+      "source_and_download_landing": "https://news.xjtu.edu.cn/info/1033/18748.htm",
+      "campus_assignment": "Xingqing confirmed",
+      "model_creation_or_publication": "2015 post; geometry age unknown",
+      "format": "web illustration; no CAD",
+      "rights": "RESEARCH_ONLY",
+      "threejs_conversion_cost": "medium"
+    },
+    {
+      "id": "A06",
+      "name": "Qian Xuesen architectural records",
+      "source_and_download_landing": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+      "campus_assignment": "Xingqing confirmed",
+      "model_creation_or_publication": "1961 north/1991 south; 2016 text",
+      "format": "web photos and measurements, no CAD",
+      "rights": "RESEARCH_ONLY",
+      "threejs_conversion_cost": "low"
+    },
+    {
+      "id": "A07",
+      "name": "OpenStreetMap",
+      "source_and_download_landing": "https://www.openstreetmap.org/export",
+      "campus_assignment": "Xingqing coverage in current code, not re-fetched",
+      "model_creation_or_publication": "community continuous",
+      "format": "OSM XML/PBF/GeoJSON",
+      "rights": "ODBL_CONDITIONAL",
+      "threejs_conversion_cost": "low"
+    },
+    {
+      "id": "A08",
+      "name": "Sketchfab/3D Warehouse/GitHub/CG",
+      "source_and_download_landing": "https://help.sketchup.com/cs/3d-warehouse/3d-warehouse-terms-use-faq",
+      "campus_assignment": "no qualifying Xingqing asset verified",
+      "model_creation_or_publication": "unknown",
+      "format": "unknown",
+      "rights": "NOT_FOUND_OR_UNVERIFIED",
+      "threejs_conversion_cost": "unknown"
+    },
+    {
+      "id": "C01",
+      "name": "Poly Haven Asphalt 02",
+      "source_and_download_landing": "https://polyhaven.com/a/asphalt_02",
+      "campus_assignment": "generic non-XJTU",
+      "model_creation_or_publication": "site approx 6 years old",
+      "format": "1K-8K PNG/JPG/EXR + material packs",
+      "rights": "CC0_CANDIDATE",
+      "threejs_conversion_cost": "low"
+    },
+    {
+      "id": "C02",
+      "name": "Poly Haven Stone Tiles 02",
+      "source_and_download_landing": "https://polyhaven.com/a/stone_tiles_02",
+      "campus_assignment": "generic non-XJTU",
+      "model_creation_or_publication": "site approx 3 years old",
+      "format": "1K-8K PNG/JPG/EXR + material packs",
+      "rights": "CC0_CANDIDATE",
+      "threejs_conversion_cost": "low"
+    },
+    {
+      "id": "C03",
+      "name": "Poly Haven Concrete Wall 009",
+      "source_and_download_landing": "https://polyhaven.com/a/concrete_wall_009",
+      "campus_assignment": "generic non-XJTU",
+      "model_creation_or_publication": "site approx 3 months old",
+      "format": "1K-16K PNG/JPG/EXR + material packs",
+      "rights": "CC0_CANDIDATE",
+      "threejs_conversion_cost": "low"
+    },
+    {
+      "id": "C04",
+      "name": "Poly Haven Crosswalk HDRI",
+      "source_and_download_landing": "https://polyhaven.com/a/crosswalk",
+      "campus_assignment": "generic non-XJTU",
+      "model_creation_or_publication": "site approx 5 years old",
+      "format": "HDR/EXR 1K-16K",
+      "rights": "CC0_CANDIDATE",
+      "threejs_conversion_cost": "medium"
+    }
+  ],
+  "shared_missing_fields": {
+    "file_size": "not verified; license-page selector may show preset bundles",
+    "coordinate_system": "unknown for all external XJTU models; UV-only for CC0 materials",
+    "lod": "unknown for all XJTU original models; 1K/2K/etc for textures are texture resolutions, not mesh LOD",
+    "material_metadata": "unknown for XJTU models; see CC0 source individual maps",
+    "reference_photo_taken": "unverified, even where article publication date known",
+    "binary_sha256": "not downloaded",
+    "permission_scope": "PERMISSION_REQUIRED means modify/web display/public deployment/redistribute all unconfirmed",
+    "binary_imported": false
+  },
+  "rights_source": {
+    "CC0": "https://polyhaven.com/license",
+    "OSM_ODbL": "https://osmfoundation.org/wiki/Attribution_Guidelines",
+    "Sketchfab": "https://sketchfab.com/developers/download-api/guidelines",
+    "Warehouse": "https://help.sketchup.com/cs/3d-warehouse/3d-warehouse-terms-use-faq"
+  }
+}
