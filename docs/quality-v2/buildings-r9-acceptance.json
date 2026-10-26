@@ -1,0 +1,103 @@
+{
+  "recordedAt": "2026-10-26T14:57:47.844Z",
+  "baseline": "9d154bcd9363f07d8212bb58332820fb0a96b0d8",
+  "sourceCommit": "fd68603a1ab564143dfa91948746d8af7eb3290b",
+  "status": "phase acceptance with explicit geometry and device limits",
+  "commands": [
+    {
+      "command": "npm run verify",
+      "exitCode": 0,
+      "evidence": "Native exec session 93689 completed with exit 0; unchanged full original suite"
+    },
+    {
+      "command": "node scripts/verify-building-envelope-r9.mjs",
+      "exitCode": 0,
+      "wallRaySamples": 74,
+      "mainPortalPositiveAndNegative": true,
+      "foldedGlazingVisible": true,
+      "roofJunctions": true
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "modules": 40,
+      "script": "index-B_WQtuz9.js",
+      "reportedSizeKB": 751.3,
+      "reportedGzipKB": 207.88,
+      "warning": "751.30 kB exceeds the unchanged 750 kB chunk warning threshold"
+    }
+  ],
+  "sourceFiles": {
+    "world.js": "cf81251234836304e805c68ce0b615fd59d728512f0e5cb3f81e5caf43f9c310",
+    "building-envelope.js": "aac633fa13ceb28a87d03434fcd7299596bbf07cf749adeb3769c8a13ea61208",
+    "building-silhouettes.js": "cb604d7ad91bbb6912b33967e8895bc3b2bebb87b7806adec8c48503ef9ef37e",
+    "library-facade.js": "043e24423c207b2abc9b6970868f9083c155d6a795c25d0c4db4b232f33cd647",
+    "main-tower-facade.js": "395b9040127ccfffdf14218f737c15c4f404efca3804fd2b0ed0a4893f58885d",
+    "cultural-facades.js": "5b608a89c9c5f8b07b1bcb4ceeeac01a93351b3fdcd59bff1a038f0cef601371",
+    "building-review-hook.js": "b1888ee796469525d4b214240bddf97e7715aec77380f1769a5f8336cba6c4d6"
+  },
+  "photo": {
+    "views": 12,
+    "script": [
+      "http://127.0.0.1:18939/@vite/client"
+    ],
+    "fpsRange": [
+      240,
+      240
+    ],
+    "initialisationMs": [
+      2457,
+      4007
+    ],
+    "maxTextures": 32,
+    "consoleErrors": 0,
+    "httpErrors": 0
+  },
+  "production": {
+    "views": 14,
+    "script": [
+      "http://127.0.0.1:18929/assets/index-B_WQtuz9.js"
+    ],
+    "fpsRange": [
+      169,
+      175
+    ],
+    "initialisationMs": [
+      2612,
+      6512
+    ],
+    "maxTextures": 34,
+    "consoleErrors": 0,
+    "httpErrors": 0
+  },
+  "desktop": {
+    "rotationMetres": 778.1457857619163,
+    "distanceBeforeWheel": 1832.1094399625804,
+    "distanceAfterWheel": 1760.2559644396958,
+    "treeLayerTrianglesBefore": 567166,
+    "treeLayerTrianglesHidden": 200320,
+    "selected": "钱学森图书馆",
+    "passed": true
+  },
+  "mobile": {
+    "panMetres": 141.26927232775668,
+    "pinchDistanceBefore": 2148.1910995067456,
+    "pinchDistanceAfter": 1619.6949613499498,
+    "pageScale": 1,
+    "labelSampleCount": 5,
+    "labelDriftPx": 0,
+    "walkMetres": 4.350500000118018,
+    "walkMode": "walk",
+    "returnMode": "orbit",
+    "passed": true
+  },
+  "deviceCaveat": "Windows Edge headless, RTX 5060 Laptop, CSS 1440/390, DPR 2; not physical iPhone/Safari acceptance",
+  "publication": "No main merge or Pages publication performed by this task",
+  "limitations": [
+    "No measured heights or architectural sections acquired",
+    "OSM 264595812 retained at original estimated 14m; occludes Main E entrance",
+    "Yifu low annex not separated from existing uniform 21m volume",
+    "Approximate R6 tree positions occlude portions of entrances",
+    "South library rear facade remains schematic"
+  ]
+}
