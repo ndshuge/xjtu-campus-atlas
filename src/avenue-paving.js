@@ -24,12 +24,12 @@ export function avenuePavingGeometry(roads){
       edge.push([pt[0]+normal[0]*e,pt[1]+normal[1]*e]);
     }
     // Keep footpaths below asphalt and road markings to avoid depth fighting.
-    sidewalks.push(ribbon(footpath,2.22,BASE+.133));
-    edges.push(ribbon(edge,.11,BASE+.185));
+    sidewalks.push(ribbon(footpath,2.22,BASE+.185));
+    edges.push(ribbon(edge,.11,BASE+.195));
   }
   // The 2024 after-repair photograph shows a continuous YELLOW centre line.
   // Do not copy the generic dashed white road style onto this documented avenue.
-  const centerline=ribbon(points,.13,BASE+.205);
+  const centerline=ribbon(points,.13,BASE+.225);
   return {sidewalks,edges,centerline,roadName:road.name,length:Math.round(length),
     note:'2024 material types documented; shoulder widths and striping geometry interpretive'};
 }

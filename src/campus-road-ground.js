@@ -82,11 +82,11 @@ export function campusSpineGroundGeometry(roads){
     for(const side of [-1,1]){
       // The mapped centreline/width remain authoritative; no road rerouting.
       for(const run of clippedOffsetRuns(r,roads,side,r.width/2+1.65)){
-        const geometry=ribbon(run,2.05,BASE+.139);
+        const geometry=ribbon(run,2.05,BASE+.185);
         if(geometry){sidewalks.push(geometry);pavementPieces++;}
       }
       for(const run of clippedOffsetRuns(r,roads,side,r.width/2+.13)){
-        const geometry=ribbon(run,.115,BASE+.155);
+        const geometry=ribbon(run,.115,BASE+.195);
         if(geometry)edgings.push(geometry);
       }
     }
@@ -95,7 +95,7 @@ export function campusSpineGroundGeometry(roads){
   }
   return {sidewalks,edgings,segments,found:[...found],
     unavailable:Object.keys(OFFICIAL_CAMPUS_SPINES).filter(name=>name!=='梧桐东道'&&!found.has(name)),
-    maxHeight:BASE+.155,lowImpact:true};
+    maxHeight:BASE+.195,lowImpact:true};
 }
 function paleAggregate(){
   if(typeof document==='undefined')return null;

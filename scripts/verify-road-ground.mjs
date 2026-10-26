@@ -17,7 +17,7 @@ assert(plan.sidewalks.length>2 && plan.edgings.length>2);
 for(const g of [...plan.sidewalks,...plan.edgings]){
   const a=g.getAttribute('position');
   assert(a.count>3&&g.index.count>0&&[...a.array].every(Number.isFinite));
-  for(let i=0;i<a.count;i++)assert(a.getY(i)>=BASE+.137&&a.getY(i)<=BASE+.157,
+  for(let i=0;i<a.count;i++)assert(a.getY(i)>=BASE+.184&&a.getY(i)<=BASE+.196,
     'Main-road surface is neither flat nor close to existing asphalt');
 }
 
