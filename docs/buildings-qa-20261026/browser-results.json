@@ -1,0 +1,487 @@
+{
+  "origin": "http://127.0.0.1:19382/building-review.html",
+  "testedAt": "2026-10-26T08:05:51.724Z",
+  "results": [
+    {
+      "pose": "library",
+      "url": "http://127.0.0.1:19382/building-review.html?building=library",
+      "width": 1440,
+      "height": 900,
+      "file": "library-1440.png",
+      "elapsedMs": 6497,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19382/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 252,
+          "farTrees": 1840
+        },
+        "drawCalls": 425,
+        "triangles": 888134,
+        "geometries": 283,
+        "textures": 31,
+        "fps": 179,
+        "sceneLoadMs": 2710,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -27.000000000000004,
+          30.99999999999999,
+          107.99999999999955
+        ],
+        "target": [
+          -29.000000000000004,
+          22,
+          -104
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 2710,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false,
+        "buildingPreview": {
+          "present": true,
+          "children": 3,
+          "camera": [
+            -27.000000000000004,
+            30.99999999999999,
+            107.99999999999955
+          ]
+        }
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "main",
+      "url": "http://127.0.0.1:19382/building-review.html?building=main",
+      "width": 1440,
+      "height": 900,
+      "file": "main-1440.png",
+      "elapsedMs": 4661,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19382/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 217,
+          "farTrees": 1875
+        },
+        "drawCalls": 448,
+        "triangles": 869837,
+        "geometries": 307,
+        "textures": 31,
+        "fps": 240,
+        "sceneLoadMs": 1547,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -24.99999999999999,
+          56.99999999999997,
+          346
+        ],
+        "target": [
+          -28.99999999999999,
+          30,
+          132
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1547,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false,
+        "buildingPreview": {
+          "present": true,
+          "children": 3,
+          "camera": [
+            -24.99999999999999,
+            56.99999999999997,
+            346
+          ]
+        }
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "science",
+      "url": "http://127.0.0.1:19382/building-review.html?building=science",
+      "width": 1440,
+      "height": 900,
+      "file": "science-1440.png",
+      "elapsedMs": 4120,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19382/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 261,
+          "farTrees": 1831
+        },
+        "drawCalls": 342,
+        "triangles": 856525,
+        "geometries": 279,
+        "textures": 26,
+        "fps": 240,
+        "sceneLoadMs": 1140,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -83.99999999999892,
+          30.999999999999865,
+          -33.999999999999986
+        ],
+        "target": [
+          65,
+          13,
+          -33
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1140,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false,
+        "buildingPreview": {
+          "present": true,
+          "children": 3,
+          "camera": [
+            -83.99999999999892,
+            30.999999999999865,
+            -33.999999999999986
+          ]
+        }
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "library",
+      "url": "http://127.0.0.1:19382/building-review.html?building=library",
+      "width": 390,
+      "height": 844,
+      "file": "library-390.png",
+      "elapsedMs": 4408,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19382/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 81,
+          "farTrees": 2011
+        },
+        "drawCalls": 218,
+        "triangles": 620455,
+        "geometries": 211,
+        "textures": 29,
+        "fps": 240,
+        "sceneLoadMs": 1741,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -27.000000000000004,
+          30.99999999999999,
+          107.99999999999955
+        ],
+        "target": [
+          -29.000000000000004,
+          22,
+          -104
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1741,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false,
+        "buildingPreview": {
+          "present": true,
+          "children": 3,
+          "camera": [
+            -27.000000000000004,
+            30.99999999999999,
+            107.99999999999955
+          ]
+        }
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "main",
+      "url": "http://127.0.0.1:19382/building-review.html?building=main",
+      "width": 390,
+      "height": 844,
+      "file": "main-390.png",
+      "elapsedMs": 4177,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19382/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 95,
+          "farTrees": 1997
+        },
+        "drawCalls": 227,
+        "triangles": 637097,
+        "geometries": 224,
+        "textures": 29,
+        "fps": 240,
+        "sceneLoadMs": 1295,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -24.99999999999999,
+          56.99999999999997,
+          346
+        ],
+        "target": [
+          -28.99999999999999,
+          30,
+          132
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1295,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false,
+        "buildingPreview": {
+          "present": true,
+          "children": 3,
+          "camera": [
+            -24.99999999999999,
+            56.99999999999997,
+            346
+          ]
+        }
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "science",
+      "url": "http://127.0.0.1:19382/building-review.html?building=science",
+      "width": 390,
+      "height": 844,
+      "file": "science-390.png",
+      "elapsedMs": 3847,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19382/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 118,
+          "farTrees": 1974
+        },
+        "drawCalls": 135,
+        "triangles": 594531,
+        "geometries": 128,
+        "textures": 23,
+        "fps": 240,
+        "sceneLoadMs": 988,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -83.99999999999892,
+          30.999999999999865,
+          -33.999999999999986
+        ],
+        "target": [
+          65,
+          13,
+          -33
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 2,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 988,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false,
+        "buildingPreview": {
+          "present": true,
+          "children": 3,
+          "camera": [
+            -83.99999999999892,
+            30.999999999999865,
+            -33.999999999999986
+          ]
+        }
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
