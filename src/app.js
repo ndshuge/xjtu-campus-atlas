@@ -34,6 +34,13 @@ function appendRealPhotoReference(container,place){
  license.target='_blank';license.rel='noopener noreferrer';
  details.append(safe('p','预览图为缩放版本，未对照片内容作其他修改。'));
  details.append(license);
+ const news2026=safe('a','2026年10月新华网图书馆实景报道');
+ news2026.href='https://www.xinhuanet.com/20261013/d42e47404e3c4ab6b336946bc42d276a/c.html';
+ news2026.target='_blank';news2026.rel='noopener noreferrer';
+ const university2016=safe('a','2016年学校正面与圆形庭院照片');
+ university2016.href='https://news.xjtu.edu.cn/info/1079/52073.htm';
+ university2016.target='_blank';university2016.rel='noopener noreferrer';
+ details.append(safe('p','另外提供新近官方外景与历史入口照片链接，仅供对照，未将版权照片导入模型。'),news2026,university2016);
  container.append(details);
 }
 

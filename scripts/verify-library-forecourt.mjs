@@ -33,6 +33,9 @@ for(let i=0;i<72;i++){
  assert(!source.buildings.some(b=>pointIn(point,b.points)),'Library courtyard rim overlaps a mapped building');
 }
 assert(courtyardBox.max.y<1.1+3.2,'Courtyard railing/pedestal grows to impossible height');
+const app=fs.readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
+assert(app.includes('https://www.xinhuanet.com/20261013/d42e47404e3c4ab6b336946bc42d276a/c.html'),'Missing latest public exterior photo/news link');
+assert(app.includes('https://news.xjtu.edu.cn/info/1079/52073.htm'),'Missing official courtyard reference link');
 const world=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
 assert(world.includes('this.libraryClock=createLibraryClock('),'Clock model not integrated');
 assert(world.includes('this.libraryForecourt=createLibraryForecourt('),'Forecourt not integrated');
