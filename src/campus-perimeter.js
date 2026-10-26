@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {pointIn} from './geo.js';
+import {pointIn,pointSegment} from './geo.js';
 
 /**
  * Visible OSM-derived *schematic* perimeter. The North Gate is separately
@@ -12,7 +12,7 @@ import {pointIn} from './geo.js';
  * North Gate side relief documented 2025-12-09, 4.5 m high / 47 m long:
  * https://dwxcb.xjtu.edu.cn/info/1085/17811.htm
  */
-export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[]){
+export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],buildings=[]){
  const group=new THREE.Group();
  group.name='Xingqing campus perimeter / schematic enclosure with verified gate openings';
  const gateList=gates.filter(g=>Array.isArray(g.position)&&/门/.test(g.name||'')).map(g=>({
@@ -47,6 +47,11 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[]){
  }
  const segments=[],pillars=[],bars=[],upper=[],middle=[];
  const nearGate=(x,z,extra=0)=>gateList.some(g=>Math.hypot(x-g.point[0],z-g.point[1])<g.clearance+extra);
+ const buildingConflict=(x,z,margin)=>buildings.some(b=>{
+   if(pointIn([x,z],b.points)&&!(b.holes||[]).some(h=>pointIn([x,z],h)))return true;
+   return b.points.slice(1).some((p,i)=>pointSegment([x,z],b.points[i],p).distance<margin);
+ });
+ let skippedBuildingSegments=0;
  const record=(list,x,z,len,y,h,depth,angle)=>list.push({x,z,len,y,h,depth,angle});
  for(const ring of boundaries){
    for(let i=1;i<ring.length;i++){
@@ -57,6 +62,9 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[]){
       const start=length*j/steps,end=length*(j+1)/steps,span=end-start;
       const x=a[0]+ux*(start+end)/2,z=a[1]+uz*(start+end)/2;
       if(nearGate(x,z,span/2+.4))continue; // no phantom wall across mapped gates
+      // A university boundary can coincide with a building wall. Do not draw
+      // invented ironwork through that building; do not move the OSM boundary.
+      if(buildingConflict(x,z,span/2+.45)){skippedBuildingSegments++;continue;}
       record(segments,x,z,span,baseY+.37,.74,.34,angle);
       record(upper,x,z,span,baseY+2.24,.14,.14,angle);
       record(middle,x,z,span,baseY+1.32,.10,.105,angle);
@@ -98,7 +106,16 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[]){
   wallLengthMetres:Math.round(segments.reduce((sum,p)=>sum+p.len,0)),
   gapCenters:gateList.map(g=>g.point),
   roadCrossingCount:mappedRoadPassages.length,
-  geometryVersion:'visible-perimeter-r1'
+  geometryVersion:'visible-perimeter-r6-clearance',
+  buildingClearanceGaps:skippedBuildingSegments,
+  colliderSegments:segments.map(p=>({a:[p.x-Math.cos(-p.angle)*p.len/2,p.z-Math.sin(-p.angle)*p.len/2],b:[p.x+Math.cos(-p.angle)*p.len/2,p.z+Math.sin(-p.angle)*p.len/2]}))
  };
  return group;
+}
+
+export function perimeterBlocksPosition(perimeter,point,margin=.75){
+ return (perimeter?.userData.colliderSegments||[]).some(s=>{
+   if(point[0]<Math.min(s.a[0],s.b[0])-margin||point[0]>Math.max(s.a[0],s.b[0])+margin||point[1]<Math.min(s.a[1],s.b[1])-margin||point[1]>Math.max(s.a[1],s.b[1])+margin)return false;
+   return pointSegment(point,s.a,s.b).distance<margin+.18;
+ });
 }

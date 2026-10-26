@@ -1,0 +1,149 @@
+{
+  "origin": "http://127.0.0.1:18906/",
+  "testedAt": "2026-10-26T05:45:53.058Z",
+  "results": [
+    {
+      "pose": "north-wall-oblique",
+      "url": "http://127.0.0.1:18906/?inspection=north-wall",
+      "width": 1440,
+      "height": 900,
+      "file": "north-wall-oblique-1440.png",
+      "elapsedMs": 7271,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 84,
+          "farTrees": 2008
+        },
+        "drawCalls": 251,
+        "triangles": 634297,
+        "geometries": 330,
+        "textures": 30,
+        "fps": 171,
+        "sceneLoadMs": 2813,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -79.22566715925723,
+          7.928420042520325,
+          -624.090067566655
+        ],
+        "target": [
+          -126,
+          4.300000000000001,
+          -563
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 8,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 2813,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-wall-oblique",
+      "url": "http://127.0.0.1:18906/?inspection=north-wall",
+      "width": 390,
+      "height": 844,
+      "file": "north-wall-oblique-390.png",
+      "elapsedMs": 5185,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 13,
+          "farTrees": 2079
+        },
+        "drawCalls": 84,
+        "triangles": 525799,
+        "geometries": 161,
+        "textures": 16,
+        "fps": 171,
+        "sceneLoadMs": 1361,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -119.03988430122313,
+          7.9284200425203295,
+          -639.625004779476
+        ],
+        "target": [
+          -126,
+          4.300000000000001,
+          -563
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 4,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1361,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

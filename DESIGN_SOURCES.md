@@ -47,3 +47,9 @@
 本轮从 Wikimedia Commons **逐张核对图片作者、拍摄时间和 CC BY-SA 4.0 条款**。两张 Liuxingy 的钱学森图书馆照片已转为 960px 预览并随静态站点发布；原始源图和许可链接在 `public/assets/reference/README.md` 中完整记录。它们并非 Designeer 素材，也没有被冒称为官方测绘或 3DGS 训练数据。
 
 体验方向从“全屏地图覆盖半屏大卡片”改为“地图优先的折叠地点栏”，照片对照是按需展开的独立 `<details>`，减少首屏图片加载和层级遮挡。移动视口截图在 `docs/quality-v2/peek-mobile-v2.png`、`docs/quality-v2/photo-sticky-mobile.png`。体验仍有 3D 资产精度、真实性与性能限制；不宣称已完成摄影级重建。
+
+## 2026-10-26 R6 · 场景质量闭环
+
+沿用现有地图界面与 Three.js。Prism 的实际采用项为实例批次、近远 LOD、几何预算、DPR 上限与真实 WebGL 指标；Taste 的实际采用项为先看当前页面、保留既有视觉语言、根据截图返工。树冠远景消失、树皮 shader 编译失败和远景叶簇叠板感均由看图后修正，没有用静态测试代替视觉验收。
+
+新道路/植被纹理为原创程序资产；学校 2024 道路改造、2026 北门修缮照片仅作研究。四视角、六维评分、工具结果及未完成项见 [R6 记录](docs/quality-v2/CANOPY_CLEARANCE_R6_20261026.md)。真实 iPhone Safari、全校高保真和完整双来源设计门仍不能报告通过。

@@ -26,15 +26,29 @@ export function avenuePavingGeometry(roads){
     sidewalks.push(ribbon(footpath,2.22,BASE+.133));
     edges.push(ribbon(edge,.11,BASE+.185));
   }
-  return {sidewalks,edges,roadName:road.name,length:Math.round(length),
+  // The 2024 after-repair photograph shows a continuous YELLOW centre line.
+  // Do not copy the generic dashed white road style onto this documented avenue.
+  const centerline=ribbon(points,.13,BASE+.205);
+  return {sidewalks,edges,centerline,roadName:road.name,length:Math.round(length),
     note:'2024 material types documented; shoulder widths and striping geometry interpretive'};
 }
 
-export function addAvenuePaving(scene,roads,pavers){
+function porousConcreteTexture(){
+  const canvas=document.createElement('canvas');canvas.width=canvas.height=128;
+  const c=canvas.getContext('2d');c.fillStyle='#c8c8bd';c.fillRect(0,0,128,128);
+  // Original aggregate/pore pattern. The documented 2024 surface is concrete,
+  // not a grid of small paving bricks. This is not a photograph-derived map.
+  let seed=1956;const random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};
+  for(let i=0;i<2100;i++){const v=150+Math.floor(random()*76);c.fillStyle=`rgba(${v},${v},${v-8},.32)`;c.fillRect(random()*128,random()*128,random()*1.4+.25,random()*1.4+.25);}
+  const texture=new THREE.CanvasTexture(canvas);texture.colorSpace=THREE.SRGBColorSpace;
+  texture.wrapS=texture.wrapT=THREE.RepeatWrapping;texture.anisotropy=4;return texture;
+}
+
+export function addAvenuePaving(scene,roads){
   const data=avenuePavingGeometry(roads);
   const group=new THREE.Group();
   group.name='Wutong East Road / resurfaced asphalt and porous sidewalks (interpretive width)';
-  const concrete=new THREE.MeshStandardMaterial({color:'#d7d9ca',map:pavers,roughness:.98});
+  const concrete=new THREE.MeshStandardMaterial({color:'#e1e1d8',map:porousConcreteTexture(),roughness:.98});
   const line=new THREE.MeshBasicMaterial({color:'#d2cfb5',transparent:true,opacity:.86,depthWrite:false});
   for(const [index,collection,material] of [[0,data.sidewalks,concrete],[1,data.edges,line]]){
     for(const geometry of collection){
@@ -43,6 +57,10 @@ export function addAvenuePaving(scene,roads,pavers){
       mesh.name=index?'subtle roadway edge thermoplastic':'permeable concrete walkway (schematic width)';
       mesh.receiveShadow=true;group.add(mesh);
     }
+  }
+  if(data.centerline){
+    const paint=new THREE.MeshBasicMaterial({color:'#cfb548',depthWrite:false});
+    const center=new THREE.Mesh(data.centerline,paint);center.name='2024 documented continuous yellow centre line';center.renderOrder=7;group.add(center);
   }
   group.userData={source:'https://news.xjtu.edu.cn/info/1002/214178.htm',
     published:'2024-09-20',name:data.roadName,length:data.length,

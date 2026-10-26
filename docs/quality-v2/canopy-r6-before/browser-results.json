@@ -1,0 +1,223 @@
+{
+  "origin": "http://127.0.0.1:18906/",
+  "testedAt": "2026-10-26T05:09:22.653Z",
+  "results": [
+    {
+      "pose": "avenue-east",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-east",
+      "width": 1440,
+      "height": 900,
+      "file": "avenue-east-1440.png",
+      "elapsedMs": 4883,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-BaKmtPs_.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "drawCalls": 268,
+        "triangles": 1749270,
+        "geometries": 217,
+        "textures": 11,
+        "fps": 176,
+        "sceneLoadMs": 1822,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.79863012799035,
+          13.63770629446644,
+          9.831400368046928
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1822,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-wall",
+      "url": "http://127.0.0.1:18906/?inspection=north-wall",
+      "width": 1440,
+      "height": 900,
+      "file": "north-wall-1440.png",
+      "elapsedMs": 3947,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-BaKmtPs_.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "drawCalls": 438,
+        "triangles": 1779170,
+        "geometries": 322,
+        "textures": 24,
+        "fps": 171,
+        "sceneLoadMs": 1090,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -125.99999999999999,
+          7.9284200425203215,
+          -639.9404611891237
+        ],
+        "target": [
+          -126,
+          4.300000000000001,
+          -563
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1090,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "avenue-east",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-east",
+      "width": 390,
+      "height": 844,
+      "file": "avenue-east-390.png",
+      "elapsedMs": 3544,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-BaKmtPs_.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "drawCalls": 39,
+        "triangles": 623040,
+        "geometries": 41,
+        "textures": 6,
+        "fps": 170,
+        "sceneLoadMs": 746,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.79863012799035,
+          13.63770629446644,
+          9.831400368046928
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 746,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-wall",
+      "url": "http://127.0.0.1:18906/?inspection=north-wall",
+      "width": 390,
+      "height": 844,
+      "file": "north-wall-390.png",
+      "elapsedMs": 3360,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-BaKmtPs_.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "drawCalls": 137,
+        "triangles": 646048,
+        "geometries": 140,
+        "textures": 11,
+        "fps": 171,
+        "sceneLoadMs": 631,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -125.99999999999999,
+          7.9284200425203215,
+          -639.9404611891237
+        ],
+        "target": [
+          -126,
+          4.300000000000001,
+          -563
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 631,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

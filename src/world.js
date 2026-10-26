@@ -10,14 +10,14 @@ import {createMainERoofDetail} from './main-e-roof-detail.js';
 import {createTengfeiTower,createSiyuanStele} from './axis-monuments.js';
 import {createSiyuanCenter,createScienceHall} from './cultural-facades.js';
 import {makeGroundPattern} from './ground-pattern.js';
-import {makeCanopyTexture} from './foliage-texture.js';
+import {createCampusVegetation,fitTreeToBuildings} from './campus-vegetation.js';
 import {createSurfaceTexture} from './surface-textures.js';
 import {addAvenuePaving} from './avenue-paving.js';
 import {findSafeWalkStart} from './walk-placement.js';
 import {createFourInventionsMarker} from './four-inventions.js';
 import {buildFourInventionsPaving} from './plaza-terrain.js';
 import {createNorthGate} from './north-gate.js';
-import {createCampusPerimeter} from './campus-perimeter.js';
+import {createCampusPerimeter,perimeterBlocksPosition} from './campus-perimeter.js';
 import {createSecondaryGate} from './secondary-gates.js';
 import {createSouthGate} from './south-gate.js';
 import {getCampusGateEntries,visualGatePosition} from './gate-entries.js';
@@ -43,7 +43,7 @@ export class CampusWorld{
   const skyUniforms=this.sky.material.uniforms;skyUniforms.turbidity.value=3;skyUniforms.rayleigh.value=.85;skyUniforms.mieCoefficient.value=.003;skyUniforms.mieDirectionalG.value=.78;skyUniforms.sunPosition.value.copy(this.sun.position);
   this.pavers=createSurfaceTexture('pavers');this.asphalt=createSurfaceTexture('asphalt');this.waterTexture=createSurfaceTexture('water');
   this.ray=new THREE.Raycaster();this.pointer=new THREE.Vector2();this.proj=new THREE.Vector3();this.timer=new THREE.Timer();this.timer.connect(document);this.dimensions=new Map();this.footprintBounds=data.buildings.map(b=>bounds(b.points));
-  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.avenuePaving=addAvenuePaving(this.scene,this.data.roads,this.pavers);this.buildBuildings();this.buildLandmarks();this.buildTrees();this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);
+  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.avenuePaving=addAvenuePaving(this.scene,this.data.roads);this.buildBuildings();this.buildLandmarks();this.buildTrees();this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);
   // Reproducible exterior photographic QA; normal visitors keep existing default camera.
   const inspection=new URLSearchParams(location.search).get('inspection');
   if(inspection)document.body.classList.add('photo-inspection');
@@ -56,6 +56,18 @@ export class CampusWorld{
     const main=this.data.buildings.find(b=>b.osmId===263624057);
     if(main){const [x0,z0,x1,z1]=bounds(main.points);const cx=(x0+x1)/2;
       this.camera.fov=this.isMobile?64:48;this.camera.updateProjectionMatrix();this.camera.position.set(cx+6,BASE+47,z1+(this.isMobile?235:208));this.controls.target.set(cx,BASE+36,(z0+z1)/2);this.controls.update();}
+  }else if(inspection==='avenue-ground'||inspection==='avenue-ground-oblique'){
+    // The overview's polar limit lifts shallow views above the street.
+    // Permit looking slightly upward only for these photographic QA views.
+    this.controls.maxPolarAngle=Math.PI*.55;
+    if(inspection==='avenue-ground'){
+      this.camera.position.set(122.8,BASE+2,10);this.controls.target.set(121.5,BASE+5,-150);
+    }else{
+      this.camera.position.set(139,BASE+2,-18);this.controls.target.set(120,BASE+6,-115);
+    }
+    this.controls.update();
+  }else if(inspection==='avenue-oblique'){
+    this.camera.position.set(139,BASE+6.4,-18);this.controls.target.set(120,BASE+8,-115);this.controls.update();
   }else if(inspection==='avenue-east'){
     // Ground-level OSM road axis, independent of guessed single-tree coordinates.
     this.camera.position.set(122.8,BASE+3.3,10);this.controls.target.set(121.5,BASE+5,-150);this.controls.update();
@@ -72,7 +84,7 @@ export class CampusWorld{
   const edges=[];for(const p of this.data.boundary){const vs=p.map(v=>new THREE.Vector3(v[0],BASE+.15,v[1]));edges.push(...vs.flatMap((v,i)=>i<vs.length-1?[v,vs[i+1]]:[]));}
   this.scene.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(edges),new THREE.LineBasicMaterial({color:'#526b5e',transparent:true,opacity:.95})));
   // The perimeter was previously only a flat line. Add real height, leave gate gaps.
-  this.campusPerimeter=createCampusPerimeter(this.data.boundary,[...this.data.landmarks,...this.data.pois],BASE,this.data.roads);
+  this.campusPerimeter=createCampusPerimeter(this.data.boundary,[...this.data.landmarks,...this.data.pois],BASE,this.data.roads,this.data.buildings);
   this.scene.add(this.campusPerimeter);
  }
  buildSurfaces(){
@@ -108,7 +120,7 @@ export class CampusWorld{
   if(pos.length){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));const marks=new THREE.LineSegments(g,new THREE.LineBasicMaterial({color:'#ebe8cf',transparent:false,depthTest:true,depthWrite:false}));marks.renderOrder=6;this.scene.add(marks);}
  }
  buildRoads(){const curb=[],roads=[],avenues=[],paths=[],mark=[];for(const r of this.data.roads){const foot=/footway|path|steps|cycleway/.test(r.kind);if(foot){paths.push(ribbon(r.points,r.width,BASE+.115));continue;}curb.push(ribbon(r.points,r.width+2.5,BASE+.075));(/^(思源路|彭康路|学森路|文治路|梧桐东道|梧桐西道|学苑东路|学苑西路)$/.test(r.name||'')?avenues:roads).push(ribbon(r.points,r.width,BASE+.125));
-  if(r.width>=6){let offset=0;for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<.1)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=offset;t<len-1;t+=12)mark.push(ribbon([[a[0]+dx*t,a[1]+dz*t],[a[0]+dx*Math.min(t+3,len),a[1]+dz*Math.min(t+3,len)]],.22,BASE+.175));offset=(offset-len)%12;if(offset<0)offset+=12;}}
+  if(r.width>=6&&r.name!=='梧桐东道'){let offset=0;for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<.1)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=offset;t<len-1;t+=12)mark.push(ribbon([[a[0]+dx*t,a[1]+dz*t],[a[0]+dx*Math.min(t+3,len),a[1]+dz*Math.min(t+3,len)]],.22,BASE+.175));offset=(offset-len)%12;if(offset<0)offset+=12;}}
   }this.merge(curb,this.mat('#dfdeca',{map:this.pavers}));this.merge(roads,this.mat('#8b968e',{map:this.asphalt}));this.merge(avenues,this.mat('#626f69',{map:this.asphalt}));this.merge(paths,this.mat('#d3cdb7',{map:this.pavers}));this.merge(mark,this.mat('#e5dfbd'));
  }
  buildingMat(){const m=this.mat('#f0e9d2',{vertexColors:true,roughness:.82});m.onBeforeCompile=s=>{
@@ -217,47 +229,16 @@ export class CampusWorld{
    const canPlant=p=>!this.blocked(p,2)&&!waters.some(s=>pointIn(p,s.points))&&!entranceAxis(p);const used=new Set();const add=(x,z,type=0)=>{const key=Math.round(x/5)+','+Math.round(z/5);if(used.has(key))return;used.add(key);trees.push({x,z,h:type===2?15+random()*4:7+random()*5,r:type===2?4.0+random()*1.7:3.1+random()*2.2,c:random(),type});};
   for(const s of this.data.surfaces.filter(s=>s.kind==='wood'||s.kind==='green')){const [x0,z0,x1,z1]=bounds(s.points);const spacing=s.kind==='wood'?11:15;for(let x=x0+4;x<x1;x+=spacing)for(let z=z0+4;z<z1;z+=spacing){const p=[x+(random()-.5)*7,z+(random()-.5)*7];if(pointIn(p,s.points)&&canPlant(p)&&this.roadDistance(p)>1.5&&random()>.08)add(...p,s.kind==='wood'&&random()>.74?1:0);}}
   for(const r of this.data.roads.filter(r=>r.campus&&!/steps|path|footway|cycleway/.test(r.kind))){for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<14)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=7;t<len-3;t+=16)for(const side of [-1,1]){const p=[a[0]+dx*t-dz*(r.width/2+4)*side,a[1]+dz*t+dx*(r.width/2+4)*side];if(this.data.boundary.some(b=>pointIn(p,b))&&canPlant(p)&&this.roadDistance(p)>2.2)add(...p,/梧桐|彭康|思源|学森|文治|学苑/.test(r.name||'')?2:0);}}}
-  this.treePositions=trees;this.treeCells=new Map();for(const t of trees){const key=Math.floor(t.x/12)+','+Math.floor(t.z/12);if(!this.treeCells.has(key))this.treeCells.set(key,[]);this.treeCells.get(key).push(t);}this.trees=new THREE.Group();this.scene.add(this.trees);this.treeCount=trees.length;
-   // Official XJTU avenue imagery (2025-05-14): white-painted lower trunks
-   // and a taller two-sided canopy. Exact individual tree coordinates remain illustrative.
+  for(let i=0;i<trees.length;i++)trees[i]=fitTreeToBuildings(trees[i],this.data.buildings);this.treePositions=trees;this.treeCells=new Map();for(const t of trees){const key=Math.floor(t.x/12)+','+Math.floor(t.z/12);if(!this.treeCells.has(key))this.treeCells.set(key,[]);this.treeCells.get(key).push(t);}this.treeCount=trees.length;
    const avenueTrees=trees.filter(t=>t.type===2);
-   if(avenueTrees.length){const white=new THREE.InstancedMesh(new THREE.CylinderGeometry(.62,.70,1,9),this.mat('#f1f1e8'),avenueTrees.length);const temp=new THREE.Object3D();avenueTrees.forEach((t,i)=>{const paintHeight=1.65+t.c*.68;temp.position.set(t.x,BASE+paintHeight/2,t.z);temp.scale.set(1,paintHeight,1);temp.updateMatrix();white.setMatrixAt(i,temp.matrix);});white.instanceMatrix.needsUpdate=true;white.name='photo-inspired whitewashed avenue tree bases / approximate';white.castShadow=false;this.trees.add(white);}
-   if(avenueTrees.length){
-     // The university's dated avenue photos show forked plane-tree silhouettes,
-     // not short spherical hedges. Three instanced branches per avenue trunk.
-     const forks=new THREE.InstancedMesh(
-       new THREE.CylinderGeometry(.12,.26,1,6),
-       this.mat('#8b8d81',{roughness:.95}),avenueTrees.length*3
-     );
-     forks.name='plane tree branching / photo-inspired, positions approximate';
-     const up=new THREE.Vector3(0,1,0),axis=new THREE.Vector3();
-     const from=new THREE.Vector3(),to=new THREE.Vector3(),mid=new THREE.Vector3();
-     const model=new THREE.Object3D();
-     avenueTrees.forEach((t,i)=>{
-       for(let j=0;j<3;j++){
-         const a=t.c*6.28+j*Math.PI*2/3,spread=t.r*(.38+(j%2)*.19);
-         from.set(t.x,BASE+t.h*.53,t.z);
-         to.set(t.x+Math.cos(a)*spread,BASE+t.h*(.96-(j%2)*.035),t.z+Math.sin(a)*spread);
-         axis.subVectors(to,from);
-         mid.copy(from).add(to).multiplyScalar(.5);
-         model.position.copy(mid);
-         model.quaternion.setFromUnitVectors(up,axis.clone().normalize());
-         model.scale.set(1,axis.length(),1);
-         model.updateMatrix();forks.setMatrixAt(i*3+j,model.matrix);
-       }
-     });
-     forks.instanceMatrix.needsUpdate=true;forks.castShadow=false;this.trees.add(forks);
-   }
-   this.canopyTexture=makeCanopyTexture();const n=trees.length;const dummy=new THREE.Object3D();const trunk=new THREE.InstancedMesh(new THREE.CylinderGeometry(.4,.65,1,5),this.mat('#868778'),n);const crown=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?1:2),this.mat('#e0ead8',{roughness:.98,map:this.canopyTexture}),n);const crown2=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),this.mat('#ecf1e7',{roughness:.98,map:this.canopyTexture}),n);const crown3=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?0:1),this.mat('#e0e9d8',{roughness:.98,map:this.canopyTexture}),n);const colors=['#64834c','#799458','#5b7948','#899f66','#729159'];trees.forEach((t,i)=>{dummy.position.set(t.x,BASE+t.h*.35,t.z);dummy.scale.set(1,t.h*.7,1);dummy.rotation.set(0,0,0);dummy.updateMatrix();trunk.setMatrixAt(i,dummy.matrix);dummy.position.y=BASE+t.h*(t.type===2?.93:.77);dummy.scale.set(t.type===1?t.r*.55:t.type===2?t.r*.90:t.r,t.type===1?t.h*.68:t.type===2?t.r*.56:t.h*.42,t.type===1?t.r*.55:t.type===2?t.r*.87:t.r*.9);dummy.rotation.set(t.c*.3,t.c*6,.12*t.c);dummy.updateMatrix();crown.setMatrixAt(i,dummy.matrix);crown.setColorAt(i,new THREE.Color(colors[Math.floor(t.c*colors.length)]));dummy.position.x+=t.r*.5;dummy.position.y+=t.r*.1;dummy.scale.multiplyScalar(.74);dummy.updateMatrix();crown2.setMatrixAt(i,dummy.matrix);crown2.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+1)%colors.length]));dummy.position.set(t.x-t.r*.37,BASE+t.h*(t.type===2?.92:.79),t.z+t.r*.27);dummy.scale.set(t.r*.67,t.type===2?t.r*.52:t.h*.31,t.r*.72);dummy.rotation.set(-t.c*.13,t.c*5.2,t.c*.16);dummy.updateMatrix();crown3.setMatrixAt(i,dummy.matrix);crown3.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+3)%colors.length]));});for(const m of [trunk,crown,crown2,crown3]){m.castShadow=true;m.receiveShadow=true;m.instanceMatrix.needsUpdate=true;this.trees.add(m);}this.treeCrowns=[crown,crown2,crown3];
-   // Narrow evergreen forms add believable species diversity to planted groves.
-   const conifers=trees.filter(t=>t.type===1);
-   if(conifers.length){
-    const pines=new THREE.InstancedMesh(new THREE.ConeGeometry(1,1,8),this.mat('#d9e6d2',{roughness:.99,map:this.canopyTexture}),conifers.length);
-    const arbor=new THREE.Object3D();
-    conifers.forEach((t,i)=>{arbor.position.set(t.x,BASE+t.h*.61,t.z);arbor.scale.set(t.r*.67,t.h*.84,t.r*.67);arbor.rotation.set(0,t.c*6.28,0);arbor.updateMatrix();pines.setMatrixAt(i,arbor.matrix);pines.setColorAt(i,new THREE.Color(['#557450','#4b6549','#64805b'][i%3]));});
-    pines.instanceMatrix.needsUpdate=true;pines.castShadow=!this.isMobile;pines.receiveShadow=true;this.trees.add(pines);
-   }
+   this.avenueTreeCount=avenueTrees.length;
+   this.vegetation=createCampusVegetation(trees,{mobile:this.isMobile});
+   this.trees=this.vegetation.group;
+   this.trees.name='plane tree branching / photo-inspired, positions approximate';
+   this.treeCrowns=this.trees.children.filter(m=>m.name.includes('leaf sprays'));
+   this.scene.add(this.trees);
  }
+
  buildFurniture(){const lamps=[],benches=[];let k=0;for(const r of this.data.roads.filter(r=>r.campus&&r.width>=6)){for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);const dx=(b[0]-a[0])/(len||1),dz=(b[1]-a[1])/(len||1);for(let t=17;t<len;t+=48){const x=a[0]+dx*t-dz*(r.width/2+1.6),z=a[1]+dz*t+dx*(r.width/2+1.6);if(this.blocked([x,z]))continue;lamps.push({x,z});if(k++%3===0)benches.push(boxGeometry(x-dz*2,BASE+.6,z+dx*2,2.8,.35,.8));}}}this.merge(benches,this.mat('#967b5c'),{cast:true});
   const pole=new THREE.InstancedMesh(new THREE.CylinderGeometry(.1,.16,5.5,5),this.mat('#67786a'),lamps.length);this.lampMaterial=new THREE.MeshStandardMaterial({color:'#f4e5b1',emissive:'#ffd68a',emissiveIntensity:0,roughness:.45});const lamp=new THREE.InstancedMesh(new THREE.SphereGeometry(.55,6,4),this.lampMaterial,lamps.length);const dummy=new THREE.Object3D();lamps.forEach((p,i)=>{dummy.position.set(p.x,BASE+2.75,p.z);dummy.updateMatrix();pole.setMatrixAt(i,dummy.matrix);dummy.position.y=BASE+5.7;dummy.updateMatrix();lamp.setMatrixAt(i,dummy.matrix);});this.scene.add(pole,lamp);
  }
@@ -298,7 +279,7 @@ export class CampusWorld{
   return best;
  }
  isWalkable(point,margin=.75){
-  if(!this.data.boundary.some(b=>pointIn(point,b))||this.blocked(point,margin))return false;
+  if(!this.data.boundary.some(b=>pointIn(point,b))||this.blocked(point,margin)||perimeterBlocksPosition(this.campusPerimeter,point,margin))return false;
   if(this.data.surfaces.some(s=>s.kind==='water'&&pointIn(point,s.points)))return false;
     return this.treeGap(point)>=margin+.55;
  }
@@ -321,7 +302,7 @@ export class CampusWorld{
        ...trial,roads:this.data.roads,boundaries:this.data.boundary,
        buildings:this.data.buildings,water,trees:this.treePositions||[],
        obstacles:[],
-       canBlock:(q,margin)=>this.blocked(q,margin)
+       canBlock:(q,margin)=>this.blocked(q,margin)||perimeterBlocksPosition(this.campusPerimeter,q,margin)
      });
      if(result)choices.push({...result,...trial});
      // Prefer the authentic photographed south facade when its view is clear.
@@ -356,7 +337,7 @@ export class CampusWorld{
  drawMinimap(){const canvas=document.querySelector('#minimap');if(!canvas||innerWidth<=768)return;const c=canvas.getContext('2d'),w=canvas.width,h=canvas.height;const scale=Math.min((w-18)/1210,(h-15)/1180);const ox=132,oz=150;const cv=p=>[p[0]*scale+ox,p[1]*scale+oz];this.miniTransform={scale,ox,oz};c.clearRect(0,0,w,h);const poly=(ps,color,stroke)=>{c.beginPath();ps.forEach((p,i)=>{const [x,y]=cv(p);i?c.lineTo(x,y):c.moveTo(x,y);});c.closePath();if(color){c.fillStyle=color;c.fill();}if(stroke){c.strokeStyle=stroke;c.lineWidth=1.5;c.stroke();}};for(const p of this.data.boundary)poly(p,'#e0e6d4','#839a72');for(const s of this.data.surfaces)poly(s.points,s.kind==='water'?'#9bbdb2':s.kind==='pitch'?'#a1b783':'#b8caa3');for(const r of this.data.roads.filter(r=>r.campus)){c.beginPath();r.points.forEach((p,i)=>{const q=cv(p);i?c.lineTo(...q):c.moveTo(...q);});c.strokeStyle='#f2efdf';c.lineWidth=Math.max(1,r.width*scale);c.stroke();}for(const b of this.data.buildings)poly(b.points,b.id===this.selectedPlace?.id?'#65875a':'#b1b89e');const cp=cv([this.controls.target.x,this.controls.target.z]);c.strokeStyle='#6d8c56';c.lineWidth=1.3;c.beginPath();c.arc(...cp,13,0,Math.PI*2);c.stroke();c.fillStyle='#507842';c.beginPath();c.arc(...cp,3,0,Math.PI*2);c.fill();const cam=cv([this.camera.position.x,this.camera.position.z]);c.strokeStyle='#557c4855';c.beginPath();c.moveTo(...cp);c.lineTo(...cam);c.stroke();}
  animate(){requestAnimationFrame(()=>this.animate());if(document.hidden||this.contextLost)return;this.timer.update();const rawDt=this.timer.getDelta(),dt=Math.min(rawDt,.1),now=performance.now();this.frames++;if(rawDt>0){this.frameTimes.push(rawDt);if(this.frameTimes.length>120)this.frameTimes.shift();this.fps=this.frameTimes.length/this.frameTimes.reduce((a,b)=>a+b,0);}if(this.mode==='walk')this.moveWalk(dt);else if(this.flight){const f=this.flight,t=f.duration===0?1:Math.min((now-f.start)/f.duration,1),e=t*t*(3-2*t);this.camera.position.lerpVectors(f.from,f.to,e);this.controls.target.lerpVectors(f.targetFrom,f.targetTo,e);this.camera.lookAt(this.controls.target);if(t===1){this.flight=null;this.controls.enabled=true;this.controls.update();}}else{this.controls.update(dt);this.constrainOrbitToCampus();}
   if(this.tour&&!this.tour.paused&&now>this.tour.next)this.nextTour();
-  if(this.northGate){const gateDistance=this.camera.position.distanceTo(this.northGateWorldPosition);this.northGate.visible=gateDistance<(this.northGate.visible?950:800);}this.renderer.render(this.scene,this.camera);this.updateLabels();if(this.frames%10===0){this.drawMinimap();const needle=document.querySelector('#compass-needle');needle.style.transform=`rotate(${-this.controls.getAzimuthalAngle()*180/Math.PI}deg)`;document.querySelector('#view-height').textContent=this.mode==='walk'?'地面 · 2 m':`视点 ${Math.round(this.camera.position.y)} m`;}if(this.frames%60===0)this.container.dataset.runtime=JSON.stringify(this.diagnostics());
+  if(this.northGate){const gateDistance=this.camera.position.distanceTo(this.northGateWorldPosition);this.northGate.visible=gateDistance<(this.northGate.visible?950:800);}this.vegetation?.update(this.camera,now);this.renderer.render(this.scene,this.camera);this.updateLabels();if(this.frames%10===0){this.drawMinimap();const needle=document.querySelector('#compass-needle');needle.style.transform=`rotate(${-this.controls.getAzimuthalAngle()*180/Math.PI}deg)`;document.querySelector('#view-height').textContent=this.mode==='walk'?'地面 · 2 m':`视点 ${Math.round(this.camera.position.y)} m`;}if(this.frames%60===0)this.container.dataset.runtime=JSON.stringify(this.diagnostics());
  }
- diagnostics(){return{buildings:this.data.buildings.length,roads:this.data.roads.length,surfaces:this.data.surfaces.length,trees:this.treeCount,drawCalls:this.renderer.info.render.calls,triangles:this.renderer.info.render.triangles,geometries:this.renderer.info.memory.geometries,textures:this.renderer.info.memory.textures,fps:Math.round(this.fps),sceneLoadMs:Math.round(this.loadMs),mode:this.mode,walkStart:this.walkStart||null,light:this.lightMode,selected:this.selectedPlace?.name||null,webgl:'WebGL 2',camera:this.camera.position.toArray(),target:this.controls.target.toArray(),contextLost:!!this.contextLost,walkSpawn:this.walkSpawn||null,visibleLabels:this.labelItems.filter(l=>!l.el.hidden).length,reducedMotion:this.reduced,finiteGeometry:[...this.buildingMesh.geometry.attributes.position.array].every(Number.isFinite)};}
+ diagnostics(){return{buildings:this.data.buildings.length,roads:this.data.roads.length,surfaces:this.data.surfaces.length,trees:this.treeCount,vegetation:this.vegetation?.group.userData,drawCalls:this.renderer.info.render.calls,triangles:this.renderer.info.render.triangles,geometries:this.renderer.info.memory.geometries,textures:this.renderer.info.memory.textures,fps:Math.round(this.fps),sceneLoadMs:Math.round(this.loadMs),mode:this.mode,walkStart:this.walkStart||null,light:this.lightMode,selected:this.selectedPlace?.name||null,webgl:'WebGL 2',camera:this.camera.position.toArray(),target:this.controls.target.toArray(),contextLost:!!this.contextLost,walkSpawn:this.walkSpawn||null,visibleLabels:this.labelItems.filter(l=>!l.el.hidden).length,reducedMotion:this.reduced,finiteGeometry:[...this.buildingMesh.geometry.attributes.position.array].every(Number.isFinite)};}
 }

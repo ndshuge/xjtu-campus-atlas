@@ -1,0 +1,1306 @@
+{
+  "origin": "http://127.0.0.1:18906/",
+  "testedAt": "2026-10-26T05:44:33.604Z",
+  "results": [
+    {
+      "pose": "home",
+      "url": "http://127.0.0.1:18906/",
+      "width": 1440,
+      "height": 900,
+      "file": "home-1440.png",
+      "elapsedMs": 6113,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "drawCalls": 428,
+        "triangles": 582719,
+        "geometries": 303,
+        "textures": 30,
+        "fps": 172,
+        "sceneLoadMs": 2899,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          930,
+          999.9999999999999,
+          1190
+        ],
+        "target": [
+          25.000000000000004,
+          0,
+          -50.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 2899,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": [],
+      "interactions": {
+        "rotationMetres": 778.1456932256328,
+        "distanceBeforeWheel": 1832.1094399625808,
+        "distanceAfterWheel": 1760.255964439695,
+        "treeLayerTrianglesBefore": 582719,
+        "treeLayerTrianglesHidden": 215873,
+        "selected": "钱学森图书馆",
+        "passed": true
+      }
+    },
+    {
+      "pose": "avenue-east",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-east",
+      "width": 1440,
+      "height": 900,
+      "file": "avenue-east-1440.png",
+      "elapsedMs": 4627,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 228,
+          "farTrees": 1864
+        },
+        "drawCalls": 276,
+        "triangles": 779054,
+        "geometries": 224,
+        "textures": 17,
+        "fps": 169,
+        "sceneLoadMs": 1006,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.79863012799035,
+          13.63770629446644,
+          9.831400368046928
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1006,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "avenue-oblique",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-oblique",
+      "width": 1440,
+      "height": 900,
+      "file": "avenue-oblique-1440.png",
+      "elapsedMs": 4581,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 219,
+          "farTrees": 1873
+        },
+        "drawCalls": 267,
+        "triangles": 770380,
+        "geometries": 222,
+        "textures": 17,
+        "fps": 170,
+        "sceneLoadMs": 908,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          138.98139395085002,
+          13.756767505390645,
+          -18.094988777239337
+        ],
+        "target": [
+          120,
+          9.1,
+          -115.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 908,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "avenue-ground",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-ground",
+      "width": 1440,
+      "height": 900,
+      "file": "avenue-ground-1440.png",
+      "elapsedMs": 4414,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 228,
+          "farTrees": 1864
+        },
+        "drawCalls": 276,
+        "triangles": 779054,
+        "geometries": 224,
+        "textures": 17,
+        "fps": 171,
+        "sceneLoadMs": 893,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.80000000000001,
+          3.099999999999997,
+          10
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 893,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "avenue-ground-oblique",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-ground-oblique",
+      "width": 1440,
+      "height": 900,
+      "file": "avenue-ground-oblique-1440.png",
+      "elapsedMs": 4533,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 219,
+          "farTrees": 1873
+        },
+        "drawCalls": 267,
+        "triangles": 770380,
+        "geometries": 222,
+        "textures": 17,
+        "fps": 172,
+        "sceneLoadMs": 825,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          139,
+          3.099999999999989,
+          -17.99999999999997
+        ],
+        "target": [
+          120,
+          7.1,
+          -115
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 825,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-wall",
+      "url": "http://127.0.0.1:18906/?inspection=north-wall",
+      "width": 1440,
+      "height": 900,
+      "file": "north-wall-1440.png",
+      "elapsedMs": 4253,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 76,
+          "farTrees": 2016
+        },
+        "drawCalls": 446,
+        "triangles": 660326,
+        "geometries": 329,
+        "textures": 30,
+        "fps": 172,
+        "sceneLoadMs": 1076,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -125.99999999999999,
+          7.9284200425203215,
+          -639.9404611891237
+        ],
+        "target": [
+          -126,
+          4.300000000000001,
+          -563
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1076,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-gate",
+      "url": "http://127.0.0.1:18906/?inspection=north-gate",
+      "width": 1440,
+      "height": 900,
+      "file": "north-gate-1440.png",
+      "elapsedMs": 4277,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 57,
+          "farTrees": 2035
+        },
+        "drawCalls": 484,
+        "triangles": 644653,
+        "geometries": 335,
+        "textures": 33,
+        "fps": 171,
+        "sceneLoadMs": 958,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -31.94599999999999,
+          10.887269334992702,
+          -647.7883266961231
+        ],
+        "target": [
+          -31.946,
+          6.6,
+          -556.877
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 958,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "main-e",
+      "url": "http://127.0.0.1:18906/?inspection=main-e",
+      "width": 1440,
+      "height": 900,
+      "file": "main-e-1440.png",
+      "elapsedMs": 4501,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 226,
+          "farTrees": 1866
+        },
+        "drawCalls": 427,
+        "triangles": 817871,
+        "geometries": 295,
+        "textures": 31,
+        "fps": 170,
+        "sceneLoadMs": 1025,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -25.4345,
+          48.100000000000165,
+          350.82900000000376
+        ],
+        "target": [
+          -31.4345,
+          37.1,
+          123.99399999999993
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1025,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:钱学森图书馆",
+      "url": "http://127.0.0.1:18906/#%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86",
+      "width": 1440,
+      "height": 900,
+      "file": "place_钱学森图书馆-1440.png",
+      "elapsedMs": 4373,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 277,
+          "farTrees": 1815
+        },
+        "drawCalls": 341,
+        "triangles": 835985,
+        "geometries": 339,
+        "textures": 33,
+        "fps": 170,
+        "sceneLoadMs": 1030,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "钱学森图书馆",
+        "webgl": "WebGL 2",
+        "camera": [
+          -4.529999999999973,
+          31.000000000000014,
+          32.702999999999975
+        ],
+        "target": [
+          -30.529999999999998,
+          19,
+          -98.297
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1030,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "home",
+      "url": "http://127.0.0.1:18906/",
+      "width": 390,
+      "height": 844,
+      "file": "home-390.png",
+      "elapsedMs": 4321,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "drawCalls": 264,
+        "triangles": 554899,
+        "geometries": 273,
+        "textures": 28,
+        "fps": 170,
+        "sceneLoadMs": 1315,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          790,
+          1370,
+          1390
+        ],
+        "target": [
+          -25.000000000000004,
+          0,
+          -50.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1315,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": [],
+      "interactions": {
+        "panMetres": 141.26925601713054,
+        "pinchDistanceBefore": 2148.1910995067456,
+        "pinchDistanceAfter": 1619.6949613499494,
+        "pageScale": 1,
+        "labelSampleCount": 5,
+        "labelDriftPx": 0,
+        "walkMetres": 4.381500000058736,
+        "walkMode": "walk",
+        "returnMode": "orbit",
+        "passed": true
+      }
+    },
+    {
+      "pose": "avenue-east",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-east",
+      "width": 390,
+      "height": 844,
+      "file": "avenue-east-390.png",
+      "elapsedMs": 3544,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 108,
+          "farTrees": 1984
+        },
+        "drawCalls": 46,
+        "triangles": 563466,
+        "geometries": 48,
+        "textures": 12,
+        "fps": 170,
+        "sceneLoadMs": 596,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.79863012799035,
+          13.63770629446644,
+          9.831400368046928
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 596,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "avenue-oblique",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-oblique",
+      "width": 390,
+      "height": 844,
+      "file": "avenue-oblique-390.png",
+      "elapsedMs": 3718,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 90,
+          "farTrees": 2002
+        },
+        "drawCalls": 83,
+        "triangles": 561166,
+        "geometries": 85,
+        "textures": 15,
+        "fps": 170,
+        "sceneLoadMs": 732,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          138.98139395085002,
+          13.756767505390645,
+          -18.094988777239337
+        ],
+        "target": [
+          120,
+          9.1,
+          -115.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 732,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "avenue-ground",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-ground",
+      "width": 390,
+      "height": 844,
+      "file": "avenue-ground-390.png",
+      "elapsedMs": 3650,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 108,
+          "farTrees": 1984
+        },
+        "drawCalls": 46,
+        "triangles": 563466,
+        "geometries": 48,
+        "textures": 12,
+        "fps": 172,
+        "sceneLoadMs": 651,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.80000000000001,
+          3.099999999999997,
+          10
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 651,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "avenue-ground-oblique",
+      "url": "http://127.0.0.1:18906/?inspection=avenue-ground-oblique",
+      "width": 390,
+      "height": 844,
+      "file": "avenue-ground-oblique-390.png",
+      "elapsedMs": 3610,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 89,
+          "farTrees": 2003
+        },
+        "drawCalls": 83,
+        "triangles": 560744,
+        "geometries": 85,
+        "textures": 15,
+        "fps": 171,
+        "sceneLoadMs": 650,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          139,
+          3.099999999999989,
+          -17.99999999999997
+        ],
+        "target": [
+          120,
+          7.1,
+          -115
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 650,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-wall",
+      "url": "http://127.0.0.1:18906/?inspection=north-wall",
+      "width": 390,
+      "height": 844,
+      "file": "north-wall-390.png",
+      "elapsedMs": 3582,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 12,
+          "farTrees": 2080
+        },
+        "drawCalls": 142,
+        "triangles": 543820,
+        "geometries": 145,
+        "textures": 16,
+        "fps": 170,
+        "sceneLoadMs": 750,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -125.99999999999999,
+          7.9284200425203215,
+          -639.9404611891237
+        ],
+        "target": [
+          -126,
+          4.300000000000001,
+          -563
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 750,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-gate",
+      "url": "http://127.0.0.1:18906/?inspection=north-gate",
+      "width": 390,
+      "height": 844,
+      "file": "north-gate-390.png",
+      "elapsedMs": 3748,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 2,
+          "farTrees": 2090
+        },
+        "drawCalls": 230,
+        "triangles": 556172,
+        "geometries": 230,
+        "textures": 31,
+        "fps": 171,
+        "sceneLoadMs": 832,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -31.94599999999999,
+          10.887269334992702,
+          -647.7883266961231
+        ],
+        "target": [
+          -31.946,
+          6.6,
+          -556.877
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 832,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "main-e",
+      "url": "http://127.0.0.1:18906/?inspection=main-e",
+      "width": 390,
+      "height": 844,
+      "file": "main-e-390.png",
+      "elapsedMs": 3683,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 93,
+          "farTrees": 1999
+        },
+        "drawCalls": 221,
+        "triangles": 597442,
+        "geometries": 220,
+        "textures": 29,
+        "fps": 169,
+        "sceneLoadMs": 846,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -25.435538955228225,
+          49.07182500547745,
+          377.7850461332738
+        ],
+        "target": [
+          -31.4345,
+          37.1,
+          123.99399999999993
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 846,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:钱学森图书馆",
+      "url": "http://127.0.0.1:18906/#%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86",
+      "width": 390,
+      "height": 844,
+      "file": "place_钱学森图书馆-390.png",
+      "elapsedMs": 3630,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:18906/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 86,
+          "farTrees": 2006
+        },
+        "drawCalls": 198,
+        "triangles": 582195,
+        "geometries": 338,
+        "textures": 31,
+        "fps": 171,
+        "sceneLoadMs": 795,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "钱学森图书馆",
+        "webgl": "WebGL 2",
+        "camera": [
+          -24.529999999999973,
+          26.999999999999982,
+          59.702999999999975
+        ],
+        "target": [
+          -30.53,
+          19,
+          -98.297
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 795,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
