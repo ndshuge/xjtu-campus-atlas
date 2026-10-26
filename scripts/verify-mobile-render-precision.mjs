@@ -5,6 +5,6 @@ const gate=readFileSync(new URL('../src/north-gate.js',import.meta.url),'utf8');
 assert(world.includes('new THREE.PerspectiveCamera(39,innerWidth/innerHeight,1.5,4800)'),'Overview depth range regression');
 assert(world.includes('this.camera.near=1.5;this.camera.updateProjectionMatrix()'),'Orbit depth range regression');
 assert(trees.includes('THREE.LinearMipmapLinearFilter')&&trees.includes('tx.anisotropy=8'),'Foliage texture sampler regression');
-assert(trees.includes('alphaTest:distant?.12:.38'),'Foliage LOD mask regression');
+assert(trees.includes('alphaTest:distant?.26:.38'),'Foliage LOD mask regression');
 assert(gate.includes('baseY+3.75')&&gate.includes('baseY+3.1'),'North gate pier/wall base positioning changed unexpectedly');
 console.log(JSON.stringify({passed:true,depth:'near 1.5 far 4800 orbit, walk 0.2',texture:'8x anisotropy trilinear mipmap',gate:'existing base anchored, no unsurveyed vertical displacement'}));

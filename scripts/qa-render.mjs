@@ -85,13 +85,14 @@ try{
  await send('Page.enable');await send('Runtime.enable');await send('Log.enable');await send('Network.enable');
  for(const width of widths)for(const pose of poses){
   const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=width<768?844:900;
-  await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:width<768});
-  await send('Emulation.setTouchEmulationEnabled',{enabled:width<768,maxTouchPoints:2});
+  await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:width<=768});
+  await send('Emulation.setTouchEmulationEnabled',{enabled:width<=768,maxTouchPoints:2});
   const url=new URL(origin);url.searchParams.set('__qa_pose',pose+'-'+width);
   // Unlike hash-only navigation, a changed query creates a fresh document.
   if(pose==='home'){}else if(pose.startsWith('place:')||pose.startsWith('group:')){url.hash=pose.slice(6);if(pose.startsWith('group:'))url.searchParams.set('group','1');}else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
+  await send('Page.navigate',{url:'about:blank'});
   await send('Page.navigate',{url:url.href});
-  let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate('!!window.__campusReady && document.querySelector("#loading").hidden');if(loaded)break;}
+  let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate('location.href==='+JSON.stringify(url.href)+' && !!window.__campusReady && document.querySelector("#loading").hidden');if(loaded)break;}
   if(!loaded)throw Error('Scene did not become ready: '+url.href);
   await sleep(1800);
   if(pose==='north-wall-oblique'){
@@ -109,12 +110,12 @@ try{
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
   const png=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,file),Buffer.from(png.result.data,'base64'));
   const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,runtime,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
-  if(interactionChecks&&width<768&&pose==='home'){
+  if(interactionChecks&&width<=768&&pose==='home'){
    r.interactions=await inspectInteractions();
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'touch-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
    r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({interactions:r.interactions}));
   }
-  if(interactionChecks&&width>=768&&pose==='home'){
+  if(interactionChecks&&width>768&&pose==='home'){
    r.interactions=await inspectDesktopInteractions();
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'desktop-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
    r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({desktopInteractions:r.interactions}));
