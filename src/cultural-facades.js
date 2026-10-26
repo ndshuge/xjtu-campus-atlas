@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {architectureBatch,stoneMaterial,glassMaterial,labelTexture} from './architecture-kit.js';
-import {boxGeometry} from './geo.js';
+import {boxGeometry,extrude} from './geo.js';
+import {onFacade} from './building-envelope.js';
 
 // Both functions retain the OSM building as their selectable underlying volume.
 // Visible features are photograph-informed; construction dimensions are inferred.
@@ -37,32 +38,38 @@ export function createSiyuanCenter({footprint,height,baseY}){
 
 export function createScienceHall({footprint,height,baseY}){
  const [x0,z0,x1,z1]=footprint;
- // The photographed entrance faces WEST, towards the central square. Model in
- // a local front-facing frame, then rotate into the footprint's recessed edge.
- const w=49,frontX=63.6,centerZ=-15.0;
- const mats={stone:stoneMaterial('#b7a080'),glass:glassMaterial('#286c91'),frame:new THREE.MeshStandardMaterial({color:'#677b7c',roughness:.48,metalness:.32}),steps:stoneMaterial('#b4afa4')};
- const b=architectureBatch('Yifu Science Hall / west entrance',mats);
- const add=(kind,u,y,v,a,h,d)=>{
-  const geo=boxGeometry(0,y,0,a,h,d);geo.rotateY(-Math.PI/2);geo.translate(frontX-v,0,centerZ+u);b.add(kind,geo);
- };
- add('glass',0,baseY+3.5,0,20,height-5,.28);
- for(let i=-4;i<=4;i++)add('frame',i*2.4,baseY+3.5,.18,.12,height-5,.20);
- for(let y=6;y<height-1;y+=2.6)add('frame',0,baseY+y,.18,20,.12,.20);
- // Narrow glazing slots in each mostly solid ochre wing.
- for(const side of [-1,1]){
-  add('stone',side*17,baseY,.25,9.3,height,.8);
-  add('glass',side*14.5,baseY+1.6,.72,2.2,height-3,.2);
+ // Existing OSM 263632364 west entrance seams. The slight central fold and
+ // canopy depth below are visual interpretations, not additional map survey.
+ const ends=[[64.684,-24.093],[63.892,.022]],centerZ=(ends[0][1]+ends[1][1])/2;
+ const fold=[63.10,centerZ],frontX=63.7;
+ const mats={stone:stoneMaterial('#bd9f79',1.3),glass:glassMaterial('#267fa8'),frame:new THREE.MeshStandardMaterial({color:'#7a8179',roughness:.46,metalness:.32})};
+ const b=architectureBatch('Yifu Science Hall / folded west glazing and curved portico',mats);
+ const edge=(a,c)=>{const dx=c[0]-a[0],dz=c[1]-a[1],length=Math.hypot(dx,dz);return{a,c,length,nx:-dz/length,nz:dx/length,angle:-Math.atan2(dz,dx)};};
+ for(const e of [edge(ends[0],fold),edge(fold,ends[1])]){
+  onFacade(b,'glass',e,{y:baseY+3.5,width:e.length,height:height-3.9,depth:.18,offset:.25});
+  for(let i=0;i<=5;i++)onFacade(b,'frame',e,{along:i/5,y:baseY+3.5,width:.11,height:height-3.9,depth:.20,offset:.42});
+  for(let y=6;y<height-.5;y+=3.3)onFacade(b,'frame',e,{y:baseY+y,width:e.length,height:.12,depth:.20,offset:.42});
  }
- add('stone',0,baseY+4.9,2.1,25,1.7,5.0);
- for(let i=-4;i<=4;i++)add('frame',i*2.4,baseY+.6,3.9,.12,4.3,.24);
- add('glass',0,baseY+.5,3.8,21.7,4.3,.24);
- for(let i=0;i<4;i++)add('steps',0,baseY,4.8+i*.72,28,.58-i*.12,.75);
- // Open triangular roof lantern, a distinctive photographed silhouette.
- const roof=baseY+height;
- for(const depth of [-3,3]){
-  b.beam('frame',[frontX+depth,roof-1.0,centerZ-7],[frontX+depth,roof+3.6,centerZ],.14);
-  b.beam('frame',[frontX+depth,roof+3.6,centerZ],[frontX+depth,roof-1.0,centerZ+7],.14);
+ const wings=[edge([49.365,-40.965],ends[0]),edge(ends[1],[48.886,10.893])];
+ for(const e of wings){
+  onFacade(b,'stone',e,{y:baseY,width:e.length,height,depth:.18,offset:.19});
+  onFacade(b,'glass',e,{along:.32,y:baseY+1.1,width:1.8,height:height-2.2,depth:.16,offset:.38});
  }
- b.beam('frame',[frontX-3,roof+3.6,centerZ],[frontX+3,roof+3.6,centerZ],.14);
- const g=b.finish();g.userData={source:'https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm',referenceDate:'EXIF 2019-07-15; camera clock unverified',estimated:true,facadeOrientation:'west; inferred from footprint and square relationship',bounds:[x0,z0,x1,z1]};return g;
+ const canopy=[];
+ for(let i=0;i<=32;i++){const a=-Math.PI/2+i/32*Math.PI;canopy.push([frontX-5.3*Math.cos(a),centerZ+14*Math.sin(a)]);}
+ canopy.push(canopy[0]);
+ b.add('stone',extrude(canopy,1.35,baseY+4.8));
+ // Photograph shows a sheltered entry at grade, not the old broad staircase.
+ // Remove unsupported entrance steps without changing the ground datum.
+ b.box('glass',63.25,baseY+.15,centerZ,.20,4.55,20);
+ for(let i=-4;i<=4;i++)b.box('frame',63.08,baseY+.15,centerZ+i*2.4,.20,4.55,.11);
+ for(const s of [-1,1])b.box('stone',frontX-.6,baseY,centerZ+s*13.1,1.4,4.8,1.8);
+ const roof=baseY+height,corners=[[63.2,centerZ-6.2],[73.2,centerZ-6.2],[73.2,centerZ+6.2],[63.2,centerZ+6.2]],apex=[68.2,roof+4.0,centerZ];
+ for(let i=0;i<4;i++){
+  const p=corners[i],q=corners[(i+1)%4],top=[p[0],roof+.9,p[1]];
+  b.beam('frame',[p[0],roof-.2,p[1]],top,.16);
+  b.beam('frame',top,[q[0],roof+.9,q[1]],.16);
+  b.beam('frame',top,apex,.16);
+ }
+ const g=b.finish();g.userData={source:'https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm',referenceDate:'EXIF DateTimeOriginal 2019-07-15 15:44:00; camera clock unverified',estimated:true,facadeOrientation:'west; existing OSM seam anchors',bounds:[x0,z0,x1,z1],curtainWallFolds:2,canopy:'curved D plan / approximate',roofFrame:{corners,apex,posts:4,connected:true},heightPolicy:'existing 21m estimate unchanged; canopy/fold/frame dimensions unsurveyed'};return g;
 }

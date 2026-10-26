@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {boxGeometry} from './geo.js';
 import {architectureBatch,stoneMaterial,glassMaterial,labelTexture} from './architecture-kit.js';
 import {libraryMassingPlan,libraryEdgeProfile} from './library-massing.js';
+import {facadeEdges,addFacadeBacking} from './building-envelope.js';
 
 // Photo-informed proportions, not measured dimensions. Keep OSM perimeter and
 // the university's 49.75 m maximum. The aerial reference was captured in 2025.
@@ -16,6 +17,11 @@ export function createLibraryFacade({centerX,stairFrontZ,steppedCenterZ,baseY,fo
  let previous=0;
  for(const tier of LIBRARY_TIERS){
   const bottom=baseY+13+previous,top=baseY+13+tier.h,visible=tier.h-previous;
+  // Dedicated glazing must not be superimposed on the world's generic grid.
+  const shell=[[centerX-tier.w/2,steppedCenterZ-tier.d/2],[centerX+tier.w/2,steppedCenterZ-tier.d/2],[centerX+tier.w/2,steppedCenterZ+tier.d/2],[centerX-tier.w/2,steppedCenterZ+tier.d/2],[centerX-tier.w/2,steppedCenterZ-tier.d/2]];
+  // The rear has no dedicated surveyed facade. Retain its existing schematic
+  // window treatment instead of replacing it with a misleading blank wall.
+  for(const edge of facadeEdges(shell))if(edge.nz>-.7)addFacadeBacking(b,'stone',edge,bottom,visible);
   const front=steppedCenterZ+tier.d/2+.13,glassW=tier.glass;
   if(glassW){
    b.box('glass',centerX,bottom+.08,front,glassW,visible-.18,.18);
@@ -40,17 +46,22 @@ export function createLibraryFacade({centerX,stairFrontZ,steppedCenterZ,baseY,fo
  }
  // Published north-block / stack levels replace a uniform three-row treatment.
  const massing=libraryMassingPlan(footprint);
+ const perimeter=facadeEdges(footprint);
+ for(const edge of perimeter)addFacadeBacking(b,'stone',edge,baseY,libraryEdgeProfile(massing,edge.a,edge.c).height);
  // Regular fenestration follows the actual OSM north/side-wing perimeter.
  for(let i=1;i<footprint.length;i++){
   const a=footprint[i-1],c=footprint[i],dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz);
   if(len<7)continue;
   const bays=Math.max(1,Math.floor(len/3.2)),angle=-Math.atan2(dz,dx);
   const profile=libraryEdgeProfile(massing,a,c);
+  const edge=perimeter[i-1];
   for(let bay=0;bay<bays;bay++)for(let row=0;row<profile.levels;row++){
    const t=(bay+.5)/bays,x=a[0]+dx*t,z=a[1]+dz*t;
+   // The north entrance colonnade is owned once by building-silhouettes.js.
+   if(i===1&&Math.abs(x-centerX)<19)continue;
    const y=profile.levels===3?baseY+2.1+row*3.35:baseY+1+row*3.5;
    const geo=boxGeometry(0,y,0,1.65,2.45,.22);
-   geo.rotateY(angle);geo.translate(x,0,z);b.add('glass',geo);
+   geo.rotateY(angle);geo.translate(x+(edge?.nx||0)*.19,0,z+(edge?.nz||0)*.19);b.add('glass',geo);
   }
  }
  const front=stairFrontZ+.20;

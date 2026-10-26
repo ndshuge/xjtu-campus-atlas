@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import {architectureBatch, stoneMaterial, glassMaterial} from './architecture-kit.js';
+import {facadeEdges,addFacadeBacking,onFacade} from './building-envelope.js';
+import {libraryMassingPlan} from './library-massing.js';
 
 // Overlay-only construction: the imported OSM footprints remain authoritative.
 // No ground, road, foliage, boundary or underground terrain geometry is generated.
@@ -76,6 +78,7 @@ function mainWings(buildings,baseY){
   for(const id of BUILDING_IDS.mainWings){
     const wing=buildings.find(v=>v.osmId===id);if(!wing)continue;
     const bb=bounds(wing.points);
+    for(const edge of facadeEdges(wing.points))addFacadeBacking(b,'frame',edge,baseY,wing.height);
     // The wings preserve their existing OSM footprint, height and orientation.
     // Photo evidence supports regularly repeated dark window bays with pale piers.
     for(const e of edgePoints(wing.points)){
@@ -84,9 +87,8 @@ function mainWings(buildings,baseY){
       windowEdges++;
     }
     // Roof parapets run inside the mapped footprint; no invented extra floors.
-    const cx=(bb[0]+bb[2])/2,cz=(bb[1]+bb[3])/2;
-    const roofW=Math.min(8,(bb[2]-bb[0])*.3);
-    b.box('roof',cx,baseY+wing.height+.12,cz,roofW,.30,Math.min(7,(bb[3]-bb[1])*.22));
+    // Delete the old four arbitrary rooftop boxes. No available photograph or
+    // roof plan identifies them; preserve the source silhouette instead.
     modeled++;
   }
   const g=b.finish();
@@ -106,21 +108,22 @@ function northLibrary(buildings,baseY){
   };
   const b=architectureBatch('Qian Xuesen Library | north wing photographic articulation',mat);
   if(!lib)return b.finish();
-  // The southern 1991 high-rise and clock/stepped entry are already modeled by
-  // src/library-facade.js and src/library-clock.js. Do not duplicate those forms.
-  // The north 1961 low wing is represented by the EXISTING 13m OSM volume.
-  // Here only its legible external fenestration and continuous parapet are added.
-  let edges=0;
-  for(const edge of edgePoints(lib.points)){
-    const midZ=(edge.a[1]+edge.c[1])/2;
-    if(midZ > -147 || edge.length<12)continue;
-    fenestrate(b,edge,{baseY,height:13,glassHeight:2.25,floorSpacing:3.35,openingWidth:1.9});
-    edges++;
-  }
+  // R7 owns the 4/5-storey perimeter. This module no longer draws a second
+  // 13m facade around it. Only the photographed north entry pavilion is here.
+  const plan=libraryMassingPlan(lib.points),edge=facadeEdges(lib.points)[0];
+  const h=plan?.zones.find(z=>z.id==='north-reading-block')?.height;
+  if(!h||!edge||edge.length<80)return b.finish();
+  const cx=(Math.min(...lib.points.map(p=>p[0]))+Math.max(...lib.points.map(p=>p[0])))/2;
+  const t=(cx-edge.a[0])/(edge.c[0]-edge.a[0]);
+  onFacade(b,'glass',edge,{along:t,y:baseY+.55,width:34,height:h-1.1,depth:.14,offset:.22});
+  for(let i=0;i<=8;i++)onFacade(b,'frame',edge,{along:t+(i-4)*4.25/edge.length,y:baseY+.25,width:.65,height:h-.5,depth:.42,offset:.40});
+  for(let i=1;i<4;i++)onFacade(b,'cornice',edge,{along:t,y:baseY+i*h/4-.2,width:34,height:.48,depth:.18,offset:.32});
+  onFacade(b,'roof',edge,{along:t,y:baseY+h-.62,width:38,height:.62,depth:.8,offset:.22});
+  const edges=1;
   const g=b.finish();g.userData={osmId:BUILDING_IDS.library,wing:'north',
     officialNorthYear:1961,officialSouthYear:1991,officialSouthHeight:49.75,
     estimated:true,roofPolicy:'no extra storeys',sunkenCourtyard:'not modeled',
-    source:'https://news.xjtu.edu.cn/info/1219/153497.htm',edges};
+    source:'https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm',edges,perimeterOwner:'library-facade.js / R7',colonnadeWidthApprox:38,legacyDuplicateWindowBands:0};
   return g;
 }
 
@@ -151,10 +154,9 @@ function scienceHall(buildings,baseY){
       skip:e=>((e.a[0]+e.c[0])/2)<57&&((e.a[1]+e.c[1])/2)>-43});
     edges++;
   }
-  // Brick piers are visible at each side of the real glazed north-west corner;
-  // shallow geometry ensures we don't alter the OSM ground outline.
-  b.box('brick',64.7,baseY+2.1,-24.1,.60,Math.min(hall.height-3,15),1.65);
-  b.box('roof',73,baseY+hall.height-.36,-41.3,17,.72,1.4);
+  for(const edge of facadeEdges(hall.points))addFacadeBacking(b,'brick',edge,baseY,hall.height);
+  // The entrance and its roof frame have a single owner: cultural-facades.js.
+  // Remove the old unattached brick pier and arbitrary roof bar in that region.
   const g=b.finish();g.userData={osmId:BUILDING_IDS.science,
     source:'https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm',
     facadeObservation:'brick wings, reflective glazing, triangular roof and broad entry canopy',
