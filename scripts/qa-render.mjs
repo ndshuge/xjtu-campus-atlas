@@ -8,6 +8,9 @@ const poses=(process.argv[4]||'avenue-east,north-wall').split(',');
 const widths=(process.argv[5]||'1440,390').split(',').map(Number);
 const dpr=Number(process.argv[6])||1;
 const interactionChecks=process.argv.includes('--interact');
+// Preserve independent interaction state: reusing one CDP target across sizes
+// can retain synthetic pointer/OrbitControls state and produce false failures.
+if(interactionChecks&&widths.length!==1)throw Error('Run --interact with one width per Edge process; use separate invocations for 390/430/768/desktop.');
 await fs.mkdir(out,{recursive:true});
 const profile=await fs.mkdtemp(path.join(os.tmpdir(),'xjtu-r6-edge-'));
 const edge=spawn('C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',[

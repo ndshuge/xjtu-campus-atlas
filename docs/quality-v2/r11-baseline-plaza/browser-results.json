@@ -1,0 +1,183 @@
+{
+  "origin": "http://127.0.0.1:19845/",
+  "testedAt": "2026-10-26T16:47:50.252Z",
+  "results": [
+    {
+      "pose": "place:四大发明广场",
+      "url": "http://127.0.0.1:19845/?__qa_pose=place%3A%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA-390#%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA",
+      "width": 390,
+      "height": 844,
+      "file": "place_四大发明广场-390.png",
+      "elapsedMs": 10399,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19845/assets/index-CNyS0ye9.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 75,
+          "farTrees": 2017
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 179,
+        "triangles": 537899,
+        "geometries": 403,
+        "textures": 29,
+        "fps": 58,
+        "sceneLoadMs": 6978,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "四大发明广场",
+        "webgl": "WebGL 2",
+        "camera": [
+          24.679999999999943,
+          57.00000000000001,
+          -96
+        ],
+        "target": [
+          -38.32,
+          2,
+          0
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 6978,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:四大发明广场",
+      "url": "http://127.0.0.1:19845/?__qa_pose=place%3A%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA-1440#%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA",
+      "width": 1440,
+      "height": 900,
+      "file": "place_四大发明广场-1440.png",
+      "elapsedMs": 11594,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19845/assets/index-CNyS0ye9.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 239,
+          "farTrees": 1853
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 366,
+        "triangles": 794742,
+        "geometries": 438,
+        "textures": 31,
+        "fps": 57,
+        "sceneLoadMs": 8210,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "四大发明广场",
+        "webgl": "WebGL 2",
+        "camera": [
+          24.67999999999999,
+          57.00000000000001,
+          -96.00000000000003
+        ],
+        "target": [
+          -31.320000000000004,
+          2,
+          0
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 8210,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
