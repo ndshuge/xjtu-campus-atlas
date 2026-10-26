@@ -1,0 +1,64 @@
+{
+  "checkedAt": "2026-10-26T18:12:27.662Z",
+  "branch": "feature/r11-library",
+  "baseCommit": "36170135addd3c16bebf2f179607e5ee4574043a",
+  "researchCommit": "506052b2bd9a48c3cbe48dc602b6a2592c8a1d74",
+  "sourceStableAfterFinalRenders": true,
+  "sourceHashes": {
+    "src/world.js": "b8464485566c4b12c6303bf688ff5a052245d4d44c012723d369f8f33948c8f0",
+    "src/library-asset.js": "6686f6251d1ca5640429159cf34f6434fe83b24e1b128d12ea69f498b24fde62",
+    "src/library-asset-plan.js": "6828a6f11786c0c53c97c114d6cf4d5792ba1a7e1033a731dffb5c105225b9d7",
+    "src/building-silhouettes.js": "01a58e77e15158e2def587a61f2e23eebd3e6a59b2d158395c59a613b4b58c1f",
+    "src/library-r11-review.js": "d291dc9111803fddcca9886fd0ddbfd81a33a98528bd390886fd46aa3a9fc33f",
+    "src/library-facade.js": "043e24423c207b2abc9b6970868f9083c155d6a795c25d0c4db4b232f33cd647",
+    "src/library-massing.js": "7b35155e79fb1d0eb04ab37eb694bdc794488f61b5948471137c89d6a37297cf",
+    "scripts/library-r11-integration.mjs": "81b95027643d028dd9b47e531992410a60c7b2ef1263df4ee88eb2a95dd6145e",
+    "scripts/qa-render.mjs": "e4eba8990295182042ebb76eb3e20eab96827185031d303bc8db60f0f19a434c",
+    "public/data/campus.json": "d4a91a0cb649c79503016441b3cfe1a56d25b34c1a95849f185f9a2051d64cc1"
+  },
+  "checks": [
+    {
+      "command": "npm run verify",
+      "exitCode": 0,
+      "output": "verify-output.txt"
+    },
+    {
+      "command": "node scripts/verify-library-asset-r11.mjs",
+      "exitCode": 0,
+      "output": "geometry-verification.json"
+    },
+    {
+      "command": "npm run build -- --outDir dist-r11-legacy-check",
+      "exitCode": 0,
+      "output": "standard-build-output.txt"
+    },
+    {
+      "command": "vite build --config vite.library-r11.config.mjs",
+      "exitCode": 0,
+      "output": "candidate-build-output.txt"
+    },
+    {
+      "command": "git apply --check docs/quality-v2/library-r11/world-integration.patch",
+      "exitCode": 0,
+      "applied": false
+    }
+  ],
+  "browser": {
+    "fixedCandidateRenders": 18,
+    "matchedBaselineRenders": 18,
+    "jsErrors": 0,
+    "httpErrors": 0,
+    "overflow": false,
+    "contextLost": false,
+    "meshClick": true,
+    "desktopInteractions": true,
+    "mobileEmulatedInteractions": true,
+    "realIPhoneSafari": false
+  },
+  "openItems": [
+    "390px south-front FPS regression",
+    "Cold initialization about 12-13 seconds",
+    "Measured roof/storey/setback/elevation data unavailable",
+    "No production integration or Pages deployment by this branch"
+  ]
+}

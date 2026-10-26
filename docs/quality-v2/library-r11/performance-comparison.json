@@ -1,0 +1,944 @@
+{
+  "baseCommit": "3617013",
+  "researchCommit": "506052b",
+  "method": "Production builds; identical fixed cameras and CSS viewports; sequential separate Edge sessions; DPR 1",
+  "sourceReports": {
+    "before": [
+      "library-r11-baseline-production/browser-results.json",
+      "library-r11-oblique-baseline-review/browser-results.json"
+    ],
+    "after": [
+      "library-r11-validated/browser-results.json"
+    ],
+    "steady": [
+      "library-r11-fresh-baseline/browser-results.json",
+      "library-r11-fresh-validated/browser-results.json"
+    ],
+    "repeat": [
+      "library-r11-mobile-repeat-baseline/browser-results.json",
+      "library-r11-mobile-repeat-candidate/browser-results.json"
+    ]
+  },
+  "testedAt": "2026-10-26T18:11:33.909Z",
+  "geometry": {
+    "passed": true,
+    "researchCommit": "506052b",
+    "baseArea": 7994.269172999998,
+    "spatialSamples": 2483,
+    "roofSamples": 217,
+    "sourceDataUnchanged": true,
+    "sharedWorldUnchanged": true,
+    "otherBuildingGeometryAndColourUnchanged": true,
+    "otherBuildingHash": "c260033c0048ffd82ee4bf8c18529a3ff255381a11913b3b6ae198ebb9f2e9ef",
+    "legacyLibraryVertices": 1128,
+    "newGenericLibraryVertices": 0,
+    "gray": {
+      "triangles": 1591,
+      "meshes": 4
+    },
+    "material": {
+      "triangles": 23239,
+      "meshes": 7
+    },
+    "heightScope": "49.75m applies only to the southern principal volume; north/stack/low wings have independent estimated heights",
+    "terrainAndBridgeInferred": false
+  },
+  "comparisons": [
+    {
+      "pose": "r11-north-front",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 821348,
+          "drawCalls": 482,
+          "textures": 31,
+          "fps": 56,
+          "loadMs": 9609
+        },
+        "after": {
+          "triangles": 842113,
+          "drawCalls": 452,
+          "textures": 31,
+          "fps": 5,
+          "loadMs": 11895
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-north-front-1440.png",
+      "after": "r11-north-front-1440.png"
+    },
+    {
+      "pose": "r11-north-detail",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 850914,
+          "drawCalls": 461,
+          "textures": 31,
+          "fps": 57,
+          "loadMs": 7401
+        },
+        "after": {
+          "triangles": 871679,
+          "drawCalls": 431,
+          "textures": 31,
+          "fps": 8,
+          "loadMs": 7628
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-north-detail-1440.png",
+      "after": "r11-north-detail-1440.png"
+    },
+    {
+      "pose": "r11-south-front",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 819921,
+          "drawCalls": 480,
+          "textures": 32,
+          "fps": 56,
+          "loadMs": 7919
+        },
+        "after": {
+          "triangles": 840686,
+          "drawCalls": 450,
+          "textures": 32,
+          "fps": 7,
+          "loadMs": 7905
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-south-front-1440.png",
+      "after": "r11-south-front-1440.png"
+    },
+    {
+      "pose": "r11-east",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 608365,
+          "drawCalls": 460,
+          "textures": 29,
+          "fps": 56,
+          "loadMs": 7757
+        },
+        "after": {
+          "triangles": 629130,
+          "drawCalls": 430,
+          "textures": 29,
+          "fps": 7,
+          "loadMs": 8368
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-east-1440.png",
+      "after": "r11-east-1440.png"
+    },
+    {
+      "pose": "r11-occlusion",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 690457,
+          "drawCalls": 446,
+          "textures": 29,
+          "fps": 57,
+          "loadMs": 7418
+        },
+        "after": {
+          "triangles": 711222,
+          "drawCalls": 416,
+          "textures": 29,
+          "fps": 7,
+          "loadMs": 8134
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-occlusion-1440.png",
+      "after": "r11-occlusion-1440.png"
+    },
+    {
+      "pose": "r11-oblique",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 764178,
+          "drawCalls": 509,
+          "textures": 32,
+          "fps": 56,
+          "loadMs": 7678
+        },
+        "after": {
+          "triangles": 784943,
+          "drawCalls": 479,
+          "textures": 32,
+          "fps": 8,
+          "loadMs": 7528
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-oblique-1440.png",
+      "after": "r11-oblique-1440.png"
+    },
+    {
+      "pose": "r11-oblique-wide",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 727354,
+          "drawCalls": 523,
+          "textures": 32,
+          "fps": 28,
+          "loadMs": 10926
+        },
+        "after": {
+          "triangles": 748119,
+          "drawCalls": 493,
+          "textures": 32,
+          "fps": 8,
+          "loadMs": 7770
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-oblique-wide-1440.png",
+      "after": "r11-oblique-wide-1440.png"
+    },
+    {
+      "pose": "r11-aerial",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 534749,
+          "drawCalls": 377,
+          "textures": 29,
+          "fps": 56,
+          "loadMs": 7449
+        },
+        "after": {
+          "triangles": 555514,
+          "drawCalls": 347,
+          "textures": 29,
+          "fps": 7,
+          "loadMs": 7790
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-aerial-1440.png",
+      "after": "r11-aerial-1440.png"
+    },
+    {
+      "pose": "r11-context",
+      "width": 1440,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 798942,
+          "drawCalls": 471,
+          "textures": 31,
+          "fps": 56,
+          "loadMs": 8294
+        },
+        "after": {
+          "triangles": 819707,
+          "drawCalls": 441,
+          "textures": 31,
+          "fps": 7,
+          "loadMs": 7695
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-context-1440.png",
+      "after": "r11-context-1440.png"
+    },
+    {
+      "pose": "r11-north-front",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 552729,
+          "drawCalls": 258,
+          "textures": 29,
+          "fps": 56,
+          "loadMs": 9132
+        },
+        "after": {
+          "triangles": 556543,
+          "drawCalls": 236,
+          "textures": 29,
+          "fps": 6,
+          "loadMs": 11019
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-north-front-390.png",
+      "after": "r11-north-front-390.png"
+    },
+    {
+      "pose": "r11-north-detail",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 559304,
+          "drawCalls": 239,
+          "textures": 28,
+          "fps": 57,
+          "loadMs": 7480
+        },
+        "after": {
+          "triangles": 563118,
+          "drawCalls": 217,
+          "textures": 28,
+          "fps": 7,
+          "loadMs": 7697
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-north-detail-390.png",
+      "after": "r11-north-detail-390.png"
+    },
+    {
+      "pose": "r11-south-front",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 542992,
+          "drawCalls": 290,
+          "textures": 30,
+          "fps": 57,
+          "loadMs": 7344
+        },
+        "after": {
+          "triangles": 546806,
+          "drawCalls": 268,
+          "textures": 30,
+          "fps": 7,
+          "loadMs": 7761
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-south-front-390.png",
+      "after": "r11-south-front-390.png"
+    },
+    {
+      "pose": "r11-east",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 474897,
+          "drawCalls": 151,
+          "textures": 15,
+          "fps": 57,
+          "loadMs": 7661
+        },
+        "after": {
+          "triangles": 478711,
+          "drawCalls": 129,
+          "textures": 15,
+          "fps": 8,
+          "loadMs": 7227
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-east-390.png",
+      "after": "r11-east-390.png"
+    },
+    {
+      "pose": "r11-occlusion",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 480145,
+          "drawCalls": 123,
+          "textures": 17,
+          "fps": 56,
+          "loadMs": 7247
+        },
+        "after": {
+          "triangles": 483959,
+          "drawCalls": 101,
+          "textures": 17,
+          "fps": 8,
+          "loadMs": 7303
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-occlusion-390.png",
+      "after": "r11-occlusion-390.png"
+    },
+    {
+      "pose": "r11-oblique",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 501209,
+          "drawCalls": 151,
+          "textures": 18,
+          "fps": 56,
+          "loadMs": 7234
+        },
+        "after": {
+          "triangles": 505023,
+          "drawCalls": 129,
+          "textures": 18,
+          "fps": 8,
+          "loadMs": 7346
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-oblique-390.png",
+      "after": "r11-oblique-390.png"
+    },
+    {
+      "pose": "r11-oblique-wide",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 480417,
+          "drawCalls": 195,
+          "textures": 16,
+          "fps": 28,
+          "loadMs": 10113
+        },
+        "after": {
+          "triangles": 484231,
+          "drawCalls": 173,
+          "textures": 16,
+          "fps": 8,
+          "loadMs": 7453
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-oblique-wide-390.png",
+      "after": "r11-oblique-wide-390.png"
+    },
+    {
+      "pose": "r11-aerial",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 510792,
+          "drawCalls": 218,
+          "textures": 27,
+          "fps": 56,
+          "loadMs": 7570
+        },
+        "after": {
+          "triangles": 514606,
+          "drawCalls": 196,
+          "textures": 27,
+          "fps": 7,
+          "loadMs": 7560
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-aerial-390.png",
+      "after": "r11-aerial-390.png"
+    },
+    {
+      "pose": "r11-context",
+      "width": 390,
+      "sameCamera": true,
+      "scene": {
+        "before": {
+          "triangles": 541376,
+          "drawCalls": 264,
+          "textures": 27,
+          "fps": 57,
+          "loadMs": 7318
+        },
+        "after": {
+          "triangles": 545190,
+          "drawCalls": 242,
+          "textures": 27,
+          "fps": 8,
+          "loadMs": 7226
+        }
+      },
+      "library": {
+        "before": {
+          "triangles": 19433,
+          "materials": 17,
+          "textures": 4,
+          "meshes": 34
+        },
+        "after": {
+          "triangles": 23247,
+          "materials": 10,
+          "textures": 4,
+          "meshes": 11
+        }
+      },
+      "before": "r11-context-390.png",
+      "after": "r11-context-390.png"
+    }
+  ],
+  "freshFrameComparisons": [
+    {
+      "pose": "r11-south-front",
+      "width": 1440,
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "before": {
+        "sample": {
+          "reportedBefore": 5,
+          "reportedAfter": 28,
+          "freshFrames": 120,
+          "elapsedMs": 4244.0999999999985,
+          "fps": 28.274545840107454,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 12186
+      },
+      "after": {
+        "sample": {
+          "reportedBefore": 5,
+          "reportedAfter": 28,
+          "freshFrames": 120,
+          "elapsedMs": 4255.5,
+          "fps": 28.198801550934085,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 13322
+      }
+    },
+    {
+      "pose": "r11-occlusion",
+      "width": 1440,
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "before": {
+        "sample": {
+          "reportedBefore": 7,
+          "reportedAfter": 28,
+          "freshFrames": 120,
+          "elapsedMs": 4258.1,
+          "fps": 28.181583335290384,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 7972
+      },
+      "after": {
+        "sample": {
+          "reportedBefore": 8,
+          "reportedAfter": 28,
+          "freshFrames": 120,
+          "elapsedMs": 4258.699999999999,
+          "fps": 28.177612886561633,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 7182
+      }
+    },
+    {
+      "pose": "r11-south-front",
+      "width": 390,
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "before": {
+        "sample": {
+          "reportedBefore": 7,
+          "reportedAfter": 26,
+          "freshFrames": 120,
+          "elapsedMs": 4685.4000000000015,
+          "fps": 25.611473940325258,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 8985
+      },
+      "after": {
+        "sample": {
+          "reportedBefore": 6,
+          "reportedAfter": 23,
+          "freshFrames": 120,
+          "elapsedMs": 5171.4,
+          "fps": 23.20454809142592,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 10355
+      }
+    },
+    {
+      "pose": "r11-occlusion",
+      "width": 390,
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "before": {
+        "sample": {
+          "reportedBefore": 9,
+          "reportedAfter": 28,
+          "freshFrames": 120,
+          "elapsedMs": 4257,
+          "fps": 28.188865398167724,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 6938
+      },
+      "after": {
+        "sample": {
+          "reportedBefore": 8,
+          "reportedAfter": 28,
+          "freshFrames": 120,
+          "elapsedMs": 4240,
+          "fps": 28.30188679245283,
+          "renderedFrames": 121,
+          "documentHidden": false,
+          "timedOut": false
+        },
+        "sceneLoadMs": 7460
+      }
+    }
+  ],
+  "mobileRepeat": [
+    {
+      "variant": "baseline",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "sample": {
+        "reportedBefore": 7,
+        "reportedAfter": 28,
+        "freshFrames": 120,
+        "elapsedMs": 4251.399999999998,
+        "fps": 28.225996142447208,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "sceneLoadMs": 9202
+    },
+    {
+      "variant": "candidate",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "sample": {
+        "reportedBefore": 6,
+        "reportedAfter": 23,
+        "freshFrames": 120,
+        "elapsedMs": 5128.0999999999985,
+        "fps": 23.40047970983406,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "sceneLoadMs": 10082
+    }
+  ],
+  "performanceStatus": "OPEN: 390px south-front steady sample is slower in this final run and confirmation; reduced draw calls do not prove higher FPS",
+  "bundles": {
+    "before": {
+      "files": [
+        {
+          "file": "app-DtbDFjwI.js",
+          "bytes": 26,
+          "gzipBytes": 46
+        },
+        {
+          "file": "app-YZSCB0Lu.js",
+          "bytes": 22978,
+          "gzipBytes": 10263
+        },
+        {
+          "file": "modulepreload-polyfill-P2Xu9kJm.js",
+          "bytes": 670,
+          "gzipBytes": 389
+        },
+        {
+          "file": "world-BQaUR2tK.js",
+          "bytes": 727956,
+          "gzipBytes": 196797
+        }
+      ],
+      "bytes": 751630,
+      "gzipBytes": 207495
+    },
+    "after": {
+      "files": [
+        {
+          "file": "app-DoQonoJM.js",
+          "bytes": 26,
+          "gzipBytes": 46
+        },
+        {
+          "file": "app-pBa5sYwH.js",
+          "bytes": 22978,
+          "gzipBytes": 10263
+        },
+        {
+          "file": "modulepreload-polyfill-P2Xu9kJm.js",
+          "bytes": 670,
+          "gzipBytes": 389
+        },
+        {
+          "file": "world-DZe3DI6B.js",
+          "bytes": 733631,
+          "gzipBytes": 199624
+        }
+      ],
+      "bytes": 757305,
+      "gzipBytes": 210322
+    }
+  },
+  "physicalClick": {
+    "kind": "actual mesh click",
+    "x": 719.3226217842711,
+    "y": 550.7518455346736,
+    "selected": "钱学森图书馆",
+    "passed": true
+  },
+  "limitations": [
+    "Not iPhone Safari or phone GPU evidence",
+    "FPS is Edge headless and refresh-capped; the 120 fresh RAF samples are the steady measurement, not the earlier initialization-polluted sliding window",
+    "390px south-front candidate measured about 23fps vs baseline 25.6fps, with confirmation about 23.4 vs 28.2; mobile performance remains an open qualification item",
+    "Local cold scene initialization remains about 12-13 seconds in the fresh comparison; this is not public-network loading performance",
+    "GPU memory was not directly measured; renderer textures and geometry counts are resource proxies only",
+    "Legacy per-library subset adds the generic clock plane: two triangles, one material and one texture; counts are not per-object GPU memory",
+    "The earlier close oblique crops the library on 390px; the appended wide oblique is the whole-building framing check",
+    "No external model binary: the new geometry is generated at runtime from retained OSM coordinates"
+  ]
+}

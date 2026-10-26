@@ -165,10 +165,10 @@ function scienceHall(buildings,baseY){
   return g;
 }
 
-export function createBuildingSilhouettes(buildings,{baseY=1.1}={}){
+export function createBuildingSilhouettes(buildings,{baseY=1.1,includeLibrary=true}={}){
   if(!Array.isArray(buildings))throw Error('Expected building array');
   const group=new THREE.Group();group.name='Buildings-only silhouette improvements (isolated)';
-  for(const piece of [mainWings(buildings,baseY),northLibrary(buildings,baseY),scienceHall(buildings,baseY)])group.add(piece);
+  for(const piece of [mainWings(buildings,baseY),...(includeLibrary?[northLibrary(buildings,baseY)]:[]),scienceHall(buildings,baseY)])group.add(piece);
   group.userData={scope:'building-exclusive visual augmentation',editingSharedWorld:false,
     noSubsurfaceInference:true,noFoliageRoadWallEdits:true,referenceVersion:'2026-10-26'};
   return group;

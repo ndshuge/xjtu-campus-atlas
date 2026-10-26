@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-10-26T17:13:44.344Z",
+  "sourceHashes": {
+    "src/world.js": "b8464485566c4b12c6303bf688ff5a052245d4d44c012723d369f8f33948c8f0",
+    "src/library-asset.js": "26f37a2857286f52bb250dc8e013bdce275d58a45d3609895f7854c2d74b747c",
+    "src/library-asset-plan.js": "6828a6f11786c0c53c97c114d6cf4d5792ba1a7e1033a731dffb5c105225b9d7",
+    "src/building-silhouettes.js": "01a58e77e15158e2def587a61f2e23eebd3e6a59b2d158395c59a613b4b58c1f",
+    "src/library-r11-review.js": "a91d8daf4cadc1347ef95bc376071edd50a56b0ec612c05ef84370b559997b0b",
+    "src/library-facade.js": "043e24423c207b2abc9b6970868f9083c155d6a795c25d0c4db4b232f33cd647",
+    "src/library-massing.js": "7b35155e79fb1d0eb04ab37eb694bdc794488f61b5948471137c89d6a37297cf",
+    "scripts/library-r11-integration.mjs": "275ad97b0b45d493dbb22aa82868ba1a0484004aa848d23a71875a47055854ad",
+    "public/data/campus.json": "d4a91a0cb649c79503016441b3cfe1a56d25b34c1a95849f185f9a2051d64cc1"
+  },
+  "sourceStable": true,
+  "renders": 14
+}

@@ -3,3 +3,7 @@ node_modules/
 *.tar.gz
 *.log
 .DS_Store
+.cache-r11/
+dist-r11-library/
+dist-r11-legacy-check/
+dist-r11-baseline/

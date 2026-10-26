@@ -1,0 +1,499 @@
+{
+  "origin": "http://127.0.0.1:27863/library-r11-review.html",
+  "testedAt": "2026-10-26T17:46:07.743Z",
+  "results": [
+    {
+      "pose": "r11-south-front",
+      "url": "http://127.0.0.1:27863/library-r11-review.html?__qa_pose=r11-south-front-1440&inspection=r11-south-front",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-south-front-1440.png",
+      "elapsedMs": 19761,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27863/assets/review-7k2z9q7P.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 267,
+          "farTrees": 1825
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 480,
+        "triangles": 819921,
+        "geometries": 345,
+        "textures": 32,
+        "fps": 28,
+        "sceneLoadMs": 12186,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999993,
+          38.999999999999986,
+          73.00000000000001
+        ],
+        "target": [
+          -28.999999999999993,
+          22.999999999999996,
+          -107.99999999999999
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "baseline",
+          "stage": "material",
+          "pose": "r11-south-front",
+          "genericVertices": 1128,
+          "owners": {
+            "legacy": 32
+          },
+          "triangles": 19055,
+          "geometryBytes": 1819712,
+          "materials": 15,
+          "textures": 3,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 0,
+          "hitInterface": null,
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": null,
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 12186,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": {
+        "reportedBefore": 5,
+        "reportedAfter": 28,
+        "freshFrames": 120,
+        "elapsedMs": 4244.0999999999985,
+        "fps": 28.274545840107454,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-occlusion",
+      "url": "http://127.0.0.1:27863/library-r11-review.html?__qa_pose=r11-occlusion-1440&inspection=r11-occlusion",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-occlusion-1440.png",
+      "elapsedMs": 15455,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27863/assets/review-7k2z9q7P.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 128,
+          "farTrees": 1964
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 446,
+        "triangles": 690457,
+        "geometries": 345,
+        "textures": 29,
+        "fps": 28,
+        "sceneLoadMs": 7972,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          165.99999999999994,
+          66.99999999999999,
+          -145
+        ],
+        "target": [
+          -29,
+          20.000000000000004,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "baseline",
+          "stage": "material",
+          "pose": "r11-occlusion",
+          "genericVertices": 1128,
+          "owners": {
+            "legacy": 32
+          },
+          "triangles": 19055,
+          "geometryBytes": 1819712,
+          "materials": 15,
+          "textures": 3,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 0,
+          "hitInterface": null,
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": null,
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 7972,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": {
+        "reportedBefore": 7,
+        "reportedAfter": 28,
+        "freshFrames": 120,
+        "elapsedMs": 4258.1,
+        "fps": 28.181583335290384,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-south-front",
+      "url": "http://127.0.0.1:27863/library-r11-review.html?__qa_pose=r11-south-front-390&inspection=r11-south-front",
+      "width": 390,
+      "height": 844,
+      "file": "r11-south-front-390.png",
+      "elapsedMs": 16630,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27863/assets/review-7k2z9q7P.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 71,
+          "farTrees": 2021
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 290,
+        "triangles": 542992,
+        "geometries": 283,
+        "textures": 30,
+        "fps": 26,
+        "sceneLoadMs": 8985,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999993,
+          38.999999999999986,
+          73.00000000000001
+        ],
+        "target": [
+          -28.999999999999993,
+          22.999999999999996,
+          -107.99999999999999
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "baseline",
+          "stage": "material",
+          "pose": "r11-south-front",
+          "genericVertices": 1128,
+          "owners": {
+            "legacy": 32
+          },
+          "triangles": 19055,
+          "geometryBytes": 1819712,
+          "materials": 15,
+          "textures": 3,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 0,
+          "hitInterface": null,
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": null,
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 8985,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": {
+        "reportedBefore": 7,
+        "reportedAfter": 26,
+        "freshFrames": 120,
+        "elapsedMs": 4685.4000000000015,
+        "fps": 25.611473940325258,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-occlusion",
+      "url": "http://127.0.0.1:27863/library-r11-review.html?__qa_pose=r11-occlusion-390&inspection=r11-occlusion",
+      "width": 390,
+      "height": 844,
+      "file": "r11-occlusion-390.png",
+      "elapsedMs": 14238,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27863/assets/review-7k2z9q7P.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 31,
+          "farTrees": 2061
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 123,
+        "triangles": 480145,
+        "geometries": 127,
+        "textures": 17,
+        "fps": 28,
+        "sceneLoadMs": 6938,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          165.99999999999994,
+          66.99999999999999,
+          -145
+        ],
+        "target": [
+          -29,
+          20.000000000000004,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "baseline",
+          "stage": "material",
+          "pose": "r11-occlusion",
+          "genericVertices": 1128,
+          "owners": {
+            "legacy": 32
+          },
+          "triangles": 19055,
+          "geometryBytes": 1819712,
+          "materials": 15,
+          "textures": 3,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 0,
+          "hitInterface": null,
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": null,
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 6938,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": {
+        "reportedBefore": 9,
+        "reportedAfter": 28,
+        "freshFrames": 120,
+        "elapsedMs": 4257,
+        "fps": 28.188865398167724,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

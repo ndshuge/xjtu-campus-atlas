@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import * as THREE from 'three';
+import {createLibraryAsset} from '../src/library-asset.js';
+import {integrateLibraryWorld} from './library-r11-integration.mjs';
 import {createLibraryGreenRoofs} from '../src/library-green-roofs.js';
 import {LIBRARY_TIERS} from '../src/library-facade.js';
 import {bounds} from '../src/geo.js';
@@ -25,5 +27,14 @@ for(const m of group.children){
  assert(m.material.map?.isDataTexture,'No procedural groundcover texture');
 }
 const world=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
-assert(world.includes('this.libraryGreenRoofs=createLibraryGreenRoofs('),'Green roof not actually integrated into world');
+const worlds=world.includes('this.libraryAsset=createLibraryAsset(')?[world]:[world,integrateLibraryWorld(world.replaceAll('\r\n','\n'))];
+for(const text of worlds){
+ if(text.includes('this.libraryAsset=createLibraryAsset(')){
+  assert(!text.includes('this.libraryGreenRoofs=createLibraryGreenRoofs('),'Duplicate green roof owner retained');
+  const owned=createLibraryAsset({building:library,baseY}),roof=owned.children.find(m=>m.userData.part==='groundcover');
+  assert(roof?.material.map?.isDataTexture,'Unified asset loses original procedural groundcover');
+  const bb=new THREE.Box3().setFromObject(roof);assert(bb.min.y>=baseY+13-.001&&bb.max.y<baseY+42.75,'Green roof loses support or covers clock');
+  owned.dispose();
+ }else assert(text.includes('this.libraryGreenRoofs=createLibraryGreenRoofs('),'Green roof not actually integrated into world');
+}
 console.log(JSON.stringify({passed:true,roofStrips:group.children.length,roofBounds:{min:box.min.toArray(),max:box.max.toArray()},source:group.userData.source,license:'generated texture, no copied image'}));

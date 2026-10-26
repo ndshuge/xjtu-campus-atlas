@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-10-26T18:07:47.307Z",
+  "sourceHashes": {
+    "src/world.js": "b8464485566c4b12c6303bf688ff5a052245d4d44c012723d369f8f33948c8f0",
+    "src/library-asset.js": "6686f6251d1ca5640429159cf34f6434fe83b24e1b128d12ea69f498b24fde62",
+    "src/library-asset-plan.js": "6828a6f11786c0c53c97c114d6cf4d5792ba1a7e1033a731dffb5c105225b9d7",
+    "src/building-silhouettes.js": "01a58e77e15158e2def587a61f2e23eebd3e6a59b2d158395c59a613b4b58c1f",
+    "src/library-r11-review.js": "d291dc9111803fddcca9886fd0ddbfd81a33a98528bd390886fd46aa3a9fc33f",
+    "src/library-facade.js": "043e24423c207b2abc9b6970868f9083c155d6a795c25d0c4db4b232f33cd647",
+    "src/library-massing.js": "7b35155e79fb1d0eb04ab37eb694bdc794488f61b5948471137c89d6a37297cf",
+    "scripts/library-r11-integration.mjs": "81b95027643d028dd9b47e531992410a60c7b2ef1263df4ee88eb2a95dd6145e",
+    "scripts/qa-render.mjs": "e4eba8990295182042ebb76eb3e20eab96827185031d303bc8db60f0f19a434c",
+    "public/data/campus.json": "d4a91a0cb649c79503016441b3cfe1a56d25b34c1a95849f185f9a2051d64cc1"
+  },
+  "sourceStable": true,
+  "renders": 1
+}

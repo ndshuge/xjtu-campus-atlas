@@ -1,0 +1,253 @@
+{
+  "origin": "http://127.0.0.1:27863/library-r11-review.html",
+  "testedAt": "2026-10-26T17:58:31.322Z",
+  "results": [
+    {
+      "pose": "r11-oblique-wide",
+      "url": "http://127.0.0.1:27863/library-r11-review.html?__qa_pose=r11-oblique-wide-1440&inspection=r11-oblique-wide",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-oblique-wide-1440.png",
+      "elapsedMs": 18862,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27863/assets/review-Df_fQ4MO.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 163,
+          "farTrees": 1929
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 523,
+        "triangles": 727354,
+        "geometries": 382,
+        "textures": 32,
+        "fps": 28,
+        "sceneLoadMs": 10926,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -239.99999999999994,
+          114.99999999999996,
+          64.99999999999991
+        ],
+        "target": [
+          -29,
+          22,
+          -147
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "baseline",
+          "stage": "material",
+          "pose": "r11-oblique-wide",
+          "genericVertices": 1128,
+          "owners": {
+            "legacy": 32
+          },
+          "triangles": 19055,
+          "geometryBytes": 1819712,
+          "materials": 15,
+          "textures": 3,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 0,
+          "hitInterface": null,
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": null,
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 10926,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": {
+        "reportedBefore": 6,
+        "reportedAfter": 28,
+        "freshFrames": 120,
+        "elapsedMs": 4254.9,
+        "fps": 28.202777973630404,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-oblique-wide",
+      "url": "http://127.0.0.1:27863/library-r11-review.html?__qa_pose=r11-oblique-wide-390&inspection=r11-oblique-wide",
+      "width": 390,
+      "height": 844,
+      "file": "r11-oblique-wide-390.png",
+      "elapsedMs": 17503,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27863/assets/review-Df_fQ4MO.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 8,
+          "farTrees": 2084
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 195,
+        "triangles": 480417,
+        "geometries": 198,
+        "textures": 16,
+        "fps": 28,
+        "sceneLoadMs": 10113,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -239.99999999999994,
+          114.99999999999996,
+          64.99999999999991
+        ],
+        "target": [
+          -29,
+          22,
+          -147
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "baseline",
+          "stage": "material",
+          "pose": "r11-oblique-wide",
+          "genericVertices": 1128,
+          "owners": {
+            "legacy": 32
+          },
+          "triangles": 19055,
+          "geometryBytes": 1819712,
+          "materials": 15,
+          "textures": 3,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 0,
+          "hitInterface": null,
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": null,
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 10113,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": {
+        "reportedBefore": 6,
+        "reportedAfter": 28,
+        "freshFrames": 120,
+        "elapsedMs": 4247.499999999998,
+        "fps": 28.25191288993527,
+        "renderedFrames": 121,
+        "documentHidden": false,
+        "timedOut": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
