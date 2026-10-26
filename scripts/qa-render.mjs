@@ -68,7 +68,9 @@ async function inspectDesktopInteractions(){
  await mouseClick('#search');await send('Input.insertText',{text:'钱学森'});await sleep(300);await mouseClick('#place-list button');await sleep(1700);
  const selected=await evaluate('window.campusDiagnostics()');
  const result={rotationMetres:Math.hypot(...rotated.camera.map((v,i)=>v-initial.camera[i])),distanceBeforeWheel:distance(rotated),distanceAfterWheel:distance(zoomed),treeLayerTrianglesBefore:zoomed.triangles,treeLayerTrianglesHidden:hidden.triangles,selected:selected.selected};
- result.passed=result.rotationMetres>2&&distance(zoomed)<distance(rotated)*.98&&hidden.triangles<zoomed.triangles*.8&&selected.selected==='钱学森图书馆';return result;
+ const hasGroupControl=await evaluate('!!document.querySelector("#detail-group-view")');
+ if(hasGroupControl){await mouseClick('#detail-group-view');await sleep(1700);result.groupView=(await evaluate('window.campusDiagnostics()')).groupView?.name;}
+ result.passed=result.rotationMetres>2&&distance(zoomed)<distance(rotated)*.98&&hidden.triangles<zoomed.triangles*.8&&selected.selected==='钱学森图书馆'&&(!hasGroupControl||result.groupView==='钱学森图书馆');return result;
 }
 try{
  let port;for(let i=0;i<80;i++){try{port=(await fs.readFile(path.join(profile,'DevToolsActivePort'),'utf8')).split('\n')[0];break;}catch{}await sleep(150);}
@@ -87,7 +89,10 @@ try{
   const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=width<768?844:900;
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:width<768});
   await send('Emulation.setTouchEmulationEnabled',{enabled:width<768,maxTouchPoints:2});
-  const url=new URL(origin);if(pose==='home'){}else if(pose.startsWith('place:'))url.hash=pose.slice(6);else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
+  const url=new URL(origin);if(pose==='home'){}else if(pose.startsWith('group:')){url.hash=pose.slice(6);url.searchParams.set('group','1');}else if(pose.startsWith('place:'))url.hash=pose.slice(6);else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
+  // Different fragments can be same-document navigation. A fresh document
+  // prevents the previous building being mistaken for a new group-view test.
+  await send('Page.navigate',{url:'about:blank'});
   await send('Page.navigate',{url:url.href});
   let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate('!!window.__campusReady && document.querySelector("#loading").hidden');if(loaded)break;}
   if(!loaded)throw Error('Scene did not become ready: '+url.href);
@@ -104,6 +109,10 @@ try{
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
   const png=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,file),Buffer.from(png.result.data,'base64'));
   const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,runtime,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
+  if(pose.startsWith('place:')||pose.startsWith('group:')){
+   const expected=pose.slice(6);r.navigationCheck={expected,selected:runtime.selected,group:runtime.groupView?.name};
+   r.navigationCheck.passed=runtime.selected===expected&&(!pose.startsWith('group:')||runtime.groupView?.name===expected);
+  }
   if(interactionChecks&&width<768&&pose==='home'){
    r.interactions=await inspectInteractions();
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'touch-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
@@ -117,7 +126,7 @@ try{
   results.push(r);console.log(JSON.stringify({pose,width,file,fps:runtime.fps,triangles:runtime.triangles,drawCalls:runtime.drawCalls,loadMs:runtime.sceneLoadMs,errors:r.errors.length,httpErrors:r.httpErrors.length}));
  }
  await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify({origin,testedAt:new Date().toISOString(),results,deviceCaveat:'Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance.'},null,2));
- if(results.some(r=>r.errors.length||r.httpErrors.length||r.metrics.overflow||r.runtime.contextLost||r.interactions?.passed===false))process.exitCode=1;
+ if(results.some(r=>r.errors.length||r.httpErrors.length||r.metrics.overflow||r.runtime.contextLost||r.interactions?.passed===false||r.navigationCheck?.passed===false))process.exitCode=1;
 }finally{
  // On Windows Edge's launcher can exit while the isolated browser stays alive.
  // Close the browser over CDP before terminating the launcher, or repeated QA

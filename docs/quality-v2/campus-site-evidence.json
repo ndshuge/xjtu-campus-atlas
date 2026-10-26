@@ -72,6 +72,20 @@
         "stainless-steel railings and a lower route under the raised passage"
       ],
       "limitations": "Exact location of both images, dimensions, bridge-to-building connection, photography date and vertical datum unverified"
+    },
+    {
+      "id": "commons-library-aerial-2025",
+      "kind": "licensed-aerial-photography",
+      "url": "https://commons.wikimedia.org/wiki/File:西交兴庆之俯视钱学森图书馆.jpg",
+      "published": null,
+      "photographed": "2025-07-25 15:02:22",
+      "locationVerified": true,
+      "license": "CC BY-SA 4.0 / Liuxingy",
+      "facts": [
+        "U-shaped north reading block and central T-shaped stack visible",
+        "south stepped mass, side wings and north block distinguishable"
+      ],
+      "limitations": "Photograph is not orthorectified; no survey elevations or corridor underside data"
     }
   ],
   "features": [
@@ -79,13 +93,24 @@
       "id": "library-north-south-massing",
       "evidence": [
         "xjtu-library-heritage-2016",
-        "xjtu-library-official"
+        "xjtu-library-official",
+        "commons-library-aerial-2025"
       ],
-      "status": "verified-overall-structure",
+      "status": "photo-matched-approximate-massing",
       "priority": "P0",
       "needs": [
-        "matched plan building outlines"
-      ]
+        "matched architectural plans",
+        "surveyed storey elevations"
+      ],
+      "floorCounts": {
+        "north": 4,
+        "stack": 5
+      },
+      "estimatedHeights": {
+        "north": 14,
+        "stack": 17.5,
+        "storeyAssumption": 3.5
+      }
     },
     {
       "id": "library-public-second-floor-corridor",

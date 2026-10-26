@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {boxGeometry} from './geo.js';
 import {architectureBatch,stoneMaterial,glassMaterial,labelTexture} from './architecture-kit.js';
+import {libraryMassingPlan,libraryEdgeProfile} from './library-massing.js';
 
 // Photo-informed proportions, not measured dimensions. Keep OSM perimeter and
 // the university's 49.75 m maximum. The aerial reference was captured in 2025.
@@ -37,14 +38,18 @@ export function createLibraryFacade({centerX,stairFrontZ,steppedCenterZ,baseY,fo
   for(const side of [-1,1])b.box('roof',centerX+side*(tier.w/2-.14),top-.20,steppedCenterZ,.35,.22,tier.d);
   previous=tier.h;
  }
+ // Published north-block / stack levels replace a uniform three-row treatment.
+ const massing=libraryMassingPlan(footprint);
  // Regular fenestration follows the actual OSM north/side-wing perimeter.
  for(let i=1;i<footprint.length;i++){
   const a=footprint[i-1],c=footprint[i],dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz);
   if(len<7)continue;
   const bays=Math.max(1,Math.floor(len/3.2)),angle=-Math.atan2(dz,dx);
-  for(let bay=0;bay<bays;bay++)for(let row=0;row<3;row++){
+  const profile=libraryEdgeProfile(massing,a,c);
+  for(let bay=0;bay<bays;bay++)for(let row=0;row<profile.levels;row++){
    const t=(bay+.5)/bays,x=a[0]+dx*t,z=a[1]+dz*t;
-   const geo=boxGeometry(0,baseY+2.1+row*3.35,0,1.65,2.45,.22);
+   const y=profile.levels===3?baseY+2.1+row*3.35:baseY+1+row*3.5;
+   const geo=boxGeometry(0,y,0,1.65,2.45,.22);
    geo.rotateY(angle);geo.translate(x,0,z);b.add('glass',geo);
   }
  }
