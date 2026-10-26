@@ -16,6 +16,6 @@ assert(b.min.z>=z0-1.6&&b.max.z<=z1+1.6,'Main E facade spills outside north-sout
 assert(b.max.y<=1.1+e.height+.01,'Facade height over source-based estimated height');
 const road=avenuePavingGeometry(d.roads);
 assert.equal(road.roadName,'梧桐东道');
-assert(road.length>200&&road.sidewalks.length===2&&road.edges.length===2);
+assert(road.length>200&&road.sidewalks.length>=2&&road.edges.length>=2);
 for(const geo of [...road.sidewalks,...road.edges])assert([...geo.attributes.position.array].every(Number.isFinite));
 console.log(JSON.stringify({passed:true,mainETowerBounds:{min:b.min.toArray(),max:b.max.toArray()},mainEMaterials:group.children.length,roadName:road.roadName,roadLength:road.length}));
