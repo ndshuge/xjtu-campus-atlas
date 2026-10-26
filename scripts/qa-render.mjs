@@ -22,7 +22,7 @@ const results=[];
 async function touch(type,points=[]){await send('Input.dispatchTouchEvent',{type,touchPoints:points.map(([x,y,id])=>({x,y,id,radiusX:3,radiusY:3}))});}
 async function tap(selector){
  const p=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)}),r=e?.getBoundingClientRect();return r&&r.width&&r.height?{x:r.x+r.width/2,y:r.y+r.height/2}:null})()`);
- if(!p)throw Error('Touch target hidden: '+selector);
+ if(!p){const debug=await evaluate('({width:innerWidth,mode:window.campusDiagnostics()?.mode,hudHidden:document.querySelector("#walk-hud")?.hidden,bodyClass:document.body.className})');throw Error('Touch target hidden: '+selector+' '+JSON.stringify(debug));}
  await touch('touchStart',[[p.x,p.y,1]]);await sleep(60);await touch('touchEnd');return p;
 }
 async function inspectInteractions(){
