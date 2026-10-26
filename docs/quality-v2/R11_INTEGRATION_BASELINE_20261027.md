@@ -53,9 +53,18 @@
 - `r11-baseline-desktop1440/`：1440px 鼠标旋转、滚轮缩放 1832.11→1699.29、树木图层开关使 triangles 568434→201588、搜索选中钱学森图书馆；通过。
 - `r11-baseline-interactions/` 和 `r11-baseline-gesture-diagnose/`：连续复用会话的 430px 失败证据，场景在退出漫游前已回到 orbit；用于防止 QA 混淆，不算页面单独运行失败。
 
+## 移动专项交付后的独立集成记录（2026-10-27）
+
+- 审查来源：`feature/r11-mobile-render@0adb18070c3807cb9f95abbe55b8efcdfaa09ff3`，提交树无未提交改动；与 `3617013` 比较只改 `src/world.js`，新增 `src/mobile-render-stability.js`、专项 QA 脚本、报告与截图，**未提交旧 dist 覆盖本集成树**。差异检查与合并前本树未提交文件相交计数均为 0。
+- 集成提交：`589baa8` 普通 `--no-ff` 合并；`0e6d566` 追加 `scripts/verify-r11-mobile-render.mjs` 到既有完整 `npm run verify`。继承 R3/R9/R10 场景、相机与 OrbitControls，不替换道路、建筑或植被原始地理位置。
+- 独立复跑 `npm run verify` 和 `npm run build`：退出 0。Vite 41 模块、JS 753.39 KB（gzip 208.49 KB），相比基线 751.73 KB/208.01 KB 微增，750 KB 警告保留。
+- 集成后使用同一正式构建，在 390×844、模拟设备 DPR=2、**每个机位独立 Edge 进程**重跑 `qa-r11-dynamic.mjs`：`r11-integration-mobile-avenue/`、`r11-integration-mobile-north-gate/`、`r11-integration-mobile-plaza/`、`r11-integration-mobile-library-north/`。四机位均通过平移、双指缩放、镜头最低高度、几何有限值、模拟 WebGL 丢失后恢复，以及 0 JS/HTTP 错误，单机位报告和截图留在本 worktree。低画质内部像素 740610、DPR=1 后 329160，不能据此推算实际 iPhone GPU 加速。
+- 这些是手机代码子项验收，不是整体建筑/景观 R11 完整验收；实际 Safari 连续移动闪烁、内存与温控继续保留 `NOT VERIFIED`。
+- 尚未交付的 `feature/r11-library` 预检发现其纯函数接入脚本对 LF 行结束符有假设，原 `src/world.js` 的 Windows 工作副本为 CRLF。直接应用会拒绝锚点，先按 `\r\n → \n` 规范化输入的只读模拟才通过，并确认保留 R11 手机高度保护、DPR、建筑 OSM 映射与新资产接入锚点；正式集成时需在验收后的脚本/应用流程修复行尾兼容，不得直接盲贴旧 `world.js`。
+
 ## 仍阻塞 R11 正式集成
 
-1. 只有收到 `feature/r11-library`、`feature/r11-mobile-render` 的明确提交 SHA 与干净的可交付差异后，才能执行三方代码集成；已集成研究文档不视为建筑模型版权授权。
+1. `feature/r11-mobile-render` 已正式交付并安全集成；仍必须收到 `feature/r11-library` 的实际提交 SHA、干净工作树及验收差异后，才能完成最终建筑代码集成；已集成研究文档不视为建筑模型版权授权。
 2. 图书馆必须逐段验证北馆、南馆、书库及连廊实体体量，OSM ID/搜索/建筑选择/相机聚焦/漫游/碰撞/LOD/普遍建筑 fallback，尤其避免通用体块+浮皮+屋顶补丁重复及新完整网格成为不可点击覆盖层。
 3. 合并后重新独立生产 build、完整 verify、建筑包络、390/430/768/1440 的真实 WebGL 截图与触控（其中正式要求至少桌面、390、430、768），对照本文件固定机位和性能数值，先排查可见瑕疵，再决定是否上线。
 4. 真实 iPhone Safari 的动态闪烁、发糊、帧率、温度和 WebGL context loss **未验证**，不得宣称解决。

@@ -1,0 +1,316 @@
+{
+  "date": "2026-10-26T16:56:55.257Z",
+  "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+  "origin": "http://127.0.0.1:19845/",
+  "environment": "Windows Edge Headless WebGL, mobile CDP emulation; NOT an iPhone Safari test",
+  "cases": [
+    {
+      "pose": "avenue-east",
+      "hit": {
+        "tag": "CANVAS",
+        "id": "",
+        "classes": ""
+      },
+      "low": {
+        "start": {
+          "camera": [
+            122.79863012799035,
+            13.637706294466327,
+            9.831400368044541
+          ],
+          "target": [
+            121.50000000000001,
+            6.1000000000000005,
+            -150
+          ],
+          "mode": "orbit",
+          "quality": "low",
+          "foliageCoverageMaterials": 3,
+          "dpr": 1.5,
+          "deviceDpr": 2,
+          "width": 390,
+          "height": 844,
+          "canvas": [
+            585,
+            1266
+          ],
+          "canvasPixels": 740610,
+          "drawCalls": 84,
+          "triangles": 491740,
+          "frameStats": {
+            "p50Ms": 16.7,
+            "p95Ms": 17
+          },
+          "fps": 42,
+          "loadMs": 7593,
+          "contextLost": false,
+          "errors": [],
+          "visibleLabels": 1
+        },
+        "pan": {
+          "camera": [
+            116.51021006774533,
+            13.637706294466437,
+            6.127496511424539
+          ],
+          "target": [
+            115.211579939755,
+            6.099999999999998,
+            -153.7039038566224
+          ],
+          "mode": "orbit",
+          "quality": "low",
+          "foliageCoverageMaterials": 3,
+          "dpr": 1.5,
+          "deviceDpr": 2,
+          "width": 390,
+          "height": 844,
+          "canvas": [
+            585,
+            1266
+          ],
+          "canvasPixels": 740610,
+          "drawCalls": 83,
+          "triangles": 491740,
+          "frameStats": {
+            "p50Ms": 16.7,
+            "p95Ms": 17.1
+          },
+          "fps": 46,
+          "loadMs": 7593,
+          "contextLost": false,
+          "errors": [],
+          "visibleLabels": 1
+        },
+        "pinch": {
+          "camera": [
+            116.01213372938079,
+            16.704031324456718,
+            -30.791224971186523
+          ],
+          "target": [
+            115.15312467288274,
+            6.099999999999997,
+            -153.73833429042074
+          ],
+          "mode": "orbit",
+          "quality": "low",
+          "foliageCoverageMaterials": 3,
+          "dpr": 1.5,
+          "deviceDpr": 2,
+          "width": 390,
+          "height": 844,
+          "canvas": [
+            585,
+            1266
+          ],
+          "canvasPixels": 740610,
+          "drawCalls": 82,
+          "triangles": 497792,
+          "frameStats": {
+            "p50Ms": 16.7,
+            "p95Ms": 17.1
+          },
+          "fps": 48,
+          "loadMs": 7593,
+          "contextLost": false,
+          "errors": [],
+          "visibleLabels": 1
+        },
+        "end": {
+          "camera": [
+            115.97265324259676,
+            27.063176596177225,
+            -34.90168906536148
+          ],
+          "target": [
+            115.1531226888584,
+            6.100000000000002,
+            -153.7383354590209
+          ],
+          "mode": "orbit",
+          "quality": "low",
+          "foliageCoverageMaterials": 3,
+          "dpr": 1.5,
+          "deviceDpr": 2,
+          "width": 390,
+          "height": 844,
+          "canvas": [
+            585,
+            1266
+          ],
+          "canvasPixels": 740610,
+          "drawCalls": 81,
+          "triangles": 496494,
+          "frameStats": {
+            "p50Ms": 16.7,
+            "p95Ms": 17
+          },
+          "fps": 60,
+          "loadMs": 7593,
+          "contextLost": false,
+          "errors": [],
+          "visibleLabels": 1
+        }
+      },
+      "gesture": {
+        "panTargetDelta": 7.2981594003689825,
+        "pinchDistanceDelta": -36.607768002447145,
+        "minCameraY": 13.637706294466327
+      },
+      "pass": {
+        "pan": true,
+        "pinch": true,
+        "cameraSafe": true,
+        "finite": true
+      },
+      "high": {
+        "camera": [
+          115.97258760672531,
+          27.117061388798607,
+          -34.91120666575864
+        ],
+        "target": [
+          115.1531226888584,
+          6.100000000000002,
+          -153.7383354590209
+        ],
+        "mode": "orbit",
+        "quality": "high",
+        "foliageCoverageMaterials": 3,
+        "dpr": 1.8,
+        "deviceDpr": 2,
+        "width": 390,
+        "height": 844,
+        "canvas": [
+          702,
+          1519
+        ],
+        "canvasPixels": 1066338,
+        "drawCalls": 235,
+        "triangles": 546182,
+        "frameStats": {
+          "p50Ms": 16.7,
+          "p95Ms": 17.1
+        },
+        "fps": 47,
+        "loadMs": 7593,
+        "contextLost": false,
+        "errors": [],
+        "visibleLabels": 1
+      }
+    }
+  ],
+  "dpr1": {
+    "camera": [
+      115.97257850675926,
+      27.124520906883394,
+      -34.912526216158284
+    ],
+    "target": [
+      115.1531226888584,
+      6.100000000000002,
+      -153.7383354590209
+    ],
+    "mode": "orbit",
+    "quality": "low",
+    "foliageCoverageMaterials": 3,
+    "dpr": 1,
+    "deviceDpr": 1,
+    "width": 390,
+    "height": 844,
+    "canvas": [
+      390,
+      844
+    ],
+    "canvasPixels": 329160,
+    "drawCalls": 81,
+    "triangles": 496494,
+    "frameStats": {
+      "p50Ms": 16.7,
+      "p95Ms": 17.9
+    },
+    "fps": 41,
+    "loadMs": 7593,
+    "contextLost": false,
+    "errors": [],
+    "visibleLabels": 1
+  },
+  "restoration": {
+    "supported": true,
+    "lost": {
+      "camera": [
+        115.9725785051953,
+        27.12452218867866,
+        -34.91252644294276
+      ],
+      "target": [
+        115.1531226888584,
+        6.100000000000002,
+        -153.7383354590209
+      ],
+      "mode": "orbit",
+      "quality": "low",
+      "foliageCoverageMaterials": 3,
+      "dpr": 1,
+      "deviceDpr": 1,
+      "width": 390,
+      "height": 844,
+      "canvas": [
+        390,
+        844
+      ],
+      "canvasPixels": 329160,
+      "drawCalls": 81,
+      "triangles": 496494,
+      "frameStats": {
+        "p50Ms": 16.7,
+        "p95Ms": 24.6
+      },
+      "fps": 41,
+      "loadMs": 7593,
+      "contextLost": true,
+      "errors": [],
+      "visibleLabels": 1
+    },
+    "restored": {
+      "camera": [
+        115.97257848593625,
+        27.124537973015105,
+        -34.91252923562304
+      ],
+      "target": [
+        115.1531226888584,
+        6.100000000000002,
+        -153.7383354590209
+      ],
+      "mode": "orbit",
+      "quality": "low",
+      "foliageCoverageMaterials": 3,
+      "dpr": 1,
+      "deviceDpr": 1,
+      "width": 390,
+      "height": 844,
+      "canvas": [
+        390,
+        844
+      ],
+      "canvasPixels": 329160,
+      "drawCalls": 81,
+      "triangles": 495650,
+      "frameStats": {
+        "p50Ms": 16.7,
+        "p95Ms": 16.8
+      },
+      "fps": 54,
+      "loadMs": 7593,
+      "contextLost": false,
+      "errors": [],
+      "visibleLabels": 1
+    },
+    "passed": true
+  },
+  "errors": [],
+  "httpErrors": [],
+  "passed": true
+}
