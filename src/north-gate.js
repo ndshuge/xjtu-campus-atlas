@@ -41,11 +41,15 @@ export function createNorthGate(position,baseY=1.1){
   pier.rotation.y=Math.PI/4;
   add(new THREE.CylinderGeometry(1.25,1.25,.18,32),shade,'pier medallion',sx,baseY+5.25,z-3.3).rotation.x=Math.PI/2;
   add(new THREE.BoxGeometry(20.2,6.2,5.8),stone,'outer wall',x+side*27.1,baseY+3.1,z+.6);
-  add(new THREE.BoxGeometry(18.9,4.6,.22),bronze,'bronze science relief panel',x+side*27.2,baseY+3.45,z-2.42);
+  // The eastern frontage shares an OSM post-office building: its mapped facade
+  // sits in front of the original relief texture. Keep both documented reliefs
+  // visible, without altering or claiming measured geometry for that building.
+  const reliefFront=side>0?-4.20:-2.42;
+  add(new THREE.BoxGeometry(18.9,4.6,.22),bronze,'bronze science relief panel',x+side*27.2,baseY+3.45,z+reliefFront);
   // School documentation (2025-12-09) confirms two scientific relief themes.
   // The following abstract motifs are original geometry, not tracings of the artwork.
   const motif=new THREE.MeshStandardMaterial({color:'#9b9081',metalness:.42,roughness:.64,side:THREE.DoubleSide});
-  const cx=x+side*27.2,face=z-2.60;
+  const cx=x+side*27.2,face=z+reliefFront-.18;
   if(side<0){
     for(const angle of [0,Math.PI/3,-Math.PI/3]){
       const orbit=add(new THREE.TorusGeometry(1.3,.09,8,48),motif,'abstract science orbit',cx,baseY+3.35,face);
@@ -79,13 +83,15 @@ export function createNorthGate(position,baseY=1.1){
   const mesh=add(new THREE.PlaneGeometry(w,2.15),new THREE.MeshBasicMaterial({map:t,transparent:true,depthWrite:false,side:THREE.FrontSide}),'front facade inscription',px,baseY+8.65,z+front-.24);
   mesh.rotation.y=Math.PI;mesh.castShadow=false;
  }
- const calligraphy=new THREE.TextureLoader().load((import.meta.env?.BASE_URL||'/')+'assets/reference/north-gate-calligraphy-crop.png');
+ const calligraphy=new THREE.TextureLoader().load((import.meta.env?.BASE_URL||'/')+'assets/reference/north-gate-ink-mask-r8.png');
  calligraphy.colorSpace=THREE.SRGBColorSpace;calligraphy.anisotropy=8;
- // Plane faces the road after a 180° rotation: compensate horizontal UV mirroring.
- calligraphy.wrapS=THREE.RepeatWrapping;calligraphy.repeat.x=-1;calligraphy.offset.x=1;
- const photographed=add(new THREE.PlaneGeometry(26,2.38),new THREE.MeshBasicMaterial({map:calligraphy,side:THREE.FrontSide,depthWrite:false}),'2011 photographed north gate inscription',x+16.8,baseY+8.6,z-6.58);
+ // Render-validated North Gate photo direction: do NOT mirror the calligraphic ink.
+ // Source ink mask adapted from IronBlood 2011 / Commons CC BY-SA 3.0; see acceptance report.
+ // Default U orientation renders readable Chinese from the exterior; no UV flip.
+ const photographed=add(new THREE.PlaneGeometry(19,2.45),new THREE.MeshBasicMaterial({map:calligraphy,side:THREE.FrontSide,depthWrite:false,transparent:true,alphaTest:.02}),'2011 photographed north gate inscription',x+16.8,baseY+8.6,z-6.58);
  photographed.rotation.y=Math.PI;photographed.castShadow=false;
- photographed.material.color.set('#c7cfc8'); // Blend photo crop into the off-white tiled fascia.
+ // The gate-owned, CC BY-SA 3.0 photo derivative contains ONLY the calligraphic ink.
+ // Transparent background lets the roof's white-tile material show through.
  sign('JIAOTONG UNIVERSITY',29,x-16.8,90);
  g.userData={accuracy:'2011 photo and XJTU official photos; on-screen Chinese left and English right, not surveyed or verified after 2025 repairs',source:'https://commons.wikimedia.org/wiki/File:XJTU_Main_Gate.JPG',officialPhoto:'https://news.xjtu.edu.cn/info/1006/192924.htm',reliefEvidence:'https://dwxcb.xjtu.edu.cn/info/1085/17811.htm',spanSurveyed:false,vehicleClearanceSurveyed:false};
  return g;
