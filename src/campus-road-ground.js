@@ -59,7 +59,7 @@ const normalAt=(ps,i,side)=>{
   const dx=b[0]-a[0],dz=b[1]-a[1],len=Math.hypot(dx,dz)||1;
   return [-dz/len*side,dx/len*side];
 };
-function clippedOffsetRuns(r,roads,side,offset){
+export function clippedOffsetRuns(r,roads,side,offset){
   const ps=resample(r.points),runs=[];let run=[];
   const flush=()=>{if(run.length>=2&&distance(run[0],run.at(-1))>1)runs.push(run);run=[];};
   for(let i=0;i<ps.length;i++){
