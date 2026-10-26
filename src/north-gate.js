@@ -15,7 +15,7 @@ export function createNorthGate(position,baseY=1.1){
   m.castShadow=true;m.receiveShadow=true;g.add(m);return m;
  };
  const n=72,hw=38,front=-6.3,back=2.3;
- const roofY=t=>9.7+1.1*Math.pow(Math.abs(t),1.8);
+ const roofY=t=>9.7+2.0*Math.pow(Math.abs(t),1.8);
  const roofZ=t=>front+2.0*t*t;
  function surface(name,mat,fn){
   const pos=[],uv=[],idx=[];
@@ -35,7 +35,10 @@ export function createNorthGate(position,baseY=1.1){
  surface('roof soffit',gray,t=>[[x+hw*t,baseY+roofY(t)-2.55,z+roofZ(t)],[x+hw*t,baseY+roofY(t)-2.55,z+back]]);
  for(const side of [-1,1]){
   const sx=x+side*12.7;
-  add(new THREE.BoxGeometry(3.4,7.5,3.7),stone,'inner gate pier',sx,baseY+3.75,z-1.2).rotation.z=side*.08;
+  // Photograph: narrow-footed support flares into the overhead fascia.
+  // The 4-sided tapered mass is interpretive, not a surveyed dimension.
+  const pier=add(new THREE.CylinderGeometry(2.5,1.22,7.5,4),stone,'inner flared gate pier',sx,baseY+3.75,z-1.2);
+  pier.rotation.y=Math.PI/4;
   add(new THREE.CylinderGeometry(1.25,1.25,.18,32),shade,'pier medallion',sx,baseY+5.25,z-3.3).rotation.x=Math.PI/2;
   add(new THREE.BoxGeometry(20.2,6.2,5.8),stone,'outer wall',x+side*27.1,baseY+3.1,z+.6);
   add(new THREE.BoxGeometry(18.9,4.6,.22),bronze,'bronze science relief panel',x+side*27.2,baseY+3.45,z-2.42);
@@ -68,16 +71,22 @@ export function createNorthGate(position,baseY=1.1){
   const c=document.createElement('canvas');c.width=1600;c.height=200;
   const ctx=c.getContext('2d');ctx.clearRect(0,0,1600,200);
   ctx.fillStyle='#303633';ctx.font='bold '+font+'px Arial,"Microsoft YaHei",sans-serif';
-  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(txt,800,104);
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  const words=txt.split(' ');
+  if(words.length===2){ctx.fillText(words[0],800,64);ctx.fillText(words[1],800,148);}
+  else ctx.fillText(txt,800,104);
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;
   const mesh=add(new THREE.PlaneGeometry(w,2.15),new THREE.MeshBasicMaterial({map:t,transparent:true,depthWrite:false,side:THREE.FrontSide}),'front facade inscription',px,baseY+8.65,z+front-.24);
   mesh.rotation.y=Math.PI;mesh.castShadow=false;
  }
  const calligraphy=new THREE.TextureLoader().load((import.meta.env?.BASE_URL||'/')+'assets/reference/north-gate-calligraphy-crop.png');
  calligraphy.colorSpace=THREE.SRGBColorSpace;calligraphy.anisotropy=8;
+ // Plane faces the road after a 180° rotation: compensate horizontal UV mirroring.
+ calligraphy.wrapS=THREE.RepeatWrapping;calligraphy.repeat.x=-1;calligraphy.offset.x=1;
  const photographed=add(new THREE.PlaneGeometry(26,2.38),new THREE.MeshBasicMaterial({map:calligraphy,side:THREE.FrontSide,depthWrite:false}),'2011 photographed north gate inscription',x+16.8,baseY+8.6,z-6.58);
  photographed.rotation.y=Math.PI;photographed.castShadow=false;
+ photographed.material.color.set('#c7cfc8'); // Blend photo crop into the off-white tiled fascia.
  sign('JIAOTONG UNIVERSITY',29,x-16.8,90);
- g.userData={accuracy:'2011-photo-informed approximation, not surveyed',source:'Wikimedia Commons XJTU Main Gate.JPG / IronBlood'};
+ g.userData={accuracy:'2011 photo and XJTU official photos; on-screen Chinese left and English right, not surveyed or verified after 2025 repairs',source:'https://commons.wikimedia.org/wiki/File:XJTU_Main_Gate.JPG',officialPhoto:'https://news.xjtu.edu.cn/info/1006/192924.htm',reliefEvidence:'https://dwxcb.xjtu.edu.cn/info/1085/17811.htm',spanSurveyed:false,vehicleClearanceSurveyed:false};
  return g;
 }

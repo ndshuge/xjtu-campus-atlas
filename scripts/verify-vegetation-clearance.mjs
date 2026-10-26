@@ -30,7 +30,19 @@ const courtyard={height:25,points:[[0,0],[20,0],[20,20],[0,20],[0,0]],holes:[[[5
 const inner=fitTreeToBuildings({x:7,z:10,h:16,r:5},[courtyard]);
 assert(inner.r*CROWN_RADIUS_FACTOR<=1.61,'Courtyard foliage crosses the inner facade');
 const perimeter=createCampusPerimeter(d.boundary,[...d.landmarks,...d.pois],1.1,d.roads,d.buildings);
-assert(perimeter.userData.buildingClearanceGaps>0,'Expected existing boundary-building conflicts');
+assert(Number.isInteger(perimeter.userData.buildingClearanceGaps),'Building-gap diagnostics unavailable');
+// Explicit collision fixtures must force visible gaps even when real OSM snapshots
+// happen to contain no remaining boundary/building overlap.
+const ring=[[0,0],[120,0],[120,120],[0,120],[0,0]];
+const crossingBuilding={points:[[45,-3],[55,-3],[55,3],[45,3],[45,-3]],holes:[]};
+const fixture=createCampusPerimeter([ring],[],1.1,[],[crossingBuilding],[{x:80,z:0,trunkRadius:1}]);
+assert(fixture.userData.buildingClearanceGaps>0,'Building crossing did not cut perimeter');
+assert(fixture.userData.treeClearanceGaps>0,'Surveyed tree crossing did not cut perimeter');
+for(const s of fixture.userData.colliderSegments)for(const t of [0,.5,1]){
+ const p=[s.a[0]+t*(s.b[0]-s.a[0]),s.a[1]+t*(s.b[1]-s.a[1])];
+ assert(!pointIn(p,crossingBuilding.points),'Fixture wall crosses building footprint');
+ assert(Math.hypot(p[0]-80,p[1])>=1,'Fixture wall crosses surveyed trunk');
+}
 for(const s of perimeter.userData.colliderSegments)for(const t of [0,.5,1]){
  const p=[s.a[0]+t*(s.b[0]-s.a[0]),s.a[1]+t*(s.b[1]-s.a[1])];
  for(const b of d.buildings){assert(!pointIn(p,b.points)||(b.holes||[]).some(h=>pointIn(p,h)),'Fence intersects an OSM building');}

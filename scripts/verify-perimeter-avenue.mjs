@@ -16,11 +16,14 @@ for(let i=0;i<bases.count;i++){
     assert(Math.hypot(pos.x-gate.point[0],pos.z-gate.point[1])>=gate.clearance-2.5,
       'Schematic wall would block a gate: '+gate.name);
   }
-  assert(scale.y>.5&&scale.z>.2,'Wall is flattened or invisible');
+  assert(scale.y>.3&&scale.z>.2,'Schematic ground-level boundary has invalid dimensions');
 }
 assert(perimeter.userData.wallLengthMetres>500,'Perimeter length unrealistic');
 assert(perimeter.userData.roadCrossingCount===2,'Two OSM road/boundary crossings must remain passable; review mapped passages if OSM data changes');
 assert(perimeter.userData.accuracy.includes('NOT verified'),'Missing accuracy warning');
+assert(perimeter.userData.geometryVersion.includes('non-fabricated'),'Unknown walls must be visibly schematic');
+const oldRepeatDensity=perimeter.children.find(m=>m.name.includes('uprights')).count;
+assert(oldRepeatDensity<bases.count*.5,'Repeated ornamental grille not removed');
 assert(data.roads.some(r=>r.campus&&r.name==='梧桐东道'),'Mapped avenue absent');
 const world=readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
 assert(world.includes('this.campusPerimeter=createCampusPerimeter('),'Perimeter not in rendered world');

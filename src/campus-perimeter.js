@@ -12,7 +12,7 @@ import {pointIn,pointSegment} from './geo.js';
  * North Gate side relief documented 2025-12-09, 4.5 m high / 47 m long:
  * https://dwxcb.xjtu.edu.cn/info/1085/17811.htm
  */
-export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],buildings=[]){
+export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],buildings=[],verifiedTrees=[]){
  const group=new THREE.Group();
  group.name='Xingqing campus perimeter / schematic enclosure with verified gate openings';
  const gateList=gates.filter(g=>Array.isArray(g.position)&&/门/.test(g.name||'')).map(g=>({
@@ -51,7 +51,11 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],bui
    if(pointIn([x,z],b.points)&&!(b.holes||[]).some(h=>pointIn([x,z],h)))return true;
    return b.points.slice(1).some((p,i)=>pointSegment([x,z],b.points[i],p).distance<margin);
  });
- let skippedBuildingSegments=0;
+ let skippedBuildingSegments=0,skippedTreeSegments=0,skippedRoadSegments=0;
+ // Only surveyed trees are meaningful constraints; schematic trees are not survey points.
+ const treeConflict=(p,margin)=>verifiedTrees.some(t=>Number.isFinite(t.x)&&Number.isFinite(t.z)&&Math.hypot(p[0]-t.x,p[1]-t.z)<Math.max(.35,t.trunkRadius||.35)+margin);
+ const roadConflict=(p,margin)=>roads.some(r=>r.campus&&Array.isArray(r.points)&&r.points.slice(1).some((q,i)=>
+   pointSegment(p,r.points[i],q).distance<(Number(r.width)||3)/2+margin));
  const record=(list,x,z,len,y,h,depth,angle)=>list.push({x,z,len,y,h,depth,angle});
  for(const ring of boundaries){
    for(let i=1;i<ring.length;i++){
@@ -64,22 +68,22 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],bui
       if(nearGate(x,z,span/2+.4))continue; // no phantom wall across mapped gates
       // A university boundary can coincide with a building wall. Do not draw
       // invented ironwork through that building; do not move the OSM boundary.
-      if(buildingConflict(x,z,span/2+.45)){skippedBuildingSegments++;continue;}
-      record(segments,x,z,span,baseY+.37,.74,.34,angle);
-      record(upper,x,z,span,baseY+2.24,.14,.14,angle);
-      record(middle,x,z,span,baseY+1.32,.10,.105,angle);
-      const n=Math.max(1,Math.floor(span/.52));
-      for(let k=0;k<n;k++){
-        const t=start+(k+.5)*span/n;
-        const bx=a[0]+ux*t,bz=a[1]+uz*t;
-        if(!nearGate(bx,bz,.4))record(bars,bx,bz,.115,baseY+1.5,1.52,.115,angle);
-      }
-      if(j%3===0&&!nearGate(x,z,1.1))record(pillars,a[0]+ux*start,a[1]+uz*start,.45,baseY+1.25,2.5,.47,angle);
+      const samples=[0,.25,.5,.75,1].map(t=>[a[0]+ux*(start+t*span),a[1]+uz*(start+t*span)]);
+      if(samples.some(p=>nearGate(p,.45)))continue;
+      if(samples.some(p=>buildingConflict(p,.35))||buildingConflict(x,z,span/2+.45)){skippedBuildingSegments++;continue;}
+      if(samples.some(p=>roadConflict(p,.25))){skippedRoadSegments++;continue;}
+      if(samples.some(p=>treeConflict(p,.5))){skippedTreeSegments++;continue;}
+      // Muted schematic guides, NOT invented masonry, fence design or North Gate repeats.
+      record(segments,x,z,span,baseY+.18,.36,.25,angle);
+      record(upper,x,z,span,baseY+1.72,.075,.11,angle);
+      record(middle,x,z,span,baseY+.78,.07,.11,angle);
+      if(j%4===0&&!nearGate(x,z,1.1))record(bars,x,z,.11,baseY+1.03,1.4,.11,angle);
+      if(j%7===0&&!nearGate(x,z,1.1))record(pillars,a[0]+ux*start,a[1]+uz*start,.24,baseY+.94,1.89,.26,angle);
     }
    }
  }
- const stone=new THREE.MeshStandardMaterial({color:'#b2b6a8',roughness:.88});
- const iron=new THREE.MeshStandardMaterial({color:'#505e54',metalness:.22,roughness:.74});
+ const stone=new THREE.MeshStandardMaterial({color:'#929d95',roughness:1});
+ const iron=new THREE.MeshStandardMaterial({color:'#87978c',transparent:true,opacity:.42,depthWrite:false,roughness:1});
  function batch(rows,name,material){
    if(!rows.length)return;
    const obj=new THREE.Object3D();
@@ -93,11 +97,11 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],bui
    });
    mesh.instanceMatrix.needsUpdate=true;mesh.computeBoundingSphere();group.add(mesh);
  }
- batch(segments,'perimeter masonry plinth / dimensions are illustrative',stone);
- batch(pillars,'perimeter repeating piers / not surveyed',stone);
- batch(middle,'perimeter mid-height rails / not surveyed',iron);
- batch(upper,'perimeter upper rail / not surveyed',iron);
- batch(bars,'perimeter vertical infill / not surveyed',iron);
+ batch(segments,'perimeter masonry plinth / schematic guide, NOT surveyed',stone);
+ batch(pillars,'perimeter sparse markers / NOT surveyed piers',stone);
+ batch(middle,'perimeter schematic middle guide / NOT verified rail',iron);
+ batch(upper,'perimeter schematic upper guide / NOT verified roofline',iron);
+ batch(bars,'perimeter schematic uprights / NOT verified infill',iron);
  group.userData={
   accuracy:'OSM footprint only; wall details illustrative and NOT verified by photographs',
   referenceGate:'https://news.xjtu.edu.cn/info/1033/11054.htm',
@@ -106,8 +110,8 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],bui
   wallLengthMetres:Math.round(segments.reduce((sum,p)=>sum+p.len,0)),
   gapCenters:gateList.map(g=>g.point),
   roadCrossingCount:mappedRoadPassages.length,
-  geometryVersion:'visible-perimeter-r6-clearance',
-  buildingClearanceGaps:skippedBuildingSegments,
+  geometryVersion:'schematic-perimeter-r7-non-fabricated',
+  buildingClearanceGaps:skippedBuildingSegments,treeClearanceGaps:skippedTreeSegments,roadClearanceGaps:skippedRoadSegments,
   colliderSegments:segments.map(p=>({a:[p.x-Math.cos(-p.angle)*p.len/2,p.z-Math.sin(-p.angle)*p.len/2],b:[p.x+Math.cos(-p.angle)*p.len/2,p.z+Math.sin(-p.angle)*p.len/2]}))
  };
  return group;
