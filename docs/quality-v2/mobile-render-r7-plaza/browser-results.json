@@ -1,0 +1,149 @@
+{
+  "origin": "http://127.0.0.1:19638/",
+  "testedAt": "2026-10-26T10:13:41.579Z",
+  "results": [
+    {
+      "pose": "place:四大发明广场",
+      "url": "http://127.0.0.1:19638/?__qa_pose=place%3A%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA-390#%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA",
+      "width": 390,
+      "height": 844,
+      "file": "place_四大发明广场-390.png",
+      "elapsedMs": 8869,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 702,
+        "overflow": false,
+        "script": "http://127.0.0.1:19638/assets/index-BnfDG2YV.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 75,
+          "farTrees": 2017
+        },
+        "drawCalls": 182,
+        "triangles": 524351,
+        "geometries": 383,
+        "textures": 29,
+        "fps": 173,
+        "sceneLoadMs": 5272,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "四大发明广场",
+        "webgl": "WebGL 2",
+        "camera": [
+          24.679999999999943,
+          57.00000000000001,
+          -96
+        ],
+        "target": [
+          -38.32,
+          2,
+          0
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 6,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 5272,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:东南门",
+      "url": "http://127.0.0.1:19638/?__qa_pose=place%3A%E4%B8%9C%E5%8D%97%E9%97%A8-390#%E4%B8%9C%E5%8D%97%E9%97%A8",
+      "width": 390,
+      "height": 844,
+      "file": "place_东南门-390.png",
+      "elapsedMs": 5495,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 702,
+        "overflow": false,
+        "script": "http://127.0.0.1:19638/assets/index-BnfDG2YV.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 6,
+          "farTrees": 2086
+        },
+        "drawCalls": 97,
+        "triangles": 459211,
+        "geometries": 358,
+        "textures": 29,
+        "fps": 172,
+        "sceneLoadMs": 2605,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "东南门",
+        "webgl": "WebGL 2",
+        "camera": [
+          395.754,
+          20.09999999999991,
+          65.35500000000002
+        ],
+        "target": [
+          362.754,
+          3.1,
+          40.355
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 2605,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

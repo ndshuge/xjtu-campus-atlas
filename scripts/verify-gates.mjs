@@ -22,6 +22,8 @@ for(const p of gates){
  const b=new THREE.Box3().setFromObject(mesh);
  assert(Number.isFinite(b.min.x)&&Number.isFinite(b.max.z));
  assert(b.max.y<=7&&b.min.y>=1);
+ assert(Math.abs(b.min.y-1.1)<.03,'Schematic entrance locator floats above the ground datum');
+ assert(mesh.children.some(c=>c.material?.transparent&&c.material.opacity>=.8),'Schematic gate posts too faint to read as ground-supported');
  assert.equal(mesh.children.length,6,'Unverified side gates must use only neutral location markers');
  assert(!mesh.children.some(c=>/canopy|limestone|decorative/i.test(c.name)),'Invented side-gate facade');
  tested++;
@@ -64,12 +66,14 @@ try{
  const box=new THREE.Box3().setFromObject(north);
  assert(box.min.x<main.position[0]-25&&box.max.x>main.position[0]+25);
  assert(box.max.y<15);
+ assert(Math.abs(box.min.y-1.1)<.05,'North Gate has no ground-contact geometry');
  const southGate=createSouthGate(gates.find(g=>g.name==='南门').position,1.1);
  const southBox=new THREE.Box3().setFromObject(southGate);
  assert(southGate.children.some(c=>c.name==='red granite sign wall'));
  assert(southGate.children.some(c=>c.name==='2011 photographed south gate signage'));
  assert(!southGate.children.some(c=>c.name==='roof lantern'),'Unsurveyed building should not block southern approach');
  assert(southBox.max.y<12&&southBox.min.y>0);
+ assert(Math.abs(southBox.min.y-1.1)<.05,'South Gate name wall floats above the ground datum');
  // The two independent mapped South Gate vehicle/pedestrian lanes must not be
  // covered by the modelled 2011 name wall. Lane width here is a test envelope,
  // not a certified clearance or as-built road dimension.

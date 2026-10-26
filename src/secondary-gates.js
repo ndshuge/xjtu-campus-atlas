@@ -6,7 +6,7 @@ export function createSecondaryGate({position,name,baseY=1.1,orientation=0}){
  const [x,z]=position,group=new THREE.Group();
  group.name=name+' / approximate pedestrian entrance';
  // Survey-free entrance: intentionally unornamented locator, not a fabricated gate.
- const limestone=new THREE.MeshStandardMaterial({color:'#a9b5ac',roughness:1,transparent:true,opacity:.56});
+ const limestone=new THREE.MeshStandardMaterial({color:'#a9b5ac',roughness:1,transparent:true,opacity:.86});
  const darker=new THREE.MeshStandardMaterial({color:'#748479',roughness:1});
  const steel=new THREE.MeshStandardMaterial({color:'#c7d0ca',roughness:1});
  const add=(geometry,material,label,atX=0,atY=0,atZ=0)=>{

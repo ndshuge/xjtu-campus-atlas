@@ -48,7 +48,7 @@ assert.equal(PLAZA_PAVING.north,10,'Avoid extending paving into the mapped libra
 assert.match(courtyard.userData.terrain,/no invented contour/);
 const rings=courtyard.children.filter(x=>x.name==='Sculpture foundation landing / level retained');
 assert.equal(rings.length,4);
-assert(rings.every(x=>Math.abs(x.position.y-(BASE+.07))<1e-6));
+assert(rings.every(x=>Math.abs(x.position.y-(BASE+.135))<1e-6));
 const seams=courtyard.children.find(x=>x.name==='Limited axial paving expansion seams');
 assert.equal(seams.geometry.getAttribute('position').count,8);
 const forecourt=createLibraryForecourt({centerX:0,facadeFrontZ:20,baseY:BASE});
