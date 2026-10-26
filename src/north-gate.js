@@ -39,9 +39,29 @@ export function createNorthGate(position,baseY=1.1){
   add(new THREE.CylinderGeometry(1.25,1.25,.18,32),shade,'pier medallion',sx,baseY+5.25,z-3.3).rotation.x=Math.PI/2;
   add(new THREE.BoxGeometry(20.2,6.2,5.8),stone,'outer wall',x+side*27.1,baseY+3.1,z+.6);
   add(new THREE.BoxGeometry(18.9,4.6,.22),bronze,'bronze science relief panel',x+side*27.2,baseY+3.45,z-2.42);
-  for(let j=0;j<11;j++){
-   const a=add(new THREE.BoxGeometry(.21,.6+(j%4)*.42,.12),shade,'relief motif',x+side*27.2+(j-5)*1.6,baseY+2.5+(j%3)*.22,z-2.58);
-   a.rotation.z=j%2?.24:-.2;
+  // School documentation (2025-12-09) confirms two scientific relief themes.
+  // The following abstract motifs are original geometry, not tracings of the artwork.
+  const motif=new THREE.MeshStandardMaterial({color:'#9b9081',metalness:.42,roughness:.64,side:THREE.DoubleSide});
+  const cx=x+side*27.2,face=z-2.60;
+  if(side<0){
+    for(const angle of [0,Math.PI/3,-Math.PI/3]){
+      const orbit=add(new THREE.TorusGeometry(1.3,.09,8,48),motif,'abstract science orbit',cx,baseY+3.35,face);
+      orbit.scale.y=.48;orbit.rotation.z=angle;
+    }
+    add(new THREE.SphereGeometry(.28,12,10),motif,'abstract nucleus',cx,baseY+3.35,face-.12);
+  }else{
+    add(new THREE.TorusGeometry(1.2,.17,8,40),motif,'abstract engineering gear',cx-1.4,baseY+3.4,face);
+    for(let k=0;k<12;k++){
+      const angle=k*Math.PI/6;
+      const tooth=add(new THREE.BoxGeometry(.54,.23,.14),motif,'abstract gear tooth',
+        cx-1.4+Math.cos(angle)*1.36,baseY+3.4+Math.sin(angle)*1.36,face);
+      tooth.rotation.z=angle;
+    }
+    for(let k=0;k<6;k++){
+      const trace=add(new THREE.BoxGeometry(1.10,.1,.14),motif,'abstract circuit trace',
+        cx+1.2+(k%3)*1.1,baseY+2.1+k*.46,face);
+      trace.rotation.z=k%2?.24:-.19;
+    }
   }
  }
  function sign(txt,w,px,font){

@@ -5,16 +5,18 @@ import {createLibraryFacade} from './library-facade.js';
 import {createLibraryClock} from './library-clock.js';
 import {createLibraryForecourt} from './library-forecourt.js';
 import {createLibraryGreenRoofs} from './library-green-roofs.js';
-import {createMainTowerFacade} from './main-tower-facade.js';
+import {createMainTowerFacade,mainTowerMassing} from './main-tower-facade.js';
 import {createTengfeiTower,createSiyuanStele} from './axis-monuments.js';
 import {createSiyuanCenter,createScienceHall} from './cultural-facades.js';
 import {makeGroundPattern} from './ground-pattern.js';
 import {makeCanopyTexture} from './foliage-texture.js';
 import {createSurfaceTexture} from './surface-textures.js';
+import {addAvenuePaving} from './avenue-paving.js';
 import {findSafeWalkStart} from './walk-placement.js';
 import {createFourInventionsMarker} from './four-inventions.js';
 import {buildFourInventionsPaving} from './plaza-terrain.js';
 import {createNorthGate} from './north-gate.js';
+import {createCampusPerimeter} from './campus-perimeter.js';
 import {createSecondaryGate} from './secondary-gates.js';
 import {createSouthGate} from './south-gate.js';
 import {getCampusGateEntries,visualGatePosition} from './gate-entries.js';
@@ -40,7 +42,24 @@ export class CampusWorld{
   const skyUniforms=this.sky.material.uniforms;skyUniforms.turbidity.value=3;skyUniforms.rayleigh.value=.85;skyUniforms.mieCoefficient.value=.003;skyUniforms.mieDirectionalG.value=.78;skyUniforms.sunPosition.value.copy(this.sun.position);
   this.pavers=createSurfaceTexture('pavers');this.asphalt=createSurfaceTexture('asphalt');this.waterTexture=createSurfaceTexture('water');
   this.ray=new THREE.Raycaster();this.pointer=new THREE.Vector2();this.proj=new THREE.Vector3();this.timer=new THREE.Timer();this.timer.connect(document);this.dimensions=new Map();this.footprintBounds=data.buildings.map(b=>bounds(b.points));
-  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.buildBuildings();this.buildLandmarks();this.buildTrees();this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);this.animate();
+  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.avenuePaving=addAvenuePaving(this.scene,this.data.roads,this.pavers);this.buildBuildings();this.buildLandmarks();this.buildTrees();this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);
+  // Reproducible exterior photographic QA; normal visitors keep existing default camera.
+  const inspection=new URLSearchParams(location.search).get('inspection');
+  if(inspection)document.body.classList.add('photo-inspection');
+  if(inspection==='north-gate'){
+    const gate=this.data.landmarks.find(p=>p.name==='北门');
+    if(gate){const [gx,gz]=gate.position;this.camera.position.set(gx,BASE+7,gz-92);this.controls.target.set(gx,BASE+5.5,gz-1);this.controls.update();}
+  }else if(inspection==='north-wall'){
+    this.camera.position.set(-126,BASE+5.2,-640);this.controls.target.set(-126,BASE+3.2,-563);this.controls.update();
+  }else if(inspection==='main-e'){
+    const main=this.data.buildings.find(b=>b.osmId===263624057);
+    if(main){const [x0,z0,x1,z1]=bounds(main.points);const cx=(x0+x1)/2;
+      this.camera.fov=this.isMobile?64:48;this.camera.updateProjectionMatrix();this.camera.position.set(cx+6,BASE+47,z1+(this.isMobile?235:208));this.controls.target.set(cx,BASE+36,(z0+z1)/2);this.controls.update();}
+  }else if(inspection==='avenue-east'){
+    // Ground-level OSM road axis, independent of guessed single-tree coordinates.
+    this.camera.position.set(122.8,BASE+3.3,10);this.controls.target.set(121.5,BASE+5,-150);this.controls.update();
+  }
+  this.animate();
   requestAnimationFrame(()=>{this.loadMs=performance.now()-this.startTime;ready?.();});
  }
  mat(color,options={}){return new THREE.MeshStandardMaterial({color,roughness:.9,metalness:0,...options});}
@@ -51,6 +70,9 @@ export class CampusWorld{
   const gs=this.data.boundary.map(p=>extrude(p,4,-3));this.campusBase=this.merge(gs,this.mat('#d5d5bc'));
   const edges=[];for(const p of this.data.boundary){const vs=p.map(v=>new THREE.Vector3(v[0],BASE+.15,v[1]));edges.push(...vs.flatMap((v,i)=>i<vs.length-1?[v,vs[i+1]]:[]));}
   this.scene.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(edges),new THREE.LineBasicMaterial({color:'#526b5e',transparent:true,opacity:.95})));
+  // The perimeter was previously only a flat line. Add real height, leave gate gaps.
+  this.campusPerimeter=createCampusPerimeter(this.data.boundary,[...this.data.landmarks,...this.data.pois],BASE,this.data.roads);
+  this.scene.add(this.campusPerimeter);
  }
  buildSurfaces(){
   const groups={wood:[],green:[],water:[],pitch:[],plaza:[]};
@@ -84,9 +106,9 @@ export class CampusWorld{
   }
   if(pos.length){const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));const marks=new THREE.LineSegments(g,new THREE.LineBasicMaterial({color:'#ebe8cf',transparent:false,depthTest:true,depthWrite:false}));marks.renderOrder=6;this.scene.add(marks);}
  }
- buildRoads(){const curb=[],roads=[],paths=[],mark=[];for(const r of this.data.roads){const foot=/footway|path|steps|cycleway/.test(r.kind);if(foot){paths.push(ribbon(r.points,r.width,BASE+.115));continue;}curb.push(ribbon(r.points,r.width+2.5,BASE+.075));roads.push(ribbon(r.points,r.width,BASE+.125));
+ buildRoads(){const curb=[],roads=[],avenues=[],paths=[],mark=[];for(const r of this.data.roads){const foot=/footway|path|steps|cycleway/.test(r.kind);if(foot){paths.push(ribbon(r.points,r.width,BASE+.115));continue;}curb.push(ribbon(r.points,r.width+2.5,BASE+.075));(/^(思源路|彭康路|学森路|文治路|梧桐东道|梧桐西道|学苑东路|学苑西路)$/.test(r.name||'')?avenues:roads).push(ribbon(r.points,r.width,BASE+.125));
   if(r.width>=6){let offset=0;for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<.1)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=offset;t<len-1;t+=12)mark.push(ribbon([[a[0]+dx*t,a[1]+dz*t],[a[0]+dx*Math.min(t+3,len),a[1]+dz*Math.min(t+3,len)]],.22,BASE+.175));offset=(offset-len)%12;if(offset<0)offset+=12;}}
-  }this.merge(curb,this.mat('#dfdeca',{map:this.pavers}));this.merge(roads,this.mat('#9baba3',{map:this.asphalt}));this.merge(paths,this.mat('#d3cdb7',{map:this.pavers}));this.merge(mark,this.mat('#e5dfbd'));
+  }this.merge(curb,this.mat('#dfdeca',{map:this.pavers}));this.merge(roads,this.mat('#8b968e',{map:this.asphalt}));this.merge(avenues,this.mat('#626f69',{map:this.asphalt}));this.merge(paths,this.mat('#d3cdb7',{map:this.pavers}));this.merge(mark,this.mat('#e5dfbd'));
  }
  buildingMat(){const m=this.mat('#f0e9d2',{vertexColors:true,roughness:.82});m.onBeforeCompile=s=>{
    s.uniforms.uCampusNight=this.night;s.uniforms.uSelected=this.selection;s.uniforms.uHovered=this.hover;s.uniforms.uColorMode=this.colorMode;
@@ -126,14 +148,27 @@ export class CampusWorld{
     // Gate-wing outlines are sourced from OSM, but their default 14m box height
     // is an unsupported estimate. Use low photo-informed facade massing here.
     if(b.osmId===264738601||b.osmId===264738602)h=5.3;
-   const geo=extrude(b.points,h,BASE,b.holes);gs.push(this.colorGeometry(geo,b,i,c,roof));
+   if(b.osmId===263624057){
+     // Main E's photographed open top must not be occluded by a solid OSM prism.
+     // Keep the mapped footprint at the base, use approximate architectural piers above.
+     const mass=mainTowerMassing(bounds(b.points),h,BASE);
+     const lower=extrude(b.points,mass.bodyHeight,BASE,b.holes);
+     gs.push(this.colorGeometry(lower,b,i,c,roof));
+     for(const [x,y,z,w,pierH,d] of mass.piers){
+       const g=boxGeometry(x,y,z,w,pierH,d);
+       gs.push(this.colorGeometry(g,b,i,c,roof));
+     }
+     b.displayHeight=h;
+   }else{
+     const geo=extrude(b.points,h,BASE,b.holes);gs.push(this.colorGeometry(geo,b,i,c,roof));
+   }
    this.dimensions.set(b.id,{height:b.height,bounds:bounds(b.points)});
    if(b.osmId===263624481){const [x0,z0,x1,z1]=bounds(b.points);const cx=(x0+x1)/2;const south=z1-21;
     for(const [w,d,yh] of [[85,35,7],[68,31,13],[49,28,20],[32,25,26],[17,20,29.75]]){const g=boxGeometry(cx,BASE+13,south,w,yh,d);gs.push(this.colorGeometry(g,b,i,'#b1c9c9','#a7bab6'));}
     const clockg=boxGeometry(cx,BASE+42.75,south,12,7,13);gs.push(this.colorGeometry(clockg,b,i,'#dedac4','#b3bdad'));this.addClock(cx,BASE+46.25,south+6.55,3.4);
     b.displayHeight=49.75;
    }
-   if(b.osmId===263624057){const [x0,z0,x1,z1]=bounds(b.points);const cap=boxGeometry((x0+x1)/2,BASE+b.height,(z0+z1)/2,(x1-x0)*.65,4,(z1-z0)*.8);gs.push(this.colorGeometry(cap,b,i,'#bfcbd0','#aebfc0'));b.displayHeight=b.height+4;}
+   // The photographed central opening replaces the earlier unverified solid roof cap.
   });
   // One draw call for every campus building; the attribute preserves per-building selection.
   for(const g of gs){this.buildingRanges.push([vertex,vertex+g.attributes.position.count]);vertex+=g.attributes.position.count;}
@@ -178,15 +213,41 @@ export class CampusWorld{
    const bb=lib?bounds(lib.points):null;
    const entranceAxis=p=>bb&&Math.abs(p[0]-(bb[0]+bb[2])/2)<15&&p[1]>=bb[3]-3&&p[1]<=bb[3]+115;
 
-   const canPlant=p=>!this.blocked(p,2)&&!waters.some(s=>pointIn(p,s.points))&&!entranceAxis(p);const used=new Set();const add=(x,z,type=0)=>{const key=Math.round(x/5)+','+Math.round(z/5);if(used.has(key))return;used.add(key);trees.push({x,z,h:7+random()*5,r:3.1+random()*2.2,c:random(),type});};
+   const canPlant=p=>!this.blocked(p,2)&&!waters.some(s=>pointIn(p,s.points))&&!entranceAxis(p);const used=new Set();const add=(x,z,type=0)=>{const key=Math.round(x/5)+','+Math.round(z/5);if(used.has(key))return;used.add(key);trees.push({x,z,h:type===2?15+random()*4:7+random()*5,r:type===2?4.0+random()*1.7:3.1+random()*2.2,c:random(),type});};
   for(const s of this.data.surfaces.filter(s=>s.kind==='wood'||s.kind==='green')){const [x0,z0,x1,z1]=bounds(s.points);const spacing=s.kind==='wood'?11:15;for(let x=x0+4;x<x1;x+=spacing)for(let z=z0+4;z<z1;z+=spacing){const p=[x+(random()-.5)*7,z+(random()-.5)*7];if(pointIn(p,s.points)&&canPlant(p)&&this.roadDistance(p)>1.5&&random()>.08)add(...p,s.kind==='wood'&&random()>.74?1:0);}}
-  for(const r of this.data.roads.filter(r=>r.campus&&!/steps|path|footway|cycleway/.test(r.kind))){for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<14)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=7;t<len-3;t+=16)for(const side of [-1,1]){const p=[a[0]+dx*t-dz*(r.width/2+4)*side,a[1]+dz*t+dx*(r.width/2+4)*side];if(this.data.boundary.some(b=>pointIn(p,b))&&canPlant(p)&&this.roadDistance(p)>2.2)add(...p,2);}}}
+  for(const r of this.data.roads.filter(r=>r.campus&&!/steps|path|footway|cycleway/.test(r.kind))){for(let i=1;i<r.points.length;i++){const a=r.points[i-1],b=r.points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);if(len<14)continue;const dx=(b[0]-a[0])/len,dz=(b[1]-a[1])/len;for(let t=7;t<len-3;t+=16)for(const side of [-1,1]){const p=[a[0]+dx*t-dz*(r.width/2+4)*side,a[1]+dz*t+dx*(r.width/2+4)*side];if(this.data.boundary.some(b=>pointIn(p,b))&&canPlant(p)&&this.roadDistance(p)>2.2)add(...p,/梧桐|彭康|思源|学森|文治|学苑/.test(r.name||'')?2:0);}}}
   this.treePositions=trees;this.treeCells=new Map();for(const t of trees){const key=Math.floor(t.x/12)+','+Math.floor(t.z/12);if(!this.treeCells.has(key))this.treeCells.set(key,[]);this.treeCells.get(key).push(t);}this.trees=new THREE.Group();this.scene.add(this.trees);this.treeCount=trees.length;
    // Official XJTU avenue imagery (2025-05-14): white-painted lower trunks
    // and a taller two-sided canopy. Exact individual tree coordinates remain illustrative.
    const avenueTrees=trees.filter(t=>t.type===2);
-   if(avenueTrees.length){const white=new THREE.InstancedMesh(new THREE.CylinderGeometry(.43,.68,1,7),this.mat('#deded0'),avenueTrees.length);const temp=new THREE.Object3D();avenueTrees.forEach((t,i)=>{temp.position.set(t.x,BASE+1.08,t.z);temp.scale.set(1,2.15,1);temp.updateMatrix();white.setMatrixAt(i,temp.matrix);});white.instanceMatrix.needsUpdate=true;white.name='photo-inspired whitewashed avenue tree bases / approximate';white.castShadow=false;this.trees.add(white);}
-   this.canopyTexture=makeCanopyTexture();const n=trees.length;const dummy=new THREE.Object3D();const trunk=new THREE.InstancedMesh(new THREE.CylinderGeometry(.4,.65,1,5),this.mat('#887763'),n);const crown=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?1:2),this.mat('#e0ead8',{roughness:.98,map:this.canopyTexture}),n);const crown2=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),this.mat('#ecf1e7',{roughness:.98,map:this.canopyTexture}),n);const crown3=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?0:1),this.mat('#e0e9d8',{roughness:.98,map:this.canopyTexture}),n);const colors=['#64834c','#799458','#5b7948','#899f66','#729159'];trees.forEach((t,i)=>{dummy.position.set(t.x,BASE+t.h*.35,t.z);dummy.scale.set(1,t.h*.7,1);dummy.rotation.set(0,0,0);dummy.updateMatrix();trunk.setMatrixAt(i,dummy.matrix);dummy.position.y=BASE+t.h*.77;dummy.scale.set(t.type===1?t.r*.55:t.r,t.type===1?t.h*.68:t.type===2?t.h*.49:t.h*.42,t.type===1?t.r*.55:t.r*.9);dummy.rotation.set(t.c*.3,t.c*6,.12*t.c);dummy.updateMatrix();crown.setMatrixAt(i,dummy.matrix);crown.setColorAt(i,new THREE.Color(colors[Math.floor(t.c*colors.length)]));dummy.position.x+=t.r*.5;dummy.position.y+=t.r*.1;dummy.scale.multiplyScalar(.74);dummy.updateMatrix();crown2.setMatrixAt(i,dummy.matrix);crown2.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+1)%colors.length]));dummy.position.set(t.x-t.r*.37,BASE+t.h*.79,t.z+t.r*.27);dummy.scale.set(t.r*.67,t.h*.31,t.r*.72);dummy.rotation.set(-t.c*.13,t.c*5.2,t.c*.16);dummy.updateMatrix();crown3.setMatrixAt(i,dummy.matrix);crown3.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+3)%colors.length]));});for(const m of [trunk,crown,crown2,crown3]){m.castShadow=true;m.receiveShadow=true;m.instanceMatrix.needsUpdate=true;this.trees.add(m);}this.treeCrowns=[crown,crown2,crown3];
+   if(avenueTrees.length){const white=new THREE.InstancedMesh(new THREE.CylinderGeometry(.62,.70,1,9),this.mat('#f1f1e8'),avenueTrees.length);const temp=new THREE.Object3D();avenueTrees.forEach((t,i)=>{const paintHeight=1.65+t.c*.68;temp.position.set(t.x,BASE+paintHeight/2,t.z);temp.scale.set(1,paintHeight,1);temp.updateMatrix();white.setMatrixAt(i,temp.matrix);});white.instanceMatrix.needsUpdate=true;white.name='photo-inspired whitewashed avenue tree bases / approximate';white.castShadow=false;this.trees.add(white);}
+   if(avenueTrees.length){
+     // The university's dated avenue photos show forked plane-tree silhouettes,
+     // not short spherical hedges. Three instanced branches per avenue trunk.
+     const forks=new THREE.InstancedMesh(
+       new THREE.CylinderGeometry(.12,.26,1,6),
+       this.mat('#8b8d81',{roughness:.95}),avenueTrees.length*3
+     );
+     forks.name='plane tree branching / photo-inspired, positions approximate';
+     const up=new THREE.Vector3(0,1,0),axis=new THREE.Vector3();
+     const from=new THREE.Vector3(),to=new THREE.Vector3(),mid=new THREE.Vector3();
+     const model=new THREE.Object3D();
+     avenueTrees.forEach((t,i)=>{
+       for(let j=0;j<3;j++){
+         const a=t.c*6.28+j*Math.PI*2/3,spread=t.r*(.38+(j%2)*.19);
+         from.set(t.x,BASE+t.h*.53,t.z);
+         to.set(t.x+Math.cos(a)*spread,BASE+t.h*(.96-(j%2)*.035),t.z+Math.sin(a)*spread);
+         axis.subVectors(to,from);
+         mid.copy(from).add(to).multiplyScalar(.5);
+         model.position.copy(mid);
+         model.quaternion.setFromUnitVectors(up,axis.clone().normalize());
+         model.scale.set(1,axis.length(),1);
+         model.updateMatrix();forks.setMatrixAt(i*3+j,model.matrix);
+       }
+     });
+     forks.instanceMatrix.needsUpdate=true;forks.castShadow=false;this.trees.add(forks);
+   }
+   this.canopyTexture=makeCanopyTexture();const n=trees.length;const dummy=new THREE.Object3D();const trunk=new THREE.InstancedMesh(new THREE.CylinderGeometry(.4,.65,1,5),this.mat('#868778'),n);const crown=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?1:2),this.mat('#e0ead8',{roughness:.98,map:this.canopyTexture}),n);const crown2=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,1),this.mat('#ecf1e7',{roughness:.98,map:this.canopyTexture}),n);const crown3=new THREE.InstancedMesh(new THREE.IcosahedronGeometry(1,this.isMobile?0:1),this.mat('#e0e9d8',{roughness:.98,map:this.canopyTexture}),n);const colors=['#64834c','#799458','#5b7948','#899f66','#729159'];trees.forEach((t,i)=>{dummy.position.set(t.x,BASE+t.h*.35,t.z);dummy.scale.set(1,t.h*.7,1);dummy.rotation.set(0,0,0);dummy.updateMatrix();trunk.setMatrixAt(i,dummy.matrix);dummy.position.y=BASE+t.h*(t.type===2?.93:.77);dummy.scale.set(t.type===1?t.r*.55:t.type===2?t.r*.90:t.r,t.type===1?t.h*.68:t.type===2?t.r*.56:t.h*.42,t.type===1?t.r*.55:t.type===2?t.r*.87:t.r*.9);dummy.rotation.set(t.c*.3,t.c*6,.12*t.c);dummy.updateMatrix();crown.setMatrixAt(i,dummy.matrix);crown.setColorAt(i,new THREE.Color(colors[Math.floor(t.c*colors.length)]));dummy.position.x+=t.r*.5;dummy.position.y+=t.r*.1;dummy.scale.multiplyScalar(.74);dummy.updateMatrix();crown2.setMatrixAt(i,dummy.matrix);crown2.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+1)%colors.length]));dummy.position.set(t.x-t.r*.37,BASE+t.h*(t.type===2?.92:.79),t.z+t.r*.27);dummy.scale.set(t.r*.67,t.type===2?t.r*.52:t.h*.31,t.r*.72);dummy.rotation.set(-t.c*.13,t.c*5.2,t.c*.16);dummy.updateMatrix();crown3.setMatrixAt(i,dummy.matrix);crown3.setColorAt(i,new THREE.Color(colors[(Math.floor(t.c*colors.length)+3)%colors.length]));});for(const m of [trunk,crown,crown2,crown3]){m.castShadow=true;m.receiveShadow=true;m.instanceMatrix.needsUpdate=true;this.trees.add(m);}this.treeCrowns=[crown,crown2,crown3];
    // Narrow evergreen forms add believable species diversity to planted groves.
    const conifers=trees.filter(t=>t.type===1);
    if(conifers.length){

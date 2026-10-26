@@ -62,3 +62,19 @@ body:has(#detail:not([hidden])) .intro,body:has(#detail:not([hidden])) .view-tit
 }
 /* Keep iOS pinch gestures inside the map, not the entire document. */
 html,body{overscroll-behavior:none}#scene{overflow:hidden;touch-action:none;contain:layout paint}#scene canvas{touch-action:none;-webkit-user-select:none;user-select:none}
+/* Ground-level photo QA only. Hide interface overlays, keep attribution visible. */
+body.photo-inspection .topbar,
+body.photo-inspection .intro,
+body.photo-inspection .explorer,
+body.photo-inspection .toolbar,
+body.photo-inspection .mini-panel,
+body.photo-inspection .view-title,
+body.photo-inspection #labels,
+body.photo-inspection .map-controls {display:none!important;}
+body.photo-inspection::after {
+  content:'PHOTO QA VIEW · illustrative reconstruction, not surveyed';
+  position:fixed;left:16px;top:16px;padding:7px 11px;
+  color:#3e4b41;background:rgba(248,249,241,.88);
+  border-radius:6px;font:11px/1.35 system-ui,sans-serif;
+  letter-spacing:.015em;z-index:99;pointer-events:none;
+}

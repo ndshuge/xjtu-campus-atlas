@@ -21,7 +21,13 @@ export function createMainTowerFacade({footprint,height,baseY}){
  for(const side of [-1,1]){
   const z=side<0?z0-.13:z1+.13;
   b.box('glass',cx,bottom,z,glassW,top-bottom,.22);
-  for(let i=0;i<=6;i++)b.box('frame',cx-glassW/2+i*glassW/6,bottom,z+side*.17,.10,top-bottom,.22);
+  for(let i=0;i<=6;i++)b.box('frame',cx-glassW/2+i*glassW/6,bottom,z+side*.21,.23,top-bottom,.40);
+  // Visible paired stone fins defining the tall central glazed bay, as in
+  // Danielinblue's dated 2012 Xingqing Main E photograph (not measured CAD).
+  for(const s of [-1,1]){
+   b.box('stone',cx+s*(glassW/2+.42),bottom,z+side*.65,.77,top-bottom+1.25,.85);
+   b.box('frame',cx+s*(glassW/2-1.18),bottom,z+side*.42,.16,top-bottom,.38);
+  }
   for(let y=bottom+2.95;y<top-.5;y+=3.15){
    b.box('stone',cx,y,z+side*.20,glassW,.36,.36);
    b.box('frame',cx,y+.45,z+side*.22,glassW,.08,.18);
@@ -33,7 +39,12 @@ export function createMainTowerFacade({footprint,height,baseY}){
   b.box('glass',cx,baseY+.9,z+side*.1,17,8.5,.22);
   for(let i=-2;i<=2;i++)b.box('frame',cx+i*3.1,baseY+.8,z+side*.35,.16,8.6,.35);
   b.box('stone',cx,baseY+9.4,z+side*.35,23,.75,1.6);
+  // Entrance canopy with real depth and narrow entrance-height glass divisions.
+  b.box('stone',cx,baseY+11.2,z+side*.12,glassW+2,.42,2.2);
+  b.box('shade',cx,baseY+10.94,z+side*.14,glassW+1.1,.10,2.1);
+  for(let i=-3;i<=3;i++)b.box('frame',cx+i*2.35,baseY+2.9,z+side*.47,.14,5.4,.28);
   b.box('stone',cx,top-.2,z+side*.35,w-4,.8,1.1);
+  b.box('stone',cx,top+1.18,z+side*.56,glassW+3,.42,1.02);
   // Recessed inner portal surfaces and an open balustrade behind the opening.
   b.box('shade',cx,baseY+height-18.2,z-side*1.2,w-13.8,.3,2);
   for(let i=-4;i<=4;i++)b.box('frame',cx+i*2.3,baseY+height-18,z-side*2.0,.10,1.1,.10);

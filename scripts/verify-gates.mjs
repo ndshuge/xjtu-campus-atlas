@@ -33,6 +33,8 @@ try{
  const north=createNorthGate(main.position,1.1);
  assert(north.children.some(c=>c.name==='sweeping white gate roof'));
  assert(north.children.some(c=>c.name==='bronze science relief panel'));
+ assert(north.children.some(c=>c.name==='abstract science orbit'),'Northern natural-science relief interpretation missing');
+ assert(north.children.some(c=>c.name==='abstract engineering gear'),'Northern engineering relief interpretation missing');
  assert(north.children.some(c=>c.name==='2011 photographed north gate inscription'));
  const canopy=north.children.find(c=>c.name==='sweeping white gate roof');
  assert(canopy.geometry.attributes.uv?.count===canopy.geometry.attributes.position.count,'Curved tile roof UVs must be finite and complete');
