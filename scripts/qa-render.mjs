@@ -87,7 +87,9 @@ try{
   const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=width<768?844:900;
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:width<768});
   await send('Emulation.setTouchEmulationEnabled',{enabled:width<768,maxTouchPoints:2});
-  const url=new URL(origin);if(pose==='home'){}else if(pose.startsWith('place:'))url.hash=pose.slice(6);else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
+  const url=new URL(origin);url.searchParams.set('__qa_pose',pose+'-'+width);
+  // Unlike hash-only navigation, a changed query creates a fresh document.
+  if(pose==='home'){}else if(pose.startsWith('place:'))url.hash=pose.slice(6);else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
   await send('Page.navigate',{url:url.href});
   let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate('!!window.__campusReady && document.querySelector("#loading").hidden');if(loaded)break;}
   if(!loaded)throw Error('Scene did not become ready: '+url.href);
@@ -99,6 +101,7 @@ try{
    await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:x+delta,y,button:'left',clickCount:1});await sleep(900);
   }
   const runtime=await evaluate('window.campusDiagnostics()');
+  if(pose.startsWith('place:')&&runtime.selected!==pose.slice(6))throw Error('Screenshot target mismatch: expected '+pose.slice(6)+', got '+runtime.selected);
   const metrics=await evaluate('({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,canvasWidth:document.querySelector("#scene canvas").width,overflow:document.documentElement.scrollWidth>innerWidth,script:document.querySelector("script[type=module]")?.src,scale:visualViewport.scale})');
   const gpu=await evaluate('(()=>{const g=document.querySelector("#scene canvas").getContext("webgl2"),e=g.getExtension("WEBGL_debug_renderer_info");return e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER)})()');
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';

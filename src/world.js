@@ -7,6 +7,7 @@ import {createLibraryForecourt} from './library-forecourt.js';
 import {createLibraryGreenRoofs} from './library-green-roofs.js';
 import {createMainTowerFacade,mainTowerMassing} from './main-tower-facade.js';
 import {createMainERoofDetail} from './main-e-roof-detail.js';
+import {createBuildingSilhouettes} from './building-silhouettes.js';
 import {createTengfeiTower,createSiyuanStele} from './axis-monuments.js';
 import {createSiyuanCenter,createScienceHall} from './cultural-facades.js';
 import {makeGroundPattern} from './ground-pattern.js';
@@ -43,7 +44,7 @@ export class CampusWorld{
   const skyUniforms=this.sky.material.uniforms;skyUniforms.turbidity.value=3;skyUniforms.rayleigh.value=.85;skyUniforms.mieCoefficient.value=.003;skyUniforms.mieDirectionalG.value=.78;skyUniforms.sunPosition.value.copy(this.sun.position);
   this.pavers=createSurfaceTexture('pavers');this.asphalt=createSurfaceTexture('asphalt');this.waterTexture=createSurfaceTexture('water');
   this.ray=new THREE.Raycaster();this.pointer=new THREE.Vector2();this.proj=new THREE.Vector3();this.timer=new THREE.Timer();this.timer.connect(document);this.dimensions=new Map();this.footprintBounds=data.buildings.map(b=>bounds(b.points));
-  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.avenuePaving=addAvenuePaving(this.scene,this.data.roads);this.buildBuildings();this.buildLandmarks();this.buildTrees();this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);
+  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.avenuePaving=addAvenuePaving(this.scene,this.data.roads);this.buildBuildings();this.buildLandmarks();this.buildingSilhouettes=createBuildingSilhouettes(this.data.buildings);this.scene.add(this.buildingSilhouettes);this.buildTrees();this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);
   // Reproducible exterior photographic QA; normal visitors keep existing default camera.
   const inspection=new URLSearchParams(location.search).get('inspection');
   if(inspection)document.body.classList.add('photo-inspection');

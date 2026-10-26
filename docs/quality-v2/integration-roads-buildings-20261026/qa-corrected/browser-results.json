@@ -1,0 +1,291 @@
+{
+  "origin": "http://127.0.0.1:19421/",
+  "testedAt": "2026-10-26T08:40:47.072Z",
+  "results": [
+    {
+      "pose": "place:四大发明广场",
+      "url": "http://127.0.0.1:19421/?__qa_pose=place%3A%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA-1440#%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA",
+      "width": 1440,
+      "height": 900,
+      "file": "place_四大发明广场-1440.png",
+      "elapsedMs": 5588,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19421/assets/index-DYpCvuWD.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 235,
+          "farTrees": 1857
+        },
+        "drawCalls": 397,
+        "triangles": 863718,
+        "geometries": 446,
+        "textures": 31,
+        "fps": 240,
+        "sceneLoadMs": 1851,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "四大发明广场",
+        "webgl": "WebGL 2",
+        "camera": [
+          24.67999999999999,
+          57.00000000000001,
+          -96.00000000000003
+        ],
+        "target": [
+          -31.320000000000004,
+          2,
+          0
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1851,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:钱学森图书馆",
+      "url": "http://127.0.0.1:19421/?__qa_pose=place%3A%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86-1440#%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86",
+      "width": 1440,
+      "height": 900,
+      "file": "place_钱学森图书馆-1440.png",
+      "elapsedMs": 3815,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19421/assets/index-DYpCvuWD.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 276,
+          "farTrees": 1816
+        },
+        "drawCalls": 412,
+        "triangles": 899297,
+        "geometries": 448,
+        "textures": 34,
+        "fps": 240,
+        "sceneLoadMs": 929,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "钱学森图书馆",
+        "webgl": "WebGL 2",
+        "camera": [
+          -4.529999999999973,
+          31.000000000000014,
+          32.702999999999975
+        ],
+        "target": [
+          -30.529999999999998,
+          19,
+          -98.297
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 929,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:四大发明广场",
+      "url": "http://127.0.0.1:19421/?__qa_pose=place%3A%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA-390#%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA",
+      "width": 390,
+      "height": 844,
+      "file": "place_四大发明广场-390.png",
+      "elapsedMs": 4110,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19421/assets/index-DYpCvuWD.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 76,
+          "farTrees": 2016
+        },
+        "drawCalls": 182,
+        "triangles": 608677,
+        "geometries": 411,
+        "textures": 29,
+        "fps": 240,
+        "sceneLoadMs": 1306,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "四大发明广场",
+        "webgl": "WebGL 2",
+        "camera": [
+          24.679999999999943,
+          57.00000000000001,
+          -96
+        ],
+        "target": [
+          -38.32,
+          2,
+          0
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 6,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1306,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:钱学森图书馆",
+      "url": "http://127.0.0.1:19421/?__qa_pose=place%3A%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86-390#%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86",
+      "width": 390,
+      "height": 844,
+      "file": "place_钱学森图书馆-390.png",
+      "elapsedMs": 3594,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19421/assets/index-DYpCvuWD.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 86,
+          "farTrees": 2006
+        },
+        "drawCalls": 256,
+        "triangles": 616421,
+        "geometries": 447,
+        "textures": 32,
+        "fps": 240,
+        "sceneLoadMs": 830,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "钱学森图书馆",
+        "webgl": "WebGL 2",
+        "camera": [
+          -24.529999999999976,
+          26.999999999999982,
+          59.702999999999975
+        ],
+        "target": [
+          -30.530000000000005,
+          19,
+          -98.297
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 830,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
