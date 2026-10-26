@@ -53,7 +53,8 @@ export function treeGeometry(kind='plane',detail='near',seed=1956){
  for(let i=0;i<clusters;i++){
   const a=i*2.399963,rad=conifer?(.35+rand()*.65)*(1-i/clusters)*3.2:Math.sqrt((i+.5)/clusters)*3.5;
   const y=conifer?3.0+i/clusters*7.7:6.8+Math.sqrt(Math.max(0,1-rad*rad/13))*2.4+(rand()-.5)*1.9;
-  const size=(conifer?.95:1.25)*(near?1:1.4)*(0.8+rand()*.4);
+  // Reduce over-wide flat cards; preserve existing crown points and triangle budget.
+  const size=(conifer?.95:1.25)*(near?.90:1.16)*(0.8+rand()*.4);
   const g=new THREE.PlaneGeometry(size*1.8,size,1,1);
   // Staggered sprays with holes and lobed leaf margins, not closed crown spheres.
   g.rotateX((rand()-.5)*Math.PI);g.rotateY(a+rand());g.rotateZ((rand()-.5)*1.0);
@@ -69,7 +70,8 @@ export function makeLeafSprayTexture(conifer=false,distant=false){
  c.clearRect(0,0,256,256);
  // Dense far sprays survive texture minification. Reusing the sparse near
  // texture erased the crown at campus-overview distances after alpha testing.
- const count=distant?(conifer?400:340):(conifer?240:150);
+ // Dense far alpha maps collapse into a blurred opaque sheet under mipmapping.
+ const count=distant?(conifer?300:255):(conifer?240:150);
  for(let i=0;i<count;i++){
   const a=rand()*Math.PI*2,r=Math.sqrt(rand())*102,x=128+Math.cos(a)*r,y=128+Math.sin(a)*r*.75;
   c.save();c.translate(x,y);c.rotate(rand()*6.28);const s=conifer?5:8+rand()*9;
@@ -106,7 +108,7 @@ export function createCampusVegetation(trees,{mobile=false}={}){
   if(!members.length)continue;
   for(const detail of ['near','far']){
    const distant=detail==='far',tex=makeLeafSprayTexture(kind===1,distant);
-   const leafMat=new THREE.MeshStandardMaterial({map:tex,color:'#d8e5bd',vertexColors:true,side:THREE.DoubleSide,alphaTest:distant?.12:.38,alphaToCoverage:!distant,roughness:1,depthWrite:true,emissive:'#34482c',emissiveIntensity:.10});
+   const leafMat=new THREE.MeshStandardMaterial({map:tex,color:'#d8e5bd',vertexColors:true,side:THREE.DoubleSide,alphaTest:distant?.26:.38,alphaToCoverage:!distant,roughness:1,depthWrite:true,emissive:'#34482c',emissiveIntensity:.10});
    const geo=treeGeometry(kind===1?'cedar':'plane',detail,1956+kind*37);
    const trunk=new THREE.InstancedMesh(geo.wood,wood,members.length),crown=new THREE.InstancedMesh(geo.leaves,leafMat,members.length);
    trunk.name=species[kind]+' branching '+detail;crown.name=species[kind]+' leaf sprays '+detail;
