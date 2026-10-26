@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "site": "Xi'an Jiaotong University Xingqing Campus",
+  "reviewedOn": "2026-10-26",
+  "references": [
+    {
+      "id": "xjtu-library-heritage-2016",
+      "kind": "official-building-description",
+      "url": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+      "published": "2016-11-21",
+      "photographed": null,
+      "locationVerified": true,
+      "license": "reference-only",
+      "facts": [
+        "north block: 4 floors with connected 5-floor stack",
+        "south block: segments I/II/III, central 11 above and 1 below ground",
+        "south block total reported height 49.75 m including upper structures",
+        "north and south blocks connected via corridors"
+      ],
+      "limitations": "No downloadable architectural plans, section datum, surveyed courtyard elevations or bridge alignment supplied"
+    },
+    {
+      "id": "xjtu-library-official",
+      "kind": "official-building-description",
+      "url": "https://www.xjtu.edu.cn/tsda/qxstsg.htm",
+      "published": null,
+      "photographed": null,
+      "locationVerified": true,
+      "license": "reference-only",
+      "facts": [
+        "south and north wings are different construction periods"
+      ],
+      "limitations": "No site grading or as-built drawing"
+    },
+    {
+      "id": "xjtu-planning-office",
+      "kind": "official-department",
+      "url": "https://ghjj.xjtu.edu.cn/info/1005/2088.htm",
+      "published": "2024-05-20",
+      "photographed": null,
+      "locationVerified": true,
+      "license": "contact-information-only",
+      "facts": [
+        "planning department administers campus master planning and project approval"
+      ],
+      "limitations": "Departmental responsibilities do not imply drawings are publicly available"
+    },
+    {
+      "id": "xjtu-2024-corridor-renovation",
+      "kind": "official-renovation-news",
+      "url": "https://news.xjtu.edu.cn/info/1002/213283.htm",
+      "published": null,
+      "photographed": null,
+      "locationVerified": true,
+      "license": "reference-only",
+      "facts": [
+        "second-floor library passage underwent renovation in 2024"
+      ],
+      "limitations": "No corridor construction plans or survey heights"
+    },
+    {
+      "id": "user-photos-stairs-and-raised-bridge",
+      "kind": "user-provided-photography",
+      "url": null,
+      "published": null,
+      "photographed": null,
+      "locationVerified": false,
+      "license": "user-provided-reference-not-republished",
+      "facts": [
+        "broad exterior stair flights and multiple landings",
+        "curved raised pedestrian passage with cylindrical support columns",
+        "stainless-steel railings and a lower route under the raised passage"
+      ],
+      "limitations": "Exact location of both images, dimensions, bridge-to-building connection, photography date and vertical datum unverified"
+    },
+    {
+      "id": "commons-library-aerial-2025",
+      "kind": "licensed-aerial-photography",
+      "url": "https://commons.wikimedia.org/wiki/File:西交兴庆之俯视钱学森图书馆.jpg",
+      "published": null,
+      "photographed": "2025-07-25 15:02:22",
+      "locationVerified": true,
+      "license": "CC BY-SA 4.0 / Liuxingy",
+      "facts": [
+        "U-shaped north reading block and central T-shaped stack visible",
+        "south stepped mass, side wings and north block distinguishable"
+      ],
+      "limitations": "Photograph is not orthorectified; no survey elevations or corridor underside data"
+    }
+  ],
+  "features": [
+    {
+      "id": "library-north-south-massing",
+      "evidence": [
+        "xjtu-library-heritage-2016",
+        "xjtu-library-official",
+        "commons-library-aerial-2025"
+      ],
+      "status": "photo-matched-approximate-massing",
+      "priority": "P0",
+      "needs": [
+        "matched architectural plans",
+        "surveyed storey elevations"
+      ],
+      "floorCounts": {
+        "north": 4,
+        "stack": 5
+      },
+      "estimatedHeights": {
+        "north": 14,
+        "stack": 17.5,
+        "storeyAssumption": 3.5
+      }
+    },
+    {
+      "id": "library-public-second-floor-corridor",
+      "evidence": [
+        "xjtu-library-heritage-2016",
+        "xjtu-2024-corridor-renovation"
+      ],
+      "status": "existence-confirmed-geometry-unknown",
+      "priority": "P0",
+      "needs": [
+        "floorplan",
+        "level section",
+        "connection endpoints"
+      ]
+    },
+    {
+      "id": "library-courtyard-true-elevation",
+      "evidence": [
+        "user-photos-stairs-and-raised-bridge"
+      ],
+      "status": "blocked-no-survey-or-location-validation",
+      "priority": "P0",
+      "needs": [
+        "photograph-location-verification",
+        "ground-to-platform height",
+        "stair riser height/count",
+        "planimetric outline",
+        "ADA/access connections"
+      ]
+    },
+    {
+      "id": "raised-curved-pedestrian-bridge",
+      "evidence": [
+        "user-photos-stairs-and-raised-bridge"
+      ],
+      "status": "blocked-no-survey-or-location-validation",
+      "priority": "P0",
+      "needs": [
+        "georeferenced endpoints",
+        "bridge elevation and underside clearance",
+        "radius and width",
+        "support locations"
+      ]
+    },
+    {
+      "id": "sculpture-detailed-text",
+      "evidence": [],
+      "status": "low-priority-not-reconstructed",
+      "priority": "P3",
+      "needs": []
+    }
+  ],
+  "policy": {
+    "unmeasuredGeometryMayBeSchematic": true,
+    "photographyCannotBeCopiedIntoPublicAssetsWithoutLicense": true,
+    "mayClaimHighFidelityOnlyWithPlanAndRenderEvidence": true
+  }
+}

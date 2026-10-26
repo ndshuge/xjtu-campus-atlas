@@ -1,0 +1,201 @@
+{
+  "origin": "http://127.0.0.1:19661/",
+  "testedAt": "2026-10-26T11:22:41.771Z",
+  "results": [
+    {
+      "pose": "group:钱学森图书馆",
+      "url": "http://127.0.0.1:19661/?__qa_pose=group%3A%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86-390&group=1#%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86",
+      "width": 390,
+      "height": 844,
+      "file": "group_钱学森图书馆-390.png",
+      "elapsedMs": 10508,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19661/assets/index-B76qX7aV.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "groupView": {
+          "name": "钱学森图书馆",
+          "ids": [
+            "way/263624481"
+          ],
+          "status": "Framing mapped volumes; estimated model heights are not a site survey"
+        },
+        "drawCalls": 271,
+        "triangles": 524728,
+        "geometries": 419,
+        "textures": 32,
+        "fps": 171,
+        "sceneLoadMs": 5319,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "钱学森图书馆",
+        "webgl": "WebGL 2",
+        "camera": [
+          -211.73136338695193,
+          286.9087618732374,
+          -428.36732828761853
+        ],
+        "target": [
+          -29.113,
+          20.005000000000003,
+          -147.416
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 5319,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "group:主楼E座",
+      "url": "http://127.0.0.1:19661/?__qa_pose=group%3A%E4%B8%BB%E6%A5%BCE%E5%BA%A7-390&group=1#%E4%B8%BB%E6%A5%BCE%E5%BA%A7",
+      "width": 390,
+      "height": 844,
+      "file": "group_主楼E座-390.png",
+      "elapsedMs": 7029,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19661/assets/index-B76qX7aV.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "groupView": {
+          "name": "主楼E座",
+          "ids": [
+            "way/263624057",
+            "way/263624058",
+            "way/263624059",
+            "way/263624060",
+            "way/263624061"
+          ],
+          "status": "Framing mapped volumes; estimated model heights are not a site survey"
+        },
+        "drawCalls": 276,
+        "triangles": 525347,
+        "geometries": 385,
+        "textures": 29,
+        "fps": 171,
+        "sceneLoadMs": 2516,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "主楼E座",
+        "webgl": "WebGL 2",
+        "camera": [
+          177.4271390135025,
+          296.1898094171031,
+          405.3103520180032
+        ],
+        "target": [
+          -31.3885,
+          31.689999999999984,
+          126.8895
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 2516,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

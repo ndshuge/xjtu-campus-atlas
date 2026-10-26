@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import {LIBRARY_TIERS} from './library-facade.js';
+import {flat} from './geo.js';
+import {libraryMassingPlan} from './library-massing.js';
 
 // Photo/document-based groundcover, not an invented ornamental roof garden.
 // XJTU Planning & Construction Centre, 2017-04-07:
@@ -32,7 +34,7 @@ function turfTexture(){
  return tex;
 }
 
-export function createLibraryGreenRoofs({centerX,steppedCenterZ,baseY=1.1}){
+export function createLibraryGreenRoofs({centerX,steppedCenterZ,baseY=1.1,footprint=[]}){
  const group=new THREE.Group();
  group.name='Qian Xuesen Library / documented Class-C groundcover terraces';
  const material=new THREE.MeshStandardMaterial({
@@ -62,13 +64,22 @@ export function createLibraryGreenRoofs({centerX,steppedCenterZ,baseY=1.1}){
   make('terrace '+(i+1)+' south groundcover',innerW,depth,0,z,a.h);
   make('terrace '+(i+1)+' north groundcover',innerW,depth,0,-z,a.h);
  }
+ // The 2025 overhead photograph also shows green cover on both broad south
+ // side-wing roofs. Reuse the existing turf material and OSM roof polygons;
+ // no new garden furniture, ground elevation, or presumed corridor clearance.
+ const plan=libraryMassingPlan(footprint);
+ for(const wing of plan?.southRoofWings||[]){
+  const mesh=new THREE.Mesh(flat(wing.points,baseY+13+.045),material);
+  mesh.name='2025 photo-matched '+wing.id+' roof groundcover';mesh.receiveShadow=true;mesh.castShadow=false;group.add(mesh);
+ }
  group.userData={
   source:'https://news.xjtu.edu.cn/info/1219/153746.htm',
   published:'2017-04-07',
   documentedType:'Class C low groundcover; no B-class garden amenities',
   geometry:'Estimated terraces; no measured planted extents',
   asOf2026:'Unverified; historic reconstruction, not current survey',
-  imageRights:'No source photo is stored or mapped as texture'
+  imageRights:'No source photo is stored or mapped as texture',
+  aerialCoverage:'Liuxingy / 2025-07-25 / CC BY-SA 4.0, side-wing extents approximate'
  };
  return group;
 }
