@@ -2,6 +2,10 @@
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import {createHash} from 'node:crypto';
+const sourcePaths=['world.js','building-envelope.js','building-silhouettes.js','library-facade.js','main-tower-facade.js','cultural-facades.js','building-review-hook.js'];
+const sourceSnapshot=async()=>Object.fromEntries(await Promise.all(sourcePaths.map(async p=>[p,createHash('sha256').update(await fs.readFile(new URL('../src/'+p,import.meta.url))).digest('hex')])));
+const sourceBefore=await sourceSnapshot();
 const origin=process.argv[2]||'http://127.0.0.1:18906/';
 const out=path.resolve(process.argv[3]||'docs/quality-v2/canopy-r6');
 const poses=(process.argv[4]||'avenue-east,north-wall').split(',');
@@ -87,7 +91,8 @@ try{
   const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=width<768?844:900;
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:width<768});
   await send('Emulation.setTouchEmulationEnabled',{enabled:width<768,maxTouchPoints:2});
-  const url=new URL(origin);if(pose==='home'){}else if(pose.startsWith('place:'))url.hash=pose.slice(6);else url.searchParams.set('building',pose);
+  const url=new URL(origin);url.searchParams.set('__qa_building',pose+'-'+width);if(pose==='home'){}else if(pose.startsWith('place:'))url.hash=pose.slice(6);else url.searchParams.set('building',pose);
+  await send('Page.navigate',{url:'about:blank'});
   await send('Page.navigate',{url:url.href});
   let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate('!!window.__campusReady && document.querySelector("#loading").hidden');if(loaded)break;}
   if(!loaded)throw Error('Scene did not become ready: '+url.href);
@@ -98,7 +103,8 @@ try{
    for(let i=1;i<=12;i++)await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:x+delta*i/12,y,button:'left',buttons:1});
    await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:x+delta,y,button:'left',clickCount:1});await sleep(900);
   }
-  const runtime=await evaluate('window.campusDiagnostics()'); runtime.buildingPreview=await evaluate('({present:!!window.__buildingReview, children:window.__buildingReview?.overlay.children.length||0, camera:window.__buildingReview?.world.camera.position.toArray()})');
+  const runtime=await evaluate('window.campusDiagnostics()'); runtime.buildingPreview=await evaluate('({present:!!window.__buildingReview, children:window.__buildingReview?.overlay?.children.length||0, camera:window.__buildingReview?.world.camera.position.toArray(), view:new URLSearchParams(location.search).get("building"), overlayCopies:window.__buildingReview?.world.scene.children.filter(c=>c.name==="Buildings-only silhouette improvements (isolated)").length, cameraInsideBuildings:window.__buildingReview?.cameraInsideBuildings})');
+  if(!runtime.buildingPreview.present||runtime.buildingPreview.view!==pose||runtime.buildingPreview.overlayCopies!==1||runtime.buildingPreview.cameraInsideBuildings?.length)throw Error('Wrong, duplicated or obstructed architectural review scene '+pose);
   const metrics=await evaluate('({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,canvasWidth:document.querySelector("#scene canvas").width,overflow:document.documentElement.scrollWidth>innerWidth,script:document.querySelector("script[type=module]")?.src,scale:visualViewport.scale})');
   const gpu=await evaluate('(()=>{const g=document.querySelector("#scene canvas").getContext("webgl2"),e=g.getExtension("WEBGL_debug_renderer_info");return e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER)})()');
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
@@ -116,7 +122,9 @@ try{
   }
   results.push(r);console.log(JSON.stringify({pose,width,file,fps:runtime.fps,triangles:runtime.triangles,drawCalls:runtime.drawCalls,loadMs:runtime.sceneLoadMs,errors:r.errors.length,httpErrors:r.httpErrors.length}));
  }
- await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify({origin,testedAt:new Date().toISOString(),results,deviceCaveat:'Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance.'},null,2));
+ const sourceAfter=await sourceSnapshot(),sourceUnchanged=JSON.stringify(sourceBefore)===JSON.stringify(sourceAfter);
+ await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify({origin,testedAt:new Date().toISOString(),sourceBefore,sourceUnchanged,results,deviceCaveat:'Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance.'},null,2));
+ if(!sourceUnchanged)throw Error('Source changed during architectural QA; screenshots must be repeated');
  if(results.some(r=>r.errors.length||r.httpErrors.length||r.metrics.overflow||r.runtime.contextLost||r.interactions?.passed===false))process.exitCode=1;
 }finally{
  // On Windows Edge's launcher can exit while the isolated browser stays alive.

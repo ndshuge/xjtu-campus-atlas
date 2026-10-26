@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {architectureBatch,stoneMaterial,glassMaterial} from './architecture-kit.js';
+import {facadeEdges,addFacadeBacking,onFacade} from './building-envelope.js';
 
 export function mainTowerMassing(footprint,height,baseY){
  const [x0,z0,x1,z1]=footprint,w=x1-x0,d=z1-z0,cx=(x0+x1)/2,cz=(z0+z1)/2;
@@ -18,6 +19,14 @@ export function createMainTowerFacade({footprint,height,baseY}){
   shade:new THREE.MeshStandardMaterial({color:'#6a6b65',roughness:.85})
  });
  const top=baseY+height-19.0,bottom=baseY+11,glassW=w*.48;
+ const shell=[[x0,z0],[x1,z0],[x1,z1],[x0,z1],[x0,z0]],bodyHeight=height-18.5;
+ for(const edge of facadeEdges(shell)){
+  addFacadeBacking(b,'stone',edge,baseY,bodyHeight);
+  if(Math.abs(edge.nz)>.9){
+   for(const side of [-1,1])onFacade(b,'stone',edge,{along:.5+side*(.5-3.6/w),y:baseY+bodyHeight,width:7.2,height:18.5});
+   onFacade(b,'stone',edge,{y:baseY+height-3.1,width:edge.length,height:3.1});
+  }else addFacadeBacking(b,'stone',edge,baseY+bodyHeight,18.5);
+ }
  for(const side of [-1,1]){
   const z=side<0?z0-.13:z1+.13;
   b.box('glass',cx,bottom,z,glassW,top-bottom,.22);
@@ -33,7 +42,9 @@ export function createMainTowerFacade({footprint,height,baseY}){
    b.box('frame',cx,y+.45,z+side*.22,glassW,.08,.18);
   }
   for(const s of [-1,1]){
-   b.box('stone',cx+s*(glassW/2+1.2),baseY+1,z+side*.25,1.45,height-3,.70);
+   // These inner facade fins end below the portal; the old full-height strips
+   // cut across its daylight opening and made E read as a solid capped tower.
+   b.box('stone',cx+s*(glassW/2+1.2),baseY+1,z+side*.25,1.45,bodyHeight-1,.70);
    b.box('glass',cx+s*(w/2-3.0),baseY+8.0,z,2.6,height-12,.20);
   }
   b.box('glass',cx,baseY+.9,z+side*.1,17,8.5,.22);
