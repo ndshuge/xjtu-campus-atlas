@@ -1,0 +1,359 @@
+{
+  "origin": "http://127.0.0.1:18977/",
+  "testedAt": "2026-10-26T16:13:05.551Z",
+  "results": [
+    {
+      "pose": "avenue-east",
+      "url": "http://127.0.0.1:18977/?__qa_pose=avenue-east-390&inspection=avenue-east",
+      "width": 390,
+      "height": 844,
+      "file": "avenue-east-390.png",
+      "elapsedMs": 8534,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 702,
+        "overflow": false,
+        "script": "http://127.0.0.1:18977/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 108,
+          "farTrees": 1984
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 84,
+        "triangles": 491740,
+        "geometries": 86,
+        "textures": 13,
+        "fps": 240,
+        "sceneLoadMs": 4454,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.79863012799035,
+          13.63770629446644,
+          9.831400368046928
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 4454,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "north-gate",
+      "url": "http://127.0.0.1:18977/?__qa_pose=north-gate-390&inspection=north-gate",
+      "width": 390,
+      "height": 844,
+      "file": "north-gate-390.png",
+      "elapsedMs": 7545,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 702,
+        "overflow": false,
+        "script": "http://127.0.0.1:18977/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 298,
+        "triangles": 523193,
+        "geometries": 302,
+        "textures": 32,
+        "fps": 240,
+        "sceneLoadMs": 4268,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -31.945999999999977,
+          15.73892460243884,
+          -750.6674281875421
+        ],
+        "target": [
+          -31.946,
+          6.6,
+          -556.877
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 4268,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:四大发明广场",
+      "url": "http://127.0.0.1:18977/?__qa_pose=place%3A%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA-390#%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA",
+      "width": 390,
+      "height": 844,
+      "file": "place_四大发明广场-390.png",
+      "elapsedMs": 6886,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 702,
+        "overflow": false,
+        "script": "http://127.0.0.1:18977/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 76,
+          "farTrees": 2016
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 179,
+        "triangles": 538321,
+        "geometries": 403,
+        "textures": 29,
+        "fps": 240,
+        "sceneLoadMs": 3705,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "四大发明广场",
+        "webgl": "WebGL 2",
+        "camera": [
+          24.679999999999943,
+          57.00000000000001,
+          -96
+        ],
+        "target": [
+          -38.32,
+          2,
+          0
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3705,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "library-north",
+      "url": "http://127.0.0.1:18977/?__qa_pose=library-north-390&inspection=library-north",
+      "width": 390,
+      "height": 844,
+      "file": "library-north-390.png",
+      "elapsedMs": 7158,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 702,
+        "overflow": false,
+        "script": "http://127.0.0.1:18977/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 90,
+          "farTrees": 2002
+        },
+        "libraryMassing": {
+          "source": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+          "status": "Published floor counts; OSM/photo-matched plan segmentation; 3.5m storeys are approximate, not a survey",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 267,
+        "triangles": 553405,
+        "geometries": 266,
+        "textures": 29,
+        "fps": 238,
+        "sceneLoadMs": 3993,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          25.887000000000043,
+          66.10000000000002,
+          -449.53499999999997
+        ],
+        "target": [
+          -29.113,
+          9.1,
+          -189.535
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3993,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
