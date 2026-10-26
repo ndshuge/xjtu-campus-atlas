@@ -7,7 +7,7 @@
     "dev": "vite --host 127.0.0.1 --port 18865",
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1 --port 18865",
-    "verify": "node scripts/verify.mjs && node scripts/verify-facade.mjs && node scripts/verify-walk.mjs && node scripts/verify-photos.mjs && node scripts/verify-render-regressions.mjs && node scripts/verify-four-inventions.mjs && node scripts/verify-integrated-landmarks.mjs && node scripts/verify-library-forecourt.mjs && node scripts/verify-library-reconstruction.mjs && node scripts/verify-library-green-roofs.mjs && node scripts/verify-mobile-plaza.mjs && node scripts/verify-gates.mjs && node scripts/audit-campus-boundary-20261026.mjs && node scripts/verify-perimeter-avenue.mjs && node scripts/verify-avenue-paving.mjs && node scripts/verify-avenue-main-e.mjs && node scripts/verify-main-e-roof-detail.mjs",
+    "verify": "node scripts/verify.mjs && node scripts/verify-facade.mjs && node scripts/verify-walk.mjs && node scripts/verify-photos.mjs && node scripts/verify-render-regressions.mjs && node scripts/verify-four-inventions.mjs && node scripts/verify-integrated-landmarks.mjs && node scripts/verify-library-forecourt.mjs && node scripts/verify-library-reconstruction.mjs && node scripts/verify-library-green-roofs.mjs && node scripts/verify-mobile-plaza.mjs && node scripts/verify-gates.mjs && node scripts/audit-campus-boundary-20261026.mjs && node scripts/verify-perimeter-avenue.mjs && node scripts/verify-avenue-paving.mjs && node scripts/verify-avenue-main-e.mjs && node scripts/verify-main-e-roof-detail.mjs && node scripts/verify-site-evidence.mjs",
     "data": "node scripts/prepare-data.mjs",
     "start": "node scripts/serve.mjs"
   },
