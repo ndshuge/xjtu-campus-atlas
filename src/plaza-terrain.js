@@ -48,16 +48,29 @@ export function buildFourInventionsPaving(scene){
   slab('Perimeter lawn / interpretive planting pocket',xx,zz,8.4,13.5,grass,BASE+.050);
  }
  // Fine joint pattern with an intentional surface offset to prevent z-fighting.
+ // The four interpreted sculpture locations must have complete, level
+ // landing pads. Their 2D centres match campus.json + four-inventions.js.
+ // No ground is dug or raised beyond a thin nonstructural surface layer.
+ const sculpturalCentre=[-31.32,0];
+ const foundations=[];
+ for(const dx of [-18,18])for(const dz of [-18,10]){
+  const x=sculpturalCentre[0]+dx,z=sculpturalCentre[1]+dz;
+  const disk=new THREE.Mesh(new THREE.CircleGeometry(3.68,48),walk);
+  disk.rotation.x=-Math.PI/2;disk.position.set(x,BASE+.070,z);
+  disk.receiveShadow=true;disk.name='Sculpture foundation landing / level retained';
+  group.add(disk);foundations.push([x,z]);
+ }
+ // Do not draw seam lines across grass or under the sculptures.
  const pts=[];
- for(let x=left+4;x<right-2;x+=11){pts.push(new THREE.Vector3(x,BASE+.059,south+.8),new THREE.Vector3(x,BASE+.059,north-.8));}
- for(let z=south+3;z<north-1;z+=11.2){pts.push(new THREE.Vector3(left+.6,BASE+.059,z),new THREE.Vector3(right-.6,BASE+.059,z));}
+ for(const z of [-34.0,-25.0,-7.5,1.0]){pts.push(new THREE.Vector3(-35.7,BASE+.061,z),new THREE.Vector3(-27.3,BASE+.061,z));}
+ // The peripheral paving stays uncluttered; the precise stone pattern is unverified.
  const lines=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(pts),joint);
- lines.name='Paving expansion joints';lines.renderOrder=2;group.add(lines);
+ lines.name='Limited axial paving expansion seams';lines.renderOrder=2;group.add(lines);
  // Tactile stone border is inset inside the known empty corridor; no fake cliffs.
  for(const [x,z,w,d] of [
   [cx,south+.75,right-left-1,1.0],[cx,north-.75,right-left-1,1.0],
   [left+.7,cz,1.0,north-south-1],[right-.7,cz,1.0,north-south-1]
  ])slab('Courtyard edging',x,z,w,d,border,BASE+.053);
- group.userData={accuracy:'interpretive courtyard paving from current open OSM corridor; not surveyed',terrain:'flat, no invented contour or elevation',osmBuildingsPreserved:true};
+ group.userData={accuracy:'interpretive courtyard paving from current open OSM corridor; not surveyed',terrain:'flat, no invented contour or elevation',osmBuildingsPreserved:true,sculpturalLandings:foundations,foundationPositionSource:'public/data/campus.json interpretive/four-inventions',northEdgeKeptAt:PLAZA_PAVING.north};
  scene.add(group);return group;
 }

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {BASE,ribbon} from './geo.js';
+import {addCampusSpineGround} from './campus-road-ground.js';
 
 // Verified street: XJTU's Wutong East Road was resurfaced in 2024 with asphalt,
 // thermoplastic marks, wider permeable-concrete footpaths and newer luminaires.
@@ -66,5 +67,7 @@ export function addAvenuePaving(scene,roads){
     published:'2024-09-20',name:data.roadName,length:data.length,
     status:'photo-grounded material class / unmeasured pavement geometry'};
   scene.add(group);
+  // Enhance only mapped road corridors without editing shared world.js.
+  group.userData.mainRoadGround=addCampusSpineGround(scene,roads).userData;
   return group;
 }
