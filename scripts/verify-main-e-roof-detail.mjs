@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import * as THREE from 'three';
+import {readFileSync} from 'node:fs';
+import {bounds} from '../src/geo.js';
+import {createMainERoofDetail} from '../src/main-e-roof-detail.js';
+const d=JSON.parse(readFileSync(new URL('../public/data/campus.json',import.meta.url),'utf8'));
+const e=d.buildings.find(x=>x.osmId===263624057);
+assert(e,'Main E building missing');
+const footprint=bounds(e.points),[x0,z0,x1,z1]=footprint;
+const portal=createMainERoofDetail({footprint,height:e.height,baseY:1.1});
+assert.equal(portal.children.length,4,'Photo-inspired portal detail incomplete');
+assert(portal.children.every(m=>m.isMesh&&m.geometry.attributes.position.count>0));
+const bb=new THREE.Box3().setFromObject(portal);
+assert(bb.min.x>=x0+7.2&&bb.max.x<=x1-7.2,'Rooftop feature intrudes into roof piers');
+assert(bb.min.y>1.1+e.height-18.5&&bb.max.y<1.1+e.height-3.1,'Rooftop detail outside upper opening');
+assert(bb.min.z>z0&&bb.max.z<z1,'Roof ornament outside source footprint');
+assert(portal.userData.accuracy.includes('unsurveyed'),'Not visibly marked approximate');
+console.log(JSON.stringify({passed:true,reference:'2012-11-06 CC BY 3.0',bounds:{min:bb.min.toArray(),max:bb.max.toArray()}}));

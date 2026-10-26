@@ -6,6 +6,7 @@ import {createLibraryClock} from './library-clock.js';
 import {createLibraryForecourt} from './library-forecourt.js';
 import {createLibraryGreenRoofs} from './library-green-roofs.js';
 import {createMainTowerFacade,mainTowerMassing} from './main-tower-facade.js';
+import {createMainERoofDetail} from './main-e-roof-detail.js';
 import {createTengfeiTower,createSiyuanStele} from './axis-monuments.js';
 import {createSiyuanCenter,createScienceHall} from './cultural-facades.js';
 import {makeGroundPattern} from './ground-pattern.js';
@@ -201,7 +202,7 @@ export class CampusWorld{
   const siyuanCenter=this.data.buildings.find(b=>b.osmId===263624056);
   if(siyuanCenter){this.siyuanCenterFacade=createSiyuanCenter({footprint:bounds(siyuanCenter.points),height:siyuanCenter.height,baseY:BASE});this.scene.add(this.siyuanCenterFacade);}
   const scienceHall=this.data.buildings.find(b=>b.osmId===263632364);
-  if(scienceHall){this.scienceHallFacade=createScienceHall({footprint:bounds(scienceHall.points),height:scienceHall.height,baseY:BASE});this.scene.add(this.scienceHallFacade);}  const mainE=this.data.buildings.find(b=>b.osmId===263624057);if(mainE){this.mainTowerFacade=createMainTowerFacade({footprint:bounds(mainE.points),height:mainE.height,baseY:BASE});this.scene.add(this.mainTowerFacade);}
+  if(scienceHall){this.scienceHallFacade=createScienceHall({footprint:bounds(scienceHall.points),height:scienceHall.height,baseY:BASE});this.scene.add(this.scienceHallFacade);}  const mainE=this.data.buildings.find(b=>b.osmId===263624057);if(mainE){this.mainTowerFacade=createMainTowerFacade({footprint:bounds(mainE.points),height:mainE.height,baseY:BASE});this.scene.add(this.mainTowerFacade);this.mainERoofDetail=createMainERoofDetail({footprint:bounds(mainE.points),height:mainE.height,baseY:BASE});this.scene.add(this.mainERoofDetail);}
    const central=this.data.buildings.find(b=>b.osmId===263625088);if(central){const bb=bounds(central.points);this.mesh(boxGeometry((bb[0]+bb[2])/2,BASE+central.height,(bb[1]+bb[3])/2,28,1.3,18),this.mat('#b6c1aa'),{cast:true});}
  }
  textSign(text,x,y,z,w,h){const cv=document.createElement('canvas');cv.width=1024;cv.height=128;const c=cv.getContext('2d');c.fillStyle='#637465';c.fillRect(0,0,1024,128);c.fillStyle='#f3ecd2';c.font='60px "Microsoft YaHei",sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(text,512,65);const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;const o=this.mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tx}),{receive:false});o.position.set(x,y,z);}
