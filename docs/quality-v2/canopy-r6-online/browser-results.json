@@ -1,0 +1,312 @@
+{
+  "origin": "https://ndshuge.github.io/xjtu-campus-atlas/",
+  "testedAt": "2026-10-26T07:57:01.597Z",
+  "results": [
+    {
+      "pose": "home",
+      "url": "https://ndshuge.github.io/xjtu-campus-atlas/",
+      "width": 1440,
+      "height": 900,
+      "file": "home-1440.png",
+      "elapsedMs": 8918,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "https://ndshuge.github.io/xjtu-campus-atlas/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "drawCalls": 428,
+        "triangles": 582719,
+        "geometries": 303,
+        "textures": 30,
+        "fps": 145,
+        "sceneLoadMs": 3027,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          930,
+          999.9999999999999,
+          1190
+        ],
+        "target": [
+          25.000000000000004,
+          0,
+          -50.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3027,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": [],
+      "interactions": {
+        "rotationMetres": 778.1461793593929,
+        "distanceBeforeWheel": 1832.1094399625802,
+        "distanceAfterWheel": 1760.2559644396956,
+        "treeLayerTrianglesBefore": 582719,
+        "treeLayerTrianglesHidden": 215873,
+        "selected": "钱学森图书馆",
+        "passed": true
+      }
+    },
+    {
+      "pose": "avenue-ground",
+      "url": "https://ndshuge.github.io/xjtu-campus-atlas/?inspection=avenue-ground",
+      "width": 1440,
+      "height": 900,
+      "file": "avenue-ground-1440.png",
+      "elapsedMs": 4720,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 2,
+        "canvasWidth": 2592,
+        "overflow": false,
+        "script": "https://ndshuge.github.io/xjtu-campus-atlas/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 228,
+          "farTrees": 1864
+        },
+        "drawCalls": 276,
+        "triangles": 779054,
+        "geometries": 224,
+        "textures": 17,
+        "fps": 240,
+        "sceneLoadMs": 857,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.80000000000001,
+          3.099999999999997,
+          10
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 857,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "home",
+      "url": "https://ndshuge.github.io/xjtu-campus-atlas/",
+      "width": 390,
+      "height": 844,
+      "file": "home-390.png",
+      "elapsedMs": 4569,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "https://ndshuge.github.io/xjtu-campus-atlas/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "drawCalls": 264,
+        "triangles": 554899,
+        "geometries": 273,
+        "textures": 28,
+        "fps": 240,
+        "sceneLoadMs": 1575,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          790,
+          1370,
+          1390
+        ],
+        "target": [
+          -25.000000000000004,
+          0,
+          -50.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 5,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 1575,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": [],
+      "interactions": {
+        "panMetres": 141.26933251168012,
+        "pinchDistanceBefore": 2148.1910995067456,
+        "pinchDistanceAfter": 1619.6949613499494,
+        "pageScale": 1,
+        "labelSampleCount": 5,
+        "labelDriftPx": 0,
+        "walkMetres": 4.353499999940141,
+        "walkMode": "walk",
+        "returnMode": "orbit",
+        "passed": true
+      }
+    },
+    {
+      "pose": "avenue-ground",
+      "url": "https://ndshuge.github.io/xjtu-campus-atlas/?inspection=avenue-ground",
+      "width": 390,
+      "height": 844,
+      "file": "avenue-ground-390.png",
+      "elapsedMs": 3696,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "https://ndshuge.github.io/xjtu-campus-atlas/assets/index-DNeUq3D5.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 108,
+          "farTrees": 1984
+        },
+        "drawCalls": 46,
+        "triangles": 563466,
+        "geometries": 48,
+        "textures": 12,
+        "fps": 240,
+        "sceneLoadMs": 705,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          122.80000000000001,
+          3.099999999999997,
+          10
+        ],
+        "target": [
+          121.50000000000001,
+          6.1000000000000005,
+          -150
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 705,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
