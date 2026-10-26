@@ -80,7 +80,7 @@ export function makeLeafSprayTexture(conifer=false,distant=false){
    c.closePath();c.fill();c.strokeStyle='#7d9365';c.lineWidth=.6;c.beginPath();c.moveTo(0,s);c.lineTo(0,-s*.65);c.stroke();
   }c.restore();
  }
- const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;tx.anisotropy=4;return tx;
+ const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;tx.anisotropy=8;tx.generateMipmaps=true;tx.minFilter=THREE.LinearMipmapLinearFilter;return tx;
 }
 function barkMaterial(){
  const m=new THREE.MeshStandardMaterial({color:'#b2ad9b',roughness:1});
@@ -106,7 +106,7 @@ export function createCampusVegetation(trees,{mobile=false}={}){
   if(!members.length)continue;
   for(const detail of ['near','far']){
    const distant=detail==='far',tex=makeLeafSprayTexture(kind===1,distant);
-   const leafMat=new THREE.MeshStandardMaterial({map:tex,color:'#d8e5bd',vertexColors:true,side:THREE.DoubleSide,alphaTest:distant?.16:.42,alphaToCoverage:!distant,roughness:1,depthWrite:true,emissive:'#34482c',emissiveIntensity:.10});
+   const leafMat=new THREE.MeshStandardMaterial({map:tex,color:'#d8e5bd',vertexColors:true,side:THREE.DoubleSide,alphaTest:distant?.12:.38,alphaToCoverage:!distant,roughness:1,depthWrite:true,emissive:'#34482c',emissiveIntensity:.10});
    const geo=treeGeometry(kind===1?'cedar':'plane',detail,1956+kind*37);
    const trunk=new THREE.InstancedMesh(geo.wood,wood,members.length),crown=new THREE.InstancedMesh(geo.leaves,leafMat,members.length);
    trunk.name=species[kind]+' branching '+detail;crown.name=species[kind]+' leaf sprays '+detail;
