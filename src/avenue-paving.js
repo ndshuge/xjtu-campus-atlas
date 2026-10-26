@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {BASE,ribbon} from './geo.js';
-import {addCampusSpineGround} from './campus-road-ground.js';
+import {addCampusSpineGround,clippedOffsetRuns} from './campus-road-ground.js';
 
 // Verified street: XJTU's Wutong East Road was resurfaced in 2024 with asphalt,
 // thermoplastic marks, wider permeable-concrete footpaths and newer luminaires.
@@ -24,8 +24,8 @@ export function avenuePavingGeometry(roads){
       edge.push([pt[0]+normal[0]*e,pt[1]+normal[1]*e]);
     }
     // Keep footpaths below asphalt and road markings to avoid depth fighting.
-    sidewalks.push(ribbon(footpath,2.22,BASE+.185));
-    edges.push(ribbon(edge,.11,BASE+.195));
+    for(const run of clippedOffsetRuns(road,roads,side,road.width/2+1.47)){const g=ribbon(run,2.22,BASE+.185);if(g)sidewalks.push(g);}
+    for(const run of clippedOffsetRuns(road,roads,side,road.width/2-.13)){const g=ribbon(run,.11,BASE+.195);if(g)edges.push(g);}
   }
   // The 2024 after-repair photograph shows a continuous YELLOW centre line.
   // Do not copy the generic dashed white road style onto this documented avenue.
