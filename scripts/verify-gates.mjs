@@ -34,6 +34,12 @@ try{
  const north=createNorthGate(main.position,1.1);
  assert(north.children.some(c=>c.name==='sweeping white gate roof'));
  assert(north.children.some(c=>c.name==='bronze science relief panel'));
+ const reliefPanels=north.children.filter(c=>c.name==='bronze science relief panel');
+ assert.equal(reliefPanels.length,2,'Both documented North Gate reliefs must exist');
+ const postOffice=data.buildings.find(b=>b.osmId===264738602);
+ const eastRelief=reliefPanels.find(p=>p.position.x>main.position[0]);
+ assert(postOffice&&eastRelief.position.z<Math.min(...postOffice.points.map(p=>p[1]))-.3,
+  'Photographed east-side relief is hidden behind the existing OSM post office frontage');
  assert(north.children.some(c=>c.name==='abstract science orbit'),'Northern natural-science relief interpretation missing');
  assert(north.children.some(c=>c.name==='abstract engineering gear'),'Northern engineering relief interpretation missing');
  assert(north.children.some(c=>c.name==='2011 photographed north gate inscription'));
@@ -41,6 +47,14 @@ try{
  const english=north.children.find(c=>c.name==='front facade inscription');
  // North exterior is viewed along +Z, thus increasing model X projects screen-left.
  assert(chinese.position.x>english.position.x,'Chinese must appear left of English in exterior photo view');
+ assert(chinese.material.transparent&&chinese.material.alphaTest>0,'Photo cutout must not paste a solid white background on the tiled arch');
+ assert(chinese.geometry.parameters.width<22,'Photographic glyphs must not stretch across a 26m billboard');
+ assert.equal(chinese.material.map.repeat.x,1,'Mirror regression: exterior photograph text must remain correctly ordered');
+ const mask=fs.readFileSync(new URL('../public/assets/reference/north-gate-ink-mask-r8.png',import.meta.url));
+ assert(mask.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])),'CC-licensed cutout must be PNG');
+ assert.equal(mask.readUInt32BE(16),388,'Unexpected calligraphy source crop width');
+ assert.equal(mask.readUInt32BE(20),96,'Unexpected calligraphy source crop height');
+ assert.equal(mask[25],6,'Gate cutout must have RGBA channels and preserve transparency');
  assert(north.userData.accuracy.includes('not surveyed'),'Gate cannot claim 2026 as-built accuracy');
  const canopy=north.children.find(c=>c.name==='sweeping white gate roof');
  assert(canopy.geometry.attributes.uv?.count===canopy.geometry.attributes.position.count,'Curved tile roof UVs must be finite and complete');
