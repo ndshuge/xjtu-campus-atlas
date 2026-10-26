@@ -50,7 +50,7 @@ export class CampusWorld{
   if(inspection)document.body.classList.add('photo-inspection');
   if(inspection==='north-gate'){
     const gate=this.data.landmarks.find(p=>p.name==='北门');
-    if(gate){const [gx,gz]=gate.position;this.camera.position.set(gx,BASE+7,gz-92);this.controls.target.set(gx,BASE+5.5,gz-1);this.controls.update();}
+    if(gate){const [gx,gz]=gate.position;this.camera.position.set(gx,BASE+7,gz-(this.isMobile?195:92));this.controls.target.set(gx,BASE+5.5,gz-1);this.controls.update();}
   }else if(inspection==='north-wall'){
     this.camera.position.set(-126,BASE+5.2,-640);this.controls.target.set(-126,BASE+3.2,-563);this.controls.update();
   }else if(inspection==='main-e'){
