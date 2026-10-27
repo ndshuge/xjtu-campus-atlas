@@ -34,3 +34,11 @@
 - 景观分支更密树冠因近景遮挡未全部被 R12 集成接收；本次未擅自代替其做出无依据合并。
 - 南门实体墙最终真实位置、竣工立面及宽度未测绘。
 - 本报告仅证明独立 R12 完整候选已集成并通过本机验收；正式首页未经用户批准不替换。
+
+## 公网独立预览交付（2026-10-27）
+- 正式公网预览：`https://ndshuge.github.io/xjtu-campus-atlas/r12-build-20261027/`，只写入 `r12-build-20261027/`；正式首页和 R11 测试目录均未覆盖。
+- GitHub Pages 源分支 `gh-pages` 从 `94d7408036b8dc41885f187a92b39e466b8ad936` 快进至 `67232cbb462e809d823766aa25e8562e7a9fa7ed`；`main` 保持 `36170135addd3c16bebf2f179607e5ee4574043a`。
+- GitHub Pages 状态 `built`；公网 HTML (8768 bytes) 与生产 JS `index-CwU5aEJL.js` (777269 bytes) 均 HTTP 200。
+- 独立预览路径本机 Edge 六场景 × 390/1440px 合计 12/12，零 JS/HTTP 错误：`r12-staged-complete-20261027/browser-results.json`。
+- 实际公网 Edge WebGL 复验南门、主楼、逸夫科学馆、图书馆 × 390/1440px 合计 8/8，零 JS/HTTP 错误：`r12-public-final-20261027/browser-results.json`。
+- 真实 iPhone Safari、Intel 核显图书馆稳态帧时与南门实测位置仍未验证；R12 当前仅作独立预览，不替换正式版。
