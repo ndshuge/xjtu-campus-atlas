@@ -31,3 +31,17 @@
 ## 集成边界
 
 只合并本建筑分支的源码与必要 world 接入，不复制旧 dist 覆盖其他线程。`scripts/qa-render.mjs` 的可选建筑点击、搜索目标及 low-power GPU 提示仅用于验收，默认运行保留原行为；low-power 是标准 WebGL 提示，必须核查实际返回 GPU，不能把提示本身当成 Intel 证据。Windows Edge 仿真不是真实 iPhone Safari。
+
+## 第二阶段：逸夫科学馆
+
+已完成唯一资产 src/science-hall-asset.js，主馆约21m（保留估值）、低连接体约6.4m、北附属馆檐高约7.2m/坡屋顶最高约11.6m。后三项是照片估算，不是已核实层高。2019官方西入口与2025-07-25 Commons航拍（2026-06-25上传，Liuxingy，CC BY-SA 4.0）共同支撑高低分体；航拍只覆盖北附属馆，不能据此断言主馆全屋顶。
+
+退出旧通用体块、Science silhouette 与独立 scienceHallFacade；复用 R9 折面玻璃、D形入口与连接屋架，单独抽出屋架工厂以免初始化生成后丢弃旧立面。北附属馆改为暗色坡屋顶；使用折角法线保留屋脊并消除网格小三角阴影。源OSM不变，继承R9西侧折面的视觉展开约14.3平方米（小于0.4%），不是地理测量修订。
+
+- [R11八视图](buildings-r12/science-library-before/browser-results.json)中含逸夫馆8图，另有[旧入口近景](buildings-r12/science-entry-before/browser-results.json)2图。
+- [最终十视图](buildings-r12/science-final/browser-results.json)：1440/390，远/近入口、侧面、背面、鸟瞰；JS/HTTP错误0。实际[鼠标/手机点选](buildings-r12/science-click/browser-results.json)及[产品搜索](buildings-r12/science-search/browser-results.json)通过。
+- [268处屋面射线、幕墙折面和ID检查](buildings-r12/science-geometry-verification.json)通过；主楼专项同时比较全部9个新归属ID之外的建筑属性/颜色，哈希一致。原完整verify及新增专项、标准build通过，保留750kB包体警告。
+- 建筑三角形10,428→4,163，网格8→5，材质8→5，纹理0→0。场景对比同时包含主楼改动，不能把场景总调用差值完全归因逸夫馆。
+- [新近入口桌面](buildings-r12/science-final/r12-science-entry-1440.png)、[手机](buildings-r12/science-final/r12-science-entry-390.png)、[鸟瞰](buildings-r12/science-final/r12-science-aerial-1440.png)。近景不是全馆框图，完整附属体看鸟瞰/斜视。
+
+未达标：北侧窗格/屋脊及天窗未有图纸，附属馆高度、后立面及2026现状仍未知；现有R6树位挡入口局部，未移动树。Intel复验请求low-power后实际仍选RTX5060，只登记了[探针](buildings-r12/library-low-power-probe/browser-results.json)，不能据此关闭R11 Intel风险。下一项是图书馆自身细部LOD、批量构建和材质校准，再做同GPU多轮性能/全校园回归。

@@ -9,6 +9,7 @@ const views={
  'r12-main-aerial':{eye:[-31,300,125],look:[-31,0,126],fov:55},
  'r12-campus-axis':{eye:[-110,180,-430],look:[-30,30,30],fov:56},
  'r12-science-front':{eye:[-130,47,-14],look:[75,14,-35],fov:54},
+ 'r12-science-entry':{eye:[0,14,-12.0355],mobileEye:[-28,16,-12.0355],look:[65,12,-12.0355],fov:64},
  'r12-science-oblique':{eye:[-85,70,120],look:[78,14,-45],fov:56},
  'r12-science-back':{eye:[100,58,-245],look:[78,12,-48],fov:55},
  'r12-science-aerial':{eye:[75,210,-48],look:[75,0,-47],fov:52},

@@ -93,6 +93,23 @@
       "gaps": [
         "No measured main height, annex partition elevation, north/rear elevation or 2026 condition"
       ]
+    },
+    {
+      "id": "science-north-aerial-2025",
+      "url": "https://commons.wikimedia.org/wiki/File:西交兴庆之俯视钱学森图书馆.jpg",
+      "author": "Liuxingy",
+      "captured": "2025-07-25 15:02:22; EXIF camera clock unverified",
+      "published": "2026-06-25 upload; not capture date",
+      "license": "CC BY-SA 4.0; full original retained outside Git; no photo texture",
+      "observed": [
+        "Partial Science Hall northern annex at upper-left of the south-up photograph",
+        "Dark pitched multi-part roof distinct from the taller west-entry body",
+        "Low recessed link; original OSM seams support partition"
+      ],
+      "gaps": [
+        "Main west-entry body is outside the aerial frame",
+        "Precise ridgelines, skylight dimensions, eave elevation and floor count unknown"
+      ]
     }
   ],
   "mainCalibration": {
@@ -117,6 +134,19 @@
       264595812,
       3557330,
       3557331
+    ]
+  },
+  "scienceCalibration": {
+    "mainHeight": 21,
+    "annexEave": 7.2,
+    "annexRoofRiseMaximum": 4.4,
+    "linkHeight": 6.4,
+    "status": "All indicative elevations; main estimate retained and lower annex/roof profile photo-estimated; not surveyed",
+    "visualFoldExpansion": "About 14.3m2 / less than 0.4 percent visual footprint change from R9 west fold; source OSM unchanged",
+    "unknown": [
+      "Exact north/rear fenestration",
+      "Roof ridge and skylight layout",
+      "Ground sections and 2026 facade condition"
     ]
   }
 }

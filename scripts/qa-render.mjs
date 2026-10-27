@@ -153,7 +153,7 @@ try{
    r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({desktopInteractions:r.interactions}));
   }
   if(process.argv.includes('--library-click')&&pose==='r11-south-front'&&width===1440){r.libraryClick=await inspectLibraryClick();if(!r.libraryClick.passed)throw Error('Actual library mesh click failed');}
-  if(clickBuilding){r.buildingClick=await inspectOwnedClick(clickBuilding,width);if(!r.buildingClick.passed)throw Error('Actual building selection failed '+clickBuilding);console.log(JSON.stringify({buildingClick:r.buildingClick}));}
+  if(clickBuilding){r.buildingClick=await inspectOwnedClick(clickBuilding,width);r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);if(!r.buildingClick.passed)throw Error('Actual building selection failed '+clickBuilding);console.log(JSON.stringify({buildingClick:r.buildingClick}));}
   results.push(r);console.log(JSON.stringify({pose,width,file,fps:runtime.fps,triangles:runtime.triangles,drawCalls:runtime.drawCalls,loadMs:runtime.sceneLoadMs,errors:r.errors.length,httpErrors:r.httpErrors.length}));
  }
  await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify({origin,testedAt:new Date().toISOString(),results,deviceCaveat:'Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance.'},null,2));

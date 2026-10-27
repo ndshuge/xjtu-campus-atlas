@@ -64,12 +64,22 @@ export function createScienceHall({footprint,height,baseY}){
  b.box('glass',63.25,baseY+.15,centerZ,.20,4.55,20);
  for(let i=-4;i<=4;i++)b.box('frame',63.08,baseY+.15,centerZ+i*2.4,.20,4.55,.11);
  for(const s of [-1,1])b.box('stone',frontX-.6,baseY,centerZ+s*13.1,1.4,4.8,1.8);
- const roof=baseY+height,corners=[[63.2,centerZ-6.2],[73.2,centerZ-6.2],[73.2,centerZ+6.2],[63.2,centerZ+6.2]],apex=[68.2,roof+4.0,centerZ];
+ const {corners,apex}=appendScienceRoofFrame(b,{height,baseY});
+ const g=b.finish();g.userData={source:'https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm',referenceDate:'EXIF DateTimeOriginal 2019-07-15 15:44:00; camera clock unverified',estimated:true,facadeOrientation:'west; existing OSM seam anchors',bounds:[x0,z0,x1,z1],curtainWallFolds:2,canopy:'curved D plan / approximate',roofFrame:{corners,apex,posts:4,connected:true},heightPolicy:'existing 21m estimate unchanged; canopy/fold/frame dimensions unsurveyed'};return g;
+}
+
+function appendScienceRoofFrame(b,{height,baseY}){
+ const centerZ=-12.0355,roof=baseY+height,corners=[[63.2,centerZ-6.2],[73.2,centerZ-6.2],[73.2,centerZ+6.2],[63.2,centerZ+6.2]],apex=[68.2,roof+4.0,centerZ];
  for(let i=0;i<4;i++){
   const p=corners[i],q=corners[(i+1)%4],top=[p[0],roof+.9,p[1]];
   b.beam('frame',[p[0],roof-.2,p[1]],top,.16);
   b.beam('frame',top,[q[0],roof+.9,q[1]],.16);
   b.beam('frame',top,apex,.16);
  }
- const g=b.finish();g.userData={source:'https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm',referenceDate:'EXIF DateTimeOriginal 2019-07-15 15:44:00; camera clock unverified',estimated:true,facadeOrientation:'west; existing OSM seam anchors',bounds:[x0,z0,x1,z1],curtainWallFolds:2,canopy:'curved D plan / approximate',roofFrame:{corners,apex,posts:4,connected:true},heightPolicy:'existing 21m estimate unchanged; canopy/fold/frame dimensions unsurveyed'};return g;
+ return {corners,apex,posts:4,connected:true};
+}
+
+export function createScienceRoofFrame({height,baseY}){
+ const b=architectureBatch('Yifu Science Hall / reused open roof frame',{frame:new THREE.MeshStandardMaterial({color:'#7a8179',roughness:.46,metalness:.32})});
+ const roofFrame=appendScienceRoofFrame(b,{height,baseY}),g=b.finish();g.userData={roofFrame};return g;
 }

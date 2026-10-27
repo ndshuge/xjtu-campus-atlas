@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "roofSamples": 268,
+  "sourceDataUnchanged": true,
+  "foldAreaExpansion": 14.324017069257025,
+  "curtainFold": true,
+  "roofFrameReused": true,
+  "rayHeights": {
+    "main": 21.00000038146972,
+    "annex": 11.540118200905686,
+    "link": 6.4
+  },
+  "triangles": 4163,
+  "meshes": 5,
+  "pickingPreserved": true,
+  "accuracy": "Photo-guided approximate roof and annex elevations"
+}
