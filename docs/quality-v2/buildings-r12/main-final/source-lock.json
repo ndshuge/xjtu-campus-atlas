@@ -1,0 +1,14 @@
+{
+  "checkedAt": "2026-10-27T02:02:19.028Z",
+  "sourceStable": true,
+  "sourceHashes": {
+    "src/world.js": "2a2e9d08ce4a222198147db81e5490ef7ec2a9c529727bef82e3a16d61e59329",
+    "src/building-asset-kit.js": "997207558060f96a5e449cd830e2dd29f09ca0ab0103b791cb7197c0c7c11a4a",
+    "src/main-complex-asset.js": "ac849fe1203705bda4d77af96807c31733c6b3b453cd11c2b659c0671ba862af",
+    "src/building-silhouettes.js": "80473b818f53c4972c97b3b4cef0baa356639552445afd601f12b1b40db489fb",
+    "src/library-asset.js": "20cbc0a2561785a20e914672f3878b70ff2aa63655b14d28d44cf1ca3c2dc628",
+    "src/buildings-r12-review.js": "574208d48f320667d34ca36f34ebae7f846ab3053a3d5a3f22a1c8d301c3fc20",
+    "public/data/campus.json": "d4a91a0cb649c79503016441b3cfe1a56d25b34c1a95849f185f9a2051d64cc1"
+  },
+  "renders": 14
+}

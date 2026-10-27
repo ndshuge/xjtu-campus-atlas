@@ -1,0 +1,122 @@
+{
+  "baseline": "165a0a355faef670a87f7a7a3c07ddce9095b5b4",
+  "researchInherited": "506052b / R9 evidence / R11 library and final integration reports",
+  "reviewedOn": "2026-10-27",
+  "rightsPolicy": "Original procedural geometry and materials; school photos are reference-only and stay outside Git; no historical school or commercial model imported",
+  "sources": [
+    {
+      "id": "main-official-front",
+      "url": "https://wmw.xjtu.edu.cn/wh/dbcg1.htm",
+      "image": "https://wmw.xjtu.edu.cn/images/19/09/09/1umue6d7cp/dibiao9.jpg",
+      "author": "范新凯",
+      "published": null,
+      "captured": null,
+      "digitized": "2015-04-16 per existing EXIF; not a capture date",
+      "license": "reference only",
+      "observed": [
+        "Slender central tower, much lower teaching wings",
+        "Large open upper frame, central dark curtain and pale stone piers",
+        "Raised low axial connection does not conceal the middle tower facade"
+      ],
+      "gaps": [
+        "No metric scale, storey elevations, rear plans or precise platform section"
+      ]
+    },
+    {
+      "id": "main-commons-oblique",
+      "url": "https://commons.wikimedia.org/wiki/File:Zhulou_xjtu.jpg",
+      "author": "Danielinblue",
+      "captured": "2012-11-06 stated by author",
+      "published": "2012-11-06 upload",
+      "license": "CC BY 3.0 selected from dual license; photo retained outside Git, not a texture",
+      "observed": [
+        "Open upper room has depth, perimeter crown and an oval element",
+        "Pale tiled side elevations with vertical glass strips",
+        "Recessed side volumes; broad lower entrance framing"
+      ],
+      "gaps": [
+        "Ground obscured by trees",
+        "No rectified scale; photograph is historic"
+      ]
+    },
+    {
+      "id": "main-school-eyewitness",
+      "url": "https://alumni.xjtu.edu.cn/info/1041/4898.htm",
+      "published": "2020-04-14 15:03",
+      "captured": null,
+      "license": "reference only",
+      "observed": [
+        "First-person campus account describes the teaching main tower as approximately one hundred metres tall"
+      ],
+      "gaps": [
+        "This is not a dimensioned drawing or a measured 107.45m height"
+      ]
+    },
+    {
+      "id": "main-paper-lead",
+      "url": "https://www.cnki.com.cn/Article/CJFDTOTAL-JZXB200211005.htm",
+      "author": "李子萍",
+      "published": "建筑学报 2002 issue 11",
+      "captured": null,
+      "license": "bibliographic research only; full plans not acquired",
+      "gaps": [
+        "107.45m and 24m repeated by secondary sources remain unverified dimensions"
+      ]
+    },
+    {
+      "id": "main-tradepress-lead",
+      "url": "https://www.sohu.com/a/204583620_741845",
+      "published": "2017-11-15",
+      "captured": null,
+      "license": "reference only; secondary trade-press article, not a drawing",
+      "observed": [
+        "Reports four-storey teaching wings, a low auditorium/platform and a 23-storey E tower"
+      ],
+      "gaps": [
+        "Article has inconsistent A/B orientation wording; original OSM IDs/names retained",
+        "No exact heights or courtyard ground levels adopted from this source"
+      ]
+    },
+    {
+      "id": "science-official-west",
+      "url": "https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm",
+      "image": "https://wmw.xjtu.edu.cn/images/19/09/13/183d9v00b5/13.jpg",
+      "author": "研工部供图",
+      "published": null,
+      "captured": "EXIF 2019-07-15 15:44:00; camera clock unverified",
+      "license": "reference only; existing file stays outside Git",
+      "observed": [
+        "Ochre splayed walls, reflective folded blue glass",
+        "Curved solid entrance canopy and light open pyramidal roof frame",
+        "A visibly lower recessed annex connects beside the taller entrance body"
+      ],
+      "gaps": [
+        "No measured main height, annex partition elevation, north/rear elevation or 2026 condition"
+      ]
+    }
+  ],
+  "mainCalibration": {
+    "confirmed": [
+      "Existing OSM positions, outlines and IDs",
+      "Photo-visible high tower / low wing hierarchy and open crown"
+    ],
+    "photoEstimates": {
+      "towerHeight": 100,
+      "teachingWingHeight": 22,
+      "lowMappedConnectionHeight": 5.4,
+      "upperOpenRoomHeight": 22
+    },
+    "method": "Round indicative dimensions guided by front and oblique photographs and the school eyewitness account; not photogrammetry. Original 80.5m / 27m / 14m source fields remain intact; display heights are explicit estimates.",
+    "notInferred": [
+      "Unmeasured rear bridges",
+      "Ground excavation or plaza slope",
+      "107.45m as a certified as-built height",
+      "Basements or interiors"
+    ],
+    "mappedLowConnections": [
+      264595812,
+      3557330,
+      3557331
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "baseCommit": "165a0a3",
+  "dataUnchanged": true,
+  "nonCoreGeometryAndColoursUnchanged": true,
+  "nonCoreHash": "13d92c03519782e01a55909284429c69e753f1f06d64313b1364fafc459c3e14",
+  "genericVerticesBefore": 1992,
+  "genericVerticesAfter": 0,
+  "roofSamples": 246,
+  "material": {
+    "triangles": 13571,
+    "meshes": 5
+  },
+  "gray": {
+    "triangles": 733,
+    "meshes": 2
+  },
+  "portalFrontAndSideClear": true,
+  "pickingPreserved": true,
+  "heightPolicy": "photo estimates, not surveyed"
+}

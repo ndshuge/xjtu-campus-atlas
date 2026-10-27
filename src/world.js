@@ -4,8 +4,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {renderPixelRatio,keepOrbitAboveGround,framePercentiles,enableFarFoliageCoverage} from './mobile-render-stability.js';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {createLibraryForecourt} from './library-forecourt.js';
-import {createMainTowerFacade,mainTowerMassing} from './main-tower-facade.js';
-import {createMainERoofDetail} from './main-e-roof-detail.js';
+import {createMainComplexAsset,MAIN_IDS,mainDisplayHeight} from './main-complex-asset.js';
 import {createBuildingSilhouettes} from './building-silhouettes.js';
 import {createTengfeiTower,createSiyuanStele} from './axis-monuments.js';
 import {buildingGroupFrame,libraryEntranceFrame} from './building-views.js';
@@ -44,7 +43,7 @@ export class CampusWorld{
   const skyUniforms=this.sky.material.uniforms;skyUniforms.turbidity.value=3;skyUniforms.rayleigh.value=.85;skyUniforms.mieCoefficient.value=.003;skyUniforms.mieDirectionalG.value=.78;skyUniforms.sunPosition.value.copy(this.sun.position);
   this.pavers=createSurfaceTexture('pavers');this.asphalt=createSurfaceTexture('asphalt');this.waterTexture=createSurfaceTexture('water');
   this.ray=new THREE.Raycaster();this.pointer=new THREE.Vector2();this.proj=new THREE.Vector3();this.timer=new THREE.Timer();this.timer.connect(document);this.dimensions=new Map();this.footprintBounds=data.buildings.map(b=>bounds(b.points));
-  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.avenuePaving=addAvenuePaving(this.scene,this.data.roads);this.buildBuildings();this.buildLandmarks();this.buildingSilhouettes=createBuildingSilhouettes(this.data.buildings,{includeLibrary:false});this.scene.add(this.buildingSilhouettes);this.buildTrees();this.foliageCoverageMaterials=enableFarFoliageCoverage(this.vegetation,this.renderer.getContext());this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);
+  this.buildGround();this.buildSurfaces();this.fourInventionsPaving=buildFourInventionsPaving(this.scene);this.buildRoads();this.avenuePaving=addAvenuePaving(this.scene,this.data.roads);this.buildBuildings();this.buildLandmarks();this.buildingSilhouettes=createBuildingSilhouettes(this.data.buildings,{includeLibrary:false,includeMain:false});this.scene.add(this.buildingSilhouettes);this.buildTrees();this.foliageCoverageMaterials=enableFarFoliageCoverage(this.vegetation,this.renderer.getContext());this.buildFurniture();this.buildLabels();this.bind();this.resize();this.home(false);
   // Reproducible exterior photographic QA; normal visitors keep existing default camera.
   const inspection=new URLSearchParams(location.search).get('inspection');
   if(inspection)document.body.classList.add('photo-inspection');
@@ -173,24 +172,12 @@ export class CampusWorld{
    const base=PALETTE[b.category];const c=new THREE.Color(base).offsetHSL((random()-.5)*.025,0,(random()-.5)*.07);
    const roof=/主楼|图书/.test(b.name)?'#aabfc0':b.category==='living'?'#a17963':b.category==='academic'?'#a6aa96':'#b3b4a0';
    if(b.osmId===263624481){this.dimensions.set(b.id,{height:b.height,bounds:bounds(b.points)});b.displayHeight=49.75;return;}
+   if(MAIN_IDS.includes(b.osmId)){const h=mainDisplayHeight(b.osmId);this.dimensions.set(b.id,{height:h,bounds:bounds(b.points)});b.displayHeight=h;return;}
    let h=b.height;
     // Gate-wing outlines are sourced from OSM, but their default 14m box height
     // is an unsupported estimate. Use low photo-informed facade massing here.
     if(b.osmId===264738601||b.osmId===264738602)h=5.3;
-   if(b.osmId===263624057){
-     // Main E's photographed open top must not be occluded by a solid OSM prism.
-     // Keep the mapped footprint at the base, use approximate architectural piers above.
-     const mass=mainTowerMassing(bounds(b.points),h,BASE);
-     const lower=extrude(b.points,mass.bodyHeight,BASE,b.holes);
-     gs.push(this.colorGeometry(lower,b,i,c,roof));
-     for(const [x,y,z,w,pierH,d] of mass.piers){
-       const g=boxGeometry(x,y,z,w,pierH,d);
-       gs.push(this.colorGeometry(g,b,i,c,roof));
-     }
-     b.displayHeight=h;
-   }else{
-     const geo=extrude(b.points,h,BASE,b.holes);gs.push(this.colorGeometry(geo,b,i,c,roof));
-   }
+   const geo=extrude(b.points,h,BASE,b.holes);gs.push(this.colorGeometry(geo,b,i,c,roof));
    this.dimensions.set(b.id,{height:b.height,bounds:bounds(b.points)});
    // The photographed central opening replaces the earlier unverified solid roof cap.
   });
@@ -198,7 +185,7 @@ export class CampusWorld{
   for(const g of gs){this.buildingRanges.push([vertex,vertex+g.attributes.position.count]);vertex+=g.attributes.position.count;}
   this.buildingMesh=this.merge(gs,this.buildingMat(),{cast:true});this.pickables.push(this.buildingMesh);this.originalColors=this.buildingMesh.geometry.attributes.color.array.slice();
   const edge=new THREE.EdgesGeometry(this.buildingMesh.geometry,35);this.buildingEdges=new THREE.LineSegments(edge,new THREE.LineBasicMaterial({color:'#596959',transparent:true,opacity:.16}));this.scene.add(this.buildingEdges);
-  const ac=[];for(const b of this.data.buildings){if(b.area<350||/图书|主楼/.test(b.name))continue;const bb=bounds(b.points),x=(bb[0]+bb[2])/2,z=(bb[1]+bb[3])/2;if(pointIn([x,z],b.points))ac.push(boxGeometry(x,BASE+b.height+.15,z,Math.min(5,(bb[2]-bb[0])*.2),1.5,3));}this.merge(ac,this.mat('#c8d0c0'),{cast:true});
+  const ac=[];for(const b of this.data.buildings){if(MAIN_IDS.includes(b.osmId)||b.area<350||/图书|主楼/.test(b.name))continue;const bb=bounds(b.points),x=(bb[0]+bb[2])/2,z=(bb[1]+bb[3])/2;if(pointIn([x,z],b.points))ac.push(boxGeometry(x,BASE+b.height+.15,z,Math.min(5,(bb[2]-bb[0])*.2),1.5,3));}this.merge(ac,this.mat('#c8d0c0'),{cast:true});
  }
  addClock(x,y,z,r){const cv=document.createElement('canvas');cv.width=cv.height=128;const c=cv.getContext('2d');c.fillStyle='#dce2d1';c.beginPath();c.arc(64,64,61,0,Math.PI*2);c.fill();c.strokeStyle='#526555';c.lineWidth=3;for(let i=0;i<12;i++){const a=i/12*Math.PI*2;c.beginPath();c.moveTo(64+Math.sin(a)*48,64-Math.cos(a)*48);c.lineTo(64+Math.sin(a)*55,64-Math.cos(a)*55);c.stroke();}c.lineWidth=5;c.beginPath();c.moveTo(64,31);c.lineTo(64,64);c.lineTo(91,77);c.stroke();const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;const m=new THREE.MeshBasicMaterial({map:tx,transparent:true});const o=this.mesh(new THREE.PlaneGeometry(r*2,r*2),m,{receive:false});o.position.set(x,y,z);}
  buildLandmarks(){
@@ -230,7 +217,8 @@ export class CampusWorld{
   const siyuanCenter=this.data.buildings.find(b=>b.osmId===263624056);
   if(siyuanCenter){this.siyuanCenterFacade=createSiyuanCenter({footprint:bounds(siyuanCenter.points),height:siyuanCenter.height,baseY:BASE});this.scene.add(this.siyuanCenterFacade);}
   const scienceHall=this.data.buildings.find(b=>b.osmId===263632364);
-  if(scienceHall){this.scienceHallFacade=createScienceHall({footprint:bounds(scienceHall.points),height:scienceHall.height,baseY:BASE});this.scene.add(this.scienceHallFacade);}  const mainE=this.data.buildings.find(b=>b.osmId===263624057);if(mainE){this.mainTowerFacade=createMainTowerFacade({footprint:bounds(mainE.points),height:mainE.height,baseY:BASE});this.scene.add(this.mainTowerFacade);this.mainERoofDetail=createMainERoofDetail({footprint:bounds(mainE.points),height:mainE.height,baseY:BASE});this.scene.add(this.mainERoofDetail);}
+  if(scienceHall){this.scienceHallFacade=createScienceHall({footprint:bounds(scienceHall.points),height:scienceHall.height,baseY:BASE});this.scene.add(this.scienceHallFacade);}
+  this.mainComplexAsset=createMainComplexAsset({buildings:this.data.buildings,baseY:BASE,uniforms:{selection:this.selection,hover:this.hover},stage:this.buildingReviewStage||'material'});this.scene.add(this.mainComplexAsset);this.mainComplexAsset.traverse(mesh=>{if(mesh.isMesh)this.pickables.push(mesh);});
    const central=this.data.buildings.find(b=>b.osmId===263625088);if(central){const bb=bounds(central.points);this.mesh(boxGeometry((bb[0]+bb[2])/2,BASE+central.height,(bb[1]+bb[3])/2,28,1.3,18),this.mat('#b6c1aa'),{cast:true});}
  }
  textSign(text,x,y,z,w,h){const cv=document.createElement('canvas');cv.width=1024;cv.height=128;const c=cv.getContext('2d');c.fillStyle='#637465';c.fillRect(0,0,1024,128);c.fillStyle='#f3ecd2';c.font='60px "Microsoft YaHei",sans-serif';c.textAlign='center';c.textBaseline='middle';c.fillText(text,512,65);const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;const o=this.mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tx}),{receive:false});o.position.set(x,y,z);}
@@ -271,7 +259,7 @@ export class CampusWorld{
    document.addEventListener('visibilitychange',()=>{if(document.hidden)this.keys.clear();else{this.resize();this.timer.update();}});
    addEventListener('pageshow',()=>{if(!this.contextLost)this.resize();});
  }
- hitPlace(hit){if(hit.object===this.buildingMesh){const i=Math.round(this.buildingMesh.geometry.attributes.buildingIndex.getX(hit.face.a));return{place:this.data.buildings[i],index:i};}return{place:hit.object.userData.place,index:hit.object.userData.buildingIndex??-1};}
+ hitPlace(hit){if(hit.object===this.buildingMesh||hit.object.userData.buildingAssetMesh){const i=Math.round(hit.object.geometry.attributes.buildingIndex.getX(hit.face.a));return{place:this.data.buildings[i],index:i};}return{place:hit.object.userData.place,index:hit.object.userData.buildingIndex??-1};}
  resize(){const w=Math.max(1,document.documentElement.clientWidth),h=Math.max(1,window.innerHeight);this.width=w;this.height=h;this.isMobile=w<=768;this.camera.aspect=w/h;this.camera.updateProjectionMatrix();this.renderer.setPixelRatio(renderPixelRatio({width:w,height:h,deviceRatio:devicePixelRatio,quality:this.qualityMode}));this.renderer.setSize(w,h);this.lastDeviceRatio=devicePixelRatio;this.sky.visible=this.lightMode!=='night'&&!this.isMobile;}
  constrainOrbitToCampus(){if(this.mode!=='orbit')return;const t=this.controls.target,oldX=t.x,oldZ=t.z,oldY=t.y;t.x=THREE.MathUtils.clamp(t.x,-850,920);t.z=THREE.MathUtils.clamp(t.z,-780,850);t.y=THREE.MathUtils.clamp(t.y,0,120);if(t.x!==oldX||t.z!==oldZ||t.y!==oldY){this.camera.position.x+=t.x-oldX;this.camera.position.z+=t.z-oldZ;this.camera.position.y+=t.y-oldY;}}
  cancelFlight(){if(this.flight){this.flight=null;this.controls.enabled=this.mode!=='walk';}this.controls.autoRotate=this.auto;}
@@ -292,7 +280,7 @@ export class CampusWorld{
  setAuto(value){if(this.mode==='walk')this.exitWalk();this.auto=value;this.controls.autoRotate=value&&!this.reduced;const btn=document.querySelector('#orbit-btn');btn.classList.toggle('active',value);btn.setAttribute('aria-pressed',String(value));if(value&&this.reduced)this.notify('系统已开启减弱动态效果，自动环绕保持静止。');return value;}
  focus(p,fly=true){const i=this.data.buildings.indexOf(p);this.selected=i;this.selectedPlace=p;this.selection.value=i;this.labelItems.forEach(l=>l.el.classList.toggle('selected',l.place.id===p.id));const c=p.center||p.position,h=p.displayHeight||p.height||18;const dim=p.points?bounds(p.points):null;const size=dim?Math.max(dim[2]-dim[0],dim[3]-dim[1]):35;const dist=Math.max(120,size*1.6,h*2.2);this.setAuto(false);if(fly){const gate=p.name==='北门'||p.name==='南门';const sideGate=p.gateType==='osm-point';const sidePos=sideGate?visualGatePosition(p):c;this.camera.fov=this.isMobile&&p.name==='南门'?48:gate&&this.isMobile?65:39;this.camera.updateProjectionMatrix();const exterior=p.name==='北门'?-1:1;const plaza=p.id==='interpretive/four-inventions';const library=p.osmId===263624481;const libraryFrame=library?libraryEntranceFrame(p,this.data.buildings,this.width,this.height):null;if(plaza&&this.isMobile){this.camera.fov=70;this.camera.updateProjectionMatrix();}if(libraryFrame){this.camera.fov=libraryFrame.fov;this.camera.updateProjectionMatrix();}const position=sideGate?[sidePos[0]+(/东/.test(p.name)?33:-33),BASE+(this.isMobile?19:23),sidePos[1]+25]:gate?(this.isMobile?[c[0],p.name==='南门'?22:30,c[1]+exterior*(p.name==='南门'?124:150)]:[c[0]+24,30,c[1]+exterior*135]):plaza?(this.isMobile?[c[0]+56,57,c[1]-96]:[c[0]+56,57,c[1]-96]) :libraryFrame?libraryFrame.position:[c[0]+dist*.8,Math.max(h+dist*.65,80),c[1]+dist*1.1];const target=sideGate?[sidePos[0],BASE+2,sidePos[1]]:gate?[c[0],7.7,c[1]]:plaza?[c[0]+(this.isMobile?-7:0),2.0,c[1]] :libraryFrame?libraryFrame.target:[c[0],h*.25,c[1]];this.fly(position,target,1400);}}
  clearSelection(){this.selection.value=-1;this.selected=-1;this.selectedPlace=null;this.labelItems.forEach(l=>l.el.classList.remove('selected'));}
- setColors(mode){this.libraryAsset?.setColorMode(mode);this.colorMode.value=mode==='natural'?0:1;const attr=this.buildingMesh.geometry.attributes.color,ids=this.buildingMesh.geometry.attributes.buildingIndex;if(mode==='natural')attr.array.set(this.originalColors);else for(let i=0;i<attr.count;i++){const b=this.data.buildings[Math.round(ids.getX(i))];const c=new THREE.Color(mode==='category'?CATEGORY[b.category]:b.heightSource==='official-document-height'?'#6297b9':b.levels?'#79b7a1':'#cda779');if(this.buildingMesh.geometry.attributes.normal.getY(i)>.8)c.multiplyScalar(.85);c.toArray(attr.array,i*3);}attr.needsUpdate=true;}
+ setColors(mode){this.mainComplexAsset?.setColorMode(mode);this.libraryAsset?.setColorMode(mode);this.colorMode.value=mode==='natural'?0:1;const attr=this.buildingMesh.geometry.attributes.color,ids=this.buildingMesh.geometry.attributes.buildingIndex;if(mode==='natural')attr.array.set(this.originalColors);else for(let i=0;i<attr.count;i++){const b=this.data.buildings[Math.round(ids.getX(i))];const c=new THREE.Color(mode==='category'?CATEGORY[b.category]:b.heightSource==='official-document-height'?'#6297b9':b.levels?'#79b7a1':'#cda779');if(this.buildingMesh.geometry.attributes.normal.getY(i)>.8)c.multiplyScalar(.85);c.toArray(attr.array,i*3);}attr.needsUpdate=true;}
  lighting(mode){this.lightMode=mode;const night=mode==='night',dusk=mode==='dusk';this.night.value=night?1:dusk?.3:0;this.scene.background.set(SKY[mode]);this.scene.fog.color.set(SKY[mode]);this.scene.fog.near=night?1400:1800;this.ground.material.color.set(night?'#425454':dusk?'#b8b7a2':'#b7c6b4');this.hemi.intensity=night?.75:dusk?1.4:1.75;this.hemi.color.set(night?'#a4c7dc':dusk?'#c4c7d7':'#e4f0ec');this.sun.intensity=night?.4:dusk?2.0:2.6;this.sun.color.set(night?'#9cbed7':dusk?'#ffc79c':'#fff0cf');this.sun.position.set(dusk?-900:-650,dusk?350:1000,450);this.fill.intensity=night?.25:.6;this.lampMaterial.emissiveIntensity=night?2:dusk?.7:0;this.renderer.toneMappingExposure=night?1.0:1.06;this.sky.visible=!night&&!this.isMobile;this.sky.material.uniforms.sunPosition.value.copy(this.sun.position);this.sky.material.uniforms.rayleigh.value=dusk?1.8:.85;this.sky.material.uniforms.turbidity.value=dusk?7:3;document.body.classList.toggle('night',night);}
  quality(mode){this.qualityMode=mode==='high'?'high':'low';this.renderer.shadowMap.enabled=this.qualityMode==='high';this.resize();this.buildingMesh.material.needsUpdate=true;}
  nearestRoad(p){let best={distance:Infinity,point:p};for(const r of this.data.roads.filter(r=>r.campus))for(let i=1;i<r.points.length;i++){const q=pointSegment(p,r.points[i-1],r.points[i]);if(q.distance<best.distance&&this.data.boundary.some(b=>pointIn(q.point,b))&&!this.blocked(q.point,1.5)&&!this.data.surfaces.some(s=>s.kind==='water'&&pointIn(q.point,s.points)))best=q;}return best.point;}
