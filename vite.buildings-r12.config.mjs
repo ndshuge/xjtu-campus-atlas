@@ -7,7 +7,7 @@ export default defineConfig(({mode})=>{
  return mergeConfig(base,{cacheDir:'.cache-r12/'+mode,plugins:[{
   name:'r12-readonly-baseline',enforce:'pre',
   transform(code,id){if(mode!=='r12-baseline')return;const file=id.replaceAll('\\','/').split('/src/')[1];
-   if(!['world.js','building-silhouettes.js','library-asset.js'].includes(file))return;
+   if(!['world.js','building-silhouettes.js','library-asset.js','cultural-facades.js'].includes(file))return;
    if(!originals.has(file))originals.set(file,execFileSync('git',['show',baseline+':src/'+file],{encoding:'utf8'}));
    return {code:originals.get(file),map:null};
   }

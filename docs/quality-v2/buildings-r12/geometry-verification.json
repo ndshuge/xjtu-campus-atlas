@@ -1,10 +1,21 @@
 {
   "passed": true,
   "baseCommit": "165a0a3",
+  "excludedIds": [
+    263624057,
+    263624058,
+    263624059,
+    263624060,
+    263624061,
+    264595812,
+    3557330,
+    3557331,
+    263632364
+  ],
   "dataUnchanged": true,
   "nonCoreGeometryAndColoursUnchanged": true,
-  "nonCoreHash": "13d92c03519782e01a55909284429c69e753f1f06d64313b1364fafc459c3e14",
-  "genericVerticesBefore": 1992,
+  "nonCoreHash": "6a203769cde1c86a7f76daed46a0f1ca7f33cf1315d860761da53f6b0ccbcb02",
+  "genericVerticesBefore": 2220,
   "genericVerticesAfter": 0,
   "roofSamples": 246,
   "material": {

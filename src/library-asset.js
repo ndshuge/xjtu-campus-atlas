@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
 import {architectureBatch,stoneMaterial,glassMaterial,labelTexture} from './architecture-kit.js';
 import {libraryAssetPlan,planCells,clipCell,cellBoundary,LIBRARY_OSM_ID} from './library-asset-plan.js';
 import {bounds,pointSegment} from './geo.js';
@@ -8,7 +9,7 @@ import {bounds,pointSegment} from './geo.js';
 export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms={},stage='material'}={}){
  const plan=libraryAssetPlan(building),gray=stage==='massing';
  const materials={
-  wall:stoneMaterial('#c4b9a7',.72),north:stoneMaterial('#ccc7b9',.72),
+  wall:stoneMaterial('#c4b3a4',.72),north:stoneMaterial('#c8ccc9',.72),
   glass:glassMaterial('#344c58'),frame:new THREE.MeshStandardMaterial({color:'#746f66',roughness:.66,metalness:.24}),
   roof:stoneMaterial('#89887c',.65),reveal:new THREE.MeshStandardMaterial({color:'#646660',roughness:1}),
   groundcover:new THREE.MeshStandardMaterial({color:'#647c45',roughness:1})
@@ -22,23 +23,23 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   materials.glass.metalness=.18;materials.glass.roughness=.24;
  }
  if(gray)for(const m of Object.values(materials)){m.color.set('#bebdb6');m.roughness=1;m.metalness=0;m.onBeforeCompile=()=>{};m.customProgramCacheKey=()=> 'library-r11-gray';}
- const batch=architectureBatch('Library R11 / single architectural owner',materials),partCounts={};
- const positions=(kind,vertices,uvs)=>{
-  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(vertices,3));
-  g.setAttribute('uv',new THREE.Float32BufferAttribute(uvs,2));g.computeVertexNormals();batch.add(kind,g);
+ const batch=architectureBatch('Library R11 / single architectural owner',materials),detailBatch=architectureBatch('Library R12 / subpixel window detail',materials),partCounts={};
+ const pending={main:{},detail:{}};
+ const positions=(kind,vertices,uvs,detail=false)=>{
+  const bucket=detail?pending.detail:pending.main,a=bucket[kind]||(bucket[kind]={p:[],uv:[]});a.p.push(...vertices);a.uv.push(...uvs);
   partCounts[kind]=(partCounts[kind]||0)+vertices.length/9;
  };
- const quad=(kind,points,uv=[[0,0],[0,1],[1,1],[1,0]])=>{
-  const ids=[0,1,2,0,2,3];positions(kind,ids.flatMap(i=>points[i]),ids.flatMap(i=>uv[i]));
+ const quad=(kind,points,uv=[[0,0],[0,1],[1,1],[1,0]],detail=kind==='reveal')=>{
+  const ids=[0,1,2,0,2,3];positions(kind,ids.flatMap(i=>points[i]),ids.flatMap(i=>uv[i]),detail);
  };
- const wallRect=(kind,e,a,b,y0,y1,offset=0)=>{
+ const wallRect=(kind,e,a,b,y0,y1,offset=0,detail=false)=>{
   if(b-a<.005||y1-y0<.005)return;
   const point=(s,y)=>[e.a[0]+e.ux*s+e.nx*offset,baseY+y,e.a[1]+e.uz*s+e.nz*offset];
-  quad(kind,[point(a,y0),point(a,y1),point(b,y1),point(b,y0)],[[a,y0],[a,y1],[b,y1],[b,y0]]);
+  quad(kind,[point(a,y0),point(a,y1),point(b,y1),point(b,y0)],[[a,y0],[a,y1],[b,y1],[b,y0]],detail);
  };
  const strip=(kind,e,along,y,width,height,depth=.25,offset=0)=>{
   const geo=new THREE.BoxGeometry(width,height,depth);geo.rotateY(-Math.atan2(e.uz,e.ux));
-  geo.translate(e.a[0]+e.ux*along+e.nx*offset,baseY+y+height/2,e.a[1]+e.uz*along+e.nz*offset);batch.add(kind,geo);
+  geo.translate(e.a[0]+e.ux*along+e.nx*offset,baseY+y+height/2,e.a[1]+e.uz*along+e.nz*offset);batch.add(kind,geo); // Curtain bays and cornices remain at every LOD.
  };
  const roof=(cells,y,kind='roof')=>{
   for(const ps of cells)for(let j=1;j<ps.length-1;j++){
@@ -63,8 +64,8 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    quad('reveal',[at(left,low,0),at(left,high,0),at(left,high,-.12),at(left,low,-.12)]);
    quad('reveal',[at(right,low,-.12),at(right,high,-.12),at(right,high,0),at(right,low,0)]);
    quad('reveal',[at(left,high,0),at(right,high,0),at(right,high,-.12),at(left,high,-.12)]);
-   quad(kind,[at(left-.05,low-.06,-.12),at(left-.05,low-.06,.09),at(right+.05,low-.06,.09),at(right+.05,low-.06,-.12)]);
-   wallRect('frame',e,(left+right)/2-.035,(left+right)/2+.035,low,high,-.08);
+   quad(kind,[at(left-.05,low-.06,-.12),at(left-.05,low-.06,.09),at(right+.05,low-.06,.09),at(right+.05,low-.06,-.12)],undefined,true);
+   wallRect('frame',e,(left+right)/2-.035,(left+right)/2+.035,low,high,-.08,true);
    }
   }
  }
@@ -144,7 +145,21 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  batch.box('roof',cx,baseY+47.65,cz,5.2,.35,3.8);
  const cap=new THREE.ConeGeometry(2.9,1.18,4);cap.rotateY(Math.PI/4);cap.translate(cx,baseY+48.59,cz);batch.add('roof',cap);
  const finial=new THREE.CylinderGeometry(.12,.17,.57,8);finial.translate(cx,baseY+49.465,cz);batch.add('frame',finial);
- const asset=batch.finish();asset.name='Qian Xuesen Library R11 / complete owned asset';
+ for(const [bucket,target] of [[pending.main,batch],[pending.detail,detailBatch]])for(const [kind,a] of Object.entries(bucket)){
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(a.p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(a.uv,2));g.computeVertexNormals();target.add(kind,g);
+ }
+ const asset=batch.finish(),details=detailBatch.finish();
+ // Keep one mesh per material. Details form a contiguous suffix, so far LOD
+ // trims drawRange without an extra near draw call or a second material owner.
+ for(const mesh of [...details.children]){
+  const main=asset.children.find(m=>m.material===mesh.material);
+  if(main){
+   const start=main.geometry.attributes.position.count,g=mergeGeometries([main.geometry,mesh.geometry],false);
+   main.geometry.dispose();mesh.geometry.dispose();mesh.removeFromParent();main.geometry=g;
+   g.computeBoundingBox();g.computeBoundingSphere();main.userData.libraryDetailStart=start;main.userData.libraryDetail=true;
+  }else{mesh.userData.libraryDetailStart=0;mesh.userData.libraryDetail=true;asset.add(mesh);}
+ }
+ asset.name='Qian Xuesen Library R12 / complete owned asset';
  for(const m of asset.children){m.userData.part=m.name.split('/').at(-1).trim();}
  if(!gray){
   for(const f of fronts){
@@ -178,12 +193,19 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r11-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R11',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],
   licensing:'Original procedural geometry/materials/lettering; source photos not used as textures',
   measurements:{triangles:asset.children.filter(m=>m.isMesh).reduce((n,m)=>n+(m.geometry.index?.count||m.geometry.attributes.position.count)/3,0),meshes:asset.children.length},partCounts};
+ const bb=bounds(building.points),lodBox=new THREE.Box3(new THREE.Vector3(bb[0],baseY,bb[1]),new THREE.Vector3(bb[2],baseY+plan.maxHeight,bb[3])),detailMeshes=asset.children.filter(m=>m.userData.libraryDetail);
+ const lod={detailVisible:detailMeshes.length>0,projectedThicknessPixels:null,thicknessMetres:.12,enterPixels:.85,exitPixels:.55};asset.userData.detailLOD=lod;
+ asset.updateDetailLOD=(camera,viewportPixels)=>{
+  const distance=Math.max(1,lodBox.distanceToPoint(camera.position)),pixels=.12*Math.max(1,viewportPixels)*camera.projectionMatrix.elements[5]/(2*distance);
+  const visible=detailMeshes.length>0&&(lod.detailVisible?pixels>.55:pixels>.85);lod.projectedThicknessPixels=pixels;
+  if(visible!==lod.detailVisible){for(const mesh of detailMeshes){mesh.visible=visible||mesh.userData.libraryDetailStart>0;mesh.geometry.setDrawRange(0,visible?Infinity:mesh.userData.libraryDetailStart);}lod.detailVisible=visible;}return visible;
+ };
  let disposed=false;
  asset.dispose=()=>{if(disposed)return;disposed=true;const geos=new Set(),mats=new Set(),textures=new Set();asset.traverse(m=>{if(!m.isMesh)return;geos.add(m.geometry);mats.add(m.material);for(const v of Object.values(m.material))if(v?.isTexture)textures.add(v);});for(const x of geos)x.dispose();for(const x of mats)x.dispose();for(const x of textures)x.dispose();asset.removeFromParent();};
  return asset;

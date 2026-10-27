@@ -1,0 +1,19 @@
+
+> xjtu-campus-atlas@1.0.0 build
+> vite build --outDir dist-r12-check
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-r12-check/index.html                   8.76 kB │ gzip:   3.74 kB
+dist-r12-check/assets/index-vaJwB8Xg.css   26.10 kB │ gzip:   6.83 kB
+dist-r12-check/assets/index-BShu0JRB.js   771.23 kB │ gzip: 215.88 kB
+
+✓ built in 233ms
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 750 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-10-27T03:56:59.657Z",
+  "sourceStable": true,
+  "sourceHashes": {
+    "src/world.js": "fb6df398397b8b74bcd04b6a263ca756fe28a9247bd1b5cd665a3b23a5026bcb",
+    "src/building-asset-kit.js": "997207558060f96a5e449cd830e2dd29f09ca0ab0103b791cb7197c0c7c11a4a",
+    "src/main-complex-asset.js": "ac849fe1203705bda4d77af96807c31733c6b3b453cd11c2b659c0671ba862af",
+    "src/building-silhouettes.js": "80473b818f53c4972c97b3b4cef0baa356639552445afd601f12b1b40db489fb",
+    "src/cultural-facades.js": "54e784bc256c7edcb75fb47ac96fe4dd9da4ec6b7c3f10ac75c6ff12fbb1a659",
+    "src/library-asset.js": "7a46aef93432b599ccd010cb0e1167253b7e195da0ead93c616ff38f44d6f40d",
+    "src/buildings-r12-review.js": "cd39a6f2f9cc2fb288ab54ffe46fae8de24bb2b552dc1fc1ae31d1d1e1a3e269",
+    "scripts/qa-render.mjs": "ca2b5fb39e0906211ac832e0671f39b63d34e1b1f945bac0de44ef69ef737ab1",
+    "public/data/campus.json": "d4a91a0cb649c79503016441b3cfe1a56d25b34c1a95849f185f9a2051d64cc1",
+    "src/science-hall-asset.js": "7172217d2b70e9c2cd9fa7d01eff3da79905314d5f0b00cdf3eb7b12f5587258"
+  },
+  "renders": 4
+}
