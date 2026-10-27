@@ -10,7 +10,7 @@ export function avenuePavingGeometry(roads){
   if(!road||road.points.length<2)return {sidewalks:[],edges:[],roadName:'梧桐东道',length:0};
   const points=road.points;
   const length=points.slice(1).reduce((sum,p,i)=>sum+Math.hypot(p[0]-points[i][0],p[1]-points[i][1]),0);
-  const sidewalks=[],edges=[];
+  const sidewalks=[],edges=[],verges=[];
   for(const side of [-1,1]){
     const footpath=[],edge=[];
     for(let i=0;i<points.length;i++){
@@ -20,17 +20,19 @@ export function avenuePavingGeometry(roads){
       const normal=[-dz*side,dx*side],pt=points[i];
       const xOffset=road.width/2+1.47; // approx 2.4 m shoulder beyond asphalt
       footpath.push([pt[0]+normal[0]*xOffset,pt[1]+normal[1]*xOffset]);
-      const e=road.width/2-.13;
+      const e=road.width/2+.04;
       edge.push([pt[0]+normal[0]*e,pt[1]+normal[1]*e]);
     }
     // Keep footpaths below asphalt and road markings to avoid depth fighting.
     for(const run of clippedOffsetRuns(road,roads,side,road.width/2+1.47)){const g=ribbon(run,2.22,BASE+.185);if(g)sidewalks.push(g);}
-    for(const run of clippedOffsetRuns(road,roads,side,road.width/2-.13)){const g=ribbon(run,.11,BASE+.195);if(g)edges.push(g);}
+    for(const run of clippedOffsetRuns(road,roads,side,road.width/2+.04)){const g=ribbon(run,.11,BASE+.195);if(g)edges.push(g);}
+    // A recessed planting verge meets the outer concrete boundary; keep junction cuts.
+    for(const run of clippedOffsetRuns(road,roads,side,road.width/2+2.78)){const g=ribbon(run,.34,BASE+.095);if(g)verges.push(g);}
   }
   // The 2024 after-repair photograph shows a continuous YELLOW centre line.
   // Do not copy the generic dashed white road style onto this documented avenue.
   const centerline=ribbon(points,.13,BASE+.225);
-  return {sidewalks,edges,centerline,roadName:road.name,length:Math.round(length),
+  return {sidewalks,edges,verges,centerline,roadName:road.name,length:Math.round(length),
     note:'2024 material types documented; shoulder widths and striping geometry interpretive'};
 }
 
@@ -50,12 +52,13 @@ export function addAvenuePaving(scene,roads){
   const group=new THREE.Group();
   group.name='Wutong East Road / resurfaced asphalt and porous sidewalks (interpretive width)';
   const concrete=new THREE.MeshStandardMaterial({color:'#e1e1d8',map:porousConcreteTexture(),roughness:.98});
-  const line=new THREE.MeshBasicMaterial({color:'#d2cfb5',transparent:true,opacity:.86,depthWrite:false});
-  for(const [index,collection,material] of [[0,data.sidewalks,concrete],[1,data.edges,line]]){
+  const line=new THREE.MeshBasicMaterial({color:'#dad7c7',depthWrite:false});
+  const verge=new THREE.MeshStandardMaterial({color:'#8e9e78',roughness:1});
+  for(const [index,collection,material] of [[0,data.sidewalks,concrete],[1,data.edges,line],[2,data.verges,verge]]){
     for(const geometry of collection){
       if(!geometry)continue;
       const mesh=new THREE.Mesh(geometry,material);
-      mesh.name=index?'subtle roadway edge thermoplastic':'permeable concrete walkway (schematic width)';
+      mesh.name=index===2?'recessed planting verge / mapped corridor':index?'continuous pale curb line':'permeable concrete walkway (schematic width)';
       mesh.receiveShadow=true;group.add(mesh);
     }
   }

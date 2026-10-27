@@ -62,13 +62,36 @@ const normalAt=(ps,i,side)=>{
 export function clippedOffsetRuns(r,roads,side,offset){
   const ps=resample(r.points),runs=[];let run=[];
   const flush=()=>{if(run.length>=2&&distance(run[0],run.at(-1))>1)runs.push(run);run=[];};
+  // Preserve mapped roads: refine the 3m sampler's abrupt sidewalk gaps at T-junctions.
+  const blocked=p=>otherCarriageway(p,r,roads)||footprintBlocked(p,offset>r.width/2+.5?1.3:.2);
+  const boundary=(a,b,aBlocked)=>{
+    let lo=a,hi=b;
+    for(let j=0;j<9;j++){
+      const mid=[(lo[0]+hi[0])/2,(lo[1]+hi[1])/2];
+      if(blocked(mid)===aBlocked)lo=mid;else hi=mid;
+    }
+    return aBlocked?hi:lo;
+  };
+  let previous=null;
   for(let i=0;i<ps.length;i++){
     const point=ps[i],n=normalAt(ps,i,side);
     const target=[point[0]+n[0]*offset,point[1]+n[1]*offset];
-    // Endcaps stop before gates or T-junctions, not across them.
     const terminal=(i<2||i>ps.length-3)&&ps.length>7;
-    if(terminal||otherCarriageway(target,r,roads)||footprintBlocked(target,offset>r.width/2+.5?1.3:.2)){flush();continue;}
-    run.push(target);
+    const denied=terminal||blocked(target);
+    if(denied){
+      if(run.length&&previous&&!previous.denied&&!terminal){
+        const last=boundary(previous.target,target,false);
+        if(distance(run.at(-1),last)>.005)run.push(last);
+      }
+      flush();
+    }else{
+      if(previous?.denied&&!previous.terminal){
+        const first=boundary(previous.target,target,true);
+        if(distance(first,target)>.005)run.push(first);
+      }
+      run.push(target);
+    }
+    previous={target,denied,terminal};
   }
   flush();return runs;
 }
