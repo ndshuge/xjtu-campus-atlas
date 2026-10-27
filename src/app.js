@@ -1,4 +1,5 @@
 import './style.css';
+import './map-chrome.css';
 import {CampusWorld} from './world.js';
 import {BASE} from './geo.js';
 import {getCampusGateEntries} from './gate-entries.js';
@@ -86,7 +87,7 @@ function selectPlace(p,fly=true){if(!p)return;if(fly)world.endTour();selected=p;
  const stats=safe('div','','detail-stats');const l=document.createElement('div'),r=document.createElement('div');const center=p.center||p.position;const lon=data.origin[0]+center[0]/data.projection.metresPerDegree[0],lat=data.origin[1]-center[1]/data.projection.metresPerDegree[1];if(p.height){l.append(safe('span','模型体量高度'),safe('b',p.heightSource==='official-document-height'?p.height+' m':'≈ '+Math.round(p.displayHeight||p.height)+' m'),safe('small',p.heightSource==='official-document-height'?'学校公开文献（2016）':p.levels?`OSM ${p.levels} 层 · 层高估算`:'示意高度 · 非实测'));r.append(safe('span','建筑占地轮廓'),safe('b',Math.round(p.area).toLocaleString()+' m²'),safe('small','由 OSM 多边形计算'));}else{l.append(safe('span','北纬'),safe('b',lat.toFixed(5)+'°'),safe('small','WGS 84'));r.append(safe('span','东经'),safe('b',lon.toFixed(5)+'°'),safe('small',p.source?'示意中心':'OSM 点位 / 边界'));}stats.append(l,r);body.append(stats);
  const ev=safe('div','','evidence');ev.append(safe('b',p.source?'参考定位':'开放数据'),document.createTextNode(p.source?' · 名称据官方校园图；中心位置为解释性定位。':' · '+(p.points?'真实基底':'真实点位')+' / '+(p.heightSource==='official-document-height'?'高度据学校文献；分段体量示意':p.levels?'层数来自 OSM':'高度或外观为估算')+'。立面、树木与设施均为示意。'));body.append(ev);if(p.heightEvidence?.source){const sourceLink=safe('a','高度依据：学校公开报道 ↗','detail-link');sourceLink.href=p.heightEvidence.source;sourceLink.target='_blank';sourceLink.rel='noopener';body.append(sourceLink);}if(p.notice)body.append(safe('p',p.notice,'notice'));const actions=safe('div','','detail-actions');const focus=safe('button','近看这里','primary'),walk=safe('button','地面漫游');focus.onclick=()=>world.focus(p);walk.onclick=()=>world.enterWalk(p);actions.append(focus,walk);body.append(actions);if(!p.source){const link=safe('a','查看 OSM 原始记录 ↗','detail-link');link.href='https://www.openstreetmap.org/'+p.id;link.target='_blank';link.rel='noopener';body.append(link);}const officialReference=p.id==='interpretive/four-inventions'?'https://wmw.xjtu.edu.cn/wh/dbcg1/3.htm':{263624481:'https://www.xjtu.edu.cn/info/1112/2225136.htm'}[p.osmId];if(officialReference){const link=safe('a','查看学校公开的建筑图文 ↗','detail-link');link.href=officialReference;link.target='_blank';link.rel='noopener noreferrer';body.append(link);}appendBuildingGroupControl(body,p);appendRealPhotoReference(body,p);appendGatePhotoReference(body,p);renderList();
 }
-function closeDetail(){selected=null;world.clearSelection();$('#detail').hidden=true;setDetailExpanded(false);$('#explorer').hidden=false;$('#view-name').textContent='兴庆 · 全景';$('#view-kicker').textContent='XINGQING CAMPUS';renderList();}
+function closeDetail(){selected=null;world.clearSelection();$('#detail').hidden=true;setDetailExpanded(false);$('#explorer').hidden=false;if(innerWidth<=768){$('#explorer').classList.add('collapsed');$('#explorer-toggle').setAttribute('aria-expanded','false');$('#search').blur();}$('#view-name').textContent='兴庆 · 全景';$('#view-kicker').textContent='XINGQING CAMPUS';renderList();}
 function changeMode(mode){const walking=mode==='walk';document.body.classList.toggle('walking',walking);$('#walk-hud').hidden=!walking;$('#walk-btn').classList.toggle('active',walking);$('#walk-btn').setAttribute('aria-pressed',String(walking));for(const b of ['#home-btn','#top-btn'])$(b).classList.toggle('active',b===(mode==='top'?'#top-btn':mode==='home'?'#home-btn':''));if(walking)toast('已进入地面漫游。拖动画面环顾，WASD 或方向键移动。');}
 function showDialog(type){const body=$('#dialog-content');if(type==='sources')body.innerHTML=`<div class="dialog-kicker">GEOGRAPHY & PROVENANCE</div><h2>让每一处还原，都有依据。</h2><p>这是兴庆校区的开放数据 3D 图志。建筑位置与基底有来源，缺少的高度与细节以示意补充。本作品为独立校园可视化，非学校官方地图。</p><div class="data-counts"><span><strong>${data.buildings.length}</strong>OSM 建筑轮廓</span><span><strong>${data.buildings.filter(b=>b.name!=='未命名建筑').length}</strong>有名建筑</span><span><strong>${data.surfaces.length}</strong>景观与场地</span><span><strong>${data.buildings.filter(b=>b.levels).length}</strong>有层数标签</span></div><h3>真实数据与示意内容</h3><ul><li>建筑基底、道路中心线、绿地/水面/球场边界、已有名称来自 OpenStreetMap。高度标签为 0 栋，层数标签为 12 栋；另有图书馆南楼高度采用学校公开报道的 49.75 m，其余按建筑类别估算。</li><li>钱学森图书馆分段体量、主楼高度、窗格、屋顶、腾飞塔形体、门柱、路灯与单株树木均为程序化示意，不是实测复原。</li><li>四大发明广场名称由学校官方图确认，中心位置按中轴关系作解释性定位。模型采用局部米制投影和平地近似，不含建筑内部。</li><li>建筑完整度限于此数据快照。官方新图的教三楼在建区域及 OSM 旧称“西迁纪念馆”存在时效差异，已在地点详情中提示。未涵盖雁塔、曲江和创新港。</li></ul><h3>来源与许可</h3><p>地理数据：<a href="https://www.openstreetmap.org/relation/17568632" target="_blank" rel="noopener">OpenStreetMap 校区关系 17568632 ↗</a>，© OpenStreetMap contributors，<a href="https://opendatacommons.org/licenses/odbl/1-0/" target="_blank" rel="noopener">ODbL 1.0</a>。派生校园数据库以相同许可提供。获取日期 2026-10-25（北京时间）；OSM 基准 ${data.metadata.osmTimestamp}。</p><p>交叉核对：<a href="https://vi.xjtu.edu.cn/qt/jddt.htm" target="_blank" rel="noopener">西安交通大学官方平面图 ↗</a>、<a href="https://www.xjtu.edu.cn/tsda/qxstsg.htm" target="_blank" rel="noopener">学校钱学森图书馆介绍 ↗</a>。学校地图、照片、校徽未打包复制；界面“交”字为自绘标记。代码使用 Three.js（MIT），地图资产未从参考校园项目搬用。</p><div class="source-downloads"><a href="./data/campus.json" download>下载派生校园数据 ↓</a><a href="./data/osm-source.json" download>下载 OSM 源快照 ↓</a><a href="./data/README.txt" target="_blank">数据许可与说明 ↗</a></div><h3>研究与技术选择</h3><p>研究了 <a href="https://github.com/PeterZh6/cuhk-campus-3d" target="_blank" rel="noopener">CUHK Campus 3D</a>、<a href="https://github.com/saarzhanova/Campus3DMap" target="_blank" rel="noopener">Campus3DMap</a> 与 <a href="https://github.com/abmah/College-Campus-3D-Visualization" target="_blank" rel="noopener">College Campus 3D</a>。选用 Three.js + 预处理地理数据，建筑批量绘制和实例化树木；运行时不需地图 API、密钥或外部模型服务。完整研究记录随源码提供。</p>`;
  else{const diag=world.diagnostics();body.innerHTML=`<div class="dialog-kicker">A WALK THROUGH XINGQING</div><h2>从一张地图，走进校园。</h2><div class="key-row"><span>旋转视角</span><span>电脑左键拖动 / 手机双指调整视角</span></div><div class="key-row"><span>缩放地图</span><span>鼠标滚轮 / 双指缩放</span></div><div class="key-row"><span>平移地图</span><span>电脑右键拖动 / 手机单指拖动</span></div><div class="key-row"><span>探索建筑</span><span>点击建筑 / 点击名称 / 搜索</span></div><div class="key-row"><span>地面漫游</span><span>WASD / 方向键；拖动画面环顾</span></div><div class="key-row"><span>加速 / 退出漫游</span><span>Shift / Esc</span></div><div class="key-row"><span>快速搜索</span><span>/</span></div><p>“中轴导览”依次带你浏览北门、中一楼、腾飞塔、图书馆、四大发明广场与主楼。拖动画面即结束导览；可随时暂停或跳至下一站。</p><p>地面漫游有建筑和水面碰撞限制。手机可使用方向按钮行走。地图不提供真实通行权限或现场导航；道路、建筑更新请以学校信息为准。</p><h3>当前运行情况</h3><p>${diag.webgl} · ${diag.buildings} 个建筑基底 · ${diag.trees} 株示意树木<br>当前约 ${diag.fps} FPS · ${diag.drawCalls} 次绘制 · ${Math.round(diag.triangles/1000)}k 三角形<br>场景初始化 ${diag.sceneLoadMs} ms。数值来自本浏览器近期帧，不代表其他设备。</p>`;}
@@ -95,7 +96,44 @@ function showDialog(type){const body=$('#dialog-content');if(type==='sources')bo
 function captureView(){
  const source=world.renderer.domElement;const canvas=document.createElement('canvas');canvas.width=source.width;canvas.height=source.height;const c=canvas.getContext('2d');world.renderer.render(world.scene,world.camera);c.drawImage(source,0,0);const scale=canvas.width/1440,pad=30*scale;const dark=world.lightMode==='night';const grad=c.createLinearGradient(0,0,0,150*scale);grad.addColorStop(0,dark?'#152e39e0':'#eff3e7ed');grad.addColorStop(1,dark?'#152e3900':'#eff3e700');c.fillStyle=grad;c.fillRect(0,0,canvas.width,150*scale);c.fillStyle=dark?'#e6eddc':'#35543c';c.font=`${26*scale}px "Microsoft YaHei",sans-serif`;c.fillText('西安交通大学 · 兴庆校园',pad,50*scale);c.font=`${12*scale}px "Microsoft YaHei",sans-serif`;c.fillText(selected?.name||'校园 3D 图志 · 全景',pad,77*scale);c.fillStyle=dark?'#172b35e8':'#e9eedfe8';c.fillRect(0,canvas.height-42*scale,canvas.width,42*scale);c.fillStyle=dark?'#d4dfcb':'#546c4a';c.font=`${10*scale}px "Microsoft YaHei",sans-serif`;c.fillText('© OpenStreetMap contributors · ODbL 1.0 | 真实基底，示意外观 | 独立校园可视化',pad,canvas.height-17*scale);canvas.toBlob(blob=>{if(!blob){toast('视图导出失败，请重新尝试。');return;}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='xjtu-campus-'+(selected?.osmId||'panorama')+'-'+world.lightMode+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),10000);toast('已保存当前 3D 视图。');},'image/png');
 }
+// R12: keep the map primary. Reuse the existing working controls inside a low-frequency menu.
+function setupMapChrome(){
+ const toolbar=$('#walk-btn').parentElement;
+ const menu=document.createElement('div');menu.id='map-extra';menu.className='map-extra';menu.hidden=true;
+ menu.setAttribute('aria-label','更多地图操作');document.body.append(menu);
+ const more=document.createElement('button');more.id='map-more-btn';more.type='button';
+ more.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg><span>更多</span>';
+ more.setAttribute('aria-expanded','false');more.setAttribute('aria-controls','map-extra');toolbar.append(more);
+ const originals=['top-btn','orbit-btn','light-btn'].map(id=>{
+   const el=document.getElementById(id),slot=document.createComment('r12-'+id);el.before(slot);
+   menu.append(el);return {el,slot};
+ });
+ const launcher=document.createElement('button');launcher.type='button';launcher.id='map-search-launch';
+ launcher.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span>搜索校园地点</span>';
+ launcher.setAttribute('aria-label','搜索校园建筑或地标');document.body.append(launcher);
+ const closeMenu=()=>{menu.hidden=true;more.setAttribute('aria-expanded','false');};
+ more.addEventListener('click',()=>{menu.hidden=!menu.hidden;more.setAttribute('aria-expanded',String(!menu.hidden));});
+ launcher.addEventListener('click',()=>{
+   closeMenu();const explorer=$('#explorer');if(explorer.hidden)explorer.hidden=false;
+   explorer.classList.remove('collapsed');$('#explorer-toggle').setAttribute('aria-expanded','true');
+   $('#search').focus({preventScroll:true});
+ });
+ const sync=()=>{
+   const compact=innerWidth<=768;
+   if(compact){for(const {el} of originals)menu.append(el);}
+   else{for(const {el,slot} of originals)slot.after(el);closeMenu();}
+   launcher.hidden=!compact||!$('#detail').hidden||document.body.classList.contains('walking');
+   more.hidden=!compact;
+ };
+ document.addEventListener('pointerdown',e=>{if(!menu.hidden&&!menu.contains(e.target)&&!more.contains(e.target))closeMenu();});
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menu.hidden){closeMenu();e.stopPropagation();}});
+ window.addEventListener('resize',sync,{passive:true});
+ const observer=new MutationObserver(sync);observer.observe($('#detail'),{attributes:true,attributeFilter:['hidden']});
+ observer.observe(document.body,{attributes:true,attributeFilter:['class']});sync();
+ return {closeMenu,sync};
+}
 function bindUI(){
+ const chrome=setupMapChrome();
  $('#search').addEventListener('input',renderList);document.querySelectorAll('[data-cat]').forEach(btn=>btn.addEventListener('click',()=>{category=btn.dataset.cat;document.querySelectorAll('[data-cat]').forEach(b=>b.classList.toggle('active',b===btn));renderList();}));
  $('#home-btn').onclick=()=>{closeDetail();world.home();$('#orbit-btn').classList.remove('active');$('#orbit-btn').setAttribute('aria-pressed','false');};$('#top-btn').onclick=()=>world.top();$('#north-btn').onclick=()=>world.north();$('#zoom-in').onclick=()=>world.zoom(.75);$('#zoom-out').onclick=()=>world.zoom(1.33);
  $('#orbit-btn').onclick=()=>{const val=world.setAuto(!world.auto);$('#orbit-btn').classList.toggle('active',val);$('#orbit-btn').setAttribute('aria-pressed',String(val));};$('#walk-btn').onclick=()=>world.mode==='walk'?world.exitWalk():world.enterWalk(selected);$('#exit-walk').onclick=()=>world.exitWalk();
