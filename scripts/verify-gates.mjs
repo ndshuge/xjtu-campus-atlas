@@ -67,7 +67,9 @@ try{
  assert(box.min.x<main.position[0]-25&&box.max.x>main.position[0]+25);
  assert(box.max.y<15);
  assert(Math.abs(box.min.y-1.1)<.05,'North Gate has no ground-contact geometry');
- const southGate=createSouthGate(gates.find(g=>g.name==='南门').position,1.1);
+ const southEntry=gates.find(g=>g.name==='南门');
+ assert.equal(southEntry.passagePositions.length,2,'South Gate must retain both mapped passage anchors');
+ const southGate=createSouthGate(southEntry.position,1.1,southEntry.passagePositions);
  const southBox=new THREE.Box3().setFromObject(southGate);
  assert(southGate.children.some(c=>c.name==='red granite sign wall'));
  assert(southGate.children.some(c=>c.name==='2011 photographed south gate signage'));
@@ -78,9 +80,15 @@ try{
  // covered by the modelled 2011 name wall. Lane width here is a test envelope,
  // not a certified clearance or as-built road dimension.
  const sign=southGate.children.find(c=>c.name==='red granite sign wall');
- const signBox=new THREE.Box3().setFromObject(sign);
- for(const node of south)assert(node.position[0]>signBox.max.x+2.25||node.position[0]<signBox.min.x-2.25,
-  'South Gate photograph wall intersects an OSM passage lane');
+ assert(Math.abs(sign.position.x-southEntry.position[0])<.1,
+  'South Gate sign must align to the mapped passage midpoint, not a guessed 31m west shift');
+ const activityCenter=data.buildings.find(b=>b.osmId===263624056)?.center;
+ assert(activityCenter&&Math.abs(sign.position.x-activityCenter[0])<10,
+  'South Gate monument should visually align with Siyuan Student Activity Center');
+ // The complete monument (plinth + cap, not just sign wall) must leave the mapped
+ // passage anchors and an approximate 2.25m conservative lateral envelope clear.
+ for(const node of south)assert(node.position[0]>southBox.max.x+2.25||node.position[0]<southBox.min.x-2.25,
+  'South Gate monument intersects a mapped passage corridor');
  assert(!southGate.children.some(c=>c.name==='side guard rail'),'Invented road-blocking rail reintroduced');
  console.log(JSON.stringify({passed:true,otherGateCount:tested,hasNorth:true,northBounds:[box.min.toArray(),box.max.toArray()]}));
 } finally {globalThis.document=origCanvas;THREE.TextureLoader.prototype.load=origLoader;}

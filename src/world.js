@@ -207,7 +207,7 @@ export class CampusWorld{
    this.siyuanStele=createSiyuanStele(siyuan.position);
    this.landmarkGroup.add(this.siyuanStele);
   }  const gate=this.data.landmarks.find(p=>p.name==='北门');if(gate){this.northGate=createNorthGate(gate.position,BASE);this.northGateWorldPosition=new THREE.Vector3(gate.position[0],BASE,gate.position[1]);this.landmarkGroup.add(this.northGate);for(const m of this.northGate.children){if(m.name==='outer entry pier'||m.name==='sweeping white gate roof'){m.userData.place=gate;this.pickables.push(m);}}}
-  this.secondaryGates=[];for(const entry of getCampusGateEntries(this.data)){const gateGeometry=entry.name==='南门'?createSouthGate(entry.position,BASE):createSecondaryGate({position:visualGatePosition(entry),name:entry.name,baseY:BASE,orientation:Math.PI/2});this.landmarkGroup.add(gateGeometry);this.secondaryGates.push(gateGeometry);}
+  this.secondaryGates=[];for(const entry of getCampusGateEntries(this.data)){const gateGeometry=entry.name==='南门'?createSouthGate(entry.position,BASE,entry.passagePositions):createSecondaryGate({position:visualGatePosition(entry),name:entry.name,baseY:BASE,orientation:Math.PI/2});this.landmarkGroup.add(gateGeometry);this.secondaryGates.push(gateGeometry);}
    const lib=this.data.buildings.find(b=>b.osmId===263624481);if(lib){
     this.libraryAsset=createLibraryAsset({building:lib,baseY:BASE,buildingIndex:this.data.buildings.indexOf(lib),uniforms:{selection:this.selection,hover:this.hover,night:this.night},stage:this.libraryReviewStage||'material'});
     this.scene.add(this.libraryAsset);this.libraryMassing={source:'R11 unified asset',zones:this.libraryAsset.userData.plan.zones.map(z=>({id:z.id,levels:z.rows,height:z.top})),footprintUnchanged:true};

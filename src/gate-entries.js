@@ -23,6 +23,8 @@ export function getCampusGateEntries(data){
    category:'culture',categoryName:'校园入口',
    description:'位置取 OSM 南门两个 gate 节点的中点；当前只提供示意入口造型，尚未完成真实立面测量。',
    gateType:'osm-two-posts',
+   // Preserve both mapped openings so the sign fits in the central median.
+   passagePositions:south.map(p=>[...p.position]),
    source:'OpenStreetMap gates',
    osmSources:south.map(p=>p.id)
   });
