@@ -30,6 +30,16 @@ async function tap(selector){
  if(!p){const debug=await evaluate('({width:innerWidth,mode:window.campusDiagnostics()?.mode,hudHidden:document.querySelector("#walk-hud")?.hidden,bodyClass:document.body.className})');throw Error('Touch target hidden: '+selector+' '+JSON.stringify(debug));}
  await touch('touchStart',[[p.x,p.y,1]]);await sleep(60);await touch('touchEnd');return p;
 }
+async function inspectMapChrome(){
+ const ready=await evaluate('!document.querySelector("#map-more-btn")?.hidden && !document.querySelector("#map-search-launch")?.hidden');
+ if(!ready)return {passed:false,reason:'Mobile menu or search launcher hidden'};
+ await tap('#map-more-btn');await sleep(170);
+ const menu=await evaluate('!document.querySelector("#map-extra").hidden && document.querySelector("#map-more-btn").getAttribute("aria-expanded")==="true"');
+ await tap('#map-search-launch');await sleep(170);
+ const search=await evaluate('document.activeElement?.id==="search" && !document.querySelector("#explorer").classList.contains("collapsed")');
+ const closed=await evaluate('document.querySelector("#map-extra").hidden');
+ return {passed:menu&&search&&closed,menu,search,closed};
+}
 async function inspectInteractions(){
  const initial=await evaluate('window.campusDiagnostics()');
  await touch('touchStart',[[160,320,1]]);
@@ -43,14 +53,14 @@ async function inspectInteractions(){
  const labelSamples=[];
  for(let i=0;i<6;i++){labelSamples.push(await evaluate('[...document.querySelectorAll(".label")].filter(e=>!e.hidden).map(e=>({name:e.textContent,x:parseFloat(e.style.left),y:parseFloat(e.style.top)}))'));await sleep(100);}
  const labelDrift=Math.max(0,...labelSamples[0].map(a=>Math.max(0,...labelSamples.map(s=>s.find(b=>b.name===a.name)).filter(Boolean).map(b=>Math.hypot(a.x-b.x,a.y-b.y)))));
- await tap('#walk-btn');await sleep(400);const walkBefore=await evaluate('window.campusDiagnostics()');
+ await tap('#walk-btn');await sleep(1250);const walkBefore=await evaluate('window.campusDiagnostics()');
  const p=await evaluate('(()=>{const r=document.querySelector("[data-move=forward]").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()');
  await touch('touchStart',[[p.x,p.y,1]]);await sleep(850);await touch('touchEnd');await sleep(150);
  const walkAfter=await evaluate('window.campusDiagnostics()');await tap('#exit-walk');await sleep(300);
  const panMetres=Math.hypot(...pan.target.map((v,i)=>v-initial.target[i]));
  const walkMetres=Math.hypot(...walkAfter.camera.map((v,i)=>v-walkBefore.camera[i]));
  const result={panMetres,pinchDistanceBefore:distance(pan),pinchDistanceAfter:distance(pinch),pageScale:scale,labelSampleCount:labelSamples[0].length,labelDriftPx:labelDrift,walkMetres,walkMode:walkAfter.mode,returnMode:(await evaluate('window.campusDiagnostics()')).mode};
- result.passed=panMetres>1&&distance(pinch)<distance(pan)*.98&&scale===1&&labelSamples.every(sample=>sample.length<=3)&&labelDrift<=2&&walkAfter.mode==='walk'&&walkMetres>1&&result.returnMode==='orbit';
+ result.passed=panMetres>1&&distance(pinch)<distance(pan)*.98&&scale===1&&labelSamples.every(sample=>sample.length<=3)&&labelDrift<=2&&walkAfter.mode==='walk'&&walkMetres>1&&walkMetres<25&&result.returnMode==='orbit';
  return result;
 }
 async function mouseClick(selector){
@@ -147,6 +157,7 @@ try{
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'touch-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
    r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({interactions:r.interactions}));
   }
+  if(process.argv.includes('--r12-map-ui')&&width<=768&&pose==='home'){r.mapChrome=await inspectMapChrome();if(!r.mapChrome.passed)throw Error('Map Chrome check failed: '+JSON.stringify(r.mapChrome));}
   if(interactionChecks&&width>768&&pose==='home'){
    r.interactions=await inspectDesktopInteractions();
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'desktop-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));

@@ -47,3 +47,14 @@ A 北门 `north-gate`；B 梧桐大道 `avenue-east`；C 钱学森图书馆 `lib
 - 一旦网络/权限恢复，必须先重查 gh-pages 是否仍为基线、目标子目录是否冲突，再普通非强制推送暂存提交，最后公网获取 HTML 与最新 JS/CSS 的 HTTP 200，回到真实公网地址做手机和桌面验收。**未经用户单独同意不替换正式首页**。
 
 当前综合结论：主楼 A–E 阶段改进可进入独立 R12 测试预览；景观的近景遮挡、交互线程尚未交付及 Intel/Safari 未验证使 R12 整体正式上线不推荐。
+
+## 阶段更新：R12 已合格改动的选择性整合（以此节为准）
+
+- `4fc4f51`：接受 Codex `94a6f3e` 主楼 A–E 单一完整模型；没有重建旧图书馆重复体块。逸夫馆和图书馆下一轮未提交，保持 R11 现状。
+- `9cfc1e5`：从 `feature/r12-mobile-render@f4a5066` **只接收** `src/avenue-paving.js`、`src/campus-road-ground.js`、`src/plaza-terrain.js` 的道路/路缘/广场改进。静态 390/1440px 四机位 × 两宽度共 8 组没有 JS、HTTP、横向溢出或 context loss 错误。没有接收 `src/campus-vegetation.js` 与其 `src/world.js` 传参改动：动态 pinch 图片显示树叶卡在近景严重遮挡视线，变体版仍有此缺陷，继续暂缓。
+- `f6c5889`、`990fe2a`：仅合并 `feature/r12-map-interaction` 已提交的地图收纳、搜索、长按、镜头过渡、标签和后续收敛材质，不包含原工作树未提交的临时 CSS/dist。独立 Edge 390/430/768/1440px 复验均通过；原 QA 将 1050ms 入场过渡误计为 1200+ 单位步行，已在既有 QA 中等待过渡结束后验证，真实步行约 4.3 单位并限制异常位移小于 25。
+- 新增菜单实测：390/430/768 的“更多”可展开、搜索入口可聚焦并展开探索列表，菜单正确收起；1440 桌面保留原菜单/选中图书馆/缩放/图层。截图检查中 430px 地点卡与底部操作未重叠。
+
+**最终同参数六机位对照：**本报告的 `r12-six-scene-ab-390.jpg`、`r12-six-scene-ab-1440.jpg` 已替换为 **R10/R11/当前 R12 完整已接受组合**。最终实际 WebGL 结果是 `r12-visual-final/browser-results.json`：6 机位 × 390/1440px，共 12 组，错误/溢出/context loss 均 0；原 R10/R11 图像保持不变。R12 仍有 >750 kB JS 警告：当前 JS 771.03 kB（gzip 215.27），CSS 30.81 kB。测试 GPU 统一 RTX 5060 Laptop；Intel 核显掉帧、真实 iPhone Safari 长时稳定和透明叶片动态闪烁未获真机认证。
+
+**独立 Pages 子目录候选已更新但尚未推送：**`E:/CHATGPT/work/xjtu-pages-r12-staging-20261027`，分支 `publish/r12-staging-20261027@e95a6df`。只在 `r12-build-20261027/` 内通过正常追加提交更新 `index.html` 与 JS/CSS，旧版仍在 Git 历史。该子路径的 HTML/JS/CSS/校园数据均本地 HTTP 200；`r12-pages-final-staged/browser-results.json` 的 390/1440 共 6 组及 `r12-pages-final-interact-390/`、`r12-pages-final-interact-430/` 的实际触控/菜单均通过。**正式 main/gh-pages 没有推送**：本机 Git HTTPS TLS 失败，GitHub 连接器写入 blob 返回 403；不绕过权限、不强推、不覆盖 R10 首页或 R11 预览。必须恢复写权限、重新核对远端 SHA 和预览路径，普通安全更新后进行公网 HTTP 与真实浏览器复验。整体正式上线暂不推荐。
