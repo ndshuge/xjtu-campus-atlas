@@ -23,12 +23,12 @@
 | 430 × 932 | `r12-map-interaction/before-ready-430-single.png` | `r12-map-interaction/after-production-430-single.png` | 底部工具条和探索收起条互不重叠 |
 | 768 × 1024 | `r12-map-interaction/before-ready-768-single.png` | `r12-map-interaction/after-production-768-single.png` | 平板纵向布局无横向溢出 |
 
-选中图书馆后另存：`r12-map-interaction/after-production-detail-390.png`，基于**静态生产构建**。启动中截屏和热重载中的截屏已排除出正式交付。
+手机地点卡已通过实际打开、展开和关闭操作检查。一张静态版详情截图虽显示卡片，但背景 WebGL 偶发为空帧，**不作为正式建筑构图证据提交**；上表五组对比来自完整加载的全景画面。
 
 ## 实际 Edge 交互与自动化
 
 - **PASS — 五种视口**：生产 `dist` 同一个 Edge WebGL 页面切换 320/390/430/768/1440px，`window.__campusReady` 为 true，`documentElement.scrollWidth>innerWidth` 全为 false，静态全景截图完整；结构化结果 `r12-map-interaction/edge-production-viewport.json`。
-- **PASS — 搜索/点选**：独立 CDP 连续测试 390px 输入“钱学森图书馆”筛得 1 条记录；点击后名字正确、图书馆构图接近正面；保存详情截图；详情展开与关闭点击执行。首次测试记录 `r12-map-interaction/edge-qa-results.json`。
+- **PASS — 搜索/点选**：独立 CDP 连续测试 390px 输入“钱学森图书馆”筛得 1 条记录；点击后地点名称正确，详情展开与关闭点击执行；开发版曾目检接近正面的图书馆视角，但静态版选中建筑的完整画面仍需重新采集，不能以空帧截图判定构图达标。首次测试记录 `r12-map-interaction/edge-qa-results.json`。
 - **PASS — 手机 UI 复测**：静态构建重新打开搜索、选中图书馆、展开及关闭详情，关闭后探索面板恢复折叠；“更多”能开合。记录于本轮人工复核；先前追加录制存在**陈旧诊断快照**，未以其模式字段作漫游证明。
 - **PASS — 相机状态机（390px 开发版 CDP 实时诊断）**：进入漫游记录到 `mode='walk'`，转换期间 `walkTransition=true`，结束后 false；退出记录 `mode='orbit'`、`cameraFlight=true` 后 false。均见 `edge-qa-results.json`。没有宣称人眼 60FPS。
 - **未验证 — iPhone Safari 双指/长按手感、持续 FPS/热节流**：独立 CDP 双指操作在软件渲染模式上发生 `Input.dispatchTouchEvent` 超时；不能据此证明真实 iPhone 触控完全达标。原 OrbitControls 的移动缩放机制没有删除。
