@@ -1,0 +1,229 @@
+
+> xjtu-campus-atlas@1.0.0 verify
+> node scripts/verify.mjs && node scripts/verify-facade.mjs && node scripts/verify-walk.mjs && node scripts/verify-photos.mjs && node scripts/verify-render-regressions.mjs && node scripts/verify-four-inventions.mjs && node scripts/verify-integrated-landmarks.mjs && node scripts/verify-library-forecourt.mjs && node scripts/verify-library-reconstruction.mjs && node scripts/verify-library-green-roofs.mjs && node scripts/verify-mobile-plaza.mjs && node scripts/verify-gates.mjs && node scripts/audit-campus-boundary-20261026.mjs && node scripts/verify-perimeter-avenue.mjs && node scripts/verify-avenue-paving.mjs && node scripts/verify-avenue-main-e.mjs && node scripts/verify-main-e-roof-detail.mjs && node scripts/verify-vegetation-clearance.mjs && node scripts/verify-building-silhouettes.mjs && node scripts/verify-road-ground.mjs && node scripts/verify-render-layer-separation.mjs && node scripts/verify-campus-ground.mjs && node scripts/verify-site-evidence.mjs && node scripts/verify-library-massing.mjs && node scripts/verify-building-views.mjs && node scripts/verify-building-envelope-r9.mjs && node scripts/verify-mobile-render-precision.mjs && node scripts/verify-r11-mobile-render.mjs && node scripts/verify-library-asset-r11.mjs && node scripts/verify-buildings-r12.mjs
+
+PASS independent source footprint ID set
+PASS snapshot count and height-source accounting
+PASS WGS84 metric scale and source-coordinate retention
+PASS all rings are closed and coordinates finite
+PASS rendered building caps preserve surveyed footprint area
+PASS landmarks follow the official campus north-south order
+PASS documented library height and construction notices
+PASS road geometry and surface geometry are finite
+PASS walk entry roads exist outside target building/water footprints
+PASS syntax of all original JavaScript modules
+PASS license notices and research references are shipped
+PASS production entry references resolve, including subdirectory hosting
+{"passed":12,"baseBuildingTriangles":3860}
+{"passed":true,"library":{"batchedMeshes":5,"triangles":6300,"bounds":{"min":[-71.81300354003906,1.0800000429153442,-113.7969970703125],"max":[13.586999893188477,43.869998931884766,-67.302001953125]}},"mainTower":{"batchedMeshes":4,"bounds":{"min":[-52.130001068115234,1.100000023841858,103.80899810791016],"max":[-10.73900032043457,81.5999984741211,144.1790008544922]}}}
+{"passed":true,"realLandmarks":2,"syntheticOcclusion":true,"roadUv":true}
+{"passed":true,"photos":4,"license":"CC BY-SA 4.0","mobileDetailControls":5}
+{"passed":true,"plaza":[-31.32,0],"parts":54,"stadiumLayering":true,"labelSmoothing":true}
+{"passed":true,"installationCount":4,"geometryCount":54,"centerOpen":true}
+{"passed":true,"integratedModels":5,"modelNames":["Tengfei Tower / single tapered stone shaft","Siyuan student centre / deep eave and exposed truss","Yifu Science Hall / folded west glazing and curved portico","Yinshui Siyuan / photo-informed stele","Main A-E / complete owned building group"]}
+{"passed":true,"clockMaxY":50.52,"maxAllowed":50.85,"courtyardCenter":[-29.113,-54.696999999999996],"courtyardRadius":11.55,"geometryCount":21}
+{"passed":true,"clockElements":7,"forecourtElements":14,"facadeGlassWidth":85.4,"location":[-29.113,-54.696999999999996],"heightLimit":49.75}
+{"passed":true,"roofStrips":12,"roofBounds":{"min":[-71.013,21.027499998509885,-113.197],"max":[12.786999999999999,40.10250000149012,-79.39699999999999]},"source":"https://news.xjtu.edu.cn/info/1219/153746.htm","license":"generated texture, no copied image"}
+{"passed":true,"pavingBounds":{"left":-76,"right":13,"south":-42,"north":10},"landscapePatches":4,"oneFingerPan":true,"twoFingerCamera":true,"gateBackfaceFixed":true}
+{"passed":true,"otherGateCount":5,"hasNorth":true,"northBounds":[[-69.94599914550781,1.0999999999999996,-562.457],[6.053999900817871,12.9399995803833,-552.3769999046325]]}
+{
+  "ok": true,
+  "osmSource": "https://www.openstreetmap.org/relation/17568632",
+  "osmTimestamp": "2026-10-24T16:27:10Z",
+  "unit": "m",
+  "numberOfRings": 2,
+  "ringReports": [
+    {
+      "ring": 0,
+      "vertices": 7,
+      "west": 396.772,
+      "east": 722.716,
+      "north": 327.312,
+      "south": 560.38
+    },
+    {
+      "ring": 1,
+      "vertices": 55,
+      "west": -414.818,
+      "east": 356.121,
+      "north": -564.939,
+      "south": 481.567
+    }
+  ],
+  "bounds": {
+    "west": -414.818,
+    "east": 722.716,
+    "north": -564.939,
+    "south": 560.38
+  },
+  "widthMetres": 1137.534,
+  "heightMetres": 1125.319,
+  "coordinateAnchorsTested": 24,
+  "maxProjectionErrorMetres": 0.0006,
+  "historical": {
+    "widthMetres": 1538.64,
+    "lengthMetres": 1084.432,
+    "published": "2015-02-28",
+    "source": "https://www.xjtu.edu.cn/info/1248/5709.htm",
+    "scope": "West campus wall to east wall of third residential village; includes extra residential and surrounding land"
+  },
+  "differenceMetres": [
+    -401.106,
+    40.887
+  ],
+  "classification": "HISTORICAL_SCOPE_NOT_COMPARABLE_TO_OSM_BOUNDARY",
+  "decision": "Do not rescale or relocate campus structures from this comparison; obtain a matched-scope perimeter survey"
+}
+{
+  "passed": true,
+  "segments": 1395,
+  "wallMeters": 4376,
+  "openGates": [
+    "北门",
+    "东南门",
+    "西北门",
+    "西安交通大学北门",
+    "南门",
+    "南门",
+    "东北门",
+    "西南门",
+    "OSM road boundary crossing (unverified entrance)",
+    "OSM road boundary crossing (unverified entrance)"
+  ],
+  "meshes": [
+    [
+      "perimeter masonry plinth / schematic guide, NOT surveyed",
+      1395
+    ],
+    [
+      "perimeter sparse markers / NOT surveyed piers",
+      225
+    ],
+    [
+      "perimeter schematic middle guide / NOT verified rail",
+      1395
+    ],
+    [
+      "perimeter schematic upper guide / NOT verified roofline",
+      1395
+    ],
+    [
+      "perimeter schematic uprights / NOT verified infill",
+      370
+    ]
+  ],
+  "accuracy": "OSM footprint only; wall details illustrative and NOT verified by photographs"
+}
+{"passed":true,"name":"梧桐东道","lengthMetres":573,"walkways":9,"edges":15,"status":"2024 material types documented; shoulder widths and striping geometry interpretive"}
+{"passed":true,"mainETowerBounds":{"min":[-52.130001068115234,1.100000023841858,103.80899810791016],"max":[-10.73900032043457,81.5999984741211,144.1790008544922]},"mainEMaterials":4,"roadName":"梧桐东道","roadLength":573}
+{"passed":true,"reference":"2012-11-06 CC BY 3.0","bounds":{"min":[-38.899500002086164,67.75500003099441,127.344],"max":[-23.969499997913836,72.94499996900558,130.644]}}
+{"passed":true,"triangleCounts":{"plane-near":592,"plane-far":170,"cedar-near":328,"cedar-far":192},"crownClearance":true,"fenceBuildingGaps":199,"remainingWallMetres":3760,"gateClearanceAndCollision":true,"avenueYellowLine":true}
+{"passed":true,"buildingIds":[263624481,263632364,263624058,263624059,263624060,263624061],"meshes":11,"triangles":32016,"subsurface":false,"productionWorldIntegrated":true}
+{
+  "passed": true,
+  "officialSpines": 8,
+  "availableOnOSM": [
+    "梧桐东道",
+    "文治路",
+    "思源路",
+    "彭康路",
+    "梧桐西道",
+    "学森路"
+  ],
+  "missingFromOSM": [
+    "学苑东路",
+    "学苑西路"
+  ],
+  "sidewalkRuns": 44,
+  "edgingRuns": 49,
+  "pavedSegments": [
+    {
+      "name": "文治路",
+      "id": "way/148313518/0",
+      "OSMWidth": 7,
+      "pavementPieces": 7,
+      "mappedLength": 385
+    },
+    {
+      "name": "思源路",
+      "id": "way/148313743/0",
+      "OSMWidth": 7,
+      "pavementPieces": 7,
+      "mappedLength": 305
+    },
+    {
+      "name": "彭康路",
+      "id": "way/148313744/0",
+      "OSMWidth": 4.5,
+      "pavementPieces": 4,
+      "mappedLength": 304
+    },
+    {
+      "name": "梧桐西道",
+      "id": "way/263483674/0",
+      "OSMWidth": 7,
+      "pavementPieces": 7,
+      "mappedLength": 301
+    },
+    {
+      "name": "学森路",
+      "id": "way/263483675/0",
+      "OSMWidth": 7,
+      "pavementPieces": 4,
+      "mappedLength": 305
+    },
+    {
+      "name": "梧桐西道",
+      "id": "way/263483676/0",
+      "OSMWidth": 7,
+      "pavementPieces": 6,
+      "mappedLength": 271
+    },
+    {
+      "name": "文治路",
+      "id": "way/264273581/0",
+      "OSMWidth": 7,
+      "pavementPieces": 7,
+      "mappedLength": 316
+    },
+    {
+      "name": "文治路",
+      "id": "way/479230292/0",
+      "OSMWidth": 7,
+      "pavementPieces": 2,
+      "mappedLength": 63
+    },
+    {
+      "name": "文治路",
+      "id": "way/479230294/0",
+      "OSMWidth": 4.5,
+      "pavementPieces": 0,
+      "mappedLength": 25
+    }
+  ],
+  "sculpturalPads": 4,
+  "flatTerrain": true
+}
+{"passed":true,"roadY":1.225,"sidewalkY":1.285,"edgeY":1.295,"centerY":1.325,"pavements":53,"edges":64}
+{
+  "passed": true,
+  "officialSpines": 8,
+  "measuredRoadSegments": 9,
+  "sidewalkPieces": 44,
+  "edgePieces": 49,
+  "unmappedOfficialNames": [
+    "学苑东路",
+    "学苑西路"
+  ],
+  "sculpturePads": 4,
+  "buildingFootprintVertexOverlap": 0,
+  "examples": []
+}
+{"passed":true,"referenceCount":6,"featureCount":5,"blockedHighPriority":["library-courtyard-true-elevation","raised-curved-pedestrian-bridge"]}
+{"passed":true,"zones":[{"id":"north-reading-block","levels":4,"estimatedHeight":14,"area":3104},{"id":"north-book-stack","levels":5,"estimatedHeight":17.5,"area":891}],"sourceFootprintUnchanged":true,"courtyardAndRaisedBridgeUnchanged":true}
+{"passed":true,"results":[{"name":"钱学森图书馆","width":1440,"members":1,"maxNdc":[0.519,0.729]},{"name":"钱学森图书馆","width":390,"members":1,"maxNdc":[0.799,0.315]},{"name":"主楼E座","width":1440,"members":5,"maxNdc":[0.499,0.732]},{"name":"主楼E座","width":390,"members":5,"maxNdc":[0.799,0.337]},{"name":"逸夫科学馆","width":1440,"members":1,"maxNdc":[0.626,0.702]},{"name":"逸夫科学馆","width":390,"members":1,"maxNdc":[0.79,0.237]}],"entrances":[{"width":1440,"position":[-15.113,31.1,18],"fov":61.75},{"width":390,"position":[-29.113,31.1,8],"fov":110.73}]}
+{"passed":true,"coverage":[{"osmId":263624481,"wallSamples":41},{"osmId":263624058,"wallSamples":4},{"osmId":263624059,"wallSamples":4},{"osmId":263624060,"wallSamples":6},{"osmId":263624061,"wallSamples":5},{"osmId":263632364,"wallSamples":14}],"legacyNorthWindowBands":0,"mainPortalClear":true,"scienceFoldAndRoof":true,"sourceUnchanged":true}
+{"passed":true,"depth":"near 1.5 far 4800 orbit, walk 0.2","texture":"8x anisotropy trilinear mipmap","gate":"existing base anchored, no unsurveyed vertical displacement"}
+{"passed":true,"low":1.5,"high":1.8,"native":1,"foliageCoverage":true,"contextRestorationHook":true,"orbitSafe":true,"deviceRatioChange":true}
+{"passed":true,"researchCommit":"506052b","baseArea":7994.269172999998,"spatialSamples":2483,"roofSamples":217,"sourceDataUnchanged":true,"sharedWorldUnchanged":false,"otherBuildingGeometryAndColourUnchanged":true,"otherBuildingHash":"c260033c0048ffd82ee4bf8c18529a3ff255381a11913b3b6ae198ebb9f2e9ef","legacyLibraryVertices":1128,"newGenericLibraryVertices":0,"gray":{"triangles":1591,"meshes":4},"material":{"triangles":23239,"meshes":7},"heightScope":"49.75m applies only to the southern principal volume; north/stack/low wings have independent estimated heights","terrainAndBridgeInferred":false}
+{"passed":true,"baseCommit":"165a0a3","dataUnchanged":true,"nonCoreGeometryAndColoursUnchanged":true,"nonCoreHash":"13d92c03519782e01a55909284429c69e753f1f06d64313b1364fafc459c3e14","genericVerticesBefore":1992,"genericVerticesAfter":0,"roofSamples":246,"material":{"triangles":13571,"meshes":5},"gray":{"triangles":733,"meshes":2},"portalFrontAndSideClear":true,"pickingPreserved":true,"heightPolicy":"photo estimates, not surveyed"}

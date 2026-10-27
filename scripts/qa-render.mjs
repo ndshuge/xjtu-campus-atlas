@@ -8,6 +8,8 @@ const poses=(process.argv[4]||'avenue-east,north-wall').split(',');
 const widths=(process.argv[5]||'1440,390').split(',').map(Number);
 const dpr=Number(process.argv[6])||1;
 const interactionChecks=process.argv.includes('--interact');
+const searchPlace=process.argv.find(a=>a.startsWith('--search-place='))?.slice('--search-place='.length);
+const clickBuilding=process.argv.find(a=>a.startsWith('--building-click='))?.slice('--building-click='.length);
 // Preserve independent interaction state: reusing one CDP target across sizes
 // can retain synthetic pointer/OrbitControls state and produce false failures.
 if(interactionChecks&&widths.length!==1)throw Error('Run --interact with one width per Edge process; use separate invocations for 390/430/768/desktop.');
@@ -68,10 +70,23 @@ async function inspectDesktopInteractions(){
  await mouseClick('#layers-btn');await mouseClick('#toggle-trees');await sleep(400);
  const hidden=await evaluate('window.campusDiagnostics()');
  await mouseClick('#toggle-trees');await mouseClick('#layers-btn');
- await mouseClick('#search');await send('Input.insertText',{text:'钱学森'});await sleep(300);await mouseClick('#place-list button');await sleep(1700);
+ await mouseClick('#search');await send('Input.insertText',{text:searchPlace||'钱学森'});await sleep(300);await mouseClick('#place-list button');await sleep(1700);
  const selected=await evaluate('window.campusDiagnostics()');
  const result={rotationMetres:Math.hypot(...rotated.camera.map((v,i)=>v-initial.camera[i])),distanceBeforeWheel:distance(rotated),distanceAfterWheel:distance(zoomed),treeLayerTrianglesBefore:zoomed.triangles,treeLayerTrianglesHidden:hidden.triangles,selected:selected.selected};
- result.passed=result.rotationMetres>2&&distance(zoomed)<distance(rotated)*.98&&hidden.triangles<zoomed.triangles*.8&&selected.selected==='钱学森图书馆';return result;
+ result.passed=result.rotationMetres>2&&distance(zoomed)<distance(rotated)*.98&&hidden.triangles<zoomed.triangles*.8&&selected.selected===(searchPlace||'钱学森图书馆');return result;
+}
+async function inspectOwnedClick(id,width){
+ const point=await evaluate(`(()=>{const w=window.__r12World;if(!w)return null;const b=w.data.buildings.find(b=>b.id===${JSON.stringify(id)});if(!b)return null;
+  const xs=b.points.map(p=>p[0]),zs=b.points.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),z0=Math.min(...zs),z1=Math.max(...zs),cx=(x0+x1)/2,cz=(z0+z1)/2;
+  for(const y of [.55,.75,.3].map(f=>1.1+(b.displayHeight||b.height)*f))for(const [x,z] of [[cx,z0],[cx,z1],[x0,cz],[x1,cz],[cx,cz]]){
+   const v=w.controls.target.clone().set(x,y,z).project(w.camera),sx=(v.x+1)*innerWidth/2,sy=(1-v.y)*innerHeight/2;
+   if(sx<15||sx>innerWidth-15||sy<70||sy>innerHeight-80)continue;w.pointer.set(v.x,v.y);w.ray.setFromCamera(w.pointer,w.camera);const hit=w.ray.intersectObjects(w.pickables,false)[0];
+   if(hit&&w.hitPlace(hit)?.place?.id===b.id)return {x:sx,y:sy,name:b.name,id:b.id};
+  }return null;})()`);
+ if(!point)throw Error('No visible owned facade for actual click '+id);
+ if(width<=768){await touch('touchStart',[[point.x,point.y,1]]);await sleep(60);await touch('touchEnd');}
+ else {await send('Input.dispatchMouseEvent',{type:'mousePressed',x:point.x,y:point.y,button:'left',clickCount:1});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:point.x,y:point.y,button:'left',clickCount:1});}
+ await sleep(1700);const selectedId=await evaluate('window.__r12World.selectedPlace?.id');return {...point,kind:width<=768?'actual touch tap':'actual mouse click',selectedId,passed:selectedId===id};
 }
 async function inspectLibraryClick(){
  const p=await evaluate(`(()=>{const w=window.__libraryWorld;if(!w)return null;const v=w.controls.target.clone().set(-29.113,9,-75.5).project(w.camera);return {x:(v.x+1)*innerWidth/2,y:(1-v.y)*innerHeight/2};})()`);
@@ -94,6 +109,7 @@ try{
   if(m.method==='Network.responseReceived'&&m.params.response.status>=400)httpErrors.push({url:m.params.response.url,status:m.params.response.status});
  });
  await send('Page.enable');await send('Runtime.enable');await send('Log.enable');await send('Network.enable');
+ if(process.argv.includes('--low-power-gpu'))await send('Page.addScriptToEvaluateOnNewDocument',{source:`(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,options,...rest){return get.call(this,type,/^webgl/.test(type)?{...options,powerPreference:'low-power'}:options,...rest);};})()`});
  for(const width of widths)for(const pose of poses){
   const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=width<768?844:900;
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:width<=768});
@@ -125,7 +141,7 @@ try{
   const gpu=await evaluate('(()=>{const g=document.querySelector("#scene canvas").getContext("webgl2"),e=g.getExtension("WEBGL_debug_renderer_info");return e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER)})()');
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
   const png=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,file),Buffer.from(png.result.data,'base64'));
-  const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,runtime,frameSample,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
+  const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,requestedPowerPreference:process.argv.includes('--low-power-gpu')?'low-power':'product default',runtime,frameSample,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
   if(interactionChecks&&width<=768&&pose==='home'){
    r.interactions=await inspectInteractions();
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'touch-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
@@ -137,6 +153,7 @@ try{
    r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({desktopInteractions:r.interactions}));
   }
   if(process.argv.includes('--library-click')&&pose==='r11-south-front'&&width===1440){r.libraryClick=await inspectLibraryClick();if(!r.libraryClick.passed)throw Error('Actual library mesh click failed');}
+  if(clickBuilding){r.buildingClick=await inspectOwnedClick(clickBuilding,width);if(!r.buildingClick.passed)throw Error('Actual building selection failed '+clickBuilding);console.log(JSON.stringify({buildingClick:r.buildingClick}));}
   results.push(r);console.log(JSON.stringify({pose,width,file,fps:runtime.fps,triangles:runtime.triangles,drawCalls:runtime.drawCalls,loadMs:runtime.sceneLoadMs,errors:r.errors.length,httpErrors:r.httpErrors.length}));
  }
  await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify({origin,testedAt:new Date().toISOString(),results,deviceCaveat:'Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance.'},null,2));

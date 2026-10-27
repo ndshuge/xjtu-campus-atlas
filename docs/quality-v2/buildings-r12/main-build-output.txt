@@ -1,0 +1,14 @@
+
+> xjtu-campus-atlas@1.0.0 build
+> vite build
+
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 42 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   8.76 kB │ gzip:   3.74 kB
+dist/assets/index-vaJwB8Xg.css   26.10 kB │ gzip:   6.83 kB
+dist/assets/index-a7K0ZeW0.js   765.14 kB │ gzip: 213.46 kB
+
+✓ built in 271ms

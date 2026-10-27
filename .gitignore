@@ -7,3 +7,7 @@ node_modules/
 dist-r11-library/
 dist-r11-legacy-check/
 dist-r11-baseline/
+
+.cache-r12/
+dist-r12-buildings/
+dist-r12-baseline/
