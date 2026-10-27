@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#253f37" />
+  <meta name="description" content="走进梧桐掩映的西安交通大学兴庆校区。真实 OpenStreetMap 建筑轮廓、校园道路、绿地与地标，尽在可自由探索的 3D 校园。" />
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+  <title>西交 · 兴庆 | 校园 3D 图志</title>
+  <script type="module" crossorigin src="./assets/index-DtSI1Uo0.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-vaJwB8Xg.css">
+</head>
+<body>
+  <div id="scene" aria-label="西安交通大学兴庆校区三维地图"></div>
+  <div id="labels" aria-label="地图地点标注"></div>
+  <div id="loading" role="status"><div class="loader-mark">交</div><h1>梧桐深处，西交。</h1><p id="loading-text">正在铺开兴庆校园的每一条路…</p><div class="loader-line"></div></div>
+  <div id="fallback" hidden role="alert"><h2>当前浏览器无法启动 3D 画面</h2><p>请使用支持 WebGL 2 的新版 Edge、Chrome、Firefox 或 Safari，并开启硬件加速。</p><button onclick="location.reload()">重新加载</button><a href="https://vi.xjtu.edu.cn/qt/jddt.htm" target="_blank" rel="noopener">查看学校官方平面图 ↗</a></div>
+  <header class="topbar">
+    <a class="identity" href="./" aria-label="西交校园 3D 首页"><span class="seal" aria-hidden="true">交</span><span><strong>西安交通大学</strong><small>XI’AN JIAOTONG UNIVERSITY</small></span></a>
+    <span class="edition"><i></i> 兴庆校园 · 3D 图志 </span>
+    <nav aria-label="网站工具"><button id="sources-btn" class="text-btn">数据说明 <span>↗</span></button><button id="capture-btn" class="icon-btn" aria-label="保存当前视图" title="保存当前视图"><svg viewBox="0 0 24 24"><path d="M3 7h4l2-3h6l2 3h4v13H3Z"/><circle cx="12" cy="13" r="4"/></svg></button><button id="help-btn" class="icon-btn" aria-label="操作帮助" title="操作帮助">?</button><button id="fullscreen-btn" class="icon-btn" aria-label="切换全屏" title="全屏"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg></button></nav>
+  </header>
+  <div class="intro"><div class="eyebrow">34°14′50″ N &nbsp; 108°58′45″ E</div><h1>梧桐深处，<br>再见西交<span>。</span></h1><p>一座花园学府，一段立体旅程。</p></div>
+  <aside class="explorer" id="explorer" aria-label="地点探索">
+    <button class="mobile-handle" id="explorer-toggle" aria-expanded="true"><span></span><b>探索校园</b><i>⌄</i></button>
+    <div class="explorer-body"><div class="search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="search" type="search" placeholder="搜索建筑、书院、地标" aria-label="搜索校园地点" autocomplete="off"/><kbd>/</kbd></div>
+    <div class="categories" role="group" aria-label="地点分类"><button data-cat="landmarks" class="active">地标</button><button data-cat="academic">教学</button><button data-cat="living">生活</button><button data-cat="all">全部</button></div>
+    <div class="list-heading"><span id="list-title">从这里，认识交大</span><span id="result-count"></span></div>
+    <div id="place-list" class="place-list" aria-live="polite"></div>
+    <div class="explorer-foot"><span><i></i> 真实轮廓 · 示意立面</span><button id="tour-btn">中轴导览 <span>↗</span></button></div></div>
+  </aside>
+  <aside class="detail" id="detail" hidden aria-label="选中地点详情"><div class="detail-peek"><div class="detail-peek-name"><small id="detail-peek-type">校园地标</small><strong id="detail-peek-title">地点名称</strong></div><div class="detail-peek-actions"><button id="detail-photo-shortcut" aria-label="查看真实校园照片" hidden>实景</button><button id="detail-walk-shortcut" aria-label="在这个地点附近开始漫游">步行</button><button id="detail-expand" aria-expanded="false" aria-controls="detail-body">展开</button></div><button class="close-btn" id="close-detail-mobile" aria-label="关闭地点详情">×</button></div><button class="close-btn" id="close-detail" aria-label="关闭地点详情">×</button><div id="detail-body"></div></aside>
+  <div class="map-controls"><button class="compass" id="north-btn" aria-label="朝向正北" title="朝向正北"><span>N</span><svg id="compass-needle" viewBox="0 0 40 40"><path d="M20 4 29 33 20 27 11 33Z" fill="currentColor"/><path d="M20 4V27L11 33Z" fill="#bac6bc"/></svg></button><div class="zoom-control"><button id="zoom-in" aria-label="放大">+</button><button id="zoom-out" aria-label="缩小">−</button></div><button id="layers-btn" class="map-square" aria-label="地图图层" title="图层"><svg viewBox="0 0 24 24"><path d="m3 8 9-5 9 5-9 5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg></button></div>
+  <section class="layers panel" id="layers" hidden aria-label="图层控制"><h2>地图图层</h2><label>地点标注 <input id="toggle-labels" type="checkbox" checked/></label><label>梧桐与绿荫 <input id="toggle-trees" type="checkbox" checked/></label><label>建筑色彩 <select id="color-mode"><option value="natural">自然材质</option><option value="category">功能分区</option><option value="evidence">数据依据</option></select></label><label>画面质量 <select id="quality"><option value="high">精细 · 阴影</option><option value="low">流畅 · 省电</option></select></label><p id="layer-note">立面与单株树木为程序化示意。</p></section>
+  <section class="mini-panel" aria-label="校园总览小地图"><div><span>校园总览</span><small>点击定位</small></div><canvas id="minimap" width="360" height="310" aria-label="校园平面小地图，点击可定位" tabindex="0"></canvas><div class="mini-legend"><i></i><span>校区边界</span><b id="view-height">俯瞰校园</b></div></section>
+  <div class="view-title"><span id="view-kicker">XINGQING CAMPUS</span><strong id="view-name">兴庆 · 全景</strong><span class="view-line"></span></div>
+  <div class="toolbar" role="group" aria-label="浏览模式"><button id="home-btn" class="active"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3Z"/><path d="M9 20v-7h6v7"/></svg><span>全景</span></button><button id="top-btn"><svg viewBox="0 0 24 24"><path d="m3 8 9-5 9 5-9 5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg><span>俯视</span></button><button id="orbit-btn" aria-pressed="false"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-25 12 12)"/><path d="m19 4 2 4-4 1"/></svg><span>环绕</span></button><button id="walk-btn" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="14" cy="4" r="2"/><path d="m11 8 4 1 3 4M11 8l-3 5-4 1M13 10l-2 6-4 5M11 16l6 5"/></svg><span>漫游</span></button><span class="tool-divider"></span><button id="light-btn" aria-label="切换光照：晴日"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4 4l2 2M18 18l2 2M4 20l2-2M18 6l2-2"/></svg><span id="light-label">晴日</span></button></div>
+  <div class="walk-hud" id="walk-hud" hidden><span class="crosshair">+</span><div class="walk-note">步行漫游 <span>拖动环顾 · WASD / 方向键移动 · Shift 加速</span><button id="exit-walk">退出 <kbd>Esc</kbd></button></div><div class="walk-pad"><button data-move="forward" aria-label="向前走">↑</button><button data-move="left" aria-label="向左走">←</button><button data-move="back" aria-label="向后走">↓</button><button data-move="right" aria-label="向右走">→</button></div></div>
+  <div class="tour-hud panel" id="tour-hud" hidden><span id="tour-step">01 / 06</span><strong id="tour-name">校园中轴导览</strong><div><button id="tour-pause" aria-label="暂停导览">暂停</button><button id="tour-next" aria-label="下一站">下一站 →</button><button id="tour-close" aria-label="结束导览">×</button></div></div>
+  <div id="toast" role="status"></div><div id="tooltip" hidden></div>
+  <footer><span class="interaction-hint" id="interaction-hint">拖动旋转 <i>·</i> 滚轮缩放 <i>·</i> 右键平移 <i>·</i> 点击建筑探索</span><span class="attribution"><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a><button id="accuracy-btn">精度说明</button></span></footer>
+  <dialog id="info-dialog"><button class="close-btn" id="close-dialog" aria-label="关闭说明">×</button><div id="dialog-content"></div></dialog>
+</body>
+</html>
