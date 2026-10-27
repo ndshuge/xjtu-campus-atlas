@@ -1,0 +1,76 @@
+{
+  "baseline": "165a0a355faef670a87f7a7a3c07ddce9095b5b4",
+  "branch": "feature/r12-buildings",
+  "sourceStableAfterFinalQA": true,
+  "sourceHashes": {
+    "src/world.js": "fb6df398397b8b74bcd04b6a263ca756fe28a9247bd1b5cd665a3b23a5026bcb",
+    "src/building-asset-kit.js": "997207558060f96a5e449cd830e2dd29f09ca0ab0103b791cb7197c0c7c11a4a",
+    "src/main-complex-asset.js": "ac849fe1203705bda4d77af96807c31733c6b3b453cd11c2b659c0671ba862af",
+    "src/building-silhouettes.js": "80473b818f53c4972c97b3b4cef0baa356639552445afd601f12b1b40db489fb",
+    "src/cultural-facades.js": "54e784bc256c7edcb75fb47ac96fe4dd9da4ec6b7c3f10ac75c6ff12fbb1a659",
+    "src/library-asset.js": "90f3555da9af8b6fbfcafb2e4905831c37cdab75221807496db20e234ba5c574",
+    "src/buildings-r12-review.js": "e148d26df1374f788d8483599bde09da74c17e843f5307a7e0f0f95265c70ee7",
+    "scripts/qa-render.mjs": "ca2b5fb39e0906211ac832e0671f39b63d34e1b1f945bac0de44ef69ef737ab1",
+    "public/data/campus.json": "d4a91a0cb649c79503016441b3cfe1a56d25b34c1a95849f185f9a2051d64cc1",
+    "src/science-hall-asset.js": "7172217d2b70e9c2cd9fa7d01eff3da79905314d5f0b00cdf3eb7b12f5587258"
+  },
+  "protectedFilesUnchanged": [
+    "src/campus-vegetation.js",
+    "src/rendering-quality.js",
+    "src/style.css",
+    "src/app.js",
+    "src/library-asset-plan.js",
+    "public/data/campus.json"
+  ],
+  "fullVerify": {
+    "passed": true,
+    "commands": 32,
+    "log": "final-verify-output.txt"
+  },
+  "standardBuild": {
+    "passed": true,
+    "outDir": "dist-r12-check",
+    "mainJsBytes": 771236,
+    "gzipBytes": 214491,
+    "warning": "Chunk larger than 750kB retained",
+    "assetMeasurement": "File byte length and Node gzipSync default"
+  },
+  "browser": {
+    "engine": "Windows Edge real WebGL",
+    "viewportCss": [
+      [
+        1440,
+        900
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "gpu": "ANGLE NVIDIA RTX 5060 Laptop D3D11",
+    "finalLibraryViews": 8,
+    "campusViews": 10,
+    "actualPickingIds": [
+      "way/263624057",
+      "way/263632364",
+      "way/263624481"
+    ],
+    "jsErrors": 0,
+    "httpErrors": 0,
+    "visibleEdgeTab": "http://127.0.0.1:27922/#way%2F263624057"
+  },
+  "qualityStatus": "Photo-guided approximate reconstruction; engineering checks passed; not measured/as-built or high-fidelity final approval",
+  "openIssues": [
+    "Intel390 regression not retested on Intel",
+    "iPhone Safari hardware not tested",
+    "FPS variability incl slower main1440 samples remains unexplained",
+    "390 home label stability had zero samples and is NOT accepted",
+    "Camera near-main foreground occlusion left for interaction thread",
+    "Unverified main/science heights and rear details; library courtyard/raised walkway elevations remain gated"
+  ],
+  "publication": {
+    "mergedMain": false,
+    "pushed": false,
+    "pagesDeployed": false
+  }
+}

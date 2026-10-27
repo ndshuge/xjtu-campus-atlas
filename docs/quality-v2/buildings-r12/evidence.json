@@ -148,5 +148,22 @@
       "Roof ridge and skylight layout",
       "Ground sections and 2026 facade condition"
     ]
+  },
+  "libraryCalibration": {
+    "inherited": "docs/quality-v2/library-r11/evidence.json",
+    "geometry": "R11 plan unchanged; 4-storey north, 5-storey stack, segmented south; 49.75m southern scope unchanged",
+    "materials": {
+      "north": "#c8ccc9",
+      "south": "#c4b3a4",
+      "status": "photo-guided uncalibrated approximate colors; original procedural stone and opaque glass; no photo textures"
+    },
+    "lod": "Only subpixel reveal/sill/centre-window-frame suffix removed via material mesh drawRange; all curtain bays retained",
+    "unknown": [
+      "Courtyard elevations",
+      "Raised walkway section",
+      "Exact rear facade and storey/setback dimensions",
+      "Current 2026 condition"
+    ],
+    "intelStatus": "NOT accepted: low-power context still NVIDIA"
   }
 }

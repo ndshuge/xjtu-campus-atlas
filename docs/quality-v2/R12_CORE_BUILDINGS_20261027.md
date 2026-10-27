@@ -45,3 +45,48 @@
 - [新近入口桌面](buildings-r12/science-final/r12-science-entry-1440.png)、[手机](buildings-r12/science-final/r12-science-entry-390.png)、[鸟瞰](buildings-r12/science-final/r12-science-aerial-1440.png)。近景不是全馆框图，完整附属体看鸟瞰/斜视。
 
 未达标：北侧窗格/屋脊及天窗未有图纸，附属馆高度、后立面及2026现状仍未知；现有R6树位挡入口局部，未移动树。Intel复验请求low-power后实际仍选RTX5060，只登记了[探针](buildings-r12/library-low-power-probe/browser-results.json)，不能据此关闭R11 Intel风险。下一项是图书馆自身细部LOD、批量构建和材质校准，再做同GPU多轮性能/全校园回归。
+
+## 第三阶段：图书馆单一资产的材质与开销
+
+保留 R11 的 library-asset-plan.js、4层北馆/5层书库、分段南馆及49.75m仅用于南馆的范围；不重新建模、不叠加旧立面、不改下沉庭院/通道/地形。沿用[2016官方结构报道](https://news.xjtu.edu.cn/info/1219/153497.htm)、张轶朋北入口照片（EXIF 2017-05-18，相机时间未独立校验）、Liuxingy南面2021-09-06及航拍2025-07-25，完整日期/许可见[既有R11证据](library-r11/evidence.json)。北馆改为较冷的浅灰，南馆改为较暖的石色；这是人工照片匹配，未做色卡标定或摄影纹理采样。
+
+- 将逐面临时 BufferGeometry 改成原始数组累计后按材质构建。交替20样本、3预热的 Node 构造中位数 47.34→24.31ms，[完整样本](buildings-r12/library-construction-benchmark.json)。这是构造阶段 CPU 基准，不是页面加载或 GPU 性能结论。
+- 小窗洞侧壁、窗台、中心细框位于同材质 BufferGeometry 的连续末尾。按0.12m参考厚度的屏幕投影设置0.85px进入/0.55px退出滞回，通过 drawRange 取舍细节。墙面、窗洞、玻璃、入口幕墙分格、屋顶、名称和钟面都保留；不隐藏树木、不改全站DPR。
+- 看图发现第一版把入口幕墙分格一并隐藏，已退回；实测发现独立细节批次增加近景调用，也已改成同材质末尾范围。两种中间版本结果留本机，不作为最终成绩。
+- 完整资产 Node 23,239三角形/7网格；浏览器含4个文字/钟面平面为23,247/11网格，与R11相同。390px正面活动三角形降至10,487，降低约54.9%；实际加载的几何缓冲仍是2,231,456字节、10材质、4生成纹理。LOD不减少常驻显存，不能把活动三角形减少写成内存减少。
+- [101屋面射线/滞回/近景恢复/无新增材质批次专项](buildings-r12/library-lod-verification.json)、原R11的2483平面/217屋面采样全部通过。原ID、选择、搜索、着色和资源释放保留。
+
+| 图书馆固定视角 | R11 | R12 |
+| --- | --- | --- |
+| 南面1440 | [旧](buildings-r12/science-library-before/r12-library-front-1440.png) | [新](buildings-r12/library-r12-final/r12-library-front-1440.png) |
+| 南面390 | [旧](buildings-r12/science-library-before/r12-library-front-390.png) | [新](buildings-r12/library-r12-final/r12-library-front-390.png) |
+| 近景1440/390 | [桌面](buildings-r12/library-near-before/r12-library-near-1440.png) / [手机](buildings-r12/library-near-before/r12-library-near-390.png) | [桌面](buildings-r12/library-r12-final/r12-library-near-1440.png) / [手机](buildings-r12/library-r12-final/r12-library-near-390.png) |
+| 侧面与北面 | [旧结果](buildings-r12/science-library-before/browser-results.json) | [八张最终图和原始结果](buildings-r12/library-r12-final/browser-results.json) |
+
+人工看图：主要幕墙分格在390远景保留；近景窗洞恢复，背面能看清北馆/书库/南馆逐级关系。近景机位刻意看入口细部，会裁掉钟楼顶部；完整轮廓用正面/侧面机位。南馆侧后细节仍大量为重复估算，未达到实景或测绘级。
+
+## 第四阶段：最终回归、性能边界与集成交接
+
+完整 npm run verify 的32项命令及标准 npm run build -- --outDir dist-r12-check 均exit 0，原测试未删除。[原始验证输出](buildings-r12/final-verify-output.txt) / [构建输出](buildings-r12/final-build-output.txt)。标准主JS 771.23kB/gzip215.88kB，750kB警告保留；没有通过调高门限隐藏警告。没有GLB、额外材质图或第三方模型下载；验收双入口构建的world模块735.28→747.42kB/gzip201.56→205.87kB，和标准单入口包体口径不同。
+
+- [最终校园10图](buildings-r12/campus-final/browser-results.json)：北门、梧桐东道、主楼、图书馆北面、逸夫西面，1440/390，JS/HTTP错误0、无WebGL context lost。四大发明广场也在主楼/图书馆南面的组团截图中，未移动广场或树位。
+- [图书馆实际鼠标/触屏点选](buildings-r12/library-click-final/browser-results.json)，与先前主楼、逸夫馆真实点选均返回原OSM ID。产品[桌面搜索/旋转/滚轮](buildings-r12/product-1440/browser-results.json)、[390拖拽/双指/漫游/返回](buildings-r12/product-390/browser-results.json)通过，页面缩放仍为1。桌面测试的树木图层开关只验功能，不用于性能样本。
+- 390首页标签采样数是0，不能把labelDrift=0视为标签稳定性通过；标签专项留给交互线程。普通手机主楼检查机位前景有邻楼屋顶遮挡，独立固定清晰机位可见整塔。保留旧机位不利结果，交相机线程调整，不在建筑代码中隐藏邻楼。
+- [最终配对性能](buildings-r12/paired-performance.json)：实际RTX5060、相同相机/目标/DPR1、每次120新鲜帧、2092棵原树仍在。图书馆390两轮平均帧间隔5.827→5.813ms、5.813→5.813ms，未观察出FPS收益；1440两轮5.823→5.856ms、9.747→5.717ms，波动较大。主楼1440一次5.737→9.979ms较慢；其早期配对9.762→9.876ms接近。逸夫1440最终5.807→5.815ms、390为13.828→14.027ms，早期也有慢样本。所有原始样本保留，不把几何下降当作帧率提升，不宣称已定位系统调度/其他GPU负载的影响。
+- 最终图书馆正面全场景调用1440为450→448，390为268→268；主楼清晰正面254→245、172→166。三栋建筑全部加载，场景差值是组合结果，不全归因某一栋。
+- low-power探针仍选NVIDIA；它只是WebGL提示，参见[MDN上下文选项](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext)。R11 Intel390回退仍未关闭。Windows Edge 390不是iPhone Safari；真实iPhone、Intel同机复验、温度/功耗隔离和性能波动归因均待处理。
+- 已在可见Edge打开 http://127.0.0.1:27922/#way%2F263624057 ，可见主楼选中、≈100m“示意高度·非实测”和完整组团；留存交付标签页。产品首页为 http://127.0.0.1:27922/ ，不是公开发布地址。
+
+建筑真实性结论：本轮是照片引导的近似重建，主楼高塔/低翼/低连接体、逸夫主馆/低联络体/坡屋顶附馆较R11明显改善；图书馆保留已校准体量，主要改善材质分辨和构造/远景开销。未知精确层高、主楼后桥廊、逸夫后立面/屋脊/天窗、图书馆庭院标高和2026外观均未编造，不能标记“高保真完成”。
+
+### 交给统一集成线程
+
+基线165a0a3；阶段一94a6f3e、阶段二42b838c，阶段三提交包含本段记录。依次集成建筑提交，不复制dist，不整体替换world.js。最终状态与测试以本报告、最终source-lock及Git历史为准。
+
+world.js接入只涉及：导入主楼/逸夫专属模块；通用构建在消耗原随机颜色后跳过对应8+1个ID；相应displayHeight和dimensions；禁用旧Main/Science silhouettes及旧专属立面/屋顶叠层；退出这些ID通用屋顶空调；新增资产到场景/pickables；按buildingIndex恢复原ID；着色模式转发；每帧render前调用libraryAsset.updateDetailLOD(camera,height*renderer.getPixelRatio())。所有移动端精度、植被、地面、相机/UI分支应保留集成线程的新实现。library-asset-plan.js、campus.json和R6/R8/R10专项文件未改。
+
+cultural-facades.js仅抽出可复用Science屋架工厂，Siyuan不变。building-silhouettes.js增加默认true的includeMain/includeScience选项，保留旧工厂供兼容验证。旧专项仍运行；新增建筑唯一归属/光线采样/LOD专项必须一起保留。scripts/qa-render.mjs只增加可选建筑点击/搜索/GPU提示并修正独立进程清理；合并时保留交互线程的新增逻辑。
+
+复现：npm run verify；npm run build -- --outDir dist-r12-check；npx vite build --config vite.buildings-r12.config.mjs；npx vite preview --config vite.buildings-r12.config.mjs --host 127.0.0.1 --port 27922；用scripts/qa-buildings-r12.mjs和现有qa-render.mjs执行记录中的机位。对照构建加--mode r12-baseline，另用27923端口；插件从Git读取165a源文件，无需改动其他工作树。
+
+构建曾在本工作树生成tracked dist改动、verify重写旧报告，它们未纳入提交，留本机保护；中间截图同样保留。未修改其他工作树、合并main、推送或发布Pages。

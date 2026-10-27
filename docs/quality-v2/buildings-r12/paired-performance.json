@@ -1,0 +1,751 @@
+{
+  "status": "Geometry and construction improvement verified; scene FPS improvement NOT established; Intel regression remains open.",
+  "method": "Sequential Edge WebGL production, identical camera, target, viewport, DPR and actual GPU; 120 new visible RAF intervals. Whole campus and all 2092 trees present. Two final paired library rounds, one with reverse order. sceneReadyMs is diagnostic scene-ready time with cache/compile variability, not network loading.",
+  "intermediateSamples": "perf-before/after-1,2,3 are preserved intermediate split-mesh implementation, superseded by final drawRange version; slow samples not deleted.",
+  "pairs": [
+    {
+      "round": 4,
+      "pose": "r12-main-front-clear",
+      "width": 1440,
+      "height": 900,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 777868,
+        "drawCalls": 254,
+        "frameMeanMs": 5.736666666666664,
+        "sceneReadyMs": 4493,
+        "geometryResources": 239,
+        "textureResources": 17,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 755117,
+        "drawCalls": 245,
+        "frameMeanMs": 9.979166666666675,
+        "sceneReadyMs": 4105,
+        "geometryResources": 232,
+        "textureResources": 17,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": {
+            "detailVisible": true,
+            "projectedThicknessPixels": 3.139034440870625,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "round": 4,
+      "pose": "r12-science-entry",
+      "width": 1440,
+      "height": 900,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 762358,
+        "drawCalls": 250,
+        "frameMeanMs": 5.806666666666668,
+        "sceneReadyMs": 2942,
+        "geometryResources": 232,
+        "textureResources": 16,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 758981,
+        "drawCalls": 248,
+        "frameMeanMs": 5.815000000000001,
+        "sceneReadyMs": 3068,
+        "geometryResources": 229,
+        "textureResources": 16,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": {
+            "detailVisible": true,
+            "projectedThicknessPixels": 1.3660451391164725,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "round": 4,
+      "pose": "r12-library-front",
+      "width": 1440,
+      "height": 900,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 840686,
+        "drawCalls": 450,
+        "frameMeanMs": 5.822500000000006,
+        "sceneReadyMs": 3265,
+        "geometryResources": 323,
+        "textureResources": 32,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 818450,
+        "drawCalls": 448,
+        "frameMeanMs": 5.855833333333332,
+        "sceneReadyMs": 3179,
+        "geometryResources": 319,
+        "textureResources": 32,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": {
+            "detailVisible": true,
+            "projectedThicknessPixels": 0.7303400894555323,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "round": 4,
+      "pose": "r12-main-front-clear",
+      "width": 390,
+      "height": 844,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 515786,
+        "drawCalls": 172,
+        "frameMeanMs": 5.793333333333332,
+        "sceneReadyMs": 3906,
+        "geometryResources": 169,
+        "textureResources": 25,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 500169,
+        "drawCalls": 166,
+        "frameMeanMs": 5.813333333333329,
+        "sceneReadyMs": 3868,
+        "geometryResources": 163,
+        "textureResources": 25,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": {
+            "detailVisible": true,
+            "projectedThicknessPixels": 1.4164256400211792,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "round": 4,
+      "pose": "r12-science-entry",
+      "width": 390,
+      "height": 844,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 496667,
+        "drawCalls": 126,
+        "frameMeanMs": 13.82833333333333,
+        "sceneReadyMs": 2677,
+        "geometryResources": 120,
+        "textureResources": 22,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 493468,
+        "drawCalls": 125,
+        "frameMeanMs": 14.026666666666673,
+        "sceneReadyMs": 2601,
+        "geometryResources": 119,
+        "textureResources": 22,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": {
+            "detailVisible": true,
+            "projectedThicknessPixels": 0.9885189571372007,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "round": 4,
+      "pose": "r12-library-front",
+      "width": 390,
+      "height": 844,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 546806,
+        "drawCalls": 268,
+        "frameMeanMs": 5.826666666666665,
+        "sceneReadyMs": 2776,
+        "geometryResources": 261,
+        "textureResources": 30,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 518797,
+        "drawCalls": 268,
+        "frameMeanMs": 5.8125,
+        "sceneReadyMs": 2754,
+        "geometryResources": 261,
+        "textureResources": 30,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 10487,
+          "activeMeshes": 10,
+          "detailLOD": {
+            "detailVisible": false,
+            "projectedThicknessPixels": 0.42168885417058344,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "round": 5,
+      "pose": "r12-library-front",
+      "width": 1440,
+      "height": 900,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 840686,
+        "drawCalls": 450,
+        "frameMeanMs": 9.74666666666667,
+        "sceneReadyMs": 5194,
+        "geometryResources": 323,
+        "textureResources": 32,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 818450,
+        "drawCalls": 448,
+        "frameMeanMs": 5.716666666666659,
+        "sceneReadyMs": 4949,
+        "geometryResources": 319,
+        "textureResources": 32,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": {
+            "detailVisible": true,
+            "projectedThicknessPixels": 0.7303400894555323,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    },
+    {
+      "round": 5,
+      "pose": "r12-library-front",
+      "width": 390,
+      "height": 844,
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "dpr": 1,
+      "sameCameraGpuDpr": true,
+      "before": {
+        "sceneTriangles": 546806,
+        "drawCalls": 268,
+        "frameMeanMs": 5.813333333333336,
+        "sceneReadyMs": 3529,
+        "geometryResources": 261,
+        "textureResources": 30,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 23247,
+          "activeMeshes": 11,
+          "detailLOD": null,
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      },
+      "after": {
+        "sceneTriangles": 518797,
+        "drawCalls": 268,
+        "frameMeanMs": 5.8125,
+        "sceneReadyMs": 3414,
+        "geometryResources": 261,
+        "textureResources": 30,
+        "library": {
+          "ids": [
+            263624481
+          ],
+          "indices": [
+            6
+          ],
+          "genericVertices": 0,
+          "triangles": 23247,
+          "meshes": 11,
+          "activeTriangles": 10487,
+          "activeMeshes": 10,
+          "detailLOD": {
+            "detailVisible": false,
+            "projectedThicknessPixels": 0.42168885417058344,
+            "thicknessMetres": 0.12,
+            "enterPixels": 0.85,
+            "exitPixels": 0.55
+          },
+          "materials": 10,
+          "textures": 4,
+          "geometryBytes": 2231456,
+          "owners": [
+            "library-asset.js"
+          ],
+          "positions": [
+            {
+              "id": 263624481,
+              "center": [
+                -30.53,
+                -140
+              ],
+              "sourceHeight": 49.75,
+              "displayHeight": 49.75
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

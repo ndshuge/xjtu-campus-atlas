@@ -13,6 +13,7 @@ const views={
  'r12-science-oblique':{eye:[-85,70,120],look:[78,14,-45],fov:56},
  'r12-science-back':{eye:[100,58,-245],look:[78,12,-48],fov:55},
  'r12-science-aerial':{eye:[75,210,-48],look:[75,0,-47],fov:52},
+ 'r12-library-near':{eye:[-29,14,-42],look:[-29,15,-94],fov:70},
  'r12-library-front':{eye:[-29,39,73],look:[-29,23,-108],fov:53},
  'r12-library-side':{eye:[190,145,-145],look:[-29,17,-145],fov:64},
  'r12-library-back':{eye:[-29,58,-385],look:[-29,17,-185],fov:52}
@@ -26,12 +27,12 @@ CampusWorld.prototype.home=function(...args){
  return result;
 };
 function audit(w,ids,objects){
- const indices=ids.map(id=>w.data.buildings.findIndex(b=>b.osmId===id)),mats=new Set(),textures=new Set();let triangles=0,meshes=0,bytes=0,genericVertices=0;
+ const indices=ids.map(id=>w.data.buildings.findIndex(b=>b.osmId===id)),mats=new Set(),textures=new Set();let triangles=0,meshes=0,bytes=0,genericVertices=0,activeTriangles=0,activeMeshes=0;
  const g=w.buildingMesh.geometry;
  for(let i=0;i<g.attributes.buildingIndex.count;i++)if(indices.includes(Math.round(g.attributes.buildingIndex.getX(i))))genericVertices++;
- if(genericVertices){triangles+=genericVertices/3;meshes++;mats.add(w.buildingMesh.material);}
- for(const obj of objects.filter(Boolean))obj.traverse(m=>{if(!m.isMesh)return;meshes++;triangles+=(m.geometry.index?.count||m.geometry.attributes.position.count)/3;for(const a of Object.values(m.geometry.attributes))bytes+=a.array.byteLength;mats.add(m.material);for(const t of Object.values(m.material))if(t?.isTexture)textures.add(t.uuid);});
- return {ids,indices,genericVertices,triangles,meshes,materials:mats.size,textures:textures.size,geometryBytes:bytes,owners:objects.filter(Boolean).map(o=>o.userData.owner||o.name),positions:ids.map(id=>{const b=w.data.buildings.find(x=>x.osmId===id);return {id,center:b.center,sourceHeight:b.height,displayHeight:b.displayHeight||b.height};})};
+ if(genericVertices){triangles+=genericVertices/3;activeTriangles+=genericVertices/3;meshes++;activeMeshes++;mats.add(w.buildingMesh.material);}
+ for(const obj of objects.filter(Boolean))obj.traverse(m=>{if(!m.isMesh)return;meshes++;const count=(m.geometry.index?.count||m.geometry.attributes.position.count)/3;triangles+=count;let visible=m.visible;for(let p=m.parent;p;p=p.parent)visible=visible&&p.visible;if(visible){activeTriangles+=Math.min(count,m.geometry.drawRange.count/3);activeMeshes++;}for(const a of Object.values(m.geometry.attributes))bytes+=a.array.byteLength;mats.add(m.material);for(const t of Object.values(m.material))if(t?.isTexture)textures.add(t.uuid);});
+ return {ids,indices,genericVertices,triangles,meshes,activeTriangles,activeMeshes,detailLOD:objects.find(o=>o?.userData.detailLOD)?.userData.detailLOD||null,materials:mats.size,textures:textures.size,geometryBytes:bytes,owners:objects.filter(Boolean).map(o=>o.userData.owner||o.name),positions:ids.map(id=>{const b=w.data.buildings.find(x=>x.osmId===id);return {id,center:b.center,sourceHeight:b.height,displayHeight:b.displayHeight||b.height};})};
 }
 const diagnostics=CampusWorld.prototype.diagnostics;
 CampusWorld.prototype.diagnostics=function(){

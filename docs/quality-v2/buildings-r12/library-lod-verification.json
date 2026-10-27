@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "fullTriangles": 23239,
+  "farTriangles": 10479,
+  "farReduction": 0.549076982658462,
+  "hysteresis": true,
+  "nearDetailsRestore": true,
+  "visibleRoofSamples": 101,
+  "dataUnchanged": true,
+  "ownershipUnchanged": true,
+  "globalDprTreesRoadsChanged": false
+}
