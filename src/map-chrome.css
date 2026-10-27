@@ -1,7 +1,7 @@
 /* R12 — Map is the canvas. Contextual controls, restrained glass. */
 #map-more-btn svg,#map-search-launch svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
 #map-more-btn svg circle{fill:currentColor;stroke:none}
-.map-extra{position:fixed;z-index:38;bottom:calc(102px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;padding:7px;background:rgba(250,251,248,.94);border:1px solid rgba(118,145,125,.24);border-radius:20px;box-shadow:0 7px 26px rgba(15,35,26,.12);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2)}
+.map-extra{position:fixed;z-index:38;bottom:calc(102px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:7px;padding:7px;background:rgba(250,251,248,.94);border:1px solid rgba(118,145,125,.24);border-radius:20px;box-shadow:0 7px 26px rgba(15,35,26,.12)}
 .map-extra[hidden],#map-more-btn[hidden],#map-search-launch[hidden]{display:none!important}
 .map-extra button{font:500 12px/1.25 system-ui,sans-serif;color:#315244;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;min-width:64px;min-height:55px;border:0;border-radius:13px;background:transparent;cursor:pointer}
 .map-extra button svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.7}
@@ -15,7 +15,7 @@
 @media(min-width:769px){.toolbar .tool-divider{display:none}.map-extra{bottom:91px}.detail{border-radius:18px}}
 @media(max-width:768px){
  .intro{display:none!important}
- #map-search-launch{position:fixed;z-index:26;display:flex;align-items:center;gap:9px;left:calc(12px + env(safe-area-inset-left,0px));top:calc(91px + env(safe-area-inset-top,0px));width:min(225px,calc(100vw - 154px));height:43px;padding:0 14px;border:1px solid rgba(133,154,141,.33);border-radius:15px;background:rgba(249,251,247,.94);color:#526b5b;box-shadow:0 2px 9px rgba(20,40,24,.055);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);text-align:left;font:500 13px/1.3 system-ui,sans-serif}
+ #map-search-launch{position:fixed;z-index:26;display:flex;align-items:center;gap:9px;left:calc(12px + env(safe-area-inset-left,0px));top:calc(91px + env(safe-area-inset-top,0px));width:min(225px,calc(100vw - 154px));height:43px;padding:0 14px;border:1px solid rgba(133,154,141,.33);border-radius:15px;background:rgba(249,251,247,.94);color:#526b5b;box-shadow:0 2px 9px rgba(20,40,24,.055);text-align:left;font:500 13px/1.3 system-ui,sans-serif}
  #map-search-launch svg{flex:0 0 auto}
  #map-search-launch span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
  #map-search-launch:active{transform:scale(.985);background:#f1f5ef}
@@ -30,7 +30,7 @@
  .explorer:not(.collapsed) .explorer-body{overflow-y:auto;overscroll-behavior:contain}
  .search-wrap{border-radius:14px}
  #place-list{overscroll-behavior:contain}
- .detail{bottom:calc(85px + env(safe-area-inset-bottom,0px));left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));width:auto;max-width:none;min-width:0;padding:11px 13px;border-radius:19px;border:1px solid rgba(135,159,140,.3);background:rgba(250,251,248,.94);box-shadow:0 4px 20px rgba(17,35,27,.095);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2);transition:max-height .3s cubic-bezier(.2,.75,.28,1),opacity .22s ease}
+ .detail{bottom:calc(85px + env(safe-area-inset-bottom,0px));left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));width:auto;max-width:none;min-width:0;padding:11px 13px;border-radius:19px;border:1px solid rgba(135,159,140,.3);background:rgba(250,251,248,.94);box-shadow:0 4px 20px rgba(17,35,27,.095);transition:max-height .3s cubic-bezier(.2,.75,.28,1),opacity .22s ease}
  .detail-peek{gap:8px}
  .detail-peek-name strong{font:600 16px/1.34 system-ui,sans-serif;letter-spacing:-.02em}
  .detail-peek-actions button{border-radius:12px;min-height:39px;min-width:40px}
