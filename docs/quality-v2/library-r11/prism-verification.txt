@@ -1,0 +1,17 @@
+
+[prism-verify] http://127.0.0.1:27862/
+  shots → E:\CHATGPT\work\xjtu-r11-library\docs\quality-v2\library-r11-prism
+
+overflow sweep
+   360  ok
+   768  ok
+  1024  ok
+  1440  ok
+  1920  ok
+
+GSAP pins (hold beats): 0
+
+page errors: none
+reduced-motion: content present (415 chars)
+
+[prism-verify] PASS  ·  now READ the screenshots in E:\CHATGPT\work\xjtu-r11-library\docs\quality-v2\library-r11-prism

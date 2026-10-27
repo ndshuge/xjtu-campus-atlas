@@ -1,0 +1,83 @@
+{
+  "researchBranch": "research/r11-xjtu-assets",
+  "researchCommit": "506052b",
+  "researchReadMethod": "git show; no branch merge and no third-party binary download",
+  "sources": [
+    {
+      "id": "official-structure-2016",
+      "url": "https://news.xjtu.edu.cn/info/1219/153497.htm",
+      "published": "2016-11-21",
+      "photographed": null,
+      "rights": "Reference only; no school photo/model copied into this asset",
+      "verifiedVia": "research 506052b A06 and existing R7/R9 evidence; current web fetch timed out",
+      "observations": ["North reading building: four floors", "Connecting stack: five floors", "Southern low sections I/III: three floors", "Southern principal section II: eleven above-ground floors plus roof utility volumes", "49.75m applies to the documented southern height range"],
+      "missing": ["As-built storey heights", "I/III numbering on a georeferenced plan", "Vertical datum and courtyard elevations", "Exact tier/setback/clock dimensions"]
+    },
+    {
+      "id": "north-front-official",
+      "url": "https://wmw.xjtu.edu.cn/images/19/09/09/1umue6d7cp/dibiao5.jpg",
+      "gallery": "https://wmw.xjtu.edu.cn/wh/dbcg1/2.htm",
+      "author": "张轶朋",
+      "published": null,
+      "photographedExif": "2017-05-18 17:51:33; camera clock not independently verified",
+      "rights": "Reference only; reuse existing off-repository R9 reference; not a texture",
+      "observations": ["Tall north colonnade", "Pale piers and long cornice", "Dark vertical glass with floor bands"],
+      "missing": ["Side/back coverage", "Measured bay and entrance widths", "2026 condition"]
+    },
+    {
+      "id": "south-front-commons",
+      "url": "https://commons.wikimedia.org/wiki/File:西安交通大学_钱学森图书馆和四大发明广场.jpg",
+      "author": "Liuxingy",
+      "published": null,
+      "photographed": "2021-09-06",
+      "rights": "CC BY-SA 4.0; existing attributed preview retained; not sampled as texture",
+      "observations": ["Stepped southern skyline", "Central dark glass ribbon", "Continuous low front atrium and one library name", "Small clock above the upper volume"],
+      "missing": ["Reliable metric tier dimensions", "Post-2024 renovation appearance"]
+    },
+    {
+      "id": "aerial-commons",
+      "url": "https://commons.wikimedia.org/wiki/File:西交兴庆之俯视钱学森图书馆.jpg",
+      "author": "Liuxingy",
+      "published": "2026-06-25 upload; not the capture date",
+      "photographed": "2025-07-25 per EXIF; camera clock not independently verified",
+      "rights": "CC BY-SA 4.0; existing attributed preview retained; not orthorectified or sampled as texture",
+      "observations": ["North U/shan-shaped reading building and pitched roof", "T-shaped connecting stack", "Southern stepped body with angular low wings", "Broad green southern low-wing roofs"],
+      "missing": ["Surveyed roof pitch", "Ortho control points and elevations", "Exact planting coverage"]
+    },
+    {
+      "id": "roof-groundcover-official",
+      "url": "https://news.xjtu.edu.cn/info/1219/153746.htm",
+      "published": "2017-04-07",
+      "photographed": null,
+      "rights": "Reference only; original generated turf/no photograph texture",
+      "observations": ["Historic Class-C low groundcover rooftop planting"],
+      "missing": ["Exact boundaries and 2026 continuity"]
+    },
+    {
+      "id": "renovation-2024",
+      "url": "https://news.xjtu.edu.cn/info/1002/213283.htm",
+      "published": "2024-08-13",
+      "photographed": null,
+      "rights": "Reference only; no binary copied",
+      "observations": ["Renovation of second-floor circulation and southern facilities; older photographs do not prove current interiors"],
+      "missing": ["Current floor plans", "Courtyard sections and raised walkway clearances"]
+    }
+  ],
+  "asset": {
+    "buildingId": "way/263624481",
+    "osmId": 263624481,
+    "authoring": "Original procedural asset; reuse existing R7 massing seams, Three.js architecture batch and materials",
+    "format": "JavaScript-generated BufferGeometry; no GLB conversion necessary",
+    "units": "metres",
+    "worldOriginWGS84": [108.9793, 34.2473],
+    "axes": {"x": "east", "y": "up", "z": "south"},
+    "rootTransform": "identity; source coordinates remain in the established campus projection",
+    "heightScope": "49.75m bounds southern principal volume only",
+    "estimated": ["14m north and 17.5m stack from assumed 3.5m floors", "13m southern podium/low-wing heights", "Tier dimensions and floor allocation among setbacks", "Clock proportion and position", "Modest north/stack roof slopes", "Fenestration and material appearance"],
+    "notInferred": ["Sunken courtyard elevation", "Raised curved walkway", "Basement or interior geometry"],
+    "materials": ["wall", "north", "glass", "frame", "roof", "reveal", "groundcover"],
+    "textures": "Original generated turf, lettering and clock faces; opaque PBR glazing; no third-party image texture or separate environment map",
+    "ownership": "library-asset.js owns visible shell/roof/facade/clock/groundcover; existing library-forecourt.js retains the site approximation",
+    "fallback": "Unpatched world.js continues to use the preserved legacy components; patched world must retire their library render paths"
+  }
+}

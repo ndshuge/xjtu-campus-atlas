@@ -73,6 +73,14 @@ async function inspectDesktopInteractions(){
  const result={rotationMetres:Math.hypot(...rotated.camera.map((v,i)=>v-initial.camera[i])),distanceBeforeWheel:distance(rotated),distanceAfterWheel:distance(zoomed),treeLayerTrianglesBefore:zoomed.triangles,treeLayerTrianglesHidden:hidden.triangles,selected:selected.selected};
  result.passed=result.rotationMetres>2&&distance(zoomed)<distance(rotated)*.98&&hidden.triangles<zoomed.triangles*.8&&selected.selected==='钱学森图书馆';return result;
 }
+async function inspectLibraryClick(){
+ const p=await evaluate(`(()=>{const w=window.__libraryWorld;if(!w)return null;const v=w.controls.target.clone().set(-29.113,9,-75.5).project(w.camera);return {x:(v.x+1)*innerWidth/2,y:(1-v.y)*innerHeight/2};})()`);
+ if(!p||p.x<0||p.x>1440||p.y<0||p.y>900)throw Error('Library click target is outside viewport');
+ await send('Input.dispatchMouseEvent',{type:'mousePressed',...p,button:'left',clickCount:1});
+ await send('Input.dispatchMouseEvent',{type:'mouseReleased',...p,button:'left',clickCount:1});await sleep(1700);
+ const selected=await evaluate('window.campusDiagnostics().selected');
+ return {kind:'actual mesh click',...p,selected,passed:selected==='钱学森图书馆'};
+}
 try{
  let port;for(let i=0;i<80;i++){try{port=(await fs.readFile(path.join(profile,'DevToolsActivePort'),'utf8')).split('\n')[0];break;}catch{}await sleep(150);}
  if(!port)throw Error('Edge did not start');
@@ -95,7 +103,7 @@ try{
   if(pose==='home'){}else if(pose.startsWith('place:')||pose.startsWith('group:')){url.hash=pose.slice(6);if(pose.startsWith('group:'))url.searchParams.set('group','1');}else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
   await send('Page.navigate',{url:'about:blank'});
   await send('Page.navigate',{url:url.href});
-  let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate('location.href==='+JSON.stringify(url.href)+' && !!window.__campusReady && document.querySelector("#loading").hidden');if(loaded)break;}
+  let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate(`location.href===${JSON.stringify(url.href)} && typeof window.campusDiagnostics==='function' && !!window.__campusReady && document.querySelector("#loading").hidden`);if(loaded)break;}
   if(!loaded)throw Error('Scene did not become ready: '+url.href);
   await sleep(1800);
   if(pose==='north-wall-oblique'){
@@ -105,6 +113,11 @@ try{
    await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:x+delta,y,button:'left',clickCount:1});await sleep(900);
   }
   if(pose.startsWith('group:'))await sleep(1700);
+  const frameSample=process.argv.includes('--measure-frames')?await evaluate(`new Promise(resolve=>{
+   const times=[],before=window.campusDiagnostics().fps,startFrames=window.__libraryWorld?.frames;
+   let done=false;const finish=timedOut=>{if(done)return;done=true;const elapsed=times.length>1?times.at(-1)-times[0]:0;resolve({reportedBefore:before,reportedAfter:window.campusDiagnostics().fps,freshFrames:Math.max(0,times.length-1),elapsedMs:elapsed,fps:elapsed?(times.length-1)*1000/elapsed:0,renderedFrames:startFrames===undefined?null:window.__libraryWorld.frames-startFrames,documentHidden:document.hidden,timedOut});};
+   const tick=t=>{if(done)return;times.push(t);if(times.length>=121)finish(false);else requestAnimationFrame(tick);};requestAnimationFrame(tick);setTimeout(()=>finish(true),15000);
+  })`):null;
   const runtime=await evaluate('window.campusDiagnostics()');
   if(pose.startsWith('group:')&&runtime.groupView?.name!==pose.slice(6))throw Error('Building group view mismatch: '+pose);
   if(pose.startsWith('place:')&&runtime.selected!==pose.slice(6))throw Error('Screenshot target mismatch: expected '+pose.slice(6)+', got '+runtime.selected);
@@ -112,7 +125,7 @@ try{
   const gpu=await evaluate('(()=>{const g=document.querySelector("#scene canvas").getContext("webgl2"),e=g.getExtension("WEBGL_debug_renderer_info");return e?g.getParameter(e.UNMASKED_RENDERER_WEBGL):g.getParameter(g.RENDERER)})()');
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
   const png=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,file),Buffer.from(png.result.data,'base64'));
-  const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,runtime,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
+  const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,runtime,frameSample,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
   if(interactionChecks&&width<=768&&pose==='home'){
    r.interactions=await inspectInteractions();
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'touch-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
@@ -123,6 +136,7 @@ try{
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'desktop-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
    r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({desktopInteractions:r.interactions}));
   }
+  if(process.argv.includes('--library-click')&&pose==='r11-south-front'&&width===1440){r.libraryClick=await inspectLibraryClick();if(!r.libraryClick.passed)throw Error('Actual library mesh click failed');}
   results.push(r);console.log(JSON.stringify({pose,width,file,fps:runtime.fps,triangles:runtime.triangles,drawCalls:runtime.drawCalls,loadMs:runtime.sceneLoadMs,errors:r.errors.length,httpErrors:r.httpErrors.length}));
  }
  await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify({origin,testedAt:new Date().toISOString(),results,deviceCaveat:'Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance.'},null,2));

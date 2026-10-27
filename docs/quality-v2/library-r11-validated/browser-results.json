@@ -1,0 +1,3038 @@
+{
+  "origin": "http://127.0.0.1:27862/library-r11-review.html",
+  "testedAt": "2026-10-26T18:04:04.962Z",
+  "results": [
+    {
+      "pose": "r11-north-front",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-north-front-1440&inspection=r11-north-front",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-north-front-1440.png",
+      "elapsedMs": 15640,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 260,
+          "farTrees": 1832
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 452,
+        "triangles": 842113,
+        "geometries": 365,
+        "textures": 31,
+        "fps": 5,
+        "sceneLoadMs": 11895,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999975,
+          57.99999999999999,
+          -385
+        ],
+        "target": [
+          -29,
+          17,
+          -185
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-north-front",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 11895,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-north-detail",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-north-detail-1440&inspection=r11-north-detail",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-north-detail-1440.png",
+      "elapsedMs": 10929,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 284,
+          "farTrees": 1808
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 431,
+        "triangles": 871679,
+        "geometries": 345,
+        "textures": 31,
+        "fps": 8,
+        "sceneLoadMs": 7628,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.99999999999999,
+          20,
+          -274
+        ],
+        "target": [
+          -28.999999999999996,
+          10,
+          -212
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-north-detail",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 7628,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-south-front",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-south-front-1440&inspection=r11-south-front",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-south-front-1440.png",
+      "elapsedMs": 11232,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 267,
+          "farTrees": 1825
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 450,
+        "triangles": 840686,
+        "geometries": 323,
+        "textures": 32,
+        "fps": 7,
+        "sceneLoadMs": 7905,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999993,
+          38.999999999999986,
+          73.00000000000001
+        ],
+        "target": [
+          -28.999999999999993,
+          22.999999999999996,
+          -107.99999999999999
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-south-front",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 7905,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": [],
+      "libraryClick": {
+        "kind": "actual mesh click",
+        "x": 719.3226217842711,
+        "y": 550.7518455346736,
+        "selected": "钱学森图书馆",
+        "passed": true
+      }
+    },
+    {
+      "pose": "r11-east",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-east-1440&inspection=r11-east",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-east-1440.png",
+      "elapsedMs": 11735,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 42,
+          "farTrees": 2050
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 430,
+        "triangles": 629130,
+        "geometries": 337,
+        "textures": 29,
+        "fps": 7,
+        "sceneLoadMs": 8368,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          189.99999999999997,
+          145,
+          -145
+        ],
+        "target": [
+          -29,
+          17,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-east",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 8368,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-occlusion",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-occlusion-1440&inspection=r11-occlusion",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-occlusion-1440.png",
+      "elapsedMs": 11396,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 128,
+          "farTrees": 1964
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 416,
+        "triangles": 711222,
+        "geometries": 323,
+        "textures": 29,
+        "fps": 7,
+        "sceneLoadMs": 8134,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          165.99999999999994,
+          66.99999999999999,
+          -145
+        ],
+        "target": [
+          -29,
+          20.000000000000004,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-occlusion",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 8134,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-oblique",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-oblique-1440&inspection=r11-oblique",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-oblique-1440.png",
+      "elapsedMs": 10783,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 227,
+          "farTrees": 1865
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 479,
+        "triangles": 784943,
+        "geometries": 354,
+        "textures": 32,
+        "fps": 8,
+        "sceneLoadMs": 7528,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -190,
+          91.00000000000001,
+          14
+        ],
+        "target": [
+          -28.999999999999996,
+          22,
+          -140
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-oblique",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 7528,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-oblique-wide",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-oblique-wide-1440&inspection=r11-oblique-wide",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-oblique-wide-1440.png",
+      "elapsedMs": 11097,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 163,
+          "farTrees": 1929
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 493,
+        "triangles": 748119,
+        "geometries": 360,
+        "textures": 32,
+        "fps": 8,
+        "sceneLoadMs": 7770,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -239.99999999999994,
+          114.99999999999996,
+          64.99999999999991
+        ],
+        "target": [
+          -29,
+          22,
+          -147
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-oblique-wide",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 7770,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-aerial",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-aerial-1440&inspection=r11-aerial",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-aerial-1440.png",
+      "elapsedMs": 11271,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 347,
+        "triangles": 555514,
+        "geometries": 294,
+        "textures": 29,
+        "fps": 7,
+        "sceneLoadMs": 7790,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999996,
+          259.5340599924769,
+          -160.59075699962622
+        ],
+        "target": [
+          -29,
+          0,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 7,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-aerial",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 7790,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-context",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-context-1440&inspection=r11-context",
+      "width": 1440,
+      "height": 900,
+      "file": "r11-context-1440.png",
+      "elapsedMs": 11041,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 235,
+          "farTrees": 1857
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 441,
+        "triangles": 819707,
+        "geometries": 342,
+        "textures": 31,
+        "fps": 7,
+        "sceneLoadMs": 7695,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -165,
+          81.99999999999999,
+          -349.9999999999999
+        ],
+        "target": [
+          -28.999999999999993,
+          19.99999999999999,
+          -174.9999999999999
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-context",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": true
+        },
+        "totalLoadMs": 7695,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-north-front",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-north-front-390&inspection=r11-north-front",
+      "width": 390,
+      "height": 844,
+      "file": "r11-north-front-390.png",
+      "elapsedMs": 14282,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 89,
+          "farTrees": 2003
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 236,
+        "triangles": 556543,
+        "geometries": 235,
+        "textures": 29,
+        "fps": 6,
+        "sceneLoadMs": 11019,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999975,
+          57.99999999999999,
+          -385
+        ],
+        "target": [
+          -29,
+          17,
+          -185
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-north-front",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 11019,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-north-detail",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-north-detail-390&inspection=r11-north-detail",
+      "width": 390,
+      "height": 844,
+      "file": "r11-north-detail-390.png",
+      "elapsedMs": 10648,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 101,
+          "farTrees": 1991
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 217,
+        "triangles": 563118,
+        "geometries": 213,
+        "textures": 28,
+        "fps": 7,
+        "sceneLoadMs": 7697,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.99999999999999,
+          20,
+          -274
+        ],
+        "target": [
+          -28.999999999999996,
+          10,
+          -212
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-north-detail",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7697,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-south-front",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-south-front-390&inspection=r11-south-front",
+      "width": 390,
+      "height": 844,
+      "file": "r11-south-front-390.png",
+      "elapsedMs": 10687,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 71,
+          "farTrees": 2021
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 268,
+        "triangles": 546806,
+        "geometries": 261,
+        "textures": 30,
+        "fps": 7,
+        "sceneLoadMs": 7761,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999993,
+          38.999999999999986,
+          73.00000000000001
+        ],
+        "target": [
+          -28.999999999999993,
+          22.999999999999996,
+          -107.99999999999999
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-south-front",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7761,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-east",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-east-390&inspection=r11-east",
+      "width": 390,
+      "height": 844,
+      "file": "r11-east-390.png",
+      "elapsedMs": 10208,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 129,
+        "triangles": 478711,
+        "geometries": 133,
+        "textures": 15,
+        "fps": 8,
+        "sceneLoadMs": 7227,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          189.99999999999997,
+          145,
+          -145
+        ],
+        "target": [
+          -29,
+          17,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-east",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7227,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-occlusion",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-occlusion-390&inspection=r11-occlusion",
+      "width": 390,
+      "height": 844,
+      "file": "r11-occlusion-390.png",
+      "elapsedMs": 10240,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 31,
+          "farTrees": 2061
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 101,
+        "triangles": 483959,
+        "geometries": 105,
+        "textures": 17,
+        "fps": 8,
+        "sceneLoadMs": 7303,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          165.99999999999994,
+          66.99999999999999,
+          -145
+        ],
+        "target": [
+          -29,
+          20.000000000000004,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-occlusion",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7303,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-oblique",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-oblique-390&inspection=r11-oblique",
+      "width": 390,
+      "height": 844,
+      "file": "r11-oblique-390.png",
+      "elapsedMs": 10343,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 67,
+          "farTrees": 2025
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 129,
+        "triangles": 505023,
+        "geometries": 131,
+        "textures": 18,
+        "fps": 8,
+        "sceneLoadMs": 7346,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -190,
+          91.00000000000001,
+          14
+        ],
+        "target": [
+          -28.999999999999996,
+          22,
+          -140
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-oblique",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7346,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-oblique-wide",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-oblique-wide-390&inspection=r11-oblique-wide",
+      "width": 390,
+      "height": 844,
+      "file": "r11-oblique-wide-390.png",
+      "elapsedMs": 10511,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 8,
+          "farTrees": 2084
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 173,
+        "triangles": 484231,
+        "geometries": 176,
+        "textures": 16,
+        "fps": 8,
+        "sceneLoadMs": 7453,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -239.99999999999994,
+          114.99999999999996,
+          64.99999999999991
+        ],
+        "target": [
+          -29,
+          22,
+          -147
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-oblique-wide",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7453,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-aerial",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-aerial-390&inspection=r11-aerial",
+      "width": 390,
+      "height": 844,
+      "file": "r11-aerial-390.png",
+      "elapsedMs": 10621,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 196,
+        "triangles": 514606,
+        "geometries": 195,
+        "textures": 27,
+        "fps": 7,
+        "sceneLoadMs": 7560,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -28.999999999999996,
+          259.5340599924769,
+          -160.59075699962622
+        ],
+        "target": [
+          -29,
+          0,
+          -145
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 1,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-aerial",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7560,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r11-context",
+      "url": "http://127.0.0.1:27862/library-r11-review.html?__qa_pose=r11-context-390&inspection=r11-context",
+      "width": 390,
+      "height": 844,
+      "file": "r11-context-390.png",
+      "elapsedMs": 10245,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:27862/assets/review-BGSRAt1L.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 68,
+          "farTrees": 2024
+        },
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 242,
+        "triangles": 545190,
+        "geometries": 240,
+        "textures": 27,
+        "fps": 8,
+        "sceneLoadMs": 7226,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -165,
+          81.99999999999999,
+          -349.9999999999999
+        ],
+        "target": [
+          -28.999999999999993,
+          19.99999999999999,
+          -174.9999999999999
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "libraryAudit": {
+          "variant": "R11",
+          "stage": "material",
+          "pose": "r11-context",
+          "genericVertices": 0,
+          "owners": {
+            "library-asset.js": 11
+          },
+          "triangles": 23247,
+          "geometryBytes": 2231456,
+          "materials": 10,
+          "textures": 4,
+          "dataIdentity": {
+            "id": "way/263624481",
+            "index": 6,
+            "pointCount": 56,
+            "height": 49.75
+          },
+          "pickableMeshCount": 11,
+          "hitInterface": {
+            "id": "way/263624481",
+            "index": 6
+          },
+          "collisionInside": true,
+          "collisionCourtyard": false,
+          "bounds": {
+            "isBox3": true,
+            "min": {
+              "x": -91.3280029296875,
+              "y": 1.100000023841858,
+              "z": -219.70498657226562
+            },
+            "max": {
+              "x": 33.10199737548828,
+              "y": 50.849998474121094,
+              "z": -74.85726165771484
+            }
+          },
+          "shadowEnabled": false
+        },
+        "totalLoadMs": 7226,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

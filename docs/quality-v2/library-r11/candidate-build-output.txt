@@ -1,0 +1,15 @@
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 43 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-r11-library/library-r11-review.html                      8.86 kB │ gzip:   3.77 kB
+dist-r11-library/index.html                                   8.93 kB │ gzip:   3.79 kB
+dist-r11-library/assets/app-vaJwB8Xg.css                     26.10 kB │ gzip:   6.83 kB
+dist-r11-library/assets/app-DoQonoJM.js                       0.02 kB │ gzip:   0.04 kB
+dist-r11-library/assets/modulepreload-polyfill-P2Xu9kJm.js    0.67 kB │ gzip:   0.38 kB
+dist-r11-library/assets/review-BGSRAt1L.js                    4.56 kB │ gzip:   2.12 kB
+dist-r11-library/assets/app-pBa5sYwH.js                      22.97 kB │ gzip:  10.27 kB
+dist-r11-library/assets/world-DZe3DI6B.js                   733.63 kB │ gzip: 200.98 kB
+
+✓ built in 704ms
