@@ -1,0 +1,823 @@
+{
+  "origin": "http://127.0.0.1:19898/",
+  "testedAt": "2026-10-27T00:37:36.133Z",
+  "results": [
+    {
+      "pose": "library-north",
+      "url": "http://127.0.0.1:19898/?__qa_pose=library-north-390&inspection=library-north",
+      "width": 390,
+      "height": 844,
+      "file": "library-north-390.png",
+      "elapsedMs": 10053,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19898/assets/index-DtSI1Uo0.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 90,
+          "farTrees": 2002
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 245,
+        "triangles": 557219,
+        "geometries": 244,
+        "textures": 29,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.7
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 6573,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          25.887000000000043,
+          66.10000000000002,
+          -449.53499999999997
+        ],
+        "target": [
+          -29.113,
+          9.1,
+          -189.535
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 6573,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "science-west",
+      "url": "http://127.0.0.1:19898/?__qa_pose=science-west-390&inspection=science-west",
+      "width": 390,
+      "height": 844,
+      "file": "science-west-390.png",
+      "elapsedMs": 6372,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19898/assets/index-DtSI1Uo0.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 84,
+          "farTrees": 2008
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 199,
+        "triangles": 543782,
+        "geometries": 192,
+        "textures": 24,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.5
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 3595,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -165.62,
+          79.09999999999998,
+          46.59000000000002
+        ],
+        "target": [
+          64.38,
+          12.1,
+          -38.41
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3595,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:钱学森图书馆",
+      "url": "http://127.0.0.1:19898/?__qa_pose=place%3A%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86-390#%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86",
+      "width": 390,
+      "height": 844,
+      "file": "place_钱学森图书馆-390.png",
+      "elapsedMs": 6269,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19898/assets/index-DtSI1Uo0.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 106,
+          "farTrees": 1986
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 245,
+        "triangles": 533066,
+        "geometries": 417,
+        "textures": 32,
+        "fps": 238,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.7
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 3344,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "钱学森图书馆",
+        "webgl": "WebGL 2",
+        "camera": [
+          -29.113000000000056,
+          31.099999999999902,
+          8
+        ],
+        "target": [
+          -29.113,
+          13.1,
+          -93.297
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3344,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "library-north",
+      "url": "http://127.0.0.1:19898/?__qa_pose=library-north-1440&inspection=library-north",
+      "width": 1440,
+      "height": 900,
+      "file": "library-north-1440.png",
+      "elapsedMs": 7782,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19898/assets/index-DtSI1Uo0.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 272,
+          "farTrees": 1820
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 442,
+        "triangles": 853204,
+        "geometries": 348,
+        "textures": 31,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.5
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 4617,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          25.886999999999958,
+          49.10000000000002,
+          -369.53499999999997
+        ],
+        "target": [
+          -29.113,
+          9.1,
+          -189.535
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 4617,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "science-west",
+      "url": "http://127.0.0.1:19898/?__qa_pose=science-west-1440&inspection=science-west",
+      "width": 1440,
+      "height": 900,
+      "file": "science-west-1440.png",
+      "elapsedMs": 6358,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19898/assets/index-DtSI1Uo0.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 232,
+          "farTrees": 1860
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 377,
+        "triangles": 800201,
+        "geometries": 286,
+        "textures": 28,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.9
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 3253,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -105.62000000000003,
+          63.099999999999994,
+          46.59000000000003
+        ],
+        "target": [
+          64.38,
+          12.1,
+          -38.41
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3253,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "place:钱学森图书馆",
+      "url": "http://127.0.0.1:19898/?__qa_pose=place%3A%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86-1440#%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86",
+      "width": 1440,
+      "height": 900,
+      "file": "place_钱学森图书馆-1440.png",
+      "elapsedMs": 6590,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:19898/assets/index-DtSI1Uo0.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "runtime": {
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 287,
+          "farTrees": 1805
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 381,
+        "triangles": 827087,
+        "geometries": 418,
+        "textures": 34,
+        "fps": 232,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 5.8
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 3700,
+        "mode": "orbit",
+        "walkStart": null,
+        "light": "day",
+        "selected": "钱学森图书馆",
+        "webgl": "WebGL 2",
+        "camera": [
+          -15.113000000000111,
+          31.09999999999998,
+          17.99999999999946
+        ],
+        "target": [
+          -29.112999999999996,
+          23.100000000000005,
+          -93.29700000000003
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3700,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

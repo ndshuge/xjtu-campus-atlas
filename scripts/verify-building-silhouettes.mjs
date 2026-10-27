@@ -32,6 +32,7 @@ assert(overlay.children[1].userData.officialSouthHeight===49.75);
 assert(overlay.children[2].userData.edges>=1);
 const world=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
 assert(world.includes("import {createBuildingSilhouettes} from './building-silhouettes.js'"),'Building model not imported into production world');
-assert(world.includes('this.buildingSilhouettes=createBuildingSilhouettes(this.data.buildings)'),'Building model not installed in production scene');
+assert(world.includes('this.buildingSilhouettes=createBuildingSilhouettes(this.data.buildings'),'Building model not installed in production scene');
+if(world.includes('this.libraryAsset=createLibraryAsset('))assert(world.includes('createBuildingSilhouettes(this.data.buildings,{includeLibrary:false})'),'Library silhouette still duplicates R11 asset');
 assert(meshes>=9,'Expected material-batched facades');
 console.log(JSON.stringify({passed:true,buildingIds:[BUILDING_IDS.library,BUILDING_IDS.science,...BUILDING_IDS.mainWings],meshes,triangles,subsurface:false,productionWorldIntegrated:true}));

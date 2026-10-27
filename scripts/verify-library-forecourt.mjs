@@ -37,7 +37,7 @@ const app=fs.readFileSync(new URL('../src/app.js',import.meta.url),'utf8');
 assert(app.includes('https://www.xinhuanet.com/20261013/d42e47404e3c4ab6b336946bc42d276a/c.html'),'Missing latest public exterior photo/news link');
 assert(app.includes('https://news.xjtu.edu.cn/info/1079/52073.htm'),'Missing official courtyard reference link');
 const world=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
-assert(world.includes('this.libraryClock=createLibraryClock('),'Clock model not integrated');
+assert(world.includes('this.libraryClock=createLibraryClock(')||world.includes('this.libraryAsset=createLibraryAsset('),'Library clock not owned by legacy or R11 asset');
 assert(world.includes('this.libraryForecourt=createLibraryForecourt('),'Forecourt not integrated');
 assert(world.includes('const library=p.osmId===263624481'),'Photo-guided camera focus not enabled');
 const after=world.substring(world.indexOf('this.libraryForecourt=createLibraryForecourt('),world.indexOf('this.libraryForecourt=createLibraryForecourt(')+420);

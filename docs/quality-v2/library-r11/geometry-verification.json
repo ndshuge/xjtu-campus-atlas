@@ -5,7 +5,7 @@
   "spatialSamples": 2483,
   "roofSamples": 217,
   "sourceDataUnchanged": true,
-  "sharedWorldUnchanged": true,
+  "sharedWorldUnchanged": false,
   "otherBuildingGeometryAndColourUnchanged": true,
   "otherBuildingHash": "c260033c0048ffd82ee4bf8c18529a3ff255381a11913b3b6ae198ebb9f2e9ef",
   "legacyLibraryVertices": 1128,

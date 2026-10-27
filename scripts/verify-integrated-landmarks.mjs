@@ -6,9 +6,11 @@ import {createSiyuanCenter,createScienceHall} from '../src/cultural-facades.js';
 import {bounds} from '../src/geo.js';
 const d=JSON.parse(fs.readFileSync(new URL('../public/data/campus.json',import.meta.url),'utf8'));
 const world=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
-for(const symbol of ['createTengfeiTower','createSiyuanCenter','createScienceHall','createLibraryFacade','createMainTowerFacade','createFourInventionsMarker']){
+for(const symbol of ['createTengfeiTower','createSiyuanCenter','createScienceHall','createMainTowerFacade','createFourInventionsMarker']){
  assert(world.includes(symbol+'('),'Not integrated into world scene: '+symbol);
 }
+assert(world.includes('createLibraryAsset(')||world.includes('createLibraryFacade('),'No library visual owner connected');
+if(world.includes('createLibraryAsset('))assert(!world.includes('this.libraryFacade=createLibraryFacade('),'Old and new library visuals overlap');
 const tower=d.landmarks.find(x=>x.name==='腾飞塔');
 const student=d.buildings.find(x=>x.osmId===263624056);
 const science=d.buildings.find(x=>x.osmId===263632364);
