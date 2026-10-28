@@ -1,0 +1,222 @@
+{
+  "origin": "http://127.0.0.1:27941/",
+  "testedAt": "2026-10-28T05:45:14.677Z",
+  "results": [
+    {
+      "pose": "home",
+      "url": "http://127.0.0.1:27941/?__qa_pose=home-390",
+      "width": 390,
+      "height": 844,
+      "file": "home-390.png",
+      "elapsedMs": 9274,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 2,
+        "canvasWidth": 585,
+        "overflow": false,
+        "script": "http://127.0.0.1:27941/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 39,
+        "viewAngles": {
+          "yaw": 0.5150231990769747,
+          "pitch": -0.6915682028467576
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 357,
+        "triangles": 497240,
+        "geometries": 366,
+        "textures": 31,
+        "fps": 15,
+        "frameStats": {
+          "p50Ms": 20.8,
+          "p95Ms": 49.9
+        },
+        "quality": "low",
+        "renderPixelRatio": 1.5,
+        "canvasPixels": 740610,
+        "sceneLoadMs": 5551,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          790,
+          1370,
+          1390
+        ],
+        "target": [
+          -25.000000000000004,
+          0,
+          -50.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 5551,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": [],
+      "viewOrb": {
+        "layout": {
+          "viewport": true,
+          "toolbar": false,
+          "explorer": false,
+          "attributionToolbar": false,
+          "attributionVisible": true
+        },
+        "discoverability": {
+          "text": "3D 视角拖动旋转视角",
+          "visible": false,
+          "resetVisible": false
+        },
+        "size": 70,
+        "pressFeedback": {
+          "scale": 0.9697239135018563,
+          "width": 70
+        },
+        "releaseFeedback": 1,
+        "gridSynced": true,
+        "resetButton": null,
+        "held": true,
+        "released": true,
+        "cancel": true,
+        "minimumDisabled": true,
+        "mapPan": 84.87810470745897,
+        "mapAngleChange": 0,
+        "residualPanBeforePress": 0.30336779677815845,
+        "lookAnchorDrift": 6.12222357532858e-13,
+        "lookAngleChange": 0.2840409010481486,
+        "pinch": {
+          "before": 39,
+          "after": 20,
+          "anchorDrift": 5.685478640793912e-12,
+          "pageScale": 1
+        },
+        "zoom": {
+          "before": 24.4,
+          "after": 20.008,
+          "anchorDrift": 0
+        },
+        "north": {
+          "yaw": 0,
+          "pitchDelta": 0,
+          "anchorDrift": 0
+        },
+        "keyboard": {
+          "angleChange": 0.06999999999999999,
+          "anchorDrift": 0
+        },
+        "reset": {
+          "yaw": 0.52,
+          "pitch": -0.7,
+          "fov": 39,
+          "anchorDrift": 9.094947017729282e-13
+        },
+        "inertia": {
+          "reducedMotion": false,
+          "angleChange": 0.020873399221900193,
+          "anchorDrift": 1.4559018921847493e-12,
+          "interruptedYaw": 0,
+          "settledDrift": 0
+        },
+        "walk": {
+          "mode": "walk",
+          "angleChange": 0.2548488627586796,
+          "anchorDrift": 0,
+          "returnMode": "orbit"
+        },
+        "passed": true
+      }
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

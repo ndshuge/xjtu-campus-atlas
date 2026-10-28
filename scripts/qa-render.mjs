@@ -3,13 +3,16 @@ import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 const origin=process.argv[2]||'http://127.0.0.1:18906/';
+const comparisonOrigin=process.argv.find(a=>a.startsWith('--compare='))?.slice('--compare='.length);
 const out=path.resolve(process.argv[3]||'docs/quality-v2/canopy-r6');
 const poses=(process.argv[4]||'avenue-east,north-wall').split(',');
 const widths=(process.argv[5]||'1440,390').split(',').map(Number);
 const dpr=Number(process.argv[6])||1;
+const requestedHeight=Number(process.argv.find(a=>a.startsWith('--height='))?.slice(9))||0;
 const interactionChecks=process.argv.includes('--interact');
 const searchPlace=process.argv.find(a=>a.startsWith('--search-place='))?.slice('--search-place='.length);
 const clickBuilding=process.argv.find(a=>a.startsWith('--building-click='))?.slice('--building-click='.length);
+const longPressBuilding=process.argv.find(a=>a.startsWith('--building-long-press='))?.slice('--building-long-press='.length);
 // Preserve independent interaction state: reusing one CDP target across sizes
 // can retain synthetic pointer/OrbitControls state and produce false failures.
 if(interactionChecks&&widths.length!==1)throw Error('Run --interact with one width per Edge process; use separate invocations for 390/430/768/desktop.');
@@ -89,19 +92,25 @@ async function inspectViewOrb(width){
  const mobile=width<=768,state=()=>evaluate('window.campusDiagnostics()'),delta=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
  const angle=(a,b)=>Math.hypot(a.viewAngles.yaw-b.viewAngles.yaw,a.viewAngles.pitch-b.viewAngles.pitch);
  const rect=await evaluate('(()=>{const r=document.querySelector("#view-orb").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height}})()');
+ const snapshot=async name=>{const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,name+'-'+width+'.png'),Buffer.from(shot.result.data,'base64'));};
  const layout=await evaluate('(()=>{const box=e=>e.getBoundingClientRect(),a=box(document.querySelector("#view-navigation")),b=box(document.querySelector(".toolbar")),c=box(document.querySelector(".explorer")),link=document.querySelector(".attribution a"),d=box(link);const overlap=(x,y)=>x.left<y.right&&x.right>y.left&&x.top<y.bottom&&x.bottom>y.top,hit=document.elementFromPoint(d.left+d.width/2,d.top+d.height/2);return {viewport:a.left>=0&&a.right<=innerWidth&&a.top>=0&&a.bottom<=innerHeight,toolbar:overlap(a,b),explorer:overlap(a,c),attributionToolbar:overlap(d,b),attributionVisible:d.left>=0&&d.right<=innerWidth&&d.top>=0&&d.bottom<=innerHeight&&(hit===link||link.contains(hit))}})()');
+ const discoverability=await evaluate('(()=>{const h=document.querySelector(".view-navigation-heading"),r=h.getBoundingClientRect();return {text:h.textContent.trim(),visible:r.width>0&&r.height>0,resetVisible:document.querySelector("#view-reset").getBoundingClientRect().width>0}})()');
  const before=await state();
  if(mobile){await touch('touchStart',[[155,320,1]]);for(let i=1;i<=8;i++)await touch('touchMove',[[155+i*5,320+i*2,1]]);await touch('touchEnd');}
  else{await send('Input.dispatchMouseEvent',{type:'mousePressed',x:800,y:390,button:'left',buttons:1,clickCount:1});for(let i=1;i<=8;i++)await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:800+i*5,y:390+i*2,button:'left',buttons:1});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:840,y:406,button:'left',clickCount:1});}
  await sleep(900);const panned=await state();
  const x=rect.x,y=rect.y+8;
+ if(!mobile){await send('Input.dispatchMouseEvent',{type:'mouseMoved',x,y,button:'none'});await sleep(300);await snapshot('orb-hover');}
  if(mobile){await touch('touchStart',[[x,y,1]]);}
  else await send('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:1});
+ const pressed=await state(),gridBefore=await evaluate('document.querySelector("#orb-grid").style.transform');
  const held=await evaluate('document.querySelector("#view-navigation").classList.contains("is-active")');
- const frame=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'orb-held-'+width+'.png'),Buffer.from(frame.result.data,'base64'));
- for(let i=1;i<=8;i++){if(mobile)await touch('touchMove',[[x+i*3,y-i*1.5,1]]);else await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:x+i*3,y:y-i*1.5,button:'left',buttons:1});}
+ await sleep(120);const pressFeedback=await evaluate('(()=>{const e=document.querySelector(".orb-surface"),r=document.querySelector("#view-orb").getBoundingClientRect();return {scale:Number(e.style.getPropertyValue("--orb-press")||1),width:r.width}})()');
+ await snapshot('orb-held');
+ for(let i=1;i<=8;i++){if(mobile)await touch('touchMove',[[x+i*3,y-i*1.5,1]]);else await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:x+i*3,y:y-i*1.5,button:'left',buttons:1});if(i===4){await sleep(80);await snapshot('orb-drag');}}
  if(mobile)await touch('touchEnd');else await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:x+24,y:y-12,button:'left',clickCount:1});
- await sleep(900);const looked=await state(),released=await evaluate('!document.querySelector("#view-navigation").classList.contains("is-active")');
+ await sleep(500);const releaseFeedback=await evaluate('Number(document.querySelector(".orb-surface").style.getPropertyValue("--orb-press")||1)');await sleep(400);const looked=await state(),released=await evaluate('!document.querySelector("#view-navigation").classList.contains("is-active")');
+ const gridAfter=await evaluate('document.querySelector("#orb-grid").style.transform');await snapshot('orb-released');
  // A short flick should coast at a fixed position; pressing north must interrupt it.
  if(mobile)await touch('touchStart',[[x,y,1]]);else await send('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:1});
  for(let i=1;i<=6;i++){if(mobile)await touch('touchMove',[[x+i*3,y,1]]);else await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:x+i*3,y,button:'left',buttons:1});await sleep(20);}
@@ -117,19 +126,22 @@ async function inspectViewOrb(width){
  if(mobile){await touch('touchStart',[[x,y,1]]);await touch('touchEnd');await sleep(110);await touch('touchStart',[[x,y,1]]);await touch('touchEnd');}
  else{for(const n of [1,2]){await send('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:n});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x,y,button:'left',clickCount:n});}}
  await sleep(950);const reset=await state();
+ let resetButton=null;
+ if(!mobile){await evaluate('document.querySelector("#view-orb").focus()');await send('Input.dispatchKeyEvent',{type:'keyDown',key:'ArrowUp',code:'ArrowUp',windowsVirtualKeyCode:38});await send('Input.dispatchKeyEvent',{type:'keyUp',key:'ArrowUp',code:'ArrowUp',windowsVirtualKeyCode:38});await sleep(150);const changed=await state();await mouseClick('#view-reset');await sleep(950);const restored=await state();resetButton={changed:angle(reset,changed),yaw:restored.viewAngles.yaw,pitch:restored.viewAngles.pitch,anchorDrift:delta(changed.camera,restored.camera)};}
+ await snapshot('orb-reset');
  if(mobile){await touch('touchStart',[[x,y,1]]);await touch('touchCancel');}const cancel=await evaluate('!document.querySelector("#view-navigation").classList.contains("is-active")');
  if(mobile)await tap('#walk-btn');else await mouseClick('#walk-btn');await sleep(1400);const walkBefore=await state();
  const walkRect=await evaluate('(()=>{const r=document.querySelector("#view-orb").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2+8}})()');
  if(mobile){await touch('touchStart',[[walkRect.x,walkRect.y,1]]);for(let i=1;i<=8;i++)await touch('touchMove',[[walkRect.x+i*3,walkRect.y-i,1]]);await touch('touchEnd');}
  else{await send('Input.dispatchMouseEvent',{type:'mousePressed',...walkRect,button:'left',buttons:1,clickCount:1});for(let i=1;i<=8;i++)await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:walkRect.x+i*3,y:walkRect.y-i,button:'left',buttons:1});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:walkRect.x+24,y:walkRect.y-8,button:'left',clickCount:1});}
  await sleep(400);const walkAfter=await state();if(mobile)await tap('#exit-walk');else await mouseClick('#exit-walk');await sleep(350);const walkReturn=await state();
- const result={layout,held,released,cancel,minimumDisabled:!pinch||pinch.fieldOfView>20.01||atMin,mapPan:delta(before.camera,panned.camera),mapAngleChange:angle(before,panned),lookAnchorDrift:delta(panned.camera,looked.camera),lookAngleChange:angle(panned,looked),pinch:pinch&&{before:looked.fieldOfView,after:pinch.fieldOfView,anchorDrift:delta(looked.camera,pinch.camera),pageScale:await evaluate('visualViewport.scale')},zoom:{before:beforeZoom.fieldOfView,after:zoomed.fieldOfView,anchorDrift:delta(beforeZoom.camera,zoomed.camera)},north:{yaw:north.viewAngles.yaw,pitchDelta:Math.abs(north.viewAngles.pitch-zoomed.viewAngles.pitch),anchorDrift:delta(zoomed.camera,north.camera)},keyboard:{angleChange:angle(north,keyboard),anchorDrift:delta(north.camera,keyboard.camera)},reset:{yaw:reset.viewAngles.yaw,pitch:reset.viewAngles.pitch,fov:reset.fieldOfView,anchorDrift:delta(keyboard.camera,reset.camera)}};
+ const result={layout,discoverability,size:rect.w,pressFeedback,releaseFeedback,gridSynced:gridBefore!==gridAfter,resetButton,held,released,cancel,minimumDisabled:!pinch||pinch.fieldOfView>20.01||atMin,mapPan:delta(before.camera,panned.camera),mapAngleChange:angle(before,panned),residualPanBeforePress:delta(panned.camera,pressed.camera),lookAnchorDrift:delta(pressed.camera,looked.camera),lookAngleChange:angle(pressed,looked),pinch:pinch&&{before:looked.fieldOfView,after:pinch.fieldOfView,anchorDrift:delta(looked.camera,pinch.camera),pageScale:await evaluate('visualViewport.scale')},zoom:{before:beforeZoom.fieldOfView,after:zoomed.fieldOfView,anchorDrift:delta(beforeZoom.camera,zoomed.camera)},north:{yaw:north.viewAngles.yaw,pitchDelta:Math.abs(north.viewAngles.pitch-zoomed.viewAngles.pitch),anchorDrift:delta(zoomed.camera,north.camera)},keyboard:{angleChange:angle(north,keyboard),anchorDrift:delta(north.camera,keyboard.camera)},reset:{yaw:reset.viewAngles.yaw,pitch:reset.viewAngles.pitch,fov:reset.fieldOfView,anchorDrift:delta(keyboard.camera,reset.camera)}};
  result.inertia={reducedMotion:before.reducedMotion,angleChange:angle(coastStart,coastEnd),anchorDrift:delta(coastStart.camera,coastEnd.camera),interruptedYaw:coastInterrupted.viewAngles.yaw,settledDrift:angle(coastInterrupted,coastSettled)};
  result.walk={mode:walkAfter.mode,angleChange:angle(walkBefore,walkAfter),anchorDrift:delta(walkBefore.camera,walkAfter.camera),returnMode:walkReturn.mode};
- result.passed=layout.viewport&&!layout.toolbar&&!layout.explorer&&!layout.attributionToolbar&&layout.attributionVisible&&held&&released&&cancel&&result.minimumDisabled&&result.mapPan>1&&result.mapAngleChange<.015&&result.lookAnchorDrift<.01&&result.lookAngleChange>.05&&(result.inertia.reducedMotion?result.inertia.angleChange<.005:result.inertia.angleChange>.01)&&result.inertia.anchorDrift<.01&&Math.abs(result.inertia.interruptedYaw)<.03&&result.inertia.settledDrift<.01&&(!pinch||(result.pinch.after<result.pinch.before*.9&&result.pinch.anchorDrift<.01&&result.pinch.pageScale===1))&&result.zoom.after<result.zoom.before*.9&&result.zoom.anchorDrift<.01&&Math.abs(result.north.yaw)<.03&&result.north.pitchDelta<.03&&result.north.anchorDrift<.01&&result.keyboard.angleChange>.04&&result.keyboard.anchorDrift<.01&&Math.abs(result.reset.yaw-.52)<.03&&Math.abs(result.reset.pitch+.70)<.03&&Math.abs(result.reset.fov-39)<.1&&result.reset.anchorDrift<.01&&result.walk.mode==='walk'&&result.walk.angleChange>.05&&result.walk.anchorDrift<.01&&result.walk.returnMode==='orbit';
+ result.passed=layout.viewport&&!layout.toolbar&&!layout.explorer&&!layout.attributionToolbar&&layout.attributionVisible&&(mobile?rect.w>=68&&rect.w<=84:rect.w>=128&&rect.w<=144&&discoverability.visible&&discoverability.resetVisible&&discoverability.text.includes('3D 视角')&&discoverability.text.includes('拖动旋转视角'))&&pressFeedback.scale<.99&&Math.abs(pressFeedback.width-rect.w)<.1&&releaseFeedback>.995&&result.gridSynced&&(!resetButton||(resetButton.changed>.04&&Math.abs(resetButton.yaw-.52)<.03&&Math.abs(resetButton.pitch+.70)<.03&&resetButton.anchorDrift<.01))&&held&&released&&cancel&&result.minimumDisabled&&result.mapPan>1&&result.mapAngleChange<.015&&result.lookAnchorDrift<.01&&result.lookAngleChange>.05&&(result.inertia.reducedMotion?result.inertia.angleChange<.005:result.inertia.angleChange>.01)&&result.inertia.anchorDrift<.01&&Math.abs(result.inertia.interruptedYaw)<.03&&result.inertia.settledDrift<.01&&(!pinch||(result.pinch.after<result.pinch.before*.9&&result.pinch.anchorDrift<.01&&result.pinch.pageScale===1))&&result.zoom.after<result.zoom.before*.9&&result.zoom.anchorDrift<.01&&Math.abs(result.north.yaw)<.03&&result.north.pitchDelta<.03&&result.north.anchorDrift<.01&&result.keyboard.angleChange>.04&&result.keyboard.anchorDrift<.01&&Math.abs(result.reset.yaw-.52)<.03&&Math.abs(result.reset.pitch+.70)<.03&&Math.abs(result.reset.fov-39)<.1&&result.reset.anchorDrift<.01&&result.walk.mode==='walk'&&result.walk.angleChange>.05&&result.walk.anchorDrift<.01&&result.walk.returnMode==='orbit';
  return result;
 }
-async function inspectOwnedClick(id,width){
+async function inspectOwnedClick(id,width,hold=false){
  const point=await evaluate(`(()=>{const w=window.__r12World;if(!w)return null;const b=w.data.buildings.find(b=>b.id===${JSON.stringify(id)});if(!b)return null;
   const xs=b.points.map(p=>p[0]),zs=b.points.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),z0=Math.min(...zs),z1=Math.max(...zs),cx=(x0+x1)/2,cz=(z0+z1)/2;
   for(const y of [.55,.75,.3].map(f=>1.1+(b.displayHeight||b.height)*f))for(const [x,z] of [[cx,z0],[cx,z1],[x0,cz],[x1,cz],[cx,cz]]){
@@ -138,9 +150,10 @@ async function inspectOwnedClick(id,width){
    if(hit&&w.hitPlace(hit)?.place?.id===b.id)return {x:sx,y:sy,name:b.name,id:b.id};
   }return null;})()`);
  if(!point)throw Error('No visible owned facade for actual click '+id);
- if(width<=768){await touch('touchStart',[[point.x,point.y,1]]);await sleep(60);await touch('touchEnd');}
+ let selectedDuringHold=null;
+ if(width<=768){await touch('touchStart',[[point.x,point.y,1]]);await sleep(hold?750:60);if(hold)selectedDuringHold=await evaluate('window.__r12World.selectedPlace?.id');await touch('touchEnd');}
  else {await send('Input.dispatchMouseEvent',{type:'mousePressed',x:point.x,y:point.y,button:'left',clickCount:1});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:point.x,y:point.y,button:'left',clickCount:1});}
- await sleep(1700);const selectedId=await evaluate('window.__r12World.selectedPlace?.id');return {...point,kind:width<=768?'actual touch tap':'actual mouse click',selectedId,passed:selectedId===id};
+ await sleep(1700);const selectedId=await evaluate('window.__r12World.selectedPlace?.id');return {...point,kind:hold?'actual touch long press':width<=768?'actual touch tap':'actual mouse click',selectedDuringHold,selectedId,passed:selectedId===id&&(!hold||selectedDuringHold===id)};
 }
 async function inspectLibraryClick(){
  const p=await evaluate(`(()=>{const w=window.__libraryWorld;if(!w)return null;const v=w.controls.target.clone().set(-29.113,9,-75.5).project(w.camera);return {x:(v.x+1)*innerWidth/2,y:(1-v.y)*innerHeight/2};})()`);
@@ -166,12 +179,12 @@ try{
  if(process.argv.includes('--reduced-motion'))await send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
  if(process.argv.includes('--low-power-gpu'))await send('Page.addScriptToEvaluateOnNewDocument',{source:`(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,options,...rest){return get.call(this,type,/^webgl/.test(type)?{...options,powerPreference:'low-power'}:options,...rest);};})()`});
  for(const width of widths)for(const pose of poses){
-  const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=width<768?844:900;
+  const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=requestedHeight||(width<768?844:900);
   await send('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:dpr,mobile:width<=768});
   await send('Emulation.setTouchEmulationEnabled',{enabled:width<=768,maxTouchPoints:2});
-  const url=new URL(origin);url.searchParams.set('__qa_pose',pose+'-'+width);
+  const url=new URL(pose==='compare'&&comparisonOrigin?comparisonOrigin:origin);url.searchParams.set('__qa_pose',pose+'-'+width);
   // Unlike hash-only navigation, a changed query creates a fresh document.
-  if(pose==='home'){}else if(pose.startsWith('place:')||pose.startsWith('group:')){url.hash=pose.slice(6);if(pose.startsWith('group:'))url.searchParams.set('group','1');}else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
+  if(pose==='home'||pose==='compare'){}else if(pose.startsWith('place:')||pose.startsWith('group:')){url.hash=pose.slice(6);if(pose.startsWith('group:'))url.searchParams.set('group','1');}else url.searchParams.set('inspection',pose==='north-wall-oblique'?'north-wall':pose);
   await send('Page.navigate',{url:'about:blank'});
   await send('Page.navigate',{url:url.href});
   let loaded=false;for(let i=0;i<160;i++){await sleep(200);loaded=await evaluate(`location.href===${JSON.stringify(url.href)} && typeof window.campusDiagnostics==='function' && !!window.__campusReady && document.querySelector("#loading").hidden`);if(loaded)break;}
@@ -197,12 +210,12 @@ try{
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
   const png=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,file),Buffer.from(png.result.data,'base64'));
   const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,requestedPowerPreference:process.argv.includes('--low-power-gpu')?'low-power':'product default',runtime,frameSample,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
-  if(process.argv.includes('--detail-layout')&&width<=768&&pose.startsWith('place:')){
+  if(process.argv.includes('--detail-layout')&&pose.startsWith('place:')){
    r.detailLayout=await evaluate(`(()=>{const a=document.querySelector('#view-navigation').getBoundingClientRect(),b=document.querySelector('#detail').getBoundingClientRect(),c=document.querySelector('.toolbar').getBoundingClientRect();const overlap=(x,y)=>x.left<y.right&&x.right>y.left&&x.top<y.bottom&&x.bottom>y.top;return {visible:a.width>0&&a.height>0,detailOverlap:overlap(a,b),toolbarOverlap:overlap(a,c),viewport:a.top>=0&&a.bottom<=innerHeight};})()`);
    if(!r.detailLayout.visible||r.detailLayout.detailOverlap||r.detailLayout.toolbarOverlap||!r.detailLayout.viewport)throw Error('Detail obscures view controls: '+JSON.stringify(r.detailLayout));
-   await tap('#detail-expand');await sleep(160);r.detailLayout.hiddenWhenExpanded=await evaluate('document.querySelector("#view-navigation").getBoundingClientRect().width===0');
-   await tap('#detail-expand');await sleep(160);r.detailLayout.restored=await evaluate('document.querySelector("#view-navigation").getBoundingClientRect().width>0');
-   if(!r.detailLayout.hiddenWhenExpanded||!r.detailLayout.restored)throw Error('Expanded detail does not restore view controls: '+JSON.stringify(r.detailLayout));
+   if(width<=768){await tap('#detail-expand');await sleep(160);r.detailLayout.hiddenWhenExpanded=await evaluate('document.querySelector("#view-navigation").getBoundingClientRect().width===0');
+    await tap('#detail-expand');await sleep(160);r.detailLayout.restored=await evaluate('document.querySelector("#view-navigation").getBoundingClientRect().width>0');
+    if(!r.detailLayout.hiddenWhenExpanded||!r.detailLayout.restored)throw Error('Expanded detail does not restore view controls: '+JSON.stringify(r.detailLayout));}
    console.log(JSON.stringify({detailLayout:r.detailLayout}));
   }
   if(interactionChecks&&width<=768&&pose==='home'){
@@ -219,6 +232,7 @@ try{
   }
   if(process.argv.includes('--library-click')&&pose==='r11-south-front'&&width===1440){r.libraryClick=await inspectLibraryClick();if(!r.libraryClick.passed)throw Error('Actual library mesh click failed');}
   if(clickBuilding){r.buildingClick=await inspectOwnedClick(clickBuilding,width);r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);if(!r.buildingClick.passed)throw Error('Actual building selection failed '+clickBuilding);console.log(JSON.stringify({buildingClick:r.buildingClick}));}
+  if(longPressBuilding){if(width>768)throw Error('Long press check needs a touch viewport');r.buildingLongPress=await inspectOwnedClick(longPressBuilding,width,true);r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);if(!r.buildingLongPress.passed)throw Error('Actual building long press failed '+longPressBuilding);console.log(JSON.stringify({buildingLongPress:r.buildingLongPress}));}
   results.push(r);console.log(JSON.stringify({pose,width,file,fps:runtime.fps,triangles:runtime.triangles,drawCalls:runtime.drawCalls,loadMs:runtime.sceneLoadMs,errors:r.errors.length,httpErrors:r.httpErrors.length}));
  }
  await fs.writeFile(path.join(out,'browser-results.json'),JSON.stringify({origin,testedAt:new Date().toISOString(),results,deviceCaveat:'Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance.'},null,2));

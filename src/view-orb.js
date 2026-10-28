@@ -1,6 +1,10 @@
+import {createSpring} from './vendor/liquid-glass.js';
+
 /** Pointer-first orientation pad. It owns its pointers so map gestures never leak through. */
 export function attachViewOrb(world){
  const orb=document.querySelector('#view-orb'),surface=document.querySelector('#view-navigation');
+ const face=orb.querySelector('.orb-surface');
+ const pressSpring=createSpring(0,value=>face.style.setProperty('--orb-press',String(1-.035*value)),{stiffness:520,damping:38});
  const points=new Map();let pinching=false,lastDistance=0,hadMultiple=false,moved=false,lastTap=null;
  let velocity={yaw:0,pitch:0},lastMove=0,inertiaFrame=0;
  const stopInertia=()=>{if(inertiaFrame)cancelAnimationFrame(inertiaFrame);inertiaFrame=0;velocity={yaw:0,pitch:0};};
@@ -24,6 +28,7 @@ export function attachViewOrb(world){
   if(points.size<2){pinching=false;lastDistance=0;}
   if(!points.size){
    surface.classList.remove('is-active');
+   pressSpring.set(0);
    if(e.type==='pointerup'&&!moved&&!hadMultiple&&e.pointerType==='touch'){
     const now=performance.now();
     if(lastTap&&now-lastTap.time<330&&Math.hypot(p.x-lastTap.x,p.y-lastTap.y)<25){world.resetViewLook();lastTap=null;}
@@ -37,6 +42,7 @@ export function attachViewOrb(world){
   if(e.pointerType==='mouse'&&e.button!==0)return;
   e.preventDefault();e.stopPropagation();orb.setPointerCapture(e.pointerId);
   points.set(e.pointerId,{x:e.clientX,y:e.clientY,startX:e.clientX,startY:e.clientY,time:performance.now()});surface.classList.add('is-active');
+  pressSpring.set(1);
   if(points.size===1){moved=false;world.beginViewLook();}
   else if(points.size===2){hadMultiple=true;pinching=true;lastDistance=distance();lastTap=null;}
  });
@@ -62,6 +68,19 @@ export function attachViewOrb(world){
  world.viewZoomButtons={in:document.querySelector('#zoom-in'),out:document.querySelector('#zoom-out')};
  world.viewZoomButtons.in.onclick=()=>world.zoomView(.82);
  world.viewZoomButtons.out.onclick=()=>world.zoomView(1.22);
+ document.querySelector('#view-reset').onclick=()=>{stopInertia();world.resetViewLook();};
+ const grid=document.querySelector('#orb-grid'),needle=document.querySelector('#compass-needle');
+ let lastYaw=NaN,lastPitch=NaN;
+ world.updateViewInstrument=()=>{
+  const p=world.camera.position,t=world.controls.target,dx=t.x-p.x,dy=t.y-p.y,dz=t.z-p.z;
+  const yaw=world.mode==='walk'?(world.walkYaw||0):Math.atan2(-dx,-dz);
+  const pitch=world.mode==='walk'?(world.walkPitch||0):Math.atan2(dy,Math.hypot(dx,dz));
+  if(Math.abs(yaw-lastYaw)<.002&&Math.abs(pitch-lastPitch)<.002)return;
+  lastYaw=yaw;lastPitch=pitch;const degrees=180/Math.PI;
+  grid.style.transform=`rotate(${-yaw*degrees}deg) rotateX(${-pitch*degrees}deg)`;
+  needle.style.transform=`rotate(${-yaw*degrees}deg)`;
+ };
+ world.updateViewInstrument();
 }
 
 function clamp(value,min,max){return Math.max(min,Math.min(max,value));}

@@ -82,3 +82,12 @@
 - 高德实验见独立工作树 `experiment/LIVE_INTEGRATION_AUDIT_20261027.md`：实测底图、卫星影像和原生楼块可显示，影像提供更真实的地理上下文；但测试中高德给自定义层 WebGL 1，Three.js r186 要求 WebGL 2，独立画布方案不共享深度，无法可靠遮挡。当前保留自主 Three.js 正式引擎，实验只是候选架构，未将高德密钥或底图复制进本分支。
 
 下一步：由集成线程复核这些资产的朝向和立面后再整合；优先补充博物馆入口朝向与中一楼立面测绘/多角度资料，进行真实 iPhone Safari 和受控功耗测试，再评估地图双模式。
+
+## 2026-10-28 · R13.1 视角球
+
+- 保留现有 R13 相机与地图逻辑。桌面球体在 1440px / 1920px 视口分别为约 136px / 144px，明确标出“3D 视角”和“拖动旋转视角”；手机独立维持 70px 球体。增加可见复位按钮、经纬线和方位标记，指针与球面根据相机朝向和俯仰同步。地图平移、球面原地旋转、两指缩放、北向和键盘操作仍分离。
+- 参考 [Apple Maps 的地图旋转及朝北操作](https://support.apple.com/en-sg/guide/maps/mpsaf9c43d8f/mac)、[Google Earth 导航](https://developers.google.com/maps/documentation/earth/navigate-the-globe) 和 [Designeer 的交互参考目录](https://designeer.org/inspiration)。使用 Taste 的既有校园配色和组件审查方法；Motion 的变换、可中断和减弱动态建议用于交互反馈。
+- 复用本机 `liquid-glass-web` 的 `createSpring` 控制球面按下和释放，文件与 [gentpan/liquidglass](https://github.com/gentpan/liquidglass) 上游 Git blob `cfc3bcf518ef8985bfd9e673ec15cf7dee7e9b66` 一致，MIT 许可随构建分发。仅球面装饰层缩放，交互命中区域不缩放。球体表面使用半透明渐变与局部模糊（L1），并未对实时 WebGL 地图实现跨浏览器真实折射（L2）；为避免额外 WebGL 复制及性能成本，没有引入折射渲染器。
+- Edge 实测结果和截图：`r13-1-spring-desktop/` 记录 1440px 的默认、悬停、按住、拖动、松开和复位；`r13-1-local-1920/` 为 1920×1080；`r13-1-spring-mobile/` 和 `r13-1-local-430/` 为手机视口；`r13-1-landmarks/` 记录南北门、图书馆及主楼。`r13-1-long-press-fixed/` 验证中心一楼真实触摸长按，`r13-1-reduced/` 验证减弱动态效果。相机锚点在按下球体后的拖动中保持不变；地图平移惯性发生在按下之前。
+- 同一 Intel GPU、同一 Edge 进程交替 A/B：1440px 下两版均为 541,821 渲染三角面、494 次绘制；帧间隔 p50 分别为 R13 17.8/16.7ms 与 R13.1 17.0/17.7ms，p95 波动较大，不能据此推断其他设备的帧率。原始采样见 `r13-1-perf-ab-1440/browser-results.json`。南门 `b52c34f` 在当前提交祖先中，关键校门、主楼、图书馆、植被及地理数据文件相对 R13 未修改。
+- 视觉与功能验收使用 Windows Edge；真实 iPhone Safari、用户亲自操作感受及长期移动功耗仍待验证。自动测试、浏览器模拟与真机验收是不同证据。
