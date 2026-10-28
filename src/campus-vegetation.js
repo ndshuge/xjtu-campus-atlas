@@ -125,7 +125,12 @@ export function createCampusVegetation(trees,{mobile=false}={}){
   if(!force&&camera.position.distanceToSquared(last)<9)return;
   lastTime=now;last.copy(camera.position);
   const cutoff=mobile?VEGETATION_LOD.mobile:VEGETATION_LOD.desktop;
-  trees.forEach((t,i)=>{const d=Math.hypot(t.x-last.x,t.z-last.z,last.y-(BASE+t.h*.7));const threshold=cutoff+(classification[i]===1?VEGETATION_LOD.hysteresis:0);classification[i]=d<threshold?1:0;});
+  let changed=false;
+  trees.forEach((t,i)=>{const d=Math.hypot(t.x-last.x,t.z-last.z,last.y-(BASE+t.h*.7));const threshold=cutoff+(classification[i]===1?VEGETATION_LOD.hysteresis:0);const next=d<threshold?1:0;if(next!==classification[i])changed=true;classification[i]=next;});
+  // Rebuilding every matrix, color and bounding sphere is unnecessary when a
+  // camera move does not cross any LOD threshold. Context restoration and
+  // other explicitly forced refreshes still rebuild the GPU buffers.
+  if(!changed&&!force)return;
   for(const batch of batches){let n=0;for(const {t,i} of batch.members){if((batch.detail==='near')!==(classification[i]===1))continue;
    dummy.position.set(t.x,BASE,t.z);dummy.rotation.set(0,t.c*Math.PI*2,0);dummy.scale.set(t.r/3.6,t.h/10.2,t.r/3.6);dummy.updateMatrix();
    batch.trunk.setMatrixAt(n,dummy.matrix);batch.crown.setMatrixAt(n,dummy.matrix);batch.crown.setColorAt(n,new THREE.Color().setHSL(.24+t.c*.035,.18,.68+t.c*.12));n++;
