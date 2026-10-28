@@ -13,6 +13,12 @@ const views={
  'r13-siyuan-oblique':{eye:[-150,60,470],look:[-30,10,334],fov:55,mobileFov:90},
  'r13-siyuan-aerial':{eye:[-30,230,334],look:[-30,0,334],fov:55,mobileFov:90},
  'r13-museum-front':{eye:[-44,18,393],look:[44,8,393],fov:58,mobileFov:95},
+ // Review-only camera: stand in the courtyard between Siyuan and the museum,
+ // avoiding the existing front view's trees and neighbouring building. This
+ // preserves the scene and does not assert a surveyed entrance orientation.
+ 'r14-museum-face':{eye:[30,7,381],mobileEye:[29,7,381],look:[35,8,381],fov:92,mobileFov:115,minDistance:2},
+ 'r14-museum-entry':{eye:[30,5,411],mobileEye:[29,5,411],look:[35,5,411],fov:88,mobileFov:110,minDistance:2},
+ 'r14-museum-oblique':{eye:[17,25,440],mobileEye:[12,28,445],look:[40,8,393],fov:72,mobileFov:105},
  'r13-museum-oblique':{eye:[-62,45,479],look:[44,8,393],fov:55,mobileFov:90},
  'r13-museum-back':{eye:[132,30,393],look:[44,8,393],fov:58,mobileFov:90},
  'r13-museum-aerial':{eye:[44,180,393],look:[44,0,393],fov:55,mobileFov:90},
@@ -35,7 +41,7 @@ const originalHome=CampusWorld.prototype.home;
 CampusWorld.prototype.home=function(...args){
  const result=originalHome.apply(this,args),pose=new URLSearchParams(location.search).get('inspection'),v=views[pose];
  window.__r12World=this;window.__libraryWorld=this;
- if(v){this.flyState=null;this.setAuto(false);this.camera.position.set(...(innerWidth<=768&&v.mobileEye?v.mobileEye:v.eye));this.controls.target.set(...v.look);this.camera.fov=innerWidth<=768?(v.mobileFov||Math.max(78,v.fov)):v.fov;this.camera.updateProjectionMatrix();this.controls.update();}
+ if(v){this.flyState=null;this.setAuto(false);if(v.minDistance)this.controls.minDistance=v.minDistance;this.camera.position.set(...(innerWidth<=768&&v.mobileEye?v.mobileEye:v.eye));this.controls.target.set(...v.look);this.camera.fov=innerWidth<=768?(v.mobileFov||Math.max(78,v.fov)):v.fov;this.camera.updateProjectionMatrix();this.controls.update();}
  return result;
 };
 function audit(w,ids,objects){
