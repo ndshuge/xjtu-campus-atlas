@@ -14,7 +14,7 @@ document.querySelector('#mode').textContent = mode === 'shared' ? '单画布共�
 const wall = {type:'FeatureCollection',features:[{type:'Feature',properties:{},geometry:{type:'Polygon',coordinates:[[
   [108.97878,34.24605],[108.97962,34.24605],[108.97962,34.24610],[108.97878,34.24610],[108.97878,34.24605]
 ]]}}]};
-const response = await fetch('/data/osm-source.json');
+const response = await fetch(new URL('data/osm-source.json', document.baseURI));
 if (!response.ok) throw new Error('Campus OSM data could not be loaded');
 const osm = await response.json();
 const buildings = {type:'FeatureCollection',features:osm.elements.filter(e=>e.type==='way'&&e.tags?.building&&e.geometry?.length>=4).map(e=>({type:'Feature',properties:{id:e.id,name:e.tags.name||''},geometry:{type:'Polygon',coordinates:[e.geometry.map(p=>[p.lon,p.lat])]}}))};

@@ -16,6 +16,8 @@
 
 构建产物：JS 1,583.96 kB、gzip 418.81 kB，worker 519.37 kB（未压缩），CSS 71.66 kB、gzip 10.36 kB；尺寸为本独立原型包含 MapLibre + Three 的整体大小，不能直接当成迁移后的增量。两组每次 90 帧、三轮的 requestAnimationFrame 间隔数据见 `results.json`；负载与运行时抖动明显，**不能据此宣称任一方案性能更好**，也不代表完整校园 GPU 时间、显存或真实手机帧率。
 
+使用相对 base 路径后，通过本地 `/preview/` 子目录检查了生产构建，同样通过 8 张截图像素断言，证据见 `docs/quality-v2/r14-map-depth-subpath/`。发布服务器必须把 `.mjs` 作为 JavaScript MIME 类型提供：实测本机 Python 默认 `http.server` 返回 `text/plain` 时 worker 无法启动；Vite preview 的 MIME 类型正确。此为本地测试，尚未进行公网预览。
+
 初版实验中 MapLibre worker 未加载，按照官方 v6 迁移说明显式设置 worker URL；自定义层需使用 `args.defaultProjectionData.mainMatrix`，误用另一矩阵会导致球落在屏幕外。两项修正均已在开发服务器和生产构建中验证。
 
 ## 判断与边界

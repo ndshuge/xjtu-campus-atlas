@@ -1,0 +1,273 @@
+{
+  "results": [
+    {
+      "width": 1440,
+      "height": 900,
+      "filename": "shared-1440-0.png",
+      "mode": "shared",
+      "sharedContext": true,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 3,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.27037181752191547,
+        0.9859284130521115
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 0
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "filename": "shared-1440-180.png",
+      "mode": "shared",
+      "sharedContext": true,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 6,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.1370140243718748,
+        0.983782007418113
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 180
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "mode": "shared",
+      "measurement": "90 repaint requests; animation frame intervals, not GPU timings or production benchmark",
+      "samples": [
+        {
+          "count": 90,
+          "mean": 4.114444443914626,
+          "p95": 4.800000071525574,
+          "p99": 5.300000071525574
+        },
+        {
+          "count": 90,
+          "mean": 4.165555555290646,
+          "p95": 4.700000047683716,
+          "p99": 5.399999976158142
+        },
+        {
+          "count": 90,
+          "mean": 4.163333333863152,
+          "p95": 4.800000071525574,
+          "p99": 5
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "filename": "separate-1440-0.png",
+      "mode": "separate",
+      "sharedContext": false,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 3,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.27037181752191547,
+        0.9859284130521115
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 0
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "filename": "separate-1440-180.png",
+      "mode": "separate",
+      "sharedContext": false,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 6,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.1370140243718748,
+        0.983782007418113
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 180
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "mode": "separate",
+      "measurement": "90 repaint requests; animation frame intervals, not GPU timings or production benchmark",
+      "samples": [
+        {
+          "count": 90,
+          "mean": 4.608888889683618,
+          "p95": 6.200000047683716,
+          "p99": 6.799999952316284
+        },
+        {
+          "count": 90,
+          "mean": 5.0299999992052715,
+          "p95": 8.100000023841858,
+          "p99": 12
+        },
+        {
+          "count": 90,
+          "mean": 4.454444444179535,
+          "p95": 6.5,
+          "p99": 11.899999976158142
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "filename": "shared-390-0.png",
+      "mode": "shared",
+      "sharedContext": true,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 3,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.2884295790644648,
+        0.9859173229826539
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "filename": "shared-390-180.png",
+      "mode": "shared",
+      "sharedContext": true,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 5,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.14694505253910453,
+        0.9836143965829715
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 180
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "filename": "separate-390-0.png",
+      "mode": "separate",
+      "sharedContext": false,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 3,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.2884295790644648,
+        0.9859173229826539
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 0
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "filename": "separate-390-180.png",
+      "mode": "separate",
+      "sharedContext": false,
+      "mapContext": "WebGL2RenderingContext",
+      "threeContext": "WebGL2RenderingContext",
+      "gpu": "ANGLE (Intel, Intel(R) Graphics (0x00007D67) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "errors": [],
+      "renderCount": 5,
+      "threeRevision": "186",
+      "maplibreVersion": "6.16.0",
+      "projectedCenter": [
+        0,
+        0.14694505253910453,
+        0.9836143965829715
+      ],
+      "draws": 1,
+      "dpr": 1,
+      "center": {
+        "lng": 108.9792,
+        "lat": 34.24625
+      },
+      "pitch": 57,
+      "bearing": 180
+    }
+  ],
+  "errors": []
+}
