@@ -1,0 +1,1 @@
+{"name":"xjtu-r14-map-depth-experiment","private":true,"type":"module","scripts":{"dev":"vite --host 127.0.0.1 --port 18972"},"dependencies":{"maplibre-gl":"6.16.0","three":"0.186.1"},"devDependencies":{"vite":"8.3.5"}}
