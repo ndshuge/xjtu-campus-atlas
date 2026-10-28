@@ -91,3 +91,5 @@
 - Edge 实测结果和截图：`r13-1-spring-desktop/` 记录 1440px 的默认、悬停、按住、拖动、松开和复位；`r13-1-local-1920/` 为 1920×1080；`r13-1-spring-mobile/` 和 `r13-1-local-430/` 为手机视口；`r13-1-landmarks/` 记录南北门、图书馆及主楼。`r13-1-long-press-fixed/` 验证中心一楼真实触摸长按，`r13-1-reduced/` 验证减弱动态效果。相机锚点在按下球体后的拖动中保持不变；地图平移惯性发生在按下之前。
 - 同一 Intel GPU、同一 Edge 进程交替 A/B：1440px 下两版均为 541,821 渲染三角面、494 次绘制；帧间隔 p50 分别为 R13 17.8/16.7ms 与 R13.1 17.0/17.7ms，p95 波动较大，不能据此推断其他设备的帧率。原始采样见 `r13-1-perf-ab-1440/browser-results.json`。南门 `b52c34f` 在当前提交祖先中，关键校门、主楼、图书馆、植被及地理数据文件相对 R13 未修改。
 - 视觉与功能验收使用 Windows Edge；真实 iPhone Safari、用户亲自操作感受及长期移动功耗仍待验证。自动测试、浏览器模拟与真机验收是不同证据。
+
+发布验收：源代码 `1b4e2d2ae933e1275ed8ebff4e0eb245581468e2` 经独立工作树完整 `verify` 和生产构建后快进推送至 main。Pages 预览提交 `72d0cbe115d3ca5f3c2dc259545c848c7f7c0a7c` 和正式首页提交 `55cf056ef0d1fbc0633b960dc069561b82aa10a3` 均获得 Pages `built` 状态。正式公网 HTML、JS、CSS、两份校园数据和 MIT 许可与构建一致（许可仅换行归一化）。Edge 公网交互与截图见 `r13-1-public-final-1440/`、`r13-1-public-final-390/`，正式页南门、图书馆、主楼回归见 `r13-1-public-final-landmarks/`；未报告真实 iPhone Safari 通过。原正式 R12 首页逐文件保存在 `r12-home-rollback-20261028/`，对应 Pages 历史提交 `76105dc83157e48dbbc3a2a447be2159763fd9a3`；旧 R13 预览和 R13.1 独立预览均保留。
