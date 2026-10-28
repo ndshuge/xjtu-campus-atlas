@@ -8,6 +8,18 @@ const views={
  'r12-main-oblique':{eye:[-185,90,-20],look:[-31,42,126],fov:56},
  'r12-main-aerial':{eye:[-31,300,125],look:[-31,0,126],fov:55},
  'r12-campus-axis':{eye:[-110,180,-430],look:[-30,30,30],fov:56},
+ 'r13-siyuan-front':{eye:[-30,18,450],look:[-30,10,360],fov:58,mobileFov:102},
+ 'r13-siyuan-entry':{eye:[-30,11,413],look:[-30,10,372],fov:67,mobileFov:98},
+ 'r13-siyuan-oblique':{eye:[-150,60,470],look:[-30,10,334],fov:55,mobileFov:90},
+ 'r13-siyuan-aerial':{eye:[-30,230,334],look:[-30,0,334],fov:55,mobileFov:90},
+ 'r13-museum-front':{eye:[-44,18,393],look:[44,8,393],fov:58,mobileFov:95},
+ 'r13-museum-oblique':{eye:[-62,45,479],look:[44,8,393],fov:55,mobileFov:90},
+ 'r13-museum-back':{eye:[132,30,393],look:[44,8,393],fov:58,mobileFov:90},
+ 'r13-museum-aerial':{eye:[44,180,393],look:[44,0,393],fov:55,mobileFov:90},
+ 'r13-central-front':{eye:[-29,20,-545],look:[-29,9,-468],fov:58,mobileFov:100},
+ 'r13-central-oblique':{eye:[-170,65,-575],look:[-29,9,-460],fov:55,mobileFov:90},
+ 'r13-central-back':{eye:[-29,45,-338],look:[-29,10,-457],fov:55,mobileFov:90},
+ 'r13-central-aerial':{eye:[-29,245,-455],look:[-29,0,-455],fov:55,mobileFov:90},
  'r12-science-front':{eye:[-130,47,-14],look:[75,14,-35],fov:54},
  'r12-science-entry':{eye:[0,14,-12.0355],mobileEye:[-28,16,-12.0355],look:[65,12,-12.0355],fov:64},
  'r12-science-oblique':{eye:[-85,70,120],look:[78,14,-45],fov:56},
@@ -23,7 +35,7 @@ const originalHome=CampusWorld.prototype.home;
 CampusWorld.prototype.home=function(...args){
  const result=originalHome.apply(this,args),pose=new URLSearchParams(location.search).get('inspection'),v=views[pose];
  window.__r12World=this;window.__libraryWorld=this;
- if(v){this.flyState=null;this.setAuto(false);this.camera.position.set(...(innerWidth<=768&&v.mobileEye?v.mobileEye:v.eye));this.controls.target.set(...v.look);this.camera.fov=innerWidth<=768?Math.max(78,v.fov):v.fov;this.camera.updateProjectionMatrix();this.controls.update();}
+ if(v){this.flyState=null;this.setAuto(false);this.camera.position.set(...(innerWidth<=768&&v.mobileEye?v.mobileEye:v.eye));this.controls.target.set(...v.look);this.camera.fov=innerWidth<=768?(v.mobileFov||Math.max(78,v.fov)):v.fov;this.camera.updateProjectionMatrix();this.controls.update();}
  return result;
 };
 function audit(w,ids,objects){
@@ -40,6 +52,9 @@ CampusWorld.prototype.diagnostics=function(){
  return {...diagnostics.call(this),buildingAudit:{
   pose:new URLSearchParams(location.search).get('inspection'),stage:this.buildingReviewStage,
   main:audit(this,[263624057,263624058,263624059,263624060,263624061,264595812,3557330,3557331],this.mainComplexAsset?[this.mainComplexAsset]:[this.mainTowerFacade,this.mainERoofDetail,...legacy.filter(g=>g.userData.scope==='Main A-D only')]),
+  siyuan:audit(this,[263624056],this.siyuanAsset?[this.siyuanAsset]:[this.siyuanCenterFacade]),
+  museum:audit(this,[1167525875],this.museumAsset?[this.museumAsset]:[]),
+  central:audit(this,[263625087,263625088,263625089],this.centralBuildingAsset?[this.centralBuildingAsset]:[]),
   science:audit(this,[263632364],this.scienceAsset?[this.scienceAsset]:[this.scienceHallFacade,...legacy.filter(g=>g.userData.osmId===263632364)]),
   library:audit(this,[263624481],[this.libraryAsset]),
   mainBounds:this.mainComplexAsset?new THREE.Box3().setFromObject(this.mainComplexAsset):null

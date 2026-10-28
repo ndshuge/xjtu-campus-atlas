@@ -7,7 +7,10 @@ import {pointIn} from '../src/geo.js';
 const d=JSON.parse(fs.readFileSync(new URL('../public/data/campus.json',import.meta.url),'utf8'));
 const s=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
 const gate=fs.readFileSync(new URL('../src/north-gate.js',import.meta.url),'utf8');
-assert(s.includes('ONE:THREE.TOUCH.PAN')&&s.includes('TWO:THREE.TOUCH.DOLLY_ROTATE'),'Phone must pan with one finger and orbit/zoom with two');
+// R13 deliberately separates map translation/zoom from the dedicated look control.
+assert(s.includes('ONE:THREE.TOUCH.PAN')&&s.includes('TWO:THREE.TOUCH.DOLLY_PAN'),'Phone map must pan with one finger and pan/zoom with two');
+const orb=fs.readFileSync(new URL('../src/view-orb.js',import.meta.url),'utf8');
+assert(orb.includes('world.turnView(')&&orb.includes('world.zoomView('),'The separate view control must provide look and zoom');
 assert(s.includes('pointer: coarse')&&s.includes('navigator.maxTouchPoints'),'Touch mode must survive landscape orientation');
 assert(s.includes('capture:true'),'User touch must cancel flight before OrbitControls pointerdown');
 assert(s.includes('constrainOrbitToCampus()'),'Orbit target must stay bounded');
@@ -24,4 +27,4 @@ for(let x=PLAZA_PAVING.left+2;x<PLAZA_PAVING.right-2;x+=3)
   assert(!d.buildings.some(b=>pointIn([x,z],b.points)&&!b.holes?.some(h=>pointIn([x,z],h))),`Paved over mapped building at ${x},${z}`);
 const bb=new THREE.Box3().setFromObject(group);
 assert(bb.min.y>1.1&&bb.max.y<1.25,'No invented plaza terrain slope');
-console.log(JSON.stringify({passed:true,pavingBounds:PLAZA_PAVING,landscapePatches:4,oneFingerPan:true,twoFingerCamera:true,gateBackfaceFixed:true}));
+console.log(JSON.stringify({passed:true,pavingBounds:PLAZA_PAVING,landscapePatches:4,oneFingerPan:true,twoFingerMapZoom:true,separateViewControl:true,gateBackfaceFixed:true}));

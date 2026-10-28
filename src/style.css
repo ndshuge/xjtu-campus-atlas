@@ -103,3 +103,29 @@ body.photo-inspection::after {
  .walk-note{bottom:calc(88px + env(safe-area-inset-bottom,0px));}
  .walk-pad{bottom:calc(150px + env(safe-area-inset-bottom,0px));}
 }
+/* R13: a small orientation instrument above the map, not a second camera target. */
+.view-navigation{position:absolute;right:24px;bottom:300px;display:flex;align-items:center;gap:9px;z-index:8;user-select:none}
+.view-orb-wrap{position:relative;width:74px;height:74px;flex:none}
+.view-orb{position:relative;width:74px;height:74px;border-radius:50%;touch-action:none;cursor:grab;overflow:hidden;color:#3d6655;border:1px solid rgba(255,255,255,.82);background:radial-gradient(circle at 34% 25%,rgba(255,255,255,.94),rgba(226,235,224,.78) 54%,rgba(167,188,174,.82));box-shadow:0 4px 18px rgba(34,55,46,.16),inset 0 1px 3px rgba(255,255,255,.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.view-orb:focus-visible{outline:2px solid #a57345;outline-offset:4px}.view-orb:active{cursor:grabbing}
+.view-orb::before{content:"";position:absolute;inset:8px;border-radius:50%;border:1px solid rgba(76,111,90,.27);transition:transform .22s ease,opacity .22s ease;pointer-events:none}
+.view-orb::after{content:"";position:absolute;left:9px;right:9px;top:33px;height:1px;background:rgba(76,111,90,.28);pointer-events:none}
+.orb-horizon{position:absolute;inset:12px 23px;border:1px solid rgba(76,111,90,.25);border-radius:50%;pointer-events:none}
+.view-orb svg{position:absolute;left:21px;top:21px;width:32px;height:32px;stroke:none;pointer-events:none;opacity:.88}
+.view-orb{transition:transform .2s cubic-bezier(.2,.8,.2,1)}
+.view-navigation.is-active .view-orb::before{transform:scale(1.1);opacity:.8}.view-navigation.is-active .view-orb{cursor:grabbing;transform:scale(1.06)}
+.orb-north{position:absolute;z-index:2;left:15px;top:-25px;width:44px;height:44px;display:flex;align-items:flex-end;justify-content:center;padding:0 0 2px;font:600 12px/1 "Microsoft YaHei UI",sans-serif;color:#365b49;background:transparent!important;touch-action:manipulation}
+.orb-north:active{transform:none}.view-zoom{display:flex;flex-direction:column;overflow:hidden;border-radius:14px;background:rgba(247,249,244,.88);border:1px solid rgba(255,255,255,.8);box-shadow:0 3px 12px rgba(34,55,46,.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.view-zoom button{width:44px;height:44px;font:24px/1 "Microsoft YaHei UI",sans-serif;touch-action:manipulation}.view-zoom button+button{border-top:1px solid rgba(82,105,88,.17)}
+body.photo-inspection .view-navigation{display:none!important}
+@media(max-width:768px){.view-navigation{right:calc(14px + env(safe-area-inset-right,0px));bottom:calc(145px + env(safe-area-inset-bottom,0px))}.view-orb-wrap,.view-orb{width:70px;height:70px}.view-orb svg{left:19px;top:19px}.orb-north{left:13px}}
+@media(max-width:768px) and (max-height:690px){.view-navigation{bottom:calc(135px + env(safe-area-inset-bottom,0px))}}
+@media(prefers-reduced-motion:reduce){.view-orb,.view-orb::before{transition:none}}
+@media(prefers-reduced-transparency:reduce){.view-orb,.view-zoom{background:#eff4ec;backdrop-filter:none;-webkit-backdrop-filter:none}}
+/* Keep the desktop view title clear and hide the instrument behind expanded content. */
+@media(min-width:769px){.view-navigation{top:190px;bottom:auto}}
+@media(max-width:768px){.explorer:not(.collapsed) ~ .view-navigation,.detail:not([hidden]).expanded ~ .view-navigation{display:none}}
+@media(max-width:768px){.detail:not([hidden]) ~ .view-navigation{bottom:calc(165px + env(safe-area-inset-bottom,0px))}}
+@media(max-width:768px) and (max-height:690px){.detail:not([hidden]) ~ .view-navigation{bottom:calc(155px + env(safe-area-inset-bottom,0px))}}
+/* Leave the map attribution visible and reachable below the mobile navigation. */
+@media(max-width:768px){body .toolbar{bottom:calc(26px + env(safe-area-inset-bottom,0px))}}

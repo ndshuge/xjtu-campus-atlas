@@ -8,7 +8,7 @@ import {createScienceHallAsset} from '../src/science-hall-asset.js';
 import {bounds} from '../src/geo.js';
 const d=JSON.parse(fs.readFileSync(new URL('../public/data/campus.json',import.meta.url),'utf8'));
 const world=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
-for(const symbol of ['createTengfeiTower','createSiyuanCenter',world.includes('createScienceHallAsset(')?'createScienceHallAsset':'createScienceHall',world.includes('createMainComplexAsset(')?'createMainComplexAsset':'createMainTowerFacade','createFourInventionsMarker']){
+for(const symbol of ['createTengfeiTower',world.includes('createSiyuanCenterAsset(')?'createSiyuanCenterAsset':'createSiyuanCenter',world.includes('createScienceHallAsset(')?'createScienceHallAsset':'createScienceHall',world.includes('createMainComplexAsset(')?'createMainComplexAsset':'createMainTowerFacade','createFourInventionsMarker']){
  assert(world.includes(symbol+'('),'Not integrated into world scene: '+symbol);
 }
 assert(world.includes('createLibraryAsset(')||world.includes('createLibraryFacade('),'No library visual owner connected');
@@ -27,6 +27,7 @@ if(world.includes('createMainComplexAsset(')){
  assert(!world.includes('this.mainTowerFacade='),'Duplicate legacy Main E facade');
  const owned=createMainComplexAsset({buildings:d.buildings});assert.equal(owned.userData.owner,'main-complex-asset.js');models.push(owned);
 }
+if(world.includes('createSiyuanCenterAsset('))assert(!world.includes('this.siyuanCenterFacade='),'Duplicate legacy Siyuan facade');
 if(world.includes('createScienceHallAsset(')){
  assert(!world.includes('this.scienceHallFacade='),'Duplicate legacy science facade');
  const owned=createScienceHallAsset({building:science,buildingIndex:d.buildings.indexOf(science)});assert.equal(owned.userData.owner,'science-hall-asset.js');models.push(owned);

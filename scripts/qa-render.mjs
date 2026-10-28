@@ -85,6 +85,50 @@ async function inspectDesktopInteractions(){
  const result={rotationMetres:Math.hypot(...rotated.camera.map((v,i)=>v-initial.camera[i])),distanceBeforeWheel:distance(rotated),distanceAfterWheel:distance(zoomed),treeLayerTrianglesBefore:zoomed.triangles,treeLayerTrianglesHidden:hidden.triangles,selected:selected.selected};
  result.passed=result.rotationMetres>2&&distance(zoomed)<distance(rotated)*.98&&hidden.triangles<zoomed.triangles*.8&&selected.selected===(searchPlace||'钱学森图书馆');return result;
 }
+async function inspectViewOrb(width){
+ const mobile=width<=768,state=()=>evaluate('window.campusDiagnostics()'),delta=(a,b)=>Math.hypot(...a.map((v,i)=>v-b[i]));
+ const angle=(a,b)=>Math.hypot(a.viewAngles.yaw-b.viewAngles.yaw,a.viewAngles.pitch-b.viewAngles.pitch);
+ const rect=await evaluate('(()=>{const r=document.querySelector("#view-orb").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2,w:r.width,h:r.height}})()');
+ const layout=await evaluate('(()=>{const box=e=>e.getBoundingClientRect(),a=box(document.querySelector("#view-navigation")),b=box(document.querySelector(".toolbar")),c=box(document.querySelector(".explorer")),link=document.querySelector(".attribution a"),d=box(link);const overlap=(x,y)=>x.left<y.right&&x.right>y.left&&x.top<y.bottom&&x.bottom>y.top,hit=document.elementFromPoint(d.left+d.width/2,d.top+d.height/2);return {viewport:a.left>=0&&a.right<=innerWidth&&a.top>=0&&a.bottom<=innerHeight,toolbar:overlap(a,b),explorer:overlap(a,c),attributionToolbar:overlap(d,b),attributionVisible:d.left>=0&&d.right<=innerWidth&&d.top>=0&&d.bottom<=innerHeight&&(hit===link||link.contains(hit))}})()');
+ const before=await state();
+ if(mobile){await touch('touchStart',[[155,320,1]]);for(let i=1;i<=8;i++)await touch('touchMove',[[155+i*5,320+i*2,1]]);await touch('touchEnd');}
+ else{await send('Input.dispatchMouseEvent',{type:'mousePressed',x:800,y:390,button:'left',buttons:1,clickCount:1});for(let i=1;i<=8;i++)await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:800+i*5,y:390+i*2,button:'left',buttons:1});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:840,y:406,button:'left',clickCount:1});}
+ await sleep(900);const panned=await state();
+ const x=rect.x,y=rect.y+8;
+ if(mobile){await touch('touchStart',[[x,y,1]]);}
+ else await send('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:1});
+ const held=await evaluate('document.querySelector("#view-navigation").classList.contains("is-active")');
+ const frame=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'orb-held-'+width+'.png'),Buffer.from(frame.result.data,'base64'));
+ for(let i=1;i<=8;i++){if(mobile)await touch('touchMove',[[x+i*3,y-i*1.5,1]]);else await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:x+i*3,y:y-i*1.5,button:'left',buttons:1});}
+ if(mobile)await touch('touchEnd');else await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:x+24,y:y-12,button:'left',clickCount:1});
+ await sleep(900);const looked=await state(),released=await evaluate('!document.querySelector("#view-navigation").classList.contains("is-active")');
+ // A short flick should coast at a fixed position; pressing north must interrupt it.
+ if(mobile)await touch('touchStart',[[x,y,1]]);else await send('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:1});
+ for(let i=1;i<=6;i++){if(mobile)await touch('touchMove',[[x+i*3,y,1]]);else await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:x+i*3,y,button:'left',buttons:1});await sleep(20);}
+ if(mobile)await touch('touchEnd');else await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:x+18,y,button:'left',clickCount:1});
+ await sleep(30);const coastStart=await state();await sleep(150);const coastEnd=await state();
+ if(mobile)await tap('#north-btn');else await mouseClick('#north-btn');await sleep(800);const coastInterrupted=await state();await sleep(220);const coastSettled=await state();
+ let pinch=null;
+ if(mobile){await touch('touchStart',[[x-10,y,1],[x+10,y,2]]);for(let i=1;i<=6;i++)await touch('touchMove',[[x-10-i*2,y,1],[x+10+i*2,y,2]]);await touch('touchEnd');await sleep(350);pinch=await state();}
+ const atMin=await evaluate('document.querySelector("#zoom-in").disabled');if(atMin){if(mobile)await tap('#zoom-out');else await mouseClick('#zoom-out');await sleep(550);}
+ const beforeZoom=await state();if(mobile)await tap('#zoom-in');else await mouseClick('#zoom-in');await sleep(550);const zoomed=await state();
+ if(mobile)await tap('#north-btn');else await mouseClick('#north-btn');await sleep(850);const north=await state();
+ await evaluate('document.querySelector("#view-orb").focus()');await send('Input.dispatchKeyEvent',{type:'keyDown',key:'ArrowRight',code:'ArrowRight',windowsVirtualKeyCode:39});await send('Input.dispatchKeyEvent',{type:'keyUp',key:'ArrowRight',code:'ArrowRight',windowsVirtualKeyCode:39});await sleep(250);const keyboard=await state();
+ if(mobile){await touch('touchStart',[[x,y,1]]);await touch('touchEnd');await sleep(110);await touch('touchStart',[[x,y,1]]);await touch('touchEnd');}
+ else{for(const n of [1,2]){await send('Input.dispatchMouseEvent',{type:'mousePressed',x,y,button:'left',buttons:1,clickCount:n});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x,y,button:'left',clickCount:n});}}
+ await sleep(950);const reset=await state();
+ if(mobile){await touch('touchStart',[[x,y,1]]);await touch('touchCancel');}const cancel=await evaluate('!document.querySelector("#view-navigation").classList.contains("is-active")');
+ if(mobile)await tap('#walk-btn');else await mouseClick('#walk-btn');await sleep(1400);const walkBefore=await state();
+ const walkRect=await evaluate('(()=>{const r=document.querySelector("#view-orb").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2+8}})()');
+ if(mobile){await touch('touchStart',[[walkRect.x,walkRect.y,1]]);for(let i=1;i<=8;i++)await touch('touchMove',[[walkRect.x+i*3,walkRect.y-i,1]]);await touch('touchEnd');}
+ else{await send('Input.dispatchMouseEvent',{type:'mousePressed',...walkRect,button:'left',buttons:1,clickCount:1});for(let i=1;i<=8;i++)await send('Input.dispatchMouseEvent',{type:'mouseMoved',x:walkRect.x+i*3,y:walkRect.y-i,button:'left',buttons:1});await send('Input.dispatchMouseEvent',{type:'mouseReleased',x:walkRect.x+24,y:walkRect.y-8,button:'left',clickCount:1});}
+ await sleep(400);const walkAfter=await state();if(mobile)await tap('#exit-walk');else await mouseClick('#exit-walk');await sleep(350);const walkReturn=await state();
+ const result={layout,held,released,cancel,minimumDisabled:!pinch||pinch.fieldOfView>20.01||atMin,mapPan:delta(before.camera,panned.camera),mapAngleChange:angle(before,panned),lookAnchorDrift:delta(panned.camera,looked.camera),lookAngleChange:angle(panned,looked),pinch:pinch&&{before:looked.fieldOfView,after:pinch.fieldOfView,anchorDrift:delta(looked.camera,pinch.camera),pageScale:await evaluate('visualViewport.scale')},zoom:{before:beforeZoom.fieldOfView,after:zoomed.fieldOfView,anchorDrift:delta(beforeZoom.camera,zoomed.camera)},north:{yaw:north.viewAngles.yaw,pitchDelta:Math.abs(north.viewAngles.pitch-zoomed.viewAngles.pitch),anchorDrift:delta(zoomed.camera,north.camera)},keyboard:{angleChange:angle(north,keyboard),anchorDrift:delta(north.camera,keyboard.camera)},reset:{yaw:reset.viewAngles.yaw,pitch:reset.viewAngles.pitch,fov:reset.fieldOfView,anchorDrift:delta(keyboard.camera,reset.camera)}};
+ result.inertia={reducedMotion:before.reducedMotion,angleChange:angle(coastStart,coastEnd),anchorDrift:delta(coastStart.camera,coastEnd.camera),interruptedYaw:coastInterrupted.viewAngles.yaw,settledDrift:angle(coastInterrupted,coastSettled)};
+ result.walk={mode:walkAfter.mode,angleChange:angle(walkBefore,walkAfter),anchorDrift:delta(walkBefore.camera,walkAfter.camera),returnMode:walkReturn.mode};
+ result.passed=layout.viewport&&!layout.toolbar&&!layout.explorer&&!layout.attributionToolbar&&layout.attributionVisible&&held&&released&&cancel&&result.minimumDisabled&&result.mapPan>1&&result.mapAngleChange<.015&&result.lookAnchorDrift<.01&&result.lookAngleChange>.05&&(result.inertia.reducedMotion?result.inertia.angleChange<.005:result.inertia.angleChange>.01)&&result.inertia.anchorDrift<.01&&Math.abs(result.inertia.interruptedYaw)<.03&&result.inertia.settledDrift<.01&&(!pinch||(result.pinch.after<result.pinch.before*.9&&result.pinch.anchorDrift<.01&&result.pinch.pageScale===1))&&result.zoom.after<result.zoom.before*.9&&result.zoom.anchorDrift<.01&&Math.abs(result.north.yaw)<.03&&result.north.pitchDelta<.03&&result.north.anchorDrift<.01&&result.keyboard.angleChange>.04&&result.keyboard.anchorDrift<.01&&Math.abs(result.reset.yaw-.52)<.03&&Math.abs(result.reset.pitch+.70)<.03&&Math.abs(result.reset.fov-39)<.1&&result.reset.anchorDrift<.01&&result.walk.mode==='walk'&&result.walk.angleChange>.05&&result.walk.anchorDrift<.01&&result.walk.returnMode==='orbit';
+ return result;
+}
 async function inspectOwnedClick(id,width){
  const point=await evaluate(`(()=>{const w=window.__r12World;if(!w)return null;const b=w.data.buildings.find(b=>b.id===${JSON.stringify(id)});if(!b)return null;
   const xs=b.points.map(p=>p[0]),zs=b.points.map(p=>p[1]),x0=Math.min(...xs),x1=Math.max(...xs),z0=Math.min(...zs),z1=Math.max(...zs),cx=(x0+x1)/2,cz=(z0+z1)/2;
@@ -119,6 +163,7 @@ try{
   if(m.method==='Network.responseReceived'&&m.params.response.status>=400)httpErrors.push({url:m.params.response.url,status:m.params.response.status});
  });
  await send('Page.enable');await send('Runtime.enable');await send('Log.enable');await send('Network.enable');
+ if(process.argv.includes('--reduced-motion'))await send('Emulation.setEmulatedMedia',{features:[{name:'prefers-reduced-motion',value:'reduce'}]});
  if(process.argv.includes('--low-power-gpu'))await send('Page.addScriptToEvaluateOnNewDocument',{source:`(()=>{const get=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(type,options,...rest){return get.call(this,type,/^webgl/.test(type)?{...options,powerPreference:'low-power'}:options,...rest);};})()`});
  for(const width of widths)for(const pose of poses){
   const start=Date.now(),errorStart=errors.length,httpStart=httpErrors.length,height=width<768?844:900;
@@ -152,11 +197,20 @@ try{
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
   const png=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,file),Buffer.from(png.result.data,'base64'));
   const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,requestedPowerPreference:process.argv.includes('--low-power-gpu')?'low-power':'product default',runtime,frameSample,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
+  if(process.argv.includes('--detail-layout')&&width<=768&&pose.startsWith('place:')){
+   r.detailLayout=await evaluate(`(()=>{const a=document.querySelector('#view-navigation').getBoundingClientRect(),b=document.querySelector('#detail').getBoundingClientRect(),c=document.querySelector('.toolbar').getBoundingClientRect();const overlap=(x,y)=>x.left<y.right&&x.right>y.left&&x.top<y.bottom&&x.bottom>y.top;return {visible:a.width>0&&a.height>0,detailOverlap:overlap(a,b),toolbarOverlap:overlap(a,c),viewport:a.top>=0&&a.bottom<=innerHeight};})()`);
+   if(!r.detailLayout.visible||r.detailLayout.detailOverlap||r.detailLayout.toolbarOverlap||!r.detailLayout.viewport)throw Error('Detail obscures view controls: '+JSON.stringify(r.detailLayout));
+   await tap('#detail-expand');await sleep(160);r.detailLayout.hiddenWhenExpanded=await evaluate('document.querySelector("#view-navigation").getBoundingClientRect().width===0');
+   await tap('#detail-expand');await sleep(160);r.detailLayout.restored=await evaluate('document.querySelector("#view-navigation").getBoundingClientRect().width>0');
+   if(!r.detailLayout.hiddenWhenExpanded||!r.detailLayout.restored)throw Error('Expanded detail does not restore view controls: '+JSON.stringify(r.detailLayout));
+   console.log(JSON.stringify({detailLayout:r.detailLayout}));
+  }
   if(interactionChecks&&width<=768&&pose==='home'){
    r.interactions=await inspectInteractions();
    const shot=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,'touch-after-'+width+'.png'),Buffer.from(shot.result.data,'base64'));
    r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({interactions:r.interactions}));
   }
+  if(process.argv.includes('--view-orb')&&pose==='home'){r.viewOrb=await inspectViewOrb(width);r.errors=errors.slice(errorStart);r.httpErrors=httpErrors.slice(httpStart);console.log(JSON.stringify({viewOrb:r.viewOrb}));if(!r.viewOrb.passed)throw Error('View orb interaction failed');}
   if(process.argv.includes('--r12-map-ui')&&width<=768&&pose==='home'){r.mapChrome=await inspectMapChrome();if(!r.mapChrome.passed)throw Error('Map Chrome check failed: '+JSON.stringify(r.mapChrome));}
   if(interactionChecks&&width>768&&pose==='home'){
    r.interactions=await inspectDesktopInteractions();

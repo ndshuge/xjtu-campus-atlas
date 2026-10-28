@@ -1,6 +1,25 @@
 import * as THREE from 'three';
 import {BASE,bounds,pointIn} from './geo.js';
 
+// Look toward the identifiable facade while fitting the mapped footprint.
+// Museum facade orientation is a photo-guided approximation, not a survey.
+export function landmarkEntranceFrame(place,width,height){
+ const directions={263624056:[0,.22,1],1167525875:[-1,.20,0],263625088:[0,.25,-1]};
+ if(!place?.points||!directions[place.osmId])return null;
+ const bb=bounds(place.points),top=place.displayHeight||place.height,mobile=width<=768;
+ const target=new THREE.Vector3((bb[0]+bb[2])/2,BASE+top*.38,(bb[1]+bb[3])/2);
+ const direction=new THREE.Vector3(...directions[place.osmId]).normalize();
+ const right=new THREE.Vector3(0,1,0).cross(direction).normalize(),up=direction.clone().cross(right).normalize();
+ const fov=mobile?85:50,tanV=Math.tan(fov*Math.PI/360),tanH=tanV*width/height,marginX=mobile?.84:.68,marginY=mobile?.68:.76;
+ let distance=100;
+ for(const x of [bb[0],bb[2]])for(const z of [bb[1],bb[3]])for(const y of [BASE,BASE+top]){
+  const q=new THREE.Vector3(x,y,z).sub(target),depth=q.dot(direction);
+  distance=Math.max(distance,depth+Math.abs(q.dot(right))/(tanH*marginX),depth+Math.abs(q.dot(up))/(tanV*marginY));
+ }
+ const position=target.clone().addScaledVector(direction,distance+10);
+ return {position:position.toArray(),target:target.toArray(),fov,bounds:bb,top,marginX,marginY,status:'Approximate facade-focused frame, OSM footprint retained'};
+}
+
 export function libraryEntranceFrame(place,buildings,width,height){
  const mobile=width<=768,bb=bounds(place.points),cx=(bb[0]+bb[2])/2;
  // Existing near-view cameras sat above the mapped A/B connecting building.
