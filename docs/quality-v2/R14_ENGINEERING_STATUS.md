@@ -29,3 +29,9 @@
 - 补充 R12 与 R14 全景基准：同一 Edge/Intel 核显进程、1440×900、DPR 1，按 R12/R14/R14/R12/R12/R14 顺序各采 120 个新帧。R12 P95 为 29.0 / 18.1 / 59.5 ms，R14 为 33.1 / 29.2 / 28.4 ms；两者分别为 479 / 494 calls、535,847 / 541,821 渲染三角面。差异随系统负载大幅波动，此短测不足以证明两版本的稳定快慢或 GPU 占用；其余机位及 R12/R13.1/R14 三版本完整同条件 P99 矩阵仍未完成。详见 `r14-r12-home-compare/browser-results.json`。
 - 恢复检查发现旧提示在画面已经自动恢复时仍要求用户重新加载。现改为中断时提示尝试恢复、成功后提示“图形已恢复”，并将手机提示移至搜索控件下方；真实浏览器模拟丢失/恢复后检查两条提示、画面、无重叠及全部 2,092 株树的近远分类总数。强制刷新会以当前镜头重新分类，因此允许阈值附近个别树切换 LOD；严格要求恢复前后近景数量完全相同的首轮断言无效，保留在 `r14-mobile-restore/report.json`。修正断言后的最终生产构建复测通过，前后截图见 `r14-mobile-restore-visible/`。
 - 1440px 桌面圆球原地旋转、复位、键盘及漫游检查通过；390px 圆球及地图手势检查通过，原始记录分别为 `r14-desktop-orb/browser-results.json` 和 `r14-mobile-orb/browser-results.json`。最终更新后的构建 JS 为 792.99 kB、gzip 223.23 kB，完整 `npm run verify` 和 `npm run build -- --outDir build-r14-final2` 均通过。
+
+## 独立公网预览
+
+源码 `343e6ac` 发布到独立分支 `feature/r14-core`；Pages 提交 `1bb28cbe18a9e93af6072d90241cdeec42746759` 仅增加 `r14-preview-20261029/`，官方首页及旧预览无改动。GitHub Pages 构建该提交状态为 `built`；公网 HTML、JS、CSS、`campus.json`、`osm-source.json` 经 SHA-256 对照与本地 `build-r14-final2` 一致。公网 Edge 1440px 与 390px 模拟视口的圆球和地图手势通过，无记录的脚本或 HTTP 错误；截图和 JSON 在 `r14-public-preview-1440/`、`r14-public-preview-390/`。预览地址： https://ndshuge.github.io/xjtu-campus-atlas/r14-preview-20261029/ 。
+
+这是阶段预览；真实性升级、全面的三版本性能矩阵、长期资源/GPU 计时、地图实验上下文恢复和真机 Safari 均仍未完成。正式首页保持 R13.1，不能依据此预览将 R14 判为完整验收。
