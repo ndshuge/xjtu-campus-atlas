@@ -156,6 +156,7 @@ body.photo-inspection .view-navigation{display:none!important}
 @media(min-width:769px){.view-navigation{top:178px;bottom:auto}}
 @media(max-width:768px){
  .view-navigation{--orb-size:70px;flex-direction:row;gap:0}
+ #toast{top:calc(145px + env(safe-area-inset-top,0px))}
  .view-navigation-heading,.view-zoom #view-reset,.orb-drag-cue{display:none}
  .view-navigation-controls{gap:9px}
  .view-zoom button{width:44px;height:44px}

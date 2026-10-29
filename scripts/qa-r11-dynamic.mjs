@@ -29,7 +29,7 @@ async function screenshot(name){
  const r=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});
  await fs.writeFile(path.join(output,name+'.png'),Buffer.from(r.result.data,'base64'));
 }
-const reading="(()=>{const d=window.campusDiagnostics(),c=document.querySelector('#scene canvas');return {camera:d.camera,target:d.target,mode:d.mode,quality:d.quality,foliageCoverageMaterials:d.foliageCoverageMaterials,dpr:d.renderPixelRatio,deviceDpr:devicePixelRatio,width:innerWidth,height:innerHeight,canvas:[c.width,c.height],canvasPixels:c.width*c.height,drawCalls:d.drawCalls,triangles:d.triangles,frameStats:d.frameStats,fps:d.fps,loadMs:d.sceneLoadMs,contextLost:d.contextLost,errors:d.errors,visibleLabels:d.visibleLabels}})()";
+const reading="(()=>{const d=window.campusDiagnostics(),c=document.querySelector('#scene canvas');return {camera:d.camera,target:d.target,mode:d.mode,quality:d.quality,foliageCoverageMaterials:d.foliageCoverageMaterials,nearTrees:d.vegetation?.nearTrees,farTrees:d.vegetation?.farTrees,dpr:d.renderPixelRatio,deviceDpr:devicePixelRatio,width:innerWidth,height:innerHeight,canvas:[c.width,c.height],canvasPixels:c.width*c.height,drawCalls:d.drawCalls,triangles:d.triangles,frameStats:d.frameStats,fps:d.fps,loadMs:d.sceneLoadMs,contextLost:d.contextLost,errors:d.errors,visibleLabels:d.visibleLabels}})()";
 const snapshot=()=>js(reading);
 async function quality(mode){
  await js("(()=>{const e=document.querySelector('#quality');e.value='"+mode+"';e.dispatchEvent(new Event('change',{bubbles:true}));return true})()");
@@ -124,14 +124,20 @@ try{
  // Same pose, lower device DPR: valid control against internal-pixel overdraw.
  await send('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
  await wait(600);const dpr1=await snapshot();
+ await screenshot('context-before');
  // WEBGL_lose_context simulates event recovery, not Safari background eviction.
  const contextAvailable=await js("(()=>{const gl=document.querySelector('#scene canvas').getContext('webgl2');const ext=gl.getExtension('WEBGL_lose_context');if(!ext)return false;window.__r11ContextExt=ext;ext.loseContext();return true})()");
  let restoration={supported:contextAvailable};
  if(contextAvailable){
-  await wait(380);restoration.lost=await snapshot();
+  await wait(380);restoration.lost=await snapshot();restoration.lost.notice=await js("document.querySelector('#toast').textContent");
   await js("window.__r11ContextExt.restoreContext()");
-  await wait(1600);restoration.restored=await snapshot();
-  restoration.passed=restoration.lost.contextLost===true&&restoration.restored.contextLost===false&&restoration.restored.drawCalls>0;
+  await wait(1600);restoration.restored=await snapshot();restoration.restored.notice=await js("document.querySelector('#toast').textContent");
+  restoration.restored.noticeLayout=await js("(()=>{const a=document.querySelector('#toast').getBoundingClientRect(),b=document.querySelector('#map-search-launch').getBoundingClientRect();return {toastInViewport:a.top>=0&&a.bottom<=innerHeight,searchOverlap:a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top}})()");
+  await screenshot('context-restored');
+  // Forced recovery reclassifies at the current camera rather than its last
+  // throttled LOD position, so boundary trees may legitimately change LOD.
+  // Require all instances to remain represented instead of equal near counts.
+  restoration.passed=restoration.lost.contextLost===true&&restoration.lost.notice.includes('正在尝试恢复')&&restoration.restored.contextLost===false&&restoration.restored.notice==='图形已恢复。'&&restoration.restored.noticeLayout.toastInViewport&&!restoration.restored.noticeLayout.searchOverlap&&restoration.restored.drawCalls>0&&restoration.restored.nearTrees+restoration.restored.farTrees===dpr1.nearTrees+dpr1.farTrees;
  }
  const gpu=await js("(()=>{const gl=document.querySelector('#scene canvas').getContext('webgl2');const e=gl.getExtension('WEBGL_debug_renderer_info');return e?gl.getParameter(e.UNMASKED_RENDERER_WEBGL):gl.getParameter(gl.RENDERER)})()");
  const report={date:new Date().toISOString(),gpu,origin,environment:'Windows Edge Headless WebGL, mobile CDP emulation; NOT an iPhone Safari test',cases:results,dpr1,restoration,errors,httpErrors,passed:results.every(r=>Object.values(r.pass).every(Boolean))&&(!restoration.supported||restoration.passed)&&!errors.length&&!httpErrors.length};
