@@ -1,0 +1,2749 @@
+{
+  "origin": "http://127.0.0.1:18971/buildings-r12-review.html",
+  "testedAt": "2026-10-29T11:56:28.453Z",
+  "results": [
+    {
+      "pose": "r13-siyuan-front",
+      "url": "http://127.0.0.1:18971/buildings-r12-review.html?__qa_pose=r13-siyuan-front-1440&inspection=r13-siyuan-front",
+      "width": 1440,
+      "height": 900,
+      "file": "r13-siyuan-front-1440.png",
+      "elapsedMs": 7253,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:18971/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 58,
+        "viewAngles": {
+          "yaw": 0,
+          "pitch": -0.0886558818674375
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 163,
+          "farTrees": 1929
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 461,
+        "triangles": 706878,
+        "geometries": 364,
+        "textures": 31,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.3
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 4089,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -29.999999999999996,
+          18.000000000000004,
+          450
+        ],
+        "target": [
+          -29.999999999999996,
+          10,
+          360
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "buildingAudit": {
+          "pose": "r13-siyuan-front",
+          "stage": "material",
+          "main": {
+            "ids": [
+              263624057,
+              263624058,
+              263624059,
+              263624060,
+              263624061,
+              264595812,
+              3557330,
+              3557331
+            ],
+            "indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              95,
+              137,
+              138
+            ],
+            "genericVertices": 0,
+            "triangles": 13571,
+            "meshes": 5,
+            "activeTriangles": 13571,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 1628520,
+            "owners": [
+              "main-complex-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624057,
+                "center": [
+                  -31.35,
+                  124.87
+                ],
+                "sourceHeight": 80.5,
+                "displayHeight": 100
+              },
+              {
+                "id": 263624058,
+                "center": [
+                  -62.74,
+                  75.23
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624059,
+                "center": [
+                  -0.54,
+                  75.69
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624060,
+                "center": [
+                  -57.79,
+                  176.98
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624061,
+                "center": [
+                  -3.24,
+                  176.35
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 264595812,
+                "center": [
+                  -31.25,
+                  68.63
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557330,
+                "center": [
+                  -44.93,
+                  169.17
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557331,
+                "center": [
+                  -15.84,
+                  169.67
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              }
+            ]
+          },
+          "siyuan": {
+            "ids": [
+              263624056
+            ],
+            "indices": [
+              0
+            ],
+            "genericVertices": 0,
+            "triangles": 344,
+            "meshes": 7,
+            "activeTriangles": 344,
+            "activeMeshes": 7,
+            "detailLOD": null,
+            "materials": 7,
+            "textures": 1,
+            "geometryBytes": 41168,
+            "owners": [
+              "siyuan-center-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624056,
+                "center": [
+                  -29.6,
+                  333.76
+                ],
+                "sourceHeight": 16,
+                "displayHeight": 16
+              }
+            ]
+          },
+          "museum": {
+            "ids": [
+              1167525875
+            ],
+            "indices": [
+              123
+            ],
+            "genericVertices": 0,
+            "triangles": 108,
+            "meshes": 6,
+            "activeTriangles": 108,
+            "activeMeshes": 6,
+            "detailLOD": null,
+            "materials": 6,
+            "textures": 1,
+            "geometryBytes": 12848,
+            "owners": [
+              "relocation-museum-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 1167525875,
+                "center": [
+                  44.14,
+                  393.19
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "central": {
+            "ids": [
+              263625087,
+              263625088,
+              263625089
+            ],
+            "indices": [
+              9,
+              10,
+              11
+            ],
+            "genericVertices": 0,
+            "triangles": 10376,
+            "meshes": 4,
+            "activeTriangles": 5640,
+            "activeMeshes": 3,
+            "detailLOD": {
+              "level": "far",
+              "description": "window jambs only",
+              "near": 750,
+              "far": 850
+            },
+            "materials": 4,
+            "textures": 0,
+            "geometryBytes": 1245120,
+            "owners": [
+              "central-buildings-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263625087,
+                "center": [
+                  -139.74,
+                  -465.29
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625088,
+                "center": [
+                  -27.92,
+                  -456.25
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625089,
+                "center": [
+                  82.06,
+                  -465.05
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "science": {
+            "ids": [
+              263632364
+            ],
+            "indices": [
+              19
+            ],
+            "genericVertices": 0,
+            "triangles": 4163,
+            "meshes": 5,
+            "activeTriangles": 4163,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 499560,
+            "owners": [
+              "science-hall-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263632364,
+                "center": [
+                  74.38,
+                  -48.41
+                ],
+                "sourceHeight": 21,
+                "displayHeight": 21
+              }
+            ]
+          },
+          "library": {
+            "ids": [
+              263624481
+            ],
+            "indices": [
+              6
+            ],
+            "genericVertices": 0,
+            "triangles": 23247,
+            "meshes": 11,
+            "activeTriangles": 10487,
+            "activeMeshes": 10,
+            "detailLOD": {
+              "detailVisible": false,
+              "projectedThicknessPixels": 0.185454283547511,
+              "thicknessMetres": 0.12,
+              "enterPixels": 0.85,
+              "exitPixels": 0.55
+            },
+            "materials": 10,
+            "textures": 4,
+            "geometryBytes": 2231456,
+            "owners": [
+              "library-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624481,
+                "center": [
+                  -30.53,
+                  -140
+                ],
+                "sourceHeight": 49.75,
+                "displayHeight": 49.75
+              }
+            ]
+          },
+          "mainBounds": {
+            "isBox3": true,
+            "min": {
+              "x": -86.8010025024414,
+              "y": 1.100000023841858,
+              "z": 10.460000038146973
+            },
+            "max": {
+              "x": 24.02400016784668,
+              "y": 101.0999984741211,
+              "z": 203.67300415039062
+            }
+          }
+        },
+        "totalLoadMs": 4089,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r13-siyuan-entry",
+      "url": "http://127.0.0.1:18971/buildings-r12-review.html?__qa_pose=r13-siyuan-entry-1440&inspection=r13-siyuan-entry",
+      "width": 1440,
+      "height": 900,
+      "file": "r13-siyuan-entry-1440.png",
+      "elapsedMs": 5988,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:18971/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 67,
+        "viewAngles": {
+          "yaw": 0,
+          "pitch": -0.0471238898038469
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 203,
+          "farTrees": 1889
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 467,
+        "triangles": 747500,
+        "geometries": 365,
+        "textures": 31,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.6
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 2901,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -30,
+          11.931938862596255,
+          412.9666646461631
+        ],
+        "target": [
+          -30,
+          10,
+          372
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "buildingAudit": {
+          "pose": "r13-siyuan-entry",
+          "stage": "material",
+          "main": {
+            "ids": [
+              263624057,
+              263624058,
+              263624059,
+              263624060,
+              263624061,
+              264595812,
+              3557330,
+              3557331
+            ],
+            "indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              95,
+              137,
+              138
+            ],
+            "genericVertices": 0,
+            "triangles": 13571,
+            "meshes": 5,
+            "activeTriangles": 13571,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 1628520,
+            "owners": [
+              "main-complex-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624057,
+                "center": [
+                  -31.35,
+                  124.87
+                ],
+                "sourceHeight": 80.5,
+                "displayHeight": 100
+              },
+              {
+                "id": 263624058,
+                "center": [
+                  -62.74,
+                  75.23
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624059,
+                "center": [
+                  -0.54,
+                  75.69
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624060,
+                "center": [
+                  -57.79,
+                  176.98
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624061,
+                "center": [
+                  -3.24,
+                  176.35
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 264595812,
+                "center": [
+                  -31.25,
+                  68.63
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557330,
+                "center": [
+                  -44.93,
+                  169.17
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557331,
+                "center": [
+                  -15.84,
+                  169.67
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              }
+            ]
+          },
+          "siyuan": {
+            "ids": [
+              263624056
+            ],
+            "indices": [
+              0
+            ],
+            "genericVertices": 0,
+            "triangles": 344,
+            "meshes": 7,
+            "activeTriangles": 344,
+            "activeMeshes": 7,
+            "detailLOD": null,
+            "materials": 7,
+            "textures": 1,
+            "geometryBytes": 41168,
+            "owners": [
+              "siyuan-center-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624056,
+                "center": [
+                  -29.6,
+                  333.76
+                ],
+                "sourceHeight": 16,
+                "displayHeight": 16
+              }
+            ]
+          },
+          "museum": {
+            "ids": [
+              1167525875
+            ],
+            "indices": [
+              123
+            ],
+            "genericVertices": 0,
+            "triangles": 108,
+            "meshes": 6,
+            "activeTriangles": 108,
+            "activeMeshes": 6,
+            "detailLOD": null,
+            "materials": 6,
+            "textures": 1,
+            "geometryBytes": 12848,
+            "owners": [
+              "relocation-museum-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 1167525875,
+                "center": [
+                  44.14,
+                  393.19
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "central": {
+            "ids": [
+              263625087,
+              263625088,
+              263625089
+            ],
+            "indices": [
+              9,
+              10,
+              11
+            ],
+            "genericVertices": 0,
+            "triangles": 10376,
+            "meshes": 4,
+            "activeTriangles": 5640,
+            "activeMeshes": 3,
+            "detailLOD": {
+              "level": "far",
+              "description": "window jambs only",
+              "near": 750,
+              "far": 850
+            },
+            "materials": 4,
+            "textures": 0,
+            "geometryBytes": 1245120,
+            "owners": [
+              "central-buildings-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263625087,
+                "center": [
+                  -139.74,
+                  -465.29
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625088,
+                "center": [
+                  -27.92,
+                  -456.25
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625089,
+                "center": [
+                  82.06,
+                  -465.05
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "science": {
+            "ids": [
+              263632364
+            ],
+            "indices": [
+              19
+            ],
+            "genericVertices": 0,
+            "triangles": 4163,
+            "meshes": 5,
+            "activeTriangles": 4163,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 499560,
+            "owners": [
+              "science-hall-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263632364,
+                "center": [
+                  74.38,
+                  -48.41
+                ],
+                "sourceHeight": 21,
+                "displayHeight": 21
+              }
+            ]
+          },
+          "library": {
+            "ids": [
+              263624481
+            ],
+            "indices": [
+              6
+            ],
+            "genericVertices": 0,
+            "triangles": 23247,
+            "meshes": 11,
+            "activeTriangles": 10487,
+            "activeMeshes": 10,
+            "detailLOD": {
+              "detailVisible": false,
+              "projectedThicknessPixels": 0.1670923035289306,
+              "thicknessMetres": 0.12,
+              "enterPixels": 0.85,
+              "exitPixels": 0.55
+            },
+            "materials": 10,
+            "textures": 4,
+            "geometryBytes": 2231456,
+            "owners": [
+              "library-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624481,
+                "center": [
+                  -30.53,
+                  -140
+                ],
+                "sourceHeight": 49.75,
+                "displayHeight": 49.75
+              }
+            ]
+          },
+          "mainBounds": {
+            "isBox3": true,
+            "min": {
+              "x": -86.8010025024414,
+              "y": 1.100000023841858,
+              "z": 10.460000038146973
+            },
+            "max": {
+              "x": 24.02400016784668,
+              "y": 101.0999984741211,
+              "z": 203.67300415039062
+            }
+          }
+        },
+        "totalLoadMs": 2901,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r13-siyuan-oblique",
+      "url": "http://127.0.0.1:18971/buildings-r12-review.html?__qa_pose=r13-siyuan-oblique-1440&inspection=r13-siyuan-oblique",
+      "width": 1440,
+      "height": 900,
+      "file": "r13-siyuan-oblique-1440.png",
+      "elapsedMs": 6214,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:18971/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 55,
+        "viewAngles": {
+          "yaw": -0.7229793534014912,
+          "pitch": -0.26899427861332464
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 126,
+          "farTrees": 1966
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 437,
+        "triangles": 667781,
+        "geometries": 337,
+        "textures": 33,
+        "fps": 241,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.7
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 3022,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -150,
+          60.000000000000014,
+          469.9999999999999
+        ],
+        "target": [
+          -30.000000000000004,
+          9.999999999999998,
+          333.99999999999994
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "buildingAudit": {
+          "pose": "r13-siyuan-oblique",
+          "stage": "material",
+          "main": {
+            "ids": [
+              263624057,
+              263624058,
+              263624059,
+              263624060,
+              263624061,
+              264595812,
+              3557330,
+              3557331
+            ],
+            "indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              95,
+              137,
+              138
+            ],
+            "genericVertices": 0,
+            "triangles": 13571,
+            "meshes": 5,
+            "activeTriangles": 13571,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 1628520,
+            "owners": [
+              "main-complex-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624057,
+                "center": [
+                  -31.35,
+                  124.87
+                ],
+                "sourceHeight": 80.5,
+                "displayHeight": 100
+              },
+              {
+                "id": 263624058,
+                "center": [
+                  -62.74,
+                  75.23
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624059,
+                "center": [
+                  -0.54,
+                  75.69
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624060,
+                "center": [
+                  -57.79,
+                  176.98
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624061,
+                "center": [
+                  -3.24,
+                  176.35
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 264595812,
+                "center": [
+                  -31.25,
+                  68.63
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557330,
+                "center": [
+                  -44.93,
+                  169.17
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557331,
+                "center": [
+                  -15.84,
+                  169.67
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              }
+            ]
+          },
+          "siyuan": {
+            "ids": [
+              263624056
+            ],
+            "indices": [
+              0
+            ],
+            "genericVertices": 0,
+            "triangles": 344,
+            "meshes": 7,
+            "activeTriangles": 344,
+            "activeMeshes": 7,
+            "detailLOD": null,
+            "materials": 7,
+            "textures": 1,
+            "geometryBytes": 41168,
+            "owners": [
+              "siyuan-center-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624056,
+                "center": [
+                  -29.6,
+                  333.76
+                ],
+                "sourceHeight": 16,
+                "displayHeight": 16
+              }
+            ]
+          },
+          "museum": {
+            "ids": [
+              1167525875
+            ],
+            "indices": [
+              123
+            ],
+            "genericVertices": 0,
+            "triangles": 108,
+            "meshes": 6,
+            "activeTriangles": 108,
+            "activeMeshes": 6,
+            "detailLOD": null,
+            "materials": 6,
+            "textures": 1,
+            "geometryBytes": 12848,
+            "owners": [
+              "relocation-museum-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 1167525875,
+                "center": [
+                  44.14,
+                  393.19
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "central": {
+            "ids": [
+              263625087,
+              263625088,
+              263625089
+            ],
+            "indices": [
+              9,
+              10,
+              11
+            ],
+            "genericVertices": 0,
+            "triangles": 10376,
+            "meshes": 4,
+            "activeTriangles": 5640,
+            "activeMeshes": 3,
+            "detailLOD": {
+              "level": "far",
+              "description": "window jambs only",
+              "near": 750,
+              "far": 850
+            },
+            "materials": 4,
+            "textures": 0,
+            "geometryBytes": 1245120,
+            "owners": [
+              "central-buildings-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263625087,
+                "center": [
+                  -139.74,
+                  -465.29
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625088,
+                "center": [
+                  -27.92,
+                  -456.25
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625089,
+                "center": [
+                  82.06,
+                  -465.05
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "science": {
+            "ids": [
+              263632364
+            ],
+            "indices": [
+              19
+            ],
+            "genericVertices": 0,
+            "triangles": 4163,
+            "meshes": 5,
+            "activeTriangles": 4163,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 499560,
+            "owners": [
+              "science-hall-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263632364,
+                "center": [
+                  74.38,
+                  -48.41
+                ],
+                "sourceHeight": 21,
+                "displayHeight": 21
+              }
+            ]
+          },
+          "library": {
+            "ids": [
+              263624481
+            ],
+            "indices": [
+              6
+            ],
+            "genericVertices": 0,
+            "triangles": 23247,
+            "meshes": 11,
+            "activeTriangles": 10487,
+            "activeMeshes": 10,
+            "detailLOD": {
+              "detailVisible": false,
+              "projectedThicknessPixels": 0.18910789261752287,
+              "thicknessMetres": 0.12,
+              "enterPixels": 0.85,
+              "exitPixels": 0.55
+            },
+            "materials": 10,
+            "textures": 4,
+            "geometryBytes": 2231456,
+            "owners": [
+              "library-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624481,
+                "center": [
+                  -30.53,
+                  -140
+                ],
+                "sourceHeight": 49.75,
+                "displayHeight": 49.75
+              }
+            ]
+          },
+          "mainBounds": {
+            "isBox3": true,
+            "min": {
+              "x": -86.8010025024414,
+              "y": 1.100000023841858,
+              "z": 10.460000038146973
+            },
+            "max": {
+              "x": 24.02400016784668,
+              "y": 101.0999984741211,
+              "z": 203.67300415039062
+            }
+          }
+        },
+        "totalLoadMs": 3022,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r13-siyuan-front",
+      "url": "http://127.0.0.1:18971/buildings-r12-review.html?__qa_pose=r13-siyuan-front-390&inspection=r13-siyuan-front",
+      "width": 390,
+      "height": 844,
+      "file": "r13-siyuan-front-390.png",
+      "elapsedMs": 6282,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:18971/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 102,
+        "viewAngles": {
+          "yaw": 0,
+          "pitch": -0.0886558818674375
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 67,
+          "farTrees": 2025
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 330,
+        "triangles": 525054,
+        "geometries": 332,
+        "textures": 29,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.3
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 3345,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -29.999999999999996,
+          18.000000000000004,
+          450
+        ],
+        "target": [
+          -29.999999999999996,
+          10,
+          360
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "buildingAudit": {
+          "pose": "r13-siyuan-front",
+          "stage": "material",
+          "main": {
+            "ids": [
+              263624057,
+              263624058,
+              263624059,
+              263624060,
+              263624061,
+              264595812,
+              3557330,
+              3557331
+            ],
+            "indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              95,
+              137,
+              138
+            ],
+            "genericVertices": 0,
+            "triangles": 13571,
+            "meshes": 5,
+            "activeTriangles": 13571,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 1628520,
+            "owners": [
+              "main-complex-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624057,
+                "center": [
+                  -31.35,
+                  124.87
+                ],
+                "sourceHeight": 80.5,
+                "displayHeight": 100
+              },
+              {
+                "id": 263624058,
+                "center": [
+                  -62.74,
+                  75.23
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624059,
+                "center": [
+                  -0.54,
+                  75.69
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624060,
+                "center": [
+                  -57.79,
+                  176.98
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624061,
+                "center": [
+                  -3.24,
+                  176.35
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 264595812,
+                "center": [
+                  -31.25,
+                  68.63
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557330,
+                "center": [
+                  -44.93,
+                  169.17
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557331,
+                "center": [
+                  -15.84,
+                  169.67
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              }
+            ]
+          },
+          "siyuan": {
+            "ids": [
+              263624056
+            ],
+            "indices": [
+              0
+            ],
+            "genericVertices": 0,
+            "triangles": 344,
+            "meshes": 7,
+            "activeTriangles": 344,
+            "activeMeshes": 7,
+            "detailLOD": null,
+            "materials": 7,
+            "textures": 1,
+            "geometryBytes": 41168,
+            "owners": [
+              "siyuan-center-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624056,
+                "center": [
+                  -29.6,
+                  333.76
+                ],
+                "sourceHeight": 16,
+                "displayHeight": 16
+              }
+            ]
+          },
+          "museum": {
+            "ids": [
+              1167525875
+            ],
+            "indices": [
+              123
+            ],
+            "genericVertices": 0,
+            "triangles": 108,
+            "meshes": 6,
+            "activeTriangles": 108,
+            "activeMeshes": 6,
+            "detailLOD": null,
+            "materials": 6,
+            "textures": 1,
+            "geometryBytes": 12848,
+            "owners": [
+              "relocation-museum-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 1167525875,
+                "center": [
+                  44.14,
+                  393.19
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "central": {
+            "ids": [
+              263625087,
+              263625088,
+              263625089
+            ],
+            "indices": [
+              9,
+              10,
+              11
+            ],
+            "genericVertices": 0,
+            "triangles": 10376,
+            "meshes": 4,
+            "activeTriangles": 5640,
+            "activeMeshes": 3,
+            "detailLOD": {
+              "level": "far",
+              "description": "window jambs only",
+              "near": 750,
+              "far": 850
+            },
+            "materials": 4,
+            "textures": 0,
+            "geometryBytes": 1245120,
+            "owners": [
+              "central-buildings-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263625087,
+                "center": [
+                  -139.74,
+                  -465.29
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625088,
+                "center": [
+                  -27.92,
+                  -456.25
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625089,
+                "center": [
+                  82.06,
+                  -465.05
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "science": {
+            "ids": [
+              263632364
+            ],
+            "indices": [
+              19
+            ],
+            "genericVertices": 0,
+            "triangles": 4163,
+            "meshes": 5,
+            "activeTriangles": 4163,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 499560,
+            "owners": [
+              "science-hall-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263632364,
+                "center": [
+                  74.38,
+                  -48.41
+                ],
+                "sourceHeight": 21,
+                "displayHeight": 21
+              }
+            ]
+          },
+          "library": {
+            "ids": [
+              263624481
+            ],
+            "indices": [
+              6
+            ],
+            "genericVertices": 0,
+            "triangles": 23247,
+            "meshes": 11,
+            "activeTriangles": 10487,
+            "activeMeshes": 10,
+            "detailLOD": {
+              "detailVisible": false,
+              "projectedThicknessPixels": 0.07806529152269127,
+              "thicknessMetres": 0.12,
+              "enterPixels": 0.85,
+              "exitPixels": 0.55
+            },
+            "materials": 10,
+            "textures": 4,
+            "geometryBytes": 2231456,
+            "owners": [
+              "library-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624481,
+                "center": [
+                  -30.53,
+                  -140
+                ],
+                "sourceHeight": 49.75,
+                "displayHeight": 49.75
+              }
+            ]
+          },
+          "mainBounds": {
+            "isBox3": true,
+            "min": {
+              "x": -86.8010025024414,
+              "y": 1.100000023841858,
+              "z": 10.460000038146973
+            },
+            "max": {
+              "x": 24.02400016784668,
+              "y": 101.0999984741211,
+              "z": 203.67300415039062
+            }
+          }
+        },
+        "totalLoadMs": 3345,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r13-siyuan-entry",
+      "url": "http://127.0.0.1:18971/buildings-r12-review.html?__qa_pose=r13-siyuan-entry-390&inspection=r13-siyuan-entry",
+      "width": 390,
+      "height": 844,
+      "file": "r13-siyuan-entry-390.png",
+      "elapsedMs": 5878,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:18971/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 98,
+        "viewAngles": {
+          "yaw": 0,
+          "pitch": -0.0471238898038469
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 91,
+          "farTrees": 2001
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 322,
+        "triangles": 534742,
+        "geometries": 323,
+        "textures": 29,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.4
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 2960,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -30,
+          11.931938862596255,
+          412.9666646461631
+        ],
+        "target": [
+          -30,
+          10,
+          372
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "buildingAudit": {
+          "pose": "r13-siyuan-entry",
+          "stage": "material",
+          "main": {
+            "ids": [
+              263624057,
+              263624058,
+              263624059,
+              263624060,
+              263624061,
+              264595812,
+              3557330,
+              3557331
+            ],
+            "indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              95,
+              137,
+              138
+            ],
+            "genericVertices": 0,
+            "triangles": 13571,
+            "meshes": 5,
+            "activeTriangles": 13571,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 1628520,
+            "owners": [
+              "main-complex-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624057,
+                "center": [
+                  -31.35,
+                  124.87
+                ],
+                "sourceHeight": 80.5,
+                "displayHeight": 100
+              },
+              {
+                "id": 263624058,
+                "center": [
+                  -62.74,
+                  75.23
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624059,
+                "center": [
+                  -0.54,
+                  75.69
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624060,
+                "center": [
+                  -57.79,
+                  176.98
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624061,
+                "center": [
+                  -3.24,
+                  176.35
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 264595812,
+                "center": [
+                  -31.25,
+                  68.63
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557330,
+                "center": [
+                  -44.93,
+                  169.17
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557331,
+                "center": [
+                  -15.84,
+                  169.67
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              }
+            ]
+          },
+          "siyuan": {
+            "ids": [
+              263624056
+            ],
+            "indices": [
+              0
+            ],
+            "genericVertices": 0,
+            "triangles": 344,
+            "meshes": 7,
+            "activeTriangles": 344,
+            "activeMeshes": 7,
+            "detailLOD": null,
+            "materials": 7,
+            "textures": 1,
+            "geometryBytes": 41168,
+            "owners": [
+              "siyuan-center-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624056,
+                "center": [
+                  -29.6,
+                  333.76
+                ],
+                "sourceHeight": 16,
+                "displayHeight": 16
+              }
+            ]
+          },
+          "museum": {
+            "ids": [
+              1167525875
+            ],
+            "indices": [
+              123
+            ],
+            "genericVertices": 0,
+            "triangles": 108,
+            "meshes": 6,
+            "activeTriangles": 108,
+            "activeMeshes": 6,
+            "detailLOD": null,
+            "materials": 6,
+            "textures": 1,
+            "geometryBytes": 12848,
+            "owners": [
+              "relocation-museum-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 1167525875,
+                "center": [
+                  44.14,
+                  393.19
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "central": {
+            "ids": [
+              263625087,
+              263625088,
+              263625089
+            ],
+            "indices": [
+              9,
+              10,
+              11
+            ],
+            "genericVertices": 0,
+            "triangles": 10376,
+            "meshes": 4,
+            "activeTriangles": 5640,
+            "activeMeshes": 3,
+            "detailLOD": {
+              "level": "far",
+              "description": "window jambs only",
+              "near": 750,
+              "far": 850
+            },
+            "materials": 4,
+            "textures": 0,
+            "geometryBytes": 1245120,
+            "owners": [
+              "central-buildings-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263625087,
+                "center": [
+                  -139.74,
+                  -465.29
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625088,
+                "center": [
+                  -27.92,
+                  -456.25
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625089,
+                "center": [
+                  82.06,
+                  -465.05
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "science": {
+            "ids": [
+              263632364
+            ],
+            "indices": [
+              19
+            ],
+            "genericVertices": 0,
+            "triangles": 4163,
+            "meshes": 5,
+            "activeTriangles": 4163,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 499560,
+            "owners": [
+              "science-hall-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263632364,
+                "center": [
+                  74.38,
+                  -48.41
+                ],
+                "sourceHeight": 21,
+                "displayHeight": 21
+              }
+            ]
+          },
+          "library": {
+            "ids": [
+              263624481
+            ],
+            "indices": [
+              6
+            ],
+            "genericVertices": 0,
+            "triangles": 23247,
+            "meshes": 11,
+            "activeTriangles": 10487,
+            "activeMeshes": 10,
+            "detailLOD": {
+              "detailVisible": false,
+              "projectedThicknessPixels": 0.09015760047374159,
+              "thicknessMetres": 0.12,
+              "enterPixels": 0.85,
+              "exitPixels": 0.55
+            },
+            "materials": 10,
+            "textures": 4,
+            "geometryBytes": 2231456,
+            "owners": [
+              "library-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624481,
+                "center": [
+                  -30.53,
+                  -140
+                ],
+                "sourceHeight": 49.75,
+                "displayHeight": 49.75
+              }
+            ]
+          },
+          "mainBounds": {
+            "isBox3": true,
+            "min": {
+              "x": -86.8010025024414,
+              "y": 1.100000023841858,
+              "z": 10.460000038146973
+            },
+            "max": {
+              "x": 24.02400016784668,
+              "y": 101.0999984741211,
+              "z": 203.67300415039062
+            }
+          }
+        },
+        "totalLoadMs": 2960,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "r13-siyuan-oblique",
+      "url": "http://127.0.0.1:18971/buildings-r12-review.html?__qa_pose=r13-siyuan-oblique-390&inspection=r13-siyuan-oblique",
+      "width": 390,
+      "height": 844,
+      "file": "r13-siyuan-oblique-390.png",
+      "elapsedMs": 5730,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:18971/@vite/client",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 90,
+        "viewAngles": {
+          "yaw": -0.7229793534014912,
+          "pitch": -0.26899427861332464
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 50,
+          "farTrees": 2042
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 42.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 179,
+        "triangles": 489579,
+        "geometries": 189,
+        "textures": 17,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.3
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 2651,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -150,
+          60.000000000000014,
+          469.9999999999999
+        ],
+        "target": [
+          -30.000000000000004,
+          9.999999999999998,
+          333.99999999999994
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "buildingAudit": {
+          "pose": "r13-siyuan-oblique",
+          "stage": "material",
+          "main": {
+            "ids": [
+              263624057,
+              263624058,
+              263624059,
+              263624060,
+              263624061,
+              264595812,
+              3557330,
+              3557331
+            ],
+            "indices": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              95,
+              137,
+              138
+            ],
+            "genericVertices": 0,
+            "triangles": 13571,
+            "meshes": 5,
+            "activeTriangles": 13571,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 1628520,
+            "owners": [
+              "main-complex-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624057,
+                "center": [
+                  -31.35,
+                  124.87
+                ],
+                "sourceHeight": 80.5,
+                "displayHeight": 100
+              },
+              {
+                "id": 263624058,
+                "center": [
+                  -62.74,
+                  75.23
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624059,
+                "center": [
+                  -0.54,
+                  75.69
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624060,
+                "center": [
+                  -57.79,
+                  176.98
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 263624061,
+                "center": [
+                  -3.24,
+                  176.35
+                ],
+                "sourceHeight": 27,
+                "displayHeight": 22
+              },
+              {
+                "id": 264595812,
+                "center": [
+                  -31.25,
+                  68.63
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557330,
+                "center": [
+                  -44.93,
+                  169.17
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              },
+              {
+                "id": 3557331,
+                "center": [
+                  -15.84,
+                  169.67
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 5.4
+              }
+            ]
+          },
+          "siyuan": {
+            "ids": [
+              263624056
+            ],
+            "indices": [
+              0
+            ],
+            "genericVertices": 0,
+            "triangles": 344,
+            "meshes": 7,
+            "activeTriangles": 344,
+            "activeMeshes": 7,
+            "detailLOD": null,
+            "materials": 7,
+            "textures": 1,
+            "geometryBytes": 41168,
+            "owners": [
+              "siyuan-center-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624056,
+                "center": [
+                  -29.6,
+                  333.76
+                ],
+                "sourceHeight": 16,
+                "displayHeight": 16
+              }
+            ]
+          },
+          "museum": {
+            "ids": [
+              1167525875
+            ],
+            "indices": [
+              123
+            ],
+            "genericVertices": 0,
+            "triangles": 108,
+            "meshes": 6,
+            "activeTriangles": 108,
+            "activeMeshes": 6,
+            "detailLOD": null,
+            "materials": 6,
+            "textures": 1,
+            "geometryBytes": 12848,
+            "owners": [
+              "relocation-museum-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 1167525875,
+                "center": [
+                  44.14,
+                  393.19
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "central": {
+            "ids": [
+              263625087,
+              263625088,
+              263625089
+            ],
+            "indices": [
+              9,
+              10,
+              11
+            ],
+            "genericVertices": 0,
+            "triangles": 10376,
+            "meshes": 4,
+            "activeTriangles": 5640,
+            "activeMeshes": 3,
+            "detailLOD": {
+              "level": "far",
+              "description": "window jambs only",
+              "near": 750,
+              "far": 850
+            },
+            "materials": 4,
+            "textures": 0,
+            "geometryBytes": 1245120,
+            "owners": [
+              "central-buildings-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263625087,
+                "center": [
+                  -139.74,
+                  -465.29
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625088,
+                "center": [
+                  -27.92,
+                  -456.25
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              },
+              {
+                "id": 263625089,
+                "center": [
+                  82.06,
+                  -465.05
+                ],
+                "sourceHeight": 14,
+                "displayHeight": 14
+              }
+            ]
+          },
+          "science": {
+            "ids": [
+              263632364
+            ],
+            "indices": [
+              19
+            ],
+            "genericVertices": 0,
+            "triangles": 4163,
+            "meshes": 5,
+            "activeTriangles": 4163,
+            "activeMeshes": 5,
+            "detailLOD": null,
+            "materials": 5,
+            "textures": 0,
+            "geometryBytes": 499560,
+            "owners": [
+              "science-hall-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263632364,
+                "center": [
+                  74.38,
+                  -48.41
+                ],
+                "sourceHeight": 21,
+                "displayHeight": 21
+              }
+            ]
+          },
+          "library": {
+            "ids": [
+              263624481
+            ],
+            "indices": [
+              6
+            ],
+            "genericVertices": 0,
+            "triangles": 23247,
+            "meshes": 11,
+            "activeTriangles": 10487,
+            "activeMeshes": 10,
+            "detailLOD": {
+              "detailVisible": false,
+              "projectedThicknessPixels": 0.0923179746491005,
+              "thicknessMetres": 0.12,
+              "enterPixels": 0.85,
+              "exitPixels": 0.55
+            },
+            "materials": 10,
+            "textures": 4,
+            "geometryBytes": 2231456,
+            "owners": [
+              "library-asset.js"
+            ],
+            "positions": [
+              {
+                "id": 263624481,
+                "center": [
+                  -30.53,
+                  -140
+                ],
+                "sourceHeight": 49.75,
+                "displayHeight": 49.75
+              }
+            ]
+          },
+          "mainBounds": {
+            "isBox3": true,
+            "min": {
+              "x": -86.8010025024414,
+              "y": 1.100000023841858,
+              "z": 10.460000038146973
+            },
+            "max": {
+              "x": 24.02400016784668,
+              "y": 101.0999984741211,
+              "z": 203.67300415039062
+            }
+          }
+        },
+        "totalLoadMs": 2651,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

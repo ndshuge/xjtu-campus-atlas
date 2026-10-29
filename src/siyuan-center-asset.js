@@ -52,8 +52,20 @@ export function createSiyuanCenterAsset({building,buildingIndex,baseY=1.1,unifor
   }
   for(let i=0;i<4;i++)b.box('stone',cx,0,z1+.5+i*.48,w*.60,.52-i*.1,.53,buildingIndex,height);
  }
- // Eave projection is a visual estimate; footprint and OSM data are untouched.
- b.box('stone',cx,height-2.55,z1+.45,w+3,2.55,4.2,buildingIndex,height);
+ // The photographed south eave is a broad, sloping canopy, not a square box.
+ // The width and depth here are visual estimates rather than surveyed dimensions.
+ // Keep the front slope and the chamfered ends as real geometry, so the shape
+ // remains recognisable in silhouette and in oblique views.
+ const y0=baseY+height-2.55,y1=baseY+height;
+ const xl=x0-.3,xr=x1+.3,il=x0-1.5,ir=x1+1.5;
+ const zf=z1+1.55,zlower=z1+2.55,zb=z1-1.65;
+ const q=(kind,points)=>b.quad(kind,points,buildingIndex,height);
+ q('stone',[[il,y0,zlower],[ir,y0,zlower],[xr,y1,zf],[xl,y1,zf]]);
+ q('stone',[[xl,y1,zf],[xl,y1,zb],[il,y0,zb],[il,y0,zlower]]);
+ q('stone',[[ir,y0,zlower],[ir,y0,zb],[xr,y1,zb],[xr,y1,zf]]);
+ q('roof',[[xl,y1,zf],[xr,y1,zf],[xr,y1,zb],[xl,y1,zb]]);
+ q('stone',[[il,y0,zlower],[il,y0,zb],[ir,y0,zb],[ir,y0,zlower]]);
+ q('stone',[[il,y0,zb],[xl,y1,zb],[xr,y1,zb],[ir,y0,zb]]);
  const asset=b.finish({owner:'siyuan-center-asset.js',osmIds:[SIYUAN_ID],sourceDataUnchanged:true,estimated:true,
   evidence:'DESIGN_SOURCES.md',unknown:'Rear/side elevations, roof sections, exact heights, canopy and ground datum are unsurveyed'});
  if(!b.gray){
