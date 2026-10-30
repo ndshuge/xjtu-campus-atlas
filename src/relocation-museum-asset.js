@@ -13,7 +13,8 @@ export function createRelocationMuseumAsset({building,buildingIndex,baseY=1.1,un
  const t=.58,cutEast=mix(p[1],p[2],t),cutWest=mix(p[0],p[3],t);
  const high=[p[0],p[1],cutEast,cutWest,p[0]],low=[cutWest,cutEast,p[2],p[3],cutWest];
  const height=building.height,wingHeight=height*.52,cutZ=(cutEast[1]+cutWest[1])/2;
- const b=ownedArchitecture('Westward relocation museum / single owned exterior',{baseY,uniforms,stage});
+ const b=ownedArchitecture('Westward relocation museum / single owned exterior',{baseY,uniforms,stage,
+  extraMaterials:{brick:new THREE.MeshStandardMaterial({color:'#885443',roughness:.92})}});
  if(!b.gray){b.materials.stone.color.set('#d5d1c6');b.materials.roof.color.set('#aaa9a1');b.materials.glass.color.set('#263b44');b.materials.frame.color.set('#4d5a60');b.materials.dark.color.set('#303f47');}
  const makeZone=(polygon,top,which)=>{
   const cells=planCells(polygon),edges=cellBoundary(cells);b.roof(cells,top,buildingIndex,height);
@@ -33,12 +34,22 @@ export function createRelocationMuseumAsset({building,buildingIndex,baseY=1.1,un
    for(const [a,c,lo,hi] of [[.01,.31,.53,.99],[.33,.64,.53,.99],[.66,.99,.12,.99],[.01,.27,.14,.47],[.30,.64,.18,.45]])
     b.plane('stone',front,L*a,L*c,top*lo,top*hi,buildingIndex,height,.06);
   }else{
+   // The 2020 entrance photograph shows a solid pale sign band, a narrow
+   // doorway, dark vertical strips and a reddish panel, not one continuous
+   // storefront. Positions and height are approximate within the OSM outline.
    b.plane('stone',front,0,L,top*.61,top,buildingIndex,height,.06);
-   b.plane('stone',front,0,L*.15,0,top*.61,buildingIndex,height,.06);
-   b.plane('stone',front,L*.80,L,0,top*.61,buildingIndex,height,.06);
-   b.plane('glass',front,L*.15,L*.80,.05,top*.61,buildingIndex,height,-.05);
-   for(let i=0;i<=7;i++){const s=L*(.15+.65*i/7);b.plane('frame',front,s-.04,s+.04,.05,top*.61,buildingIndex,height,.01);}
-   b.plane('frame',front,L*.15,L*.80,top*.32,top*.33,buildingIndex,height,.01);
+   b.plane('stone',front,0,L*.12,0,top*.61,buildingIndex,height,.06);
+   b.plane('stone',front,L*.90,L,0,top*.61,buildingIndex,height,.06);
+   b.plane('dark',front,L*.12,L*.90,.05,top*.61,buildingIndex,height,-.10);
+   b.plane('brick',front,L*.55,L*.74,.15,top*.48,buildingIndex,height,-.03);
+   for(let i=0;i<=18;i++){
+    const s=L*(.12+.78*i/18);
+    if(s>L*.20&&s<L*.43||s>L*.55&&s<L*.74)continue;
+    b.plane('frame',front,s-.045,s+.045,.08,top*.60,buildingIndex,height,-.02);
+   }
+   b.plane('glass',front,L*.20,L*.43,.05,top*.48,buildingIndex,height,-.02);
+   for(const s of [.20,.215,.30,.32,.415,.43])b.plane('stone',front,L*s-.08,L*s+.08,.05,top*.50,buildingIndex,height,.04);
+   b.plane('stone',front,L*.20,L*.43,top*.48,top*.52,buildingIndex,height,.04);
   }
   return front;
  };
