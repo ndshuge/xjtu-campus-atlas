@@ -1,16 +1,17 @@
 import fs from 'node:fs';import crypto from 'node:crypto';import {execFileSync} from 'node:child_process';import assert from 'node:assert/strict';import * as THREE from 'three';
 import {CampusWorld} from '../src/world.js';
 import {createMainComplexAsset,MAIN_IDS,MAIN_HEIGHTS,mainDisplayHeight} from '../src/main-complex-asset.js';
+import {EAST_HISTORIC_IDS} from '../src/east-historic-asset.js';
 import {BASE,rng,bounds,extrude,boxGeometry,pointIn} from '../src/geo.js';
 import {mainTowerMassing} from '../src/main-tower-facade.js';
 const data=JSON.parse(fs.readFileSync('public/data/campus.json')),snapshot=JSON.stringify(data);
 const model=createMainComplexAsset({buildings:data.buildings,baseY:BASE}),gray=createMainComplexAsset({buildings:data.buildings,baseY:BASE,stage:'massing'});
 const original=execFileSync('git',['show','165a0a3:src/world.js'],{encoding:'utf8'}).replaceAll('\r\n','\n'),current=fs.readFileSync('src/world.js','utf8').replaceAll('\r\n','\n');
 const palette=Function(original.match(/const PALETTE=.*?;/)[0]+'return PALETTE;')();
-const compile=text=>{const method=text.slice(text.indexOf(' buildBuildings(){')+1,text.indexOf('\n addClock('));return Function('THREE','PALETTE','BASE','rng','bounds','extrude','boxGeometry','mainTowerMassing','pointIn','MAIN_IDS','mainDisplayHeight','SCIENCE_ID','SIYUAN_ID','RELOCATION_MUSEUM_ID','CENTRAL_IDS','return function '+method)(THREE,palette,BASE,rng,bounds,extrude,boxGeometry,mainTowerMassing,pointIn,MAIN_IDS,mainDisplayHeight,263632364,263624056,1167525875,[263625087,263625088,263625089]);};
+const compile=text=>{const method=text.slice(text.indexOf(' buildBuildings(){')+1,text.indexOf('\n addClock('));return Function('THREE','PALETTE','BASE','rng','bounds','extrude','boxGeometry','mainTowerMassing','pointIn','MAIN_IDS','mainDisplayHeight','SCIENCE_ID','SIYUAN_ID','RELOCATION_MUSEUM_ID','CENTRAL_IDS','EAST_HISTORIC_IDS','return function '+method)(THREE,palette,BASE,rng,bounds,extrude,boxGeometry,mainTowerMassing,pointIn,MAIN_IDS,mainDisplayHeight,263632364,263624056,1167525875,[263625087,263625088,263625089],EAST_HISTORIC_IDS);};
 function run(source){const w=Object.create(CampusWorld.prototype);w.data=structuredClone(data);w.scene=new THREE.Scene();w.dimensions=new Map();w.pickables=[];w.selection={value:-1};w.hover={value:-1};w.night={value:0};w.colorMode={value:0};compile(source).call(w);return w;}
 const before=run(original),after=run(current),indices=MAIN_IDS.map(id=>data.buildings.findIndex(b=>b.osmId===id));
-const excludedIds=[...MAIN_IDS,...(current.includes('this.scienceAsset=')?[263632364]:[]),...(current.includes('this.siyuanAsset=')?[263624056]:[]),...(current.includes('this.museumAsset=')?[1167525875]:[]),...(current.includes('this.centralBuildingAsset=')?[263625087,263625088,263625089]:[]),...(current.includes('this.westOneAsset=')?[263625085]:[])],genericIndices=excludedIds.map(id=>data.buildings.findIndex(b=>b.osmId===id));
+const excludedIds=[...MAIN_IDS,...(current.includes('this.scienceAsset=')?[263632364]:[]),...(current.includes('this.siyuanAsset=')?[263624056]:[]),...(current.includes('this.museumAsset=')?[1167525875]:[]),...(current.includes('this.centralBuildingAsset=')?[263625087,263625088,263625089]:[]),...(current.includes('this.westOneAsset=')?[263625085]:[]),...(current.includes('this.eastHistoricAsset=')?EAST_HISTORIC_IDS:[])],genericIndices=excludedIds.map(id=>data.buildings.findIndex(b=>b.osmId===id));
 function hashOthers(mesh){const hash=crypto.createHash('sha256'),g=mesh.geometry;let vertices=0,owned=0;const keys=Object.keys(g.attributes).sort();
  for(let i=0;i<g.attributes.position.count;i++){if(genericIndices.includes(g.attributes.buildingIndex.getX(i))){owned++;continue;}vertices++;for(const key of keys){const a=g.attributes[key];hash.update(Buffer.from(a.array.buffer,a.array.byteOffset+i*a.itemSize*4,a.itemSize*4));}}
  return {hash:hash.digest('hex'),vertices,owned};}
