@@ -51,7 +51,7 @@ export function treeGeometry(kind='plane',detail='near',seed=1956){
  }
  const clusters=conifer?(near?68:32):(near?92:45);
  for(let i=0;i<clusters;i++){
-  const a=i*2.399963,rad=conifer?(.35+rand()*.65)*(1-i/clusters)*3.2:Math.sqrt((i+.5)/clusters)*3.5;
+  const a=i*2.399963+(rand()-.5)*.31,rad=conifer?(.35+rand()*.65)*(1-i/clusters)*3.2:Math.sqrt((i+.5)/clusters)*3.5*(.84+rand()*.31);
   const y=conifer?3.0+i/clusters*7.7:6.8+Math.sqrt(Math.max(0,1-rad*rad/13))*2.4+(rand()-.5)*1.9;
   // Reduce over-wide flat cards; preserve existing crown points and triangle budget.
   const size=(conifer?.95:1.25)*(near?.90:1.16)*(0.8+rand()*.4);
@@ -65,24 +65,65 @@ export function treeGeometry(kind='plane',detail='near',seed=1956){
  }
  return{wood:join(stems),leaves:join(leaves),leafCards:clusters};
 }
-export function makeLeafSprayTexture(conifer=false,distant=false){
- const cv=document.createElement('canvas');cv.width=cv.height=256;const c=cv.getContext('2d'),rand=rng(conifer?581:7156);
- c.clearRect(0,0,256,256);
- // Dense far sprays survive texture minification. Reusing the sparse near
- // texture erased the crown at campus-overview distances after alpha testing.
- // Dense far alpha maps collapse into a blurred opaque sheet under mipmapping.
- const count=distant?(conifer?300:255):(conifer?240:150);
+// Authored canopy sprites: irregular compound lobes, not repeated star glyphs.
+// Geometry instance counts remain exactly the same as the baseline.
+export function generateLeafletSprays(conifer=false,distant=false){
+ const random=rng(conifer?581:7156),count=conifer?(distant?90:125):(distant?104:128);
+ const sprays=[];
  for(let i=0;i<count;i++){
-  const a=rand()*Math.PI*2,r=Math.sqrt(rand())*102,x=128+Math.cos(a)*r,y=128+Math.sin(a)*r*.75;
-  c.save();c.translate(x,y);c.rotate(rand()*6.28);const s=conifer?5:8+rand()*9;
-  c.fillStyle=['#d6e3bf','#e4eccc','#b9cc9e','#c7d8ab'][i%4];
-  if(conifer){c.fillRect(-s,-1,s*2,2.5);}else{
-   c.beginPath();c.moveTo(0,s);
-   for(let j=0;j<10;j++){const ang=-Math.PI/2+j*Math.PI/5,rr=j%2?s*.48:s;c.lineTo(Math.cos(ang)*rr,Math.sin(ang)*rr);}
-   c.closePath();c.fill();c.strokeStyle='#7d9365';c.lineWidth=.6;c.beginPath();c.moveTo(0,s);c.lineTo(0,-s*.65);c.stroke();
-  }c.restore();
+   const a=random()*Math.PI*2,r=Math.sqrt(random())*(distant?109:106);
+   sprays.push({
+     x:128+Math.cos(a)*r,
+     y:128+Math.sin(a)*r*.82,
+     radius:(conifer?3.0:4.8)+random()*(conifer?3.8:5.6)+(distant?1.2:0),
+     angle:random()*Math.PI*2,
+     lobes:conifer?3+Math.floor(random()*2):3+Math.floor(random()*4),
+     tint:Math.floor(random()*5)
+   });
  }
- const tx=new THREE.CanvasTexture(cv);tx.colorSpace=THREE.SRGBColorSpace;tx.anisotropy=8;tx.generateMipmaps=true;tx.minFilter=THREE.LinearMipmapLinearFilter;return tx;
+ return sprays;
+}
+export function makeLeafSprayTexture(conifer=false,distant=false){
+ const cv=document.createElement('canvas');cv.width=cv.height=256;
+ const c=cv.getContext('2d');c.clearRect(0,0,256,256);
+ const paintOval=(rx,ry)=>{
+  c.beginPath();
+  if(typeof c.ellipse==='function') c.ellipse(0,0,rx,ry,0,0,Math.PI*2);
+  else for(let j=0;j<=16;j++){const a=j*Math.PI*2/16;j?c.lineTo(Math.cos(a)*rx,Math.sin(a)*ry):c.moveTo(rx,0);}
+  c.closePath();c.fill();
+ };
+ const palette=['#d2dfb9','#c9d8aa','#e3e9ca','#bacc9d','#dbe4c0'];
+ for(const spray of generateLeafletSprays(conifer,distant)){
+  c.save();c.translate(spray.x,spray.y);c.rotate(spray.angle);
+  c.fillStyle=palette[spray.tint];
+  // Leaflets overlap around a central axis. Near sprites keep gaps;
+  // distant sprites stay denser to survive alphaTest and minification.
+  const n=spray.lobes,core=spray.radius;
+  if(conifer){
+    for(let j=0;j<n;j++){
+      const t=(j/(n-1)-.5)*1.4;
+      c.save();c.rotate(t);paintOval(core*.34,core*2.2);c.restore();
+    }
+  }else{
+    for(let j=0;j<n;j++){
+      const theta=(j/(n-1))*Math.PI*1.2-Math.PI*.6;
+      const rr=core*(.55+(j%2)*.11),dx=Math.sin(theta)*rr,dy=-Math.cos(theta)*rr*.64;
+      c.save();c.translate(dx,dy);c.rotate(theta*.8);
+      paintOval(core*.56,core*.85);
+      c.restore();
+    }
+    c.strokeStyle='rgba(71,94,56,.35)';c.lineWidth=.55;
+    c.beginPath();c.moveTo(0,core*1.0);c.lineTo(0,-core*1.15);c.stroke();
+  }
+  c.restore();
+ }
+ const tx=new THREE.CanvasTexture(cv);
+ tx.colorSpace=THREE.SRGBColorSpace;
+ tx.anisotropy=8;
+ tx.generateMipmaps=true;
+ tx.minFilter=THREE.LinearMipmapLinearFilter;
+ tx.magFilter=THREE.LinearFilter;
+ return tx;
 }
 function barkMaterial(){
  const m=new THREE.MeshStandardMaterial({color:'#b2ad9b',roughness:1});
