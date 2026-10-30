@@ -15,7 +15,35 @@ export function createRelocationMuseumAsset({building,buildingIndex,baseY=1.1,un
  const height=building.height,wingHeight=height*.52,cutZ=(cutEast[1]+cutWest[1])/2;
  const b=ownedArchitecture('Westward relocation museum / single owned exterior',{baseY,uniforms,stage,
   extraMaterials:{brick:new THREE.MeshStandardMaterial({color:'#885443',roughness:.92})}});
- if(!b.gray){b.materials.stone.color.set('#d5d1c6');b.materials.roof.color.set('#aaa9a1');b.materials.glass.color.set('#263b44');b.materials.frame.color.set('#4d5a60');b.materials.dark.color.set('#303f47');}
+ if(!b.gray){
+  b.materials.stone.color.set('#d5d1c6');
+  b.materials.roof.color.set('#aaa9a1');
+  b.materials.glass.color.set('#405c68');
+  b.materials.glass.roughness=.22;
+  b.materials.glass.metalness=.12;
+  b.materials.frame.color.set('#4d5a60');
+  b.materials.dark.color.set('#303f47');
+
+  // An illustrative, physically modest panel finish. Schematic joints are
+  // shaded in the existing batch: no new meshes, no transparent glass passes.
+  // These are NOT measured facade panel dimensions.
+  const panel=b.materials.stone,compileStone=panel.onBeforeCompile;
+  const cacheStone=panel.customProgramCacheKey.bind(panel);
+  panel.onBeforeCompile=shader=>{
+    compileStone(shader);
+    shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
+      vec2 museumPanelUV=vec2((vStonePos.x+vStonePos.z*.26)/3.3,vStonePos.y/1.65);
+      vec2 museumPanelCell=fract(museumPanelUV);
+      vec2 museumPanelAA=max(fwidth(museumPanelUV),vec2(.0008));
+      float museumPanelEdge=min(min(museumPanelCell.x,1.-museumPanelCell.x),
+                                min(museumPanelCell.y,1.-museumPanelCell.y));
+      float museumPanelSeam=1.-smoothstep(.004,.013+max(museumPanelAA.x,museumPanelAA.y),museumPanelEdge);
+      float museumPanelShade=fract(sin(dot(floor(museumPanelUV),vec2(21.18,54.92)))*12643.23);
+      diffuseColor.rgb*=.985+(museumPanelShade-.5)*.056-museumPanelSeam*.12;
+    `);
+  };
+  panel.customProgramCacheKey=()=>cacheStone()+'-museum-panel-r15';
+ }
  const makeZone=(polygon,top,which)=>{
   const cells=planCells(polygon),edges=cellBoundary(cells);b.roof(cells,top,buildingIndex,height);
   const front=edges.find(e=>e.nx<-.9);
