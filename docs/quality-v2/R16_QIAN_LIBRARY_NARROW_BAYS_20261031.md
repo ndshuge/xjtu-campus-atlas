@@ -32,3 +32,17 @@
 1440 同机位可直接看到中层左右翼从大方窗变为密集窄竖窗，玻璃有真实内退、石材间柱更接近照片节奏；390 手机视口仍能辨认这一行。**最明显的剩余缺陷：该窄窗带只存在于一个楼层，其他层仍是大方窗，整栋楼因此出现不自然的单层风格跳变。** 下一次先检查 2021 正面照对应楼层/分段，再决定将经过验证的模数扩展到紧邻一层或改为成对窄窗，不盲目铺满所有立面；保持同一 1440/390 机位 A/B。
 
 本轮 ChatGPT-native Skill 列表返回空，无法声称重新读取 Three.js AAA Graphics Builder / 3D Visual Direction / 3D Scene Architecture / Three.js QA Release 原版 Skill；采用仓库已有 R16 方案、真实照片与 Three.js 几何/LOD/QA 既有工作流。没有独立艺术评审、真实 iPhone Safari 或实测建筑图纸。本轮未发布、不改正式 Pages、不处理其他工作树。原有未提交 `R16_QIAN_LIBRARY_ENTRY_20261031.md`、生成 JSON、`.superpowers/` 与旧点击证据属于先前遗留/其他执行流程，不纳入本轮提交。
+
+## 后续本地迭代｜south-course-2 双排窄窗连续性（2026-10-31）
+
+**范围与证据。** 承接本文件上轮最明显的单层风格跳变；再次直接查看已登记 CC BY-SA 4.0 的 Liuxingy 2021 正面照和 2025 航拍。只将 `south-course-2` 两翼上排改为与已验下排一致的窄竖窗、实体石材间柱和约 0.28m 内退玻璃；其他 tiers、侧后立面、OSM 足迹、屋顶及入口不改。参数为 **photo-informed estimated**，不是测绘/摄影测量。仍复用既有 7 Mesh / 材质 / 贴图批次，无新依赖或装饰效果。
+
+**TDD 与工程验证。** 新增 `tests/library-south-bay-continuity.test.mjs`：RED 2 项中 1 项失败（缺少第二排声明）；GREEN 专项联合测试 7/7 通过，Raycaster 在该 tier 两排左右翼均检出至少 9 个窄且内退的窗口开口；中性 massing 不出现新增细节。测试已加入 `npm run verify`，全量退出码 0。生产 `npm run build -- --outDir .sites-local/r16-bay-continuity-20261031` 退出码 0，52 modules，JS 800.97 kB / gzip 225.66 kB，既有 >750 kB chunk advisory 未消失。单体近景 **23,565 → 23,733 triangles（+168，约 +0.71%）**，远景 **10,685 → 10,733（+48）**，近景 7 Mesh 不变，远景减少约 **54.78%**；整场景的三角面变化不可全部归因于单体。
+
+**生产静态子路径真实 Edge WebGL**：`http://127.0.0.1:18884/r16-bay-continuity-20261031/`（仅本机临时服务，非发布）。固定 `library-south-detail` 视角：1440×900 为 **361 calls / 846,569 triangles / 300 geometries / 23 textures**；390×844 为 **221 / 556,558 / 216 / 28**。选中图书馆视角：1440 为 **414 calls / 872,082 triangles**；390 为 **267 / 561,558**。四视角均 0 JS/HTTP errors，静态嵌套路径资源加载正常。120 帧新 requestAnimationFrame 样本：1440 **72.38 FPS / 1657.9ms**，390 **170.65 FPS / 703.2ms**，均为本机 RTX 5060 Laptop GPU 的 headless Edge 短样本，不可解释为真实 iPhone FPS/GPU 帧时间或稳定性能改进；两次测量受运行负载影响显著。390px 整场景仍超过 150 calls / 300k triangles 起始预算。
+
+桌面 `home` 模式的鼠标旋转、滚轮缩放、树层切换、搜索选中通过；390px Edge 模拟触控的平移、双指缩放、漫游前进/返回通过，本轮漫游距离 3.115m。上轮曾有间歇性 105.42m 失败，本轮单次通过不代表问题根除。实际 iPhone Safari、独立视觉审查和长期 GPU 性能仍未验收。
+
+**实图自审与下轮目标。** 相同 1440/390 正面机位对比，上下两排窄窗节奏现在连续，改善了 `south-course-2` 内的突兀跳变；但 `south-course-3` 两翼仍有大方窗，和 2021 正面照片中更密集的竖窗节奏不符，这是当前最明显的可见缺陷。下轮只在照片确实支持的 `south-course-3` 选择一个可验证的成对窄窗模块，不向未知背面扩展；同机位 A/B 并检验移动预算。
+
+原始截图与 JSON：`r16-bay-continuity-local/`、`r16-bay-continuity-selected-local/`、`r16-bay-continuity-interact-1440/`、`r16-bay-continuity-interact-390/`。原有其他流程未提交文档、生成 JSON、`.superpowers/` 和旧点击证据未擅自清理/纳入提交。ChatGPT-native Skills 列表本轮仍为空，未声称调用原版 Three.js AAA / Visual Direction / Scene Architecture / QA Release。**本轮不发布，不改 R15 Pages。**

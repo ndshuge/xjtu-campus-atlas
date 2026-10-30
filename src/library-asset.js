@@ -47,12 +47,12 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    positions(kind,t.flatMap(p=>[p[0],baseY+y,p[1]]),t.flatMap(p=>[p[0]/6,p[1]/6]));
   }
  };
- function regularWall(e,bottom,top,rows,kind='wall',from=0,to=e.length,{narrowRow=-1}={}){
+ function regularWall(e,bottom,top,rows,kind='wall',from=0,to=e.length,{narrowRows=[]}={}){
   if(gray){wallRect(kind,e,from,to,bottom,top);return;}
   const length=to-from,floor=(top-bottom)/rows;
   if(length<2.4||floor<2.2){wallRect(kind,e,from,to,bottom,top);return;}
   for(let row=0;row<rows;row++){
-   const narrow=row===narrowRow,count=Math.max(1,Math.floor(length/(narrow?1.65:3.5)));
+   const narrow=narrowRows.includes(row),count=Math.max(1,Math.floor(length/(narrow?1.65:3.5)));
    const bay=length/count,recess=narrow?.28:.11;
    const floorY=bottom+row*floor,low=floorY+Math.min(.85,floor*.23),high=floorY+floor-.48;
    wallRect(kind,e,from,to,floorY,low);wallRect(kind,e,from,to,high,floorY+floor);
@@ -85,7 +85,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  const southNarrowBays=gray?null:{photoInformed:true,estimated:true,courses:['south-course-2'],
-  row:0,approxWidth:.92,approxRecess:.28,approxBay:1.65,
+  rows:[0,1],approxWidth:.92,approxRecess:.28,approxBay:1.65,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  for(const zone of plan.zones){
   const isNorth=zone.id==='north-reading-block',isStack=zone.id==='north-book-stack';
@@ -128,8 +128,8 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     }
    }else if(zone.rect&&zone.glass&&e.nz>.9&&Math.abs(e.a[1]-zone.rect[3])<.02&&Math.min(e.a[0],e.b[0])<plan.centerX&&Math.max(e.a[0],e.b[0])>plan.centerX){
     const mid=(plan.centerX-e.a[0])/e.ux,half=Math.min(zone.glass/2,e.length/2-.2);
-    // One representative photo-informed row only; retain the remaining R12 facade until reviewed.
-    const narrowSouthWing=!gray&&zone.id==='south-course-2'?{narrowRow:0}:undefined;
+    // Two adjacent photo-informed rows in this tier; other tiers retain the R12 facade.
+    const narrowSouthWing=!gray&&zone.id==='south-course-2'?{narrowRows:[0,1]}:undefined;
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half,narrowSouthWing);
     curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:4,rows:zone.rows});
     // The 2021 frontal reference shows prominent light stone verticals
