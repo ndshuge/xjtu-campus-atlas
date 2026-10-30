@@ -78,6 +78,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   strip(kind,e,(from+to)/2,top-.52,to-from,.52,.85,.02);
  }
  const fronts=[];
+ let southPortal=null;
  for(const zone of plan.zones){
   const isNorth=zone.id==='north-reading-block',isStack=zone.id==='north-book-stack';
   const kind=isNorth||isStack?'north':'wall';
@@ -98,7 +99,25 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     curtain(e,0,11.9,start,end,{columns:Math.max(1,Math.round((end-start)/3.4)),rows:zone.rows});
     wallRect(kind,e,0,start,0,13);wallRect(kind,e,end,e.length,0,13);
     wallRect(kind,e,start,end,11.9,13);
-    if(Math.min(e.a[0],e.b[0])<=southMid&&Math.max(e.a[0],e.b[0])>southMid)fronts.push({kind:'south',edge:e,mid:(southMid-e.a[0])/e.ux,y:12.48});
+    if(Math.min(e.a[0],e.b[0])<=southMid&&Math.max(e.a[0],e.b[0])>southMid){
+     const mid=(southMid-e.a[0])/e.ux;
+     fronts.push({kind:'south',edge:e,mid,y:12.48});
+     if(!gray){
+      // The 2021 front photograph shows a central, recessed glazed entrance
+      // beneath the name band. Dimensions and door divisions are estimated,
+      // not surveyed. Keep the detail in the existing wall/glass/frame batches.
+      const jamb=1.7,portalHeight=3.9;
+      wallRect('glass',e,mid-1.49,mid+1.49,.27,3.48,.08);
+      for(const s of [-1,1])strip('wall',e,mid+s*jamb,.15,.42,3.6,.58,.27);
+      strip('wall',e,mid,3.48,3.82,.42,.58,.27);
+      for(const s of [-1,1])strip('frame',e,mid+s*1.48,.27,.10,3.18,.18,.27);
+      strip('frame',e,mid,.27,.10,3.18,.18,.27);
+      strip('frame',e,mid,3.32,3.03,.12,.18,.27);
+      southPortal={photoInformed:true,estimated:true,width:jamb*2,height:portalHeight,
+       center:[e.a[0]+e.ux*mid,baseY,e.a[1]+e.uz*mid],
+       reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
+     }
+    }
    }else if(zone.rect&&zone.glass&&e.nz>.9&&Math.abs(e.a[1]-zone.rect[3])<.02&&Math.min(e.a[0],e.b[0])<plan.centerX&&Math.max(e.a[0],e.b[0])>plan.centerX){
     const mid=(plan.centerX-e.a[0])/e.ux,half=Math.min(zone.glass/2,e.length/2-.2);
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half);
@@ -184,7 +203,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  asset.setColorMode=value=>{mode.value=value==='natural'?0:1;modeColor.value.set(value==='category'?'#dbc080':'#6297b9');};
  asset.traverse(mesh=>{
   if(!mesh.isMesh)return;mesh.userData.place=building;mesh.userData.buildingIndex=buildingIndex;mesh.userData.libraryOwner='library-asset.js';
-  const m=mesh.material;if(m.userData.libraryR11Shader)return;m.userData.libraryR11Shader=true;
+  const m=mesh.material;if(gray||m.userData.libraryR11Shader)return;m.userData.libraryR11Shader=true;
   const previous=m.onBeforeCompile,previousKey=m.customProgramCacheKey.bind(m);
   m.onBeforeCompile=shader=>{
    previous(shader);shader.uniforms.uLibSelected=uniforms.selection||{value:-1};shader.uniforms.uLibHover=uniforms.hover||{value:-1};shader.uniforms.uLibMode=mode;shader.uniforms.uLibModeColor=modeColor;shader.uniforms.uLibNight=uniforms.night||{value:0};
@@ -194,7 +213,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],

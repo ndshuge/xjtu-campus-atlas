@@ -55,8 +55,8 @@ test('massing stage remains neutral and keeps the library-owned material contrac
   assert.equal(wall.material.color.getHexString(),'bebdb6');
   assert.equal(wall.material.roughness,1);
   const shader=shaderFor(wall.material);
-  assert.match(shader.fragmentShader,/libFresnel/);
-  assert.doesNotMatch(shader.fragmentShader,/vec3\(\.48,\.70,\.35\)/);
+  assert.doesNotMatch(shader.fragmentShader,/uLibSelected|uLibHover|uLibMode|uLibNight|libFresnel/,'Massing preview must keep the original neutral no-op shader');
+  assert.equal(wall.material.customProgramCacheKey(),'library-r11-gray','Massing preview must not opt into the material-stage shader program');
  }finally{
   asset.dispose();
  }
