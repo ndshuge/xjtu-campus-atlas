@@ -1,7 +1,7 @@
 # R15 Combined Codex × ChatGPT 3D Integration — 2026-10-30
 
 ## Outcome / release posture
-**Integrated locally; not published.** Branch `integration/r15-unified-quality-20261030`, new independent worktree `E:\CHATGPT\work\xjtu-r15-unified-quality-20261030`.
+**Integrated locally and published as an isolated GitHub Pages R15 preview.** Source branch `integration/r15-unified-quality-20261030`, source commit `471bbc7`; Pages branch commit `1c3802856cd4b9415847f449047521941629ecee` (parent `1bb28cbe18a9e93af6072d90241cdeec42746759`). URL: `https://ndshuge.github.io/xjtu-campus-atlas/r15-unified-20261030/`. The R13.1 homepage and R14 preview folder remain unchanged. New independent source worktree: `E:\CHATGPT\work\xjtu-r15-unified-quality-20261030`.
 This branch was created from ChatGPT environment commit `3472bae`, which is a direct descendant of Codex R15 integration commit `5f0b701`. Therefore all **committed** Codex R15 building improvements are included without a separate cherry-pick or any merge conflicts.
 
 Codex changes already inherited:
@@ -42,5 +42,8 @@ Files: `src/relocation-museum-asset.js`, `tests/museum-material.test.mjs`, `pack
 ## Worktree safety
 - Codex working tree `E:\CHATGPT\work\xjtu-r15-integration` retained untouched, including five dirty generated verification JSONs and untracked `build-r15-west1/` and two reference JPGs. Those are **not** automatically accepted or copied as licensed publishable assets.
 - Separate ChatGPT environment worktree `E:\CHATGPT\work\xjtu-chatgpt-r15-environment-20261030` has its own uncommitted source changes; deliberately left intact, never auto-merged.
-- Official Pages gh-pages remains unchanged. No push, force push, cleanup/reset of other worktrees, or overwrite.
-- Next steps before official release: inspect full new combined state, real iPhone Safari if available, production route/base-path preview QA, controlled GPU frame-time AB, owner approval for release promotion.
+- R15 Pages preview was added by a fast-forward-only update to `gh-pages`: commit `1c3802856cd4b9415847f449047521941629ecee`, parent `1bb28cbe18a9e93af6072d90241cdeec42746759`. Only new top-level folder `r15-unified-20261030/` was added. No force push, root overwrite, main merge, cleanup/reset of other worktrees, or replacement of R14.
+- Public HTTP verification: page, JS (799005 bytes), CSS (36904 bytes), `data/campus.json` (201536 bytes), `data/osm-source.json` (352124 bytes), library reference image and ceramic material texture all returned HTTP 200.
+- Public production URL was loaded in Edge WebGL at 1440px and 390px for Westward Relocation Museum, East 1 and South Gate: 6 screenshots, 0 JS errors, 0 HTTP errors. Results and captures: `docs/quality-v2/r15-unified-integration/public-final/`. 390px remains Edge emulation, **not physical iPhone Safari**.
+- The formal Pages root still serves the prior homepage; this R15 deployment is a separately addressable preview, not a replacement of the formal root.
+- Remaining before any promotion to the formal root: real iPhone Safari if available, controlled GPU frame-time A/B, further evidence-based high-fidelity building work, and explicit approval for root promotion.
