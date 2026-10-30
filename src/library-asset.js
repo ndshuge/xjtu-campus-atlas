@@ -47,25 +47,27 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    positions(kind,t.flatMap(p=>[p[0],baseY+y,p[1]]),t.flatMap(p=>[p[0]/6,p[1]/6]));
   }
  };
- function regularWall(e,bottom,top,rows,kind='wall',from=0,to=e.length){
+ function regularWall(e,bottom,top,rows,kind='wall',from=0,to=e.length,{narrowRow=-1}={}){
   if(gray){wallRect(kind,e,from,to,bottom,top);return;}
-  const length=to-from,count=Math.max(1,Math.floor(length/3.5)),bay=length/count,floor=(top-bottom)/rows;
+  const length=to-from,floor=(top-bottom)/rows;
   if(length<2.4||floor<2.2){wallRect(kind,e,from,to,bottom,top);return;}
   for(let row=0;row<rows;row++){
+   const narrow=row===narrowRow,count=Math.max(1,Math.floor(length/(narrow?1.65:3.5)));
+   const bay=length/count,recess=narrow?.28:.11;
    const floorY=bottom+row*floor,low=floorY+Math.min(.85,floor*.23),high=floorY+floor-.48;
    wallRect(kind,e,from,to,floorY,low);wallRect(kind,e,from,to,high,floorY+floor);
    for(let col=0;col<count;col++){
-   const x=from+col*bay,w=Math.min(1.85,bay*.62),left=x+(bay-w)/2,right=left+w;
+   const x=from+col*bay,w=Math.min(narrow?.92:1.85,bay*(narrow?.56:.62)),left=x+(bay-w)/2,right=left+w;
    if(col===0)wallRect(kind,e,from,left,low,high);
    wallRect(kind,e,right,col===count-1?to:from+(col+1)*bay+(bay-w)/2,low,high);
    // Genuine apertures in the wall plane, with inset opaque glazing and reveals.
-   wallRect('glass',e,left,right,low,high,-.11);
+   wallRect('glass',e,left,right,low,high,-recess);
    const at=(s,y,o)=>[e.a[0]+e.ux*s+e.nx*o,baseY+y,e.a[1]+e.uz*s+e.nz*o];
-   quad('reveal',[at(left,low,0),at(left,high,0),at(left,high,-.12),at(left,low,-.12)]);
-   quad('reveal',[at(right,low,-.12),at(right,high,-.12),at(right,high,0),at(right,low,0)]);
-   quad('reveal',[at(left,high,0),at(right,high,0),at(right,high,-.12),at(left,high,-.12)]);
-   quad(kind,[at(left-.05,low-.06,-.12),at(left-.05,low-.06,.09),at(right+.05,low-.06,.09),at(right+.05,low-.06,-.12)],undefined,true);
-   wallRect('frame',e,(left+right)/2-.035,(left+right)/2+.035,low,high,-.08,true);
+   quad('reveal',[at(left,low,0),at(left,high,0),at(left,high,-recess-.01),at(left,low,-recess-.01)]);
+   quad('reveal',[at(right,low,-recess-.01),at(right,high,-recess-.01),at(right,high,0),at(right,low,0)]);
+   quad('reveal',[at(left,high,0),at(right,high,0),at(right,high,-recess-.01),at(left,high,-recess-.01)]);
+   quad(kind,[at(left-.05,low-.06,-recess-.01),at(left-.05,low-.06,.09),at(right+.05,low-.06,.09),at(right+.05,low-.06,-recess-.01)],undefined,true);
+   wallRect('frame',e,(left+right)/2-.035,(left+right)/2+.035,low,high,-recess+.03,true);
    }
   }
  }
@@ -81,6 +83,9 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  let southPortal=null;
  const southFacadeRibs=gray?null:{photoInformed:true,estimated:true,
   courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
+  reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
+ const southNarrowBays=gray?null:{photoInformed:true,estimated:true,courses:['south-course-2'],
+  row:0,approxWidth:.92,approxRecess:.28,approxBay:1.65,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  for(const zone of plan.zones){
   const isNorth=zone.id==='north-reading-block',isStack=zone.id==='north-book-stack';
@@ -123,7 +128,9 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     }
    }else if(zone.rect&&zone.glass&&e.nz>.9&&Math.abs(e.a[1]-zone.rect[3])<.02&&Math.min(e.a[0],e.b[0])<plan.centerX&&Math.max(e.a[0],e.b[0])>plan.centerX){
     const mid=(plan.centerX-e.a[0])/e.ux,half=Math.min(zone.glass/2,e.length/2-.2);
-    regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half);
+    // One representative photo-informed row only; retain the remaining R12 facade until reviewed.
+    const narrowSouthWing=!gray&&zone.id==='south-course-2'?{narrowRow:0}:undefined;
+    regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half,narrowSouthWing);
     curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:4,rows:zone.rows});
     // The 2021 frontal reference shows prominent light stone verticals
     // breaking the dark central glazing. Physical piers, not shader decoration;
@@ -131,7 +138,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     if(!gray&&['south-course-2','south-course-3','south-course-4'].includes(zone.id)){
      for(const side of [-1,1])strip('wall',e,mid+side*half*.5,zone.bottom+.35,.62,zone.top-zone.bottom-.9,.66,.27);
     }
-    regularWall(e,zone.bottom,zone.top,zone.rows,kind,mid+half,e.length);
+    regularWall(e,zone.bottom,zone.top,zone.rows,kind,mid+half,e.length,narrowSouthWing);
    }else{
     regularWall(e,zone.bottom,zone.top,zone.rows,kind);
    }
@@ -222,7 +229,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],
