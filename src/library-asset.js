@@ -9,7 +9,7 @@ import {bounds,pointSegment} from './geo.js';
 export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms={},stage='material'}={}){
  const plan=libraryAssetPlan(building),gray=stage==='massing';
  const materials={
-  wall:stoneMaterial('#c4b3a4',.72),north:stoneMaterial('#c8ccc9',.72),
+  wall:stoneMaterial('#c8b2a2',.72),north:stoneMaterial('#c8ccc9',.72),
   glass:glassMaterial('#344c58'),frame:new THREE.MeshStandardMaterial({color:'#746f66',roughness:.66,metalness:.24}),
   roof:stoneMaterial('#89887c',.65),reveal:new THREE.MeshStandardMaterial({color:'#646660',roughness:1}),
   groundcover:new THREE.MeshStandardMaterial({color:'#647c45',roughness:1})
@@ -189,9 +189,10 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   m.onBeforeCompile=shader=>{
    previous(shader);shader.uniforms.uLibSelected=uniforms.selection||{value:-1};shader.uniforms.uLibHover=uniforms.hover||{value:-1};shader.uniforms.uLibMode=mode;shader.uniforms.uLibModeColor=modeColor;shader.uniforms.uLibNight=uniforms.night||{value:0};
    shader.fragmentShader='uniform float uLibSelected; uniform float uLibHover; uniform float uLibMode; uniform float uLibNight; uniform vec3 uLibModeColor;\n'+shader.fragmentShader;
-   shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>\n diffuseColor.rgb=mix(diffuseColor.rgb,uLibModeColor,uLibMode*.7);\n diffuseColor.rgb=mix(diffuseColor.rgb,vec3(.48,.70,.35),(1.-step(.25,abs(uLibSelected-${buildingIndex.toFixed(1)})))*.22+(1.-step(.25,abs(uLibHover-${buildingIndex.toFixed(1)})))*.12);`);
+   shader.fragmentShader=shader.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>\n diffuseColor.rgb=mix(diffuseColor.rgb,uLibModeColor,uLibMode*.7);\n float libSelected=1.-step(.25,abs(uLibSelected-${buildingIndex.toFixed(1)}));\n float libHovered=1.-step(.25,abs(uLibHover-${buildingIndex.toFixed(1)}));\n float libFocus=clamp(libSelected*.72+libHovered*.32,0.,1.);\n diffuseColor.rgb*=1.0+libSelected*.012+libHovered*.006;`);
+   shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n float libFresnel=pow(1.0-saturate(dot(normalize(vNormal),normalize(vViewPosition))),2.4);\n totalEmissiveRadiance+=vec3(.22,.14,.065)*libFresnel*libFocus;');
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
-  };m.customProgramCacheKey=()=>previousKey()+'-library-r11-'+buildingIndex;
+  };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
  asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
