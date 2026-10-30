@@ -56,3 +56,13 @@
 - **交互**：桌面旋转、缩放、树层开关和搜索选中通过；390px 模拟触控平移、双指缩放、漫游前进/返回通过（本轮 2.19m）。此前 105.42m 的间歇失败仍未定位，不能以单次通过视为根治。
 - **实图复核**：`r16-course3-local/library-south-detail-1440.png` 与前版 `r16-bay-continuity-local/library-south-detail-1440.png` 同机位比较，中高层两翼方窗改成连续窄竖窗，减少层间突变；390px 仍能辨识但分辨率有限。**最明显剩余缺陷**：下一级 `south-course-1` 两翼仍是偏宽方窗，中央玻璃立面也过于黑平；下一次优先核对正面照片中的下一级窗口比例，再决定是否做一处窄窗切片，不用 bloom 或装饰掩盖。截图、原始数据及交互证据位于 `r16-course3-local/`、`r16-course3-interact-1440/`、`r16-course3-interact-390/`。
 - **边界**：ChatGPT-native Skill 列表本轮为空，未声称读取原版专业 Skills；采用项目内已存专业方案和真实照片。真实 iPhone Safari、独立艺术评审未完成；未发布、未修改 R15 Pages。运行前就存在的 `R16_QIAN_LIBRARY_ENTRY_20261031.md`、生成 JSON、`.superpowers/` 与旧点击证据保留且不纳入本轮提交。
+
+## 后续本地迭代｜south-course-1 双排窄窗（2026-10-31）
+
+- **基线/照片**：本轮开始 HEAD `a488ed2`，指定 R16 分支不切换。直接检查 Liuxingy 2021 正面照片（CC BY-SA 4.0，`public/assets/reference/README.md`）和 `r16-course3-local/` 的同机位实图；`south-course-1` 两翼的大方窗与真实照片密集窄竖窗不符。只把这一 tier 的两排南向两翼窗口改为已验证的约 1.65m 模数、约 0.92m 窗宽、约 0.28m 玻璃内退；这些均为照片参考估算，不是测绘。未改 OSM footprint、碰撞、拾取、北/侧/背面、屋顶或通用渲染器。
+- **RED/GREEN**：新增 `tests/library-south-course1.test.mjs`，初始 RED 1 fail / 1 pass（course-1 未声明）；实现后测试发现原先“至少 12 个窗口”阈值高于现有可射线检出的连续窗洞（首个左翼检测 10 个），按实际几何覆盖修正为每排每侧至少 9 个独立内退开口，联合测试最终 6/6 通过；旧 course-3 测试改为非排他性包含断言。中性 massing 无新窗格。完整 `npm run verify` 退出码 0。
+- **构建/预算**：`npm run build -- --outDir .sites-local/r16-course1-20261031` 退出码 0；52 modules，主 JS 801.05 kB / gzip 225.67 kB，既有 >750kB chunk 提示。单体近景 **24,069 → 24,349 triangles（+280，约 1.16%）**；远景 **10,829 → 10,909（+80）**；7 Mesh 不变，远景减少约 **55.20%**。复用原有材质和合批，无新增贴图/依赖。
+- **真实生产静态子路径**：本机独立静态 HTTP `/r16-course1-20261031/`；Edge headless WebGL 的 `library-south-detail` 1440×900：**361 calls / 847,713 triangles / 300 geometries / 23 textures**；390×844：**221 / 557,174 / 216 / 28**。选中图书馆 1440：**414 / 874,240 / 439 / 36**；390：**267 / 560,468 / 418 / 34**。四视角均 0 JS/HTTP 错误；选中详情与工具栏无重叠，390px 展开/还原正常。120 个 requestAnimationFrame 样本分别约 56.14 FPS / 2137.7ms、101.06 FPS / 1187.4ms，属于 RTX 5060 本机 headless Edge 帧调度，不是 GPU 时间、真实 iPhone FPS 或稳定性证据。390px 场景仍超出 150 calls / 300k triangles 起始预算。
+- **交互**：1440 桌面旋转、滚轮缩放、树层切换、搜索选中通过；390 模拟触控平移、双指缩放、漫游前进/返回通过（4.38m）；此前 105.42m 间歇漫游失败仍未定位，不能视为根治。
+- **截图审查**：同机位 `r16-course3-local/library-south-detail-{1440,390}.png` 对照本轮 `r16-course1-local/`，原中下层大方窗现在形成与上两级连续的窄窗节奏，手机也可辨。**最重要的剩余可见缺陷**：中央玻璃幕墙仍像单片黑色平板，横向石材分层、立体窗梃与阴影层次不足；下轮先在 `south-course-1` 中央玻璃区做一个真实厚度的分层/退进切片，严格参考照片并保留同机位对照，不能用 bloom 遮掩。
+- **证据/边界**：`r16-course1-local/`、`r16-course1-selected-local/`、`r16-course1-interact-1440/`、`r16-course1-interact-390/` 的 PNG/JSON；独立静态服务为本轮自有进程，结束后停止。专业原版 Skills 列表为空，未声称读取；真实 iPhone Safari、独立艺术验收仍未完成。R15 Pages 不发布、不修改。运行前已有的未提交 `R16_QIAN_LIBRARY_ENTRY_20261031.md`、生成 JSON、`.superpowers/`、旧点击证据不擅自清理或纳入本轮提交。

@@ -14,7 +14,7 @@ test('south-course-3 continues the photo-informed narrow window rhythm in both v
  const asset=createLibraryAsset({building,buildingIndex:0,baseY:1.1});
  try{
   assert.equal(asset.children.length,7,'Keep existing batched meshes');
-  assert.deepEqual(asset.userData.southNarrowBays?.courses,['south-course-2','south-course-3']);
+  assert.ok(asset.userData.southNarrowBays?.courses.includes('south-course-3'));
   assert.deepEqual(asset.userData.southNarrowBays?.rows,[0,1]);
   assert.equal(asset.userData.southNarrowBays?.estimated,true);
   const wall=asset.children.find(m=>m.isMesh&&m.name.endsWith('/ wall'));
