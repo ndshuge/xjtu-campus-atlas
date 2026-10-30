@@ -79,6 +79,9 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  }
  const fronts=[];
  let southPortal=null;
+ const southFacadeRibs=gray?null:{photoInformed:true,estimated:true,
+  courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
+  reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  for(const zone of plan.zones){
   const isNorth=zone.id==='north-reading-block',isStack=zone.id==='north-book-stack';
   const kind=isNorth||isStack?'north':'wall';
@@ -122,6 +125,12 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     const mid=(plan.centerX-e.a[0])/e.ux,half=Math.min(zone.glass/2,e.length/2-.2);
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half);
     curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:4,rows:zone.rows});
+    // The 2021 frontal reference shows prominent light stone verticals
+    // breaking the dark central glazing. Physical piers, not shader decoration;
+    // their exact spacing and depth are photo-informed estimates.
+    if(!gray&&['south-course-2','south-course-3','south-course-4'].includes(zone.id)){
+     for(const side of [-1,1])strip('wall',e,mid+side*half*.5,zone.bottom+.35,.62,zone.top-zone.bottom-.9,.66,.27);
+    }
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,mid+half,e.length);
    }else{
     regularWall(e,zone.bottom,zone.top,zone.rows,kind);
@@ -213,7 +222,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],

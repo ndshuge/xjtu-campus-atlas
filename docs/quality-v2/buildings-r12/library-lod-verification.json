@@ -1,8 +1,8 @@
 {
   "passed": true,
-  "fullTriangles": 23325,
-  "farTriangles": 10565,
-  "farReduction": 0.5470525187566988,
+  "fullTriangles": 23397,
+  "farTriangles": 10637,
+  "farReduction": 0.5453690644099671,
   "hysteresis": true,
   "nearDetailsRestore": true,
   "visibleRoofSamples": 101,

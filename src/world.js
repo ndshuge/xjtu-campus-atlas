@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {createLibraryAsset} from './library-asset.js';
+import {librarySouthInspectionPose} from './library-inspection-pose.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {renderPixelRatio,keepOrbitAboveGround,framePercentiles,enableFarFoliageCoverage} from './mobile-render-stability.js';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
@@ -68,6 +69,12 @@ export class CampusWorld{
         this.camera.position.set(cx+55,BASE+(this.isMobile?65:48),z0-(this.isMobile?230:150));this.controls.target.set(cx,BASE+8,z0+30);
       }this.controls.update();
     }
+  }else if(inspection==='library-south-detail'){
+    // Reproducible front-facade review, separate from the visitor's default view.
+    const plan=this.libraryAsset?.userData.plan;
+    if(plan){const pose=librarySouthInspectionPose(plan,BASE,this.isMobile);
+      this.camera.fov=pose.fov;this.camera.updateProjectionMatrix();
+      this.camera.position.set(...pose.eye);this.controls.target.set(...pose.look);this.controls.update();}
   }else if(inspection==='science-west'){
     const science=this.data.buildings.find(b=>b.osmId===263632364);
     if(science){const [cx,cz]=science.center;this.camera.fov=this.isMobile?65:48;this.camera.updateProjectionMatrix();this.camera.position.set(cx-(this.isMobile?240:180),BASE+(this.isMobile?78:62),cz+95);this.controls.target.set(cx-10,BASE+11,cz+10);this.controls.update();}
