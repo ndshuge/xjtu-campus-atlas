@@ -46,3 +46,13 @@
 **实图自审与下轮目标。** 相同 1440/390 正面机位对比，上下两排窄窗节奏现在连续，改善了 `south-course-2` 内的突兀跳变；但 `south-course-3` 两翼仍有大方窗，和 2021 正面照片中更密集的竖窗节奏不符，这是当前最明显的可见缺陷。下轮只在照片确实支持的 `south-course-3` 选择一个可验证的成对窄窗模块，不向未知背面扩展；同机位 A/B 并检验移动预算。
 
 原始截图与 JSON：`r16-bay-continuity-local/`、`r16-bay-continuity-selected-local/`、`r16-bay-continuity-interact-1440/`、`r16-bay-continuity-interact-390/`。原有其他流程未提交文档、生成 JSON、`.superpowers/` 和旧点击证据未擅自清理/纳入提交。ChatGPT-native Skills 列表本轮仍为空，未声称调用原版 Three.js AAA / Visual Direction / Scene Architecture / QA Release。**本轮不发布，不改 R15 Pages。**
+
+## 后续本地迭代｜south-course-3 双排窄窗（2026-10-31）
+
+- **真实基线与范围**：开始时 HEAD `d8bb6c8`，仍在 `feature/r16-qian-library-asset-20261030`。核对了 Liuxingy 2021 正面照（CC BY-SA 4.0）和 2025 航拍（同许可，来源见 `public/assets/reference/README.md`）；只在 `south-course-3` 的**南向两翼、两排**延续已验证的窄窗与 0.28m 玻璃内退。没有改变北/侧/背立面、OSM 足迹、碰撞、拾取、屋顶或中央幕墙。0.92m 窗宽、1.65m 模数、立面深度均是 photo-informed estimates，不是测绘。
+- **RED → GREEN**：新增 `tests/library-south-course3.test.mjs`，先得到 1 fail / 1 pass（缺少 course-3）；实现后旧测试的“仅有 course-2”排他断言暴露为 2 fail，改成验证 course-2 持续存在；最终专项 6/6、`npm run verify` 退出码 0（库相关 12/12）。真实 Three.js Raycaster 检查 course-3 两排左右翼各至少 7 个独立内退开口；中性 massing 无新增窗格。生产构建 `npm run build -- --outDir .sites-local/r16-course3-20261031` 退出码 0，主 JS 801.02 kB / gzip 225.66 kB；仍有 >750 kB chunk 警告。
+- **预算**：图书馆近景 `23,733 → 24,069` triangles（+336，约 1.42%），远景 `10,733 → 10,829`（+96），仍 7 Mesh，远景约减少 55.0%。无新材质/贴图/依赖/批次；整场景三角面差异含植被 LOD，不归因于建筑。
+- **真实生产静态子路径**：独立 Python HTTP 服务下的 `/r16-course3-20261031/`，HTML 和 JS 均 HTTP 200；真实 headless Edge WebGL：南正面 1440×900 为 **361 calls / 847,193 triangles / 300 geometries / 23 textures**，390×844 为 **221 / 556,894 / 216 / 28**；选中图书馆 1440 为 **414 / 862,566 / 439 / 36**，390 为 **267 / 557,298 / 421 / 34**。四视角均 0 JS/HTTP errors。120 帧 requestAnimationFrame 短样本约 98.5–101.3 FPS，是本机 headless Edge 的帧调度样本，非真实手机 FPS 或 GPU 帧时间；390px 全场景仍超出 150 calls / 300k triangles 起始预算。
+- **交互**：桌面旋转、缩放、树层开关和搜索选中通过；390px 模拟触控平移、双指缩放、漫游前进/返回通过（本轮 2.19m）。此前 105.42m 的间歇失败仍未定位，不能以单次通过视为根治。
+- **实图复核**：`r16-course3-local/library-south-detail-1440.png` 与前版 `r16-bay-continuity-local/library-south-detail-1440.png` 同机位比较，中高层两翼方窗改成连续窄竖窗，减少层间突变；390px 仍能辨识但分辨率有限。**最明显剩余缺陷**：下一级 `south-course-1` 两翼仍是偏宽方窗，中央玻璃立面也过于黑平；下一次优先核对正面照片中的下一级窗口比例，再决定是否做一处窄窗切片，不用 bloom 或装饰掩盖。截图、原始数据及交互证据位于 `r16-course3-local/`、`r16-course3-interact-1440/`、`r16-course3-interact-390/`。
+- **边界**：ChatGPT-native Skill 列表本轮为空，未声称读取原版专业 Skills；采用项目内已存专业方案和真实照片。真实 iPhone Safari、独立艺术评审未完成；未发布、未修改 R15 Pages。运行前就存在的 `R16_QIAN_LIBRARY_ENTRY_20261031.md`、生成 JSON、`.superpowers/` 与旧点击证据保留且不纳入本轮提交。

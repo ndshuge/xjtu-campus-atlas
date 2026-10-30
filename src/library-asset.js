@@ -84,7 +84,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  const southFacadeRibs=gray?null:{photoInformed:true,estimated:true,
   courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
- const southNarrowBays=gray?null:{photoInformed:true,estimated:true,courses:['south-course-2'],
+ const southNarrowBays=gray?null:{photoInformed:true,estimated:true,courses:['south-course-2','south-course-3'],
   rows:[0,1],approxWidth:.92,approxRecess:.28,approxBay:1.65,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  for(const zone of plan.zones){
@@ -128,8 +128,8 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     }
    }else if(zone.rect&&zone.glass&&e.nz>.9&&Math.abs(e.a[1]-zone.rect[3])<.02&&Math.min(e.a[0],e.b[0])<plan.centerX&&Math.max(e.a[0],e.b[0])>plan.centerX){
     const mid=(plan.centerX-e.a[0])/e.ux,half=Math.min(zone.glass/2,e.length/2-.2);
-    // Two adjacent photo-informed rows in this tier; other tiers retain the R12 facade.
-    const narrowSouthWing=!gray&&zone.id==='south-course-2'?{narrowRows:[0,1]}:undefined;
+    // Paired photo-informed narrow rows in the two middle tiers; crown and unseen sides retain R12 detail.
+    const narrowSouthWing=!gray&&['south-course-2','south-course-3'].includes(zone.id)?{narrowRows:[0,1]}:undefined;
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half,narrowSouthWing);
     curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:4,rows:zone.rows});
     // The 2021 frontal reference shows prominent light stone verticals

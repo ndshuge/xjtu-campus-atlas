@@ -14,7 +14,7 @@ test('one photo-informed south-tier wing row has closely spaced narrow recessed 
  const asset=createLibraryAsset({building,buildingIndex:0,baseY:1.1});
  try{
   assert.equal(asset.children.length,7,'Keep existing batched draw calls');
-  assert.deepEqual(asset.userData.southNarrowBays?.courses,['south-course-2']);
+  assert.ok(asset.userData.southNarrowBays?.courses.includes('south-course-2'));
   assert.equal(asset.userData.southNarrowBays?.estimated,true);
   const wall=asset.children.find(m=>m.isMesh&&m.name.endsWith('/ wall'));
   const glass=asset.children.find(m=>m.isMesh&&m.name.endsWith('/ glass'));
