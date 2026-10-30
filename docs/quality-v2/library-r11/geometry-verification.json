@@ -5,7 +5,7 @@
   "spatialSamples": 2483,
   "roofSamples": 217,
   "sourceDataUnchanged": true,
-  "sharedWorldUnchanged": false,
+  "sharedWorldUnchanged": true,
   "otherBuildingGeometryAndColourUnchanged": true,
   "otherBuildingHash": "c260033c0048ffd82ee4bf8c18529a3ff255381a11913b3b6ae198ebb9f2e9ef",
   "legacyLibraryVertices": 1128,
@@ -15,7 +15,7 @@
     "meshes": 4
   },
   "material": {
-    "triangles": 23397,
+    "triangles": 23565,
     "meshes": 7
   },
   "heightScope": "49.75m applies only to the southern principal volume; north/stack/low wings have independent estimated heights",
