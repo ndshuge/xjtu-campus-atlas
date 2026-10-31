@@ -1,0 +1,1 @@
+R17 Campus Realism release\nSource SHA: 26fe136948abbd0004451b3a84309560a4b8673b\nBuilt with Vite 8.3.5 / Three.js 0.186.1\nPublication target: /xjtu-campus-atlas/r17-campus-realism-20261101/\nPhoto credits: assets/reference/README.md\n
