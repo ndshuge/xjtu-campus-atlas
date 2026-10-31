@@ -172,7 +172,13 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     // Photo-informed narrow rows on three visible south tiers; crown and unseen sides retain R12 detail.
     const narrowSouthWing=!gray&&['south-course-1','south-course-2','south-course-3'].includes(zone.id)?{narrowRows:[0,1]}:undefined;
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half,narrowSouthWing);
-    curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:['south-course-2','south-course-3'].includes(zone.id)?6:4,rows:zone.rows,southRelief:zone.id==='south-course-1',southUpperRelief:zone.id==='south-course-2',southCrownRelief:zone.id==='south-course-3'});
+    if(!gray&&zone.id==='south-course-4'){
+     // The 2021 frontal image shows a pale, full-height central masonry spine
+     // splitting this dark upper inset. Leave a real aperture gap, not glass under stone.
+     curtain(e,zone.bottom,zone.top,mid-half,mid-.45,{columns:2,rows:zone.rows});
+     curtain(e,zone.bottom,zone.top,mid+.45,mid+half,{columns:2,rows:zone.rows});
+     strip('wall',e,mid,zone.bottom+.23,.90,zone.top-zone.bottom-.46,.55,.25);
+    }else curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:['south-course-2','south-course-3'].includes(zone.id)?6:4,rows:zone.rows,southRelief:zone.id==='south-course-1',southUpperRelief:zone.id==='south-course-2',southCrownRelief:zone.id==='south-course-3'});
     // The 2021 frontal reference shows prominent light stone verticals
     // breaking the dark central glazing. Physical piers, not shader decoration;
     // their exact spacing and depth are photo-informed estimates.
