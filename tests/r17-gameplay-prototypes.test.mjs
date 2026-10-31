@@ -28,4 +28,19 @@ test('target practice only accepts registered practice targets; pause and reset 
  assert.equal(p.score,2);
  p.reset();
  assert.equal(p.score,0);
+ assert.equal(p.completed,false);
+});
+test('a target can score once per round, completion is bounded, reset unlocks targets',()=>{
+ const p=createTargetPractice({targetIds:['board-1','board-2']});
+ assert.equal(p.hit('board-1'),true);
+ assert.equal(p.hit('board-1'),false,'Repeated hit must not farm the same target');
+ assert.equal(p.score,1);
+ assert.equal(p.remaining,1);
+ assert.equal(p.hit('board-2'),true);
+ assert.equal(p.completed,true);
+ assert.equal(p.hit('board-1'),false);
+ assert.equal(p.score,2);
+ p.reset();
+ assert.equal(p.remaining,2);
+ assert.equal(p.hit('board-1'),true);
 });

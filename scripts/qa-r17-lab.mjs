@@ -82,13 +82,27 @@ try{
   const after=await evaluate('window.r17LabDiagnostics()');
   if(Math.hypot(after.carPosition[0]-before.carPosition[0],after.carPosition[2]-before.carPosition[2])<.2)
    throw Error('race car did not respond to real input '+width);
+  if(!mobile){
+   await send('Input.dispatchKeyEvent',{type:'keyDown',key:'w',code:'KeyW',windowsVirtualKeyCode:87});
+   await sleep(150);
+   await evaluate('window.dispatchEvent(new Event("blur"))');
+   const blurStop=await evaluate('window.r17LabDiagnostics().carPosition');
+   await sleep(350);
+   const blurAfter=await evaluate('window.r17LabDiagnostics().carPosition');
+   await send('Input.dispatchKeyEvent',{type:'keyUp',key:'w',code:'KeyW',windowsVirtualKeyCode:87});
+   if(Math.hypot(...blurAfter.map((v,i)=>v-blurStop[i]))>.13)
+    throw Error('Race continues driving after window blur '+width);
+  }
   await screenshot('race-'+width+'.png');
   await click('#mode-target',mobile);await sleep(300);
   const target=await evaluate('window.r17LabTargetPoint()');
   if(!target||!Number.isFinite(target.x))throw Error('No target projection '+width);
   await pointClick(target.x,target.y,mobile);await sleep(350);
   const shot=await evaluate('window.r17LabDiagnostics()');
-  if(shot.mode!=='targetPractice'||shot.score<1)throw Error('target ray click not accepted '+width);
+  if(shot.mode!=='targetPractice'||shot.score!==1)throw Error('target ray click not accepted '+width);
+  await pointClick(target.x,target.y,mobile);await sleep(160);
+  const repeat=await evaluate('window.r17LabDiagnostics()');
+  if(repeat.score!==1)throw Error('Repeated target hit incorrectly increased score '+width);
   await screenshot('target-'+width+'.png');
   await click('#mode-explore',mobile);await sleep(120);
   const restored=await evaluate('window.r17LabDiagnostics()');

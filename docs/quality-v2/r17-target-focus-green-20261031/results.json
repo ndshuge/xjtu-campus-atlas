@@ -1,0 +1,132 @@
+{
+  "url": "http://127.0.0.1:18994/r17-target-focus-green-20261031/r17-lab.html",
+  "reports": [
+    {
+      "width": 390,
+      "initial": {
+        "mode": "explore",
+        "drawCalls": 10,
+        "triangles": 666,
+        "frames": 30,
+        "score": 0,
+        "carPosition": null,
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "before": {
+        "mode": "raceSandbox",
+        "drawCalls": 15,
+        "triangles": 1830,
+        "frames": 75,
+        "score": 0,
+        "carPosition": [
+          0,
+          1.63,
+          -17
+        ],
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "after": {
+        "mode": "raceSandbox",
+        "drawCalls": 14,
+        "triangles": 1818,
+        "frames": 257,
+        "score": 0,
+        "carPosition": [
+          8.725183237497125,
+          1.63,
+          -16.99062027920403
+        ],
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "shot": {
+        "mode": "targetPractice",
+        "drawCalls": 14,
+        "triangles": 2074,
+        "frames": 433,
+        "score": 1,
+        "carPosition": null,
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "restored": {
+        "mode": "explore",
+        "drawCalls": 10,
+        "triangles": 666,
+        "frames": 550,
+        "score": 1,
+        "carPosition": null,
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "width": 1440,
+      "initial": {
+        "mode": "explore",
+        "drawCalls": 10,
+        "triangles": 666,
+        "frames": 35,
+        "score": 0,
+        "carPosition": null,
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "before": {
+        "mode": "raceSandbox",
+        "drawCalls": 15,
+        "triangles": 1830,
+        "frames": 80,
+        "score": 0,
+        "carPosition": [
+          0,
+          1.63,
+          -17
+        ],
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "after": {
+        "mode": "raceSandbox",
+        "drawCalls": 15,
+        "triangles": 1830,
+        "frames": 189,
+        "score": 0,
+        "carPosition": [
+          4.7330000000000005,
+          1.63,
+          -17
+        ],
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "shot": {
+        "mode": "targetPractice",
+        "drawCalls": 14,
+        "triangles": 2074,
+        "frames": 405,
+        "score": 1,
+        "carPosition": null,
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "restored": {
+        "mode": "explore",
+        "drawCalls": 10,
+        "triangles": 666,
+        "frames": 463,
+        "score": 1,
+        "carPosition": null,
+        "fixtureOnly": true,
+        "webgl": true
+      },
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "limitations": "Synthetic lab and headless Edge only; not a real university driveable route or physical iPhone."
+}

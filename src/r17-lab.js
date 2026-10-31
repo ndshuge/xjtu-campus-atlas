@@ -55,6 +55,9 @@ host.registerMode({
   const keys=new Set(),abort=new AbortController();let heading=Math.PI/2;
   document.addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyD','ArrowUp','ArrowLeft','ArrowRight'].includes(e.code)){keys.add(e.code);e.preventDefault()}},{signal:abort.signal});
   document.addEventListener('keyup',e=>keys.delete(e.code),{signal:abort.signal});
+  // Losing focus must release virtual acceleration, including without a keyup.
+  window.addEventListener('blur',()=>keys.clear(),{signal:abort.signal});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)keys.clear()},{signal:abort.signal});
   for(const [id,key] of [['drive-left','KeyA'],['drive-forward','KeyW'],['drive-right','KeyD']]){
    const button=document.getElementById(id);
    button.addEventListener('pointerdown',e=>{keys.add(key);button.setPointerCapture(e.pointerId);e.preventDefault()},{signal:abort.signal});
