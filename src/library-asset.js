@@ -16,7 +16,22 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  };
  if(!gray){
   const pixels=new Uint8Array(64*64*4);let seed=20170407;
-  for(let i=0;i<64*64;i++){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const n=((seed>>>24)/255-.5)*24;pixels.set([164+n,182+n,130+n,255],i*4);}
+  // The licensed 2025 aerial shows coherent light/dark vegetation patches,
+  // not uncorrelated pixel speckles. Still one 64px repeating roof texture.
+  const coarse=new Float32Array(4*4);
+  const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return (seed>>>24)/255;};
+  for(let i=0;i<coarse.length;i++)coarse[i]=random();
+  const sample=(x,y)=>{
+   const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy;
+   const smooth=t=>t*t*(3-2*t),u=smooth(fx),v=smooth(fy);
+   const at=(a,b)=>coarse[((b+4)%4)*4+(a+4)%4];
+   return (at(ix,iy)*(1-u)+at((ix+1)%4,iy)*u)*(1-v)
+    +(at(ix,(iy+1)%4)*(1-u)+at((ix+1)%4,(iy+1)%4)*u)*v;
+  };
+  for(let y=0;y<64;y++)for(let x=0;x<64;x++){
+   const n=(sample(x/16,y/16)-.5)*42+(random()-.5)*2;
+   pixels.set([164+n,182+n*.82,130+n*.52,255],(y*64+x)*4);
+  }
   const turf=new THREE.DataTexture(pixels,64,64);turf.colorSpace=THREE.SRGBColorSpace;turf.wrapS=turf.wrapT=THREE.RepeatWrapping;turf.generateMipmaps=true;turf.minFilter=THREE.LinearMipmapLinearFilter;turf.magFilter=THREE.LinearFilter;turf.needsUpdate=true;materials.groundcover.map=turf;
   // Reuse the existing opaque glazing shader. A trial building-only cubemap
   // incurred a PMREM cold-start cost without a useful campus-scale benefit.
@@ -97,7 +112,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  let southPortal=null;
  let southPodiumMassing=null;
  const southGardenParapets=gray?null:[];
- const southCrownWindows=gray?null:{photoInformed:true,estimated:true,course:'south-course-5',bottomStoneHeight:1.65,topStoneHeight:1.35,approxWindowWidth:1.15,reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
+ const southCrownWindows=gray?null:{photoInformed:true,estimated:true,course:'south-course-5',bottomStoneHeight:1.65,topStoneHeight:1.35,approxWindowWidth:1.0,roofSkylights:7,reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  const southFacadeRibs=gray?null:{photoInformed:true,estimated:true,
   courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
@@ -125,6 +140,36 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   }
   for(const e of boundary){
    if(zone.top===13&&plan.internalSeams.some(([a,b])=>[e.a,e.b].every(p=>pointSegment(p,a,b).distance<.002)))continue;
+   if(!gray&&zone.id==='south-course-5'){
+    // The 2021 frontal photo shows steep stone roof shoulders with seven real
+    // apertures below the clock, not a vertical box of windows. Geometry is
+    // illustrative: eave/ridge pitch is estimated from the image, not surveyed.
+    const eaveY=zone.bottom+1.65,ridgeScale=.87;
+    wallRect('wall',e,0,e.length,zone.bottom,eaveY);
+    const roofPoint=(s,t,normalOffset=0)=>{
+     const x=e.a[0]+e.ux*s,z=e.a[1]+e.uz*s,scale=1-(1-ridgeScale)*t;
+     return [plan.centerX+(x-plan.centerX)*scale+e.nx*normalOffset,
+      baseY+eaveY+(zone.top-eaveY)*t,
+      plan.steppedCenterZ+(z-plan.steppedCenterZ)*scale+e.nz*normalOffset];
+    };
+    const panel=(from,to,low,high,material='wall',inset=0)=>
+     quad(material,[roofPoint(from,low,inset),roofPoint(from,high,inset),
+      roofPoint(to,high,inset),roofPoint(to,low,inset)]);
+    if(e.nz>.9){
+     // Three dark roof openings per wing and one narrow center aperture.
+     // Each glass quad replaces a wall quad; no hidden continuous backing.
+     const slots=[.17,.24,.31,.50,.69,.76,.83],halfWindow=.023;
+     const cuts=[0,...slots.flatMap(s=>[s-halfWindow,s+halfWindow]),1].sort((a,b)=>a-b);
+     for(let i=0;i<cuts.length-1;i++){
+      const a=cuts[i]*e.length,b=cuts[i+1]*e.length,m=(cuts[i]+cuts[i+1])/2;
+      const opening=slots.some(s=>Math.abs(m-s)<1e-5);
+      panel(a,b,0,.27);
+      panel(a,b,.27,.65,opening?'glass':'wall',opening?-.15:0);
+      panel(a,b,.65,1);
+     }
+    }else panel(0,e.length,0,1);
+    continue;
+   }
    const northFront=isNorth&&e.nz<-.9&&Math.min(e.a[1],e.b[1])<-218;
    const southFront=zone.id==='south-II-podium'&&e.nz>.9&&Math.max(e.a[1],e.b[1])>-76;
    if(northFront){
@@ -212,6 +257,9 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     for(const r of [[a[0],a[1],b[0],a[3]],[b[2],a[1],a[2],a[3]],[b[0],a[1],b[2],b[1]],[b[0],b[3],b[2],a[3]]]){
      const cells=planCells(zone.points,r);roof(cells,zone.top,!gray&&zone.id!=='south-course-4'?'groundcover':'roof');
     }
+   }else if(!gray&&zone.id==='south-course-5'){
+    const [x0,z0,x1,z1]=zone.rect,r=.87,cx=plan.centerX,cz=plan.steppedCenterZ;
+    roof(planCells(zone.points,[cx+(x0-cx)*r,cz+(z0-cz)*r,cx+(x1-cx)*r,cz+(z1-cz)*r]),zone.top);
    }else roof(zone.cells,zone.top);
   }else{
    // Both north reading block and T-shaped stack have pitched roofs in the
@@ -234,7 +282,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  // Photo-informed estimated: broader final stone shoulder and compact clock; keep 49.75m cap.
  const cx=plan.centerX,cz=plan.steppedCenterZ+6.5,clockBase=plan.courses.at(-1).top;
  const clockCrown=gray?null:{photoInformed:true,estimated:true,supportRoofY:clockBase,
-  clockHeight:plan.maxHeight-clockBase,stoneShoulderWidth:21,
+  clockHeight:plan.maxHeight-clockBase,stoneShoulderWidth:21,roofForm:'pitched-stone-shoulders',eaveY:plan.courses.at(-1).bottom+1.65,ridgeScale:.87,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  batch.box('roof',cx,baseY+clockBase,cz,5.8,.5,4.3);
  batch.box('wall',cx,baseY+clockBase+.5,cz,4.7,2.95,3.25);
