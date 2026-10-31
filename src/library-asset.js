@@ -71,7 +71,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    }
   }
  }
- function curtain(e,bottom,top,from,to,{columns=8,north=false,rows=4,southRelief=false,southUpperRelief=false}={}){
+ function curtain(e,bottom,top,from,to,{columns=8,north=false,rows=4,southRelief=false,southUpperRelief=false,southCrownRelief=false}={}){
   const kind=north?'north':'wall';
   if(gray){wallRect(kind,e,from,to,bottom,top);return;}
   if(southRelief){
@@ -82,15 +82,15 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    wallRect('glass',e,from,to,mid+.20,top-.55,-.36);
    strip('wall',e,(from+to)/2,mid-.19,to-from,.38,.44,.11);
    for(const y of [mid-.26,mid+.19])strip('frame',e,(from+to)/2,y,to-from,.07,.26,.02);
-  }else if(southUpperRelief){
-   // Photo-informed dark-core spandrel and narrower vertical rhythm; estimated.
-   const mid=(bottom+top)/2;
-   wallRect('glass',e,from,to,bottom+.22,mid-.14,-.30);
-   wallRect('glass',e,from,to,mid+.14,top-.55,-.30);
-   strip('frame',e,(from+to)/2,mid-.12,to-from,.24,.30,.09);
+  }else if(southUpperRelief||southCrownRelief){
+   // Photo-informed but estimated: real separation of the dark central glass fields.
+   const mid=(bottom+top)/2,recess=southCrownRelief?.29:.30,halfGap=southCrownRelief?.16:.14;
+   wallRect('glass',e,from,to,bottom+.22,mid-halfGap,-recess);
+   wallRect('glass',e,from,to,mid+halfGap,top-.55,-recess);
+   strip('frame',e,(from+to)/2,mid-halfGap,to-from,halfGap*2,southCrownRelief?.32:.30,southCrownRelief?.10:.09);
   }else wallRect('glass',e,from,to,bottom+.22,top-.55,-.22);
-  for(let i=0;i<=columns;i++)strip(north?kind:'frame',e,from+i*(to-from)/columns,bottom+.12,north?.65:.11,top-bottom-.5,north?.72:(southRelief?.28:(southUpperRelief?.22:.18)),north?.1:(southRelief?.01:(southUpperRelief?-.02:-.08)));
-  if(!southRelief&&!southUpperRelief)for(let i=1;i<rows;i++)strip(north?kind:'frame',e,(from+to)/2,bottom+i*(top-bottom)/rows-.14,to-from,north?.35:.11,.28,-.06);
+  for(let i=0;i<=columns;i++)strip(north?kind:'frame',e,from+i*(to-from)/columns,bottom+.12,north?.65:.11,top-bottom-.5,north?.72:(southRelief?.28:((southUpperRelief||southCrownRelief)?.22:.18)),north?.1:(southRelief?.01:((southUpperRelief||southCrownRelief)?-.02:-.08)));
+  if(!southRelief&&!southUpperRelief&&!southCrownRelief)for(let i=1;i<rows;i++)strip(north?kind:'frame',e,(from+to)/2,bottom+i*(top-bottom)/rows-.14,to-from,north?.35:.11,.28,-.06);
   strip(kind,e,(from+to)/2,top-.52,to-from,.52,.85,.02);
  }
  const fronts=[];
@@ -102,6 +102,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   rows:[0,1],approxWidth:.92,approxRecess:.28,approxBay:1.65,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  const southUpperCurtain=gray?null:{photoInformed:true,estimated:true,courses:['south-course-2'],mullionColumns:6,spandrelHeight:.24,spandrelProjection:.24,glassRecess:.30,reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
+ const southCrownCurtain=gray?null:{photoInformed:true,estimated:true,courses:['south-course-3'],mullionColumns:6,spandrelHeight:.32,spandrelProjection:.26,glassRecess:.29,reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  const southCurtainRelief=gray?null:{photoInformed:true,estimated:true,courses:['south-course-1'],
   stoneTransomHeight:.38,stoneProjection:.33,glassRecess:.36,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
@@ -149,7 +150,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     // Photo-informed narrow rows on three visible south tiers; crown and unseen sides retain R12 detail.
     const narrowSouthWing=!gray&&['south-course-1','south-course-2','south-course-3'].includes(zone.id)?{narrowRows:[0,1]}:undefined;
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,mid-half,narrowSouthWing);
-    curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:zone.id==='south-course-2'?6:4,rows:zone.rows,southRelief:zone.id==='south-course-1',southUpperRelief:zone.id==='south-course-2'});
+    curtain(e,zone.bottom,zone.top,mid-half,mid+half,{columns:['south-course-2','south-course-3'].includes(zone.id)?6:4,rows:zone.rows,southRelief:zone.id==='south-course-1',southUpperRelief:zone.id==='south-course-2',southCrownRelief:zone.id==='south-course-3'});
     // The 2021 frontal reference shows prominent light stone verticals
     // breaking the dark central glazing. Physical piers, not shader decoration;
     // their exact spacing and depth are photo-informed estimates.
@@ -247,7 +248,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],
