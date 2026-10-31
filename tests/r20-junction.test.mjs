@@ -31,7 +31,7 @@ test('physics road tops exactly follow the existing *visual* atlas surface heigh
 test('junction pad is added only at a shared mapped vertex and follows collider lifecycle',()=>{
  const sim=createRacingPhysics({spawn:[0,2,0]})
  const track=createStreamedRoadColliders({physics:sim,network:network(),data:sample,radius:65,refreshDistance:12})
- const initial=sim.world.bodies.length
+ const initial=sim.world.bodies.length-1 // R21 terrain is constructed once and removed on destroy.
  try{
   const stats=track.update([0,2,0])
   assert.equal(stats.junctionPads,1,'single true shared junction')

@@ -16,7 +16,7 @@ import {createCentralBuildingsAsset,CENTRAL_IDS} from './central-buildings-asset
 import {createWestOneAsset} from './west-one-asset.js';
 import {createEastHistoricAsset,EAST_HISTORIC_IDS} from './east-historic-asset.js';
 import {makeGroundPattern} from './ground-pattern.js';
-import {createStadiumTrackGeometry} from './stadium-infield.js';
+import {findStadiumInfield,createAthleticsTrackGeometry,createAthleticsLaneLines} from './stadium-infield.js';
 import {createCampusVegetation,fitTreeToBuildings} from './campus-vegetation.js';
 import {createSurfaceTexture} from './surface-textures.js';
 import {addAvenuePaving} from './avenue-paving.js';
@@ -142,20 +142,31 @@ export class CampusWorld{
  }
  buildPitch(s){const [x0,z0,x1,z1]=bounds(s.points),cx=(x0+x1)/2,cz=(z0+z1)/2,w=x1-x0,d=z1-z0;let pos=[];
   // Each pitch owns exactly one base; avoid drawing a coincident generic surface.
-  if(s.name!=='东田径场')this.mesh(flat(s.points,BASE+.065),this.mat(s.sport==='soccer'?'#789963':'#80986a'));
-  const line=(a,b)=>pos.push(a[0],BASE+.22,a[1],b[0],BASE+.22,b[1]);
+  const athletics=s.name==='东田径场';
+  const stadium=this.data.surfaces.find(v=>v.name==='东田径场');
+  const infield=stadium&&findStadiumInfield(stadium,this.data.surfaces);
+  const soccerInfield=s.id===infield?.id;
+  if(!athletics)this.mesh(flat(s.points,BASE+(soccerInfield?.115:.065)),this.mat(s.sport==='soccer'?'#789963':'#80986a'));
+  const lineHeight=BASE+(soccerInfield?.138:.22);
+  const line=(a,b)=>pos.push(a[0],lineHeight,a[1],b[0],lineHeight,b[1]);
   const rect=(x,z,rw,rd)=>{const p=rectangle(x,z,rw,rd);for(let i=1;i<p.length;i++)line(p[i-1],p[i]);};
   const circle=(x,z,r,n=48)=>{for(let i=0;i<n;i++)line([x+Math.cos(i/n*Math.PI*2)*r,z+Math.sin(i/n*Math.PI*2)*r],[x+Math.cos((i+1)/n*Math.PI*2)*r,z+Math.sin((i+1)/n*Math.PI*2)*r]);};
   if(s.name==='东田径场'){
    // The original OSM outer footprint remains authoritative; lane striping is schematic.
-   this.mesh(createStadiumTrackGeometry(s,this.data.surfaces,BASE+.065),this.mat('#b87661'));
-   const fw=w*.64,fd=d*.67; // The nested OSM soccer pitch owns the grass; no duplicate rectangle.
-   const r=fw/2+3,straight=Math.max(0,(fd-fw)/2);for(let k=0;k<6;k++){const rr=r+k*1.65;const half=[];for(let i=0;i<=48;i++){const t=i/48*Math.PI;half.push([cx+Math.cos(t)*rr,cz+straight+Math.sin(t)*rr]);}for(let i=1;i<half.length;i++)line(half[i-1],half[i]);const lower=[];for(let i=0;i<=48;i++){const t=Math.PI+i/48*Math.PI;lower.push([cx+Math.cos(t)*rr,cz-straight+Math.sin(t)*rr]);}line(half[half.length-1],lower[0]);for(let i=1;i<lower.length;i++)line(lower[i-1],lower[i]);line(lower[lower.length-1],half[0]);}
+   // One inner grass pitch, one measured-footprint sports apron and one oval
+   // running track. Keep track triangles OUT of the pitch and avoid a red
+   // rectangular carpet over the full stadium enclosure.
+   this.mesh(flat(s.points,BASE+.054),this.mat('#9dae91'));
+   this.mesh(createAthleticsTrackGeometry(s,this.data.surfaces,BASE+.105),this.mat('#b86756'));
+   const laneGeom=new THREE.BufferGeometry();
+   laneGeom.setAttribute('position',new THREE.BufferAttribute(createAthleticsLaneLines(s,this.data.surfaces,BASE+.136),3));
+   const lanes=new THREE.LineSegments(laneGeom,new THREE.LineBasicMaterial({color:'#efe5d7',depthTest:true,depthWrite:false}));
+   lanes.name='east-stadium-verified-oval-lanes';lanes.renderOrder=6;this.scene.add(lanes);
    // The independent soccer surface owns the goal boxes and centre line.
 
-   for(let j=0;j<4;j++)this.mesh(boxGeometry(cx+w*.45,BASE+1+j*1.1,cz,3.2,1.15,d*.72),this.mat(j%2?'#c0c7b1':'#d3d6c3'));
+   // Avoid unverifiable freestanding stands; OSM geometry contains no stands.
   }else if(s.sport==='soccer'){
-   for(let j=0;j<8;j++)if(j%2===0)this.mesh(flat(rectangle(cx,z0+(j+.5)*d/8,w*.93,d/8),BASE+.115),this.mat('#8da876'));
+   for(let j=0;j<8;j++)if(j%2===0)this.mesh(flat(rectangle(cx,z0+(j+.5)*d/8,w*.93,d/8),BASE+(soccerInfield?.121:.115)),this.mat('#8da876'));
    rect(cx,cz,w*.9,d*.91);line([cx-w*.45,cz],[cx+w*.45,cz]);circle(cx,cz,Math.min(w,d)*.14);rect(cx,z0+d*.15,w*.5,d*.21);rect(cx,z1-d*.15,w*.5,d*.21);
   }else if(w>10&&d>10){
    const sport=s.sport||'tennis';const unit=sport==='basketball'?15:11;const nx=Math.max(1,Math.floor(w/unit));const nz=Math.max(1,Math.floor(d/(sport==='tennis'?26:28)));

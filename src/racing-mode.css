@@ -29,7 +29,8 @@ body.racing-mode .building-label,body.racing-mode .map-label,body.racing-mode #t
  #racing-overlay .race-top{top:calc(9px + env(safe-area-inset-top));left:12px;right:12px}
  #racing-overlay .race-brand strong{font-size:16px}
  #racing-overlay .race-brand span{font-size:9px;max-width:170px;line-height:1.4}
- #racing-overlay .race-actions{gap:5px}
+ #racing-overlay .race-actions{gap:4px;flex-shrink:0;max-width:45%;justify-content:flex-end}
+ #racing-overlay .race-actions button{padding:9px 7px;font-size:11px;white-space:nowrap}
  #racing-overlay button{padding:11px 10px;font-size:11px;border-radius:12px}
  #racing-overlay kbd{display:none}
  #racing-overlay .race-speed{top:calc(150px + env(safe-area-inset-top));left:13px;bottom:auto}

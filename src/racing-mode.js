@@ -2,6 +2,7 @@ import {createGameModeHost} from './game-mode-host.js'
 import {createRacingPhysics} from './racing/physics.js'
 import {createSyntheticTrack} from './racing/track.js'
 import {planCampusDrive} from './racing/campus-track.js'
+import {planFreeRoamSpawn} from './racing/free-roam.js'
 import {createCampusRoadNetwork,listDriveStartingRoads} from './racing/road-network.js'
 import {createStreamedRoadColliders} from './racing/network-physics.js'
 import {createDesktopInput,createTouchInput} from './racing/controls.js'
@@ -19,7 +20,7 @@ function makeControls(){
  node.setAttribute('aria-label','真实物理赛车实验场')
  node.innerHTML=`
  <div class="race-top"><div class="race-brand"><strong>ATLAS <em>DRIVE</em></strong><span id="race-place">校园道路 · 梧桐东道</span><label class="race-road-picker">起点 <select id="race-road" aria-label="选择校园驾驶道路"></select></label><button type="button" id="race-switch">切换至独立练车场</button></div>
- <div class="race-actions"><button id="race-camera" type="button">切换视角 <kbd>C</kbd></button><button id="race-reset" type="button">复位 <kbd>R</kbd></button><button id="race-exit" type="button">返回校园 <kbd>Esc</kbd></button></div></div>
+ <div class="race-actions"><button id="race-camera" type="button" aria-label="切换驾驶视角">视角 <kbd>C</kbd></button><button id="race-reset" type="button">复位 <kbd>R</kbd></button><button id="race-exit" type="button" aria-label="退出赛车返回校园">退出 <kbd>Esc</kbd></button></div></div>
  <div class="race-speed"><strong id="race-speed-number">000</strong><small>km/h</small><p>悬挂接地 <span id="race-contact">0/4</span></p></div>
  <div class="race-hint">真实四轮 RaycastVehicle 物理 · 校园道路高程与宽度未经实测，仅供虚拟驾驶<br/>WASD / 方向键 · Space 手刹 · S 低速倒车</div>
  <div class="race-mobile"><div class="race-steer" id="race-stick"><span>左右转向</span><div id="race-stick-knob"></div></div>
@@ -66,7 +67,7 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
    const ui=makeControls();document.body.append(ui)
    onCleanup(()=>ui.remove())
    const practice=options.arena==='practice'
-   const course=practice?null:planCampusDrive(world.data,{roadId:options.roadId})
+   const course=practice?null:options.roadId==='area:east-stadium'?planFreeRoamSpawn(world.data):planCampusDrive(world.data,{roadId:options.roadId})
    const network=practice?null:createCampusRoadNetwork(world.data)
    const spawn=practice?PRACTICE_SPAWN:course.spawn
    const sim=createRacingPhysics({spawn,heading:course?.heading??0})
@@ -79,6 +80,7 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
     track.update(spawn)
     const picker=ui.querySelector('#race-road')
     for(const road of listDriveStartingRoads(network))picker.add(new Option(road.name,road.id,false,road.id===course.roadId))
+    picker.add(new Option('东田径场 · 自由驾驶','area:east-stadium',false,course.roadId==='area:east-stadium'))
     picker.addEventListener('change',()=>{if(picker.value!==course.roadId)void switchArena('campus',picker.value)})
    }else ui.querySelector('.race-road-picker').hidden=true
    ui.querySelector('#race-place').textContent=practice?'独立合成练车场 · 实验场景':'校园路网 · 110 条连通道路｜平面高程模拟'
@@ -157,7 +159,8 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
     }
     if(!practice&&roadTick++%22===0){
      lastRoad=track.nearest(state.position)
-     ui.querySelector('#race-place').textContent='校园路网 · '+(lastRoad?.name||'校园内部道路')+'｜平面高程模拟'
+     const offRoad=lastRoad&&lastRoad.distance>lastRoad.width/2+2
+     ui.querySelector('#race-place').textContent=offRoad?'校园自由驾驶 · 草地 / 广场｜平面近似':'校园路网 · '+(lastRoad?.name||'校园内部道路')+'｜平面高程模拟'
     }
     visuals.update(state)
     cameraRig.update(state,dt)
@@ -168,6 +171,7 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
      arena:practice?'practice':'campus',routeId:course?.roadId??null,
      roadName:lastRoad?.name??course?.name??null,roadWidth:lastRoad?.width??course?.width??null,
      nearbyRoadId:lastRoad?.roadId??null,distanceToRoad:lastRoad?.distance??null,
+     isOffRoad:!!(lastRoad&&lastRoad.distance>lastRoad.width/2+2),
      networkRoads:network?.roads?.length??0,networkMeters:network?.lengthMeters??0,
      collisionStats:track.collisionStats??null,worldCamera:world.camera.position.toArray()}
    }

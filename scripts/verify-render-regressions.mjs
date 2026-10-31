@@ -16,7 +16,7 @@ assert(bounds.min.y>0&&bounds.max.y<18,'Landmark footprint or height unreasonabl
 for(const part of art.children)assert([...part.geometry.attributes.position.array].every(Number.isFinite),'Non-finite landmark coordinate');
 const src=fs.readFileSync(new URL('../src/world.js',import.meta.url),'utf8');
 assert(src.includes("if(s.kind==='pitch')this.buildPitch(s);else"),'Do not double-render stadium ground');
-assert(src.includes('BASE+.22'),'Pitch lines must clear the field material');
+assert(src.includes('lineHeight=BASE+')&&src.includes('soccerInfield?.138'),'Pitch markings must clear the mapped soccer material without floating 20cm above it');
 assert(src.includes('this.updateLabels();'),'Labels must update every frame during motion');
 assert(src.includes('item.screen.x*.46'),'Projected labels must use coordinate easing');
 console.log(JSON.stringify({passed:true,plaza:plaza.position,parts:art.children.length,stadiumLayering:true,labelSmoothing:true}));
