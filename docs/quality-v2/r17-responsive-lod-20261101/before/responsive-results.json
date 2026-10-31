@@ -1,0 +1,68 @@
+{
+  "base": "http://127.0.0.1:19142/lod-before-20261101/",
+  "pos": [
+    0,
+    16.1,
+    0
+  ],
+  "mobileBefore": {
+    "width": 390,
+    "isMobile": true,
+    "near": 95,
+    "far": 1997,
+    "camera": [
+      0,
+      36.037018897732146,
+      2.098740226780561
+    ],
+    "drawCalls": 52,
+    "triangles": 439372,
+    "vegetationLOD": {
+      "desktop": 170,
+      "mobile": 110,
+      "hysteresis": 22
+    },
+    "scale": 1
+  },
+  "desktop": {
+    "width": 900,
+    "isMobile": false,
+    "near": 95,
+    "far": 1997,
+    "camera": [
+      0,
+      36.037018897732146,
+      2.098740226780561
+    ],
+    "drawCalls": 67,
+    "triangles": 444910,
+    "vegetationLOD": {
+      "desktop": 170,
+      "mobile": 110,
+      "hysteresis": 22
+    },
+    "scale": 1
+  },
+  "mobileAfter": {
+    "width": 390,
+    "isMobile": true,
+    "near": 95,
+    "far": 1997,
+    "camera": [
+      0,
+      36.037018897732146,
+      2.098740226780561
+    ],
+    "drawCalls": 52,
+    "triangles": 439372,
+    "vegetationLOD": {
+      "desktop": 170,
+      "mobile": 110,
+      "hysteresis": 22
+    },
+    "scale": 1
+  },
+  "exceptions": 0,
+  "httpErrors": [],
+  "passed": false
+}

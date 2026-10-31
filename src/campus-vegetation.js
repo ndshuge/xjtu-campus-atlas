@@ -162,12 +162,20 @@ export function createCampusVegetation(trees,{mobile=false}={}){
  const avenue=trees.filter(t=>t.type===2);
  const white=new THREE.InstancedMesh(new THREE.CylinderGeometry(.27,.3,1,8),new THREE.MeshStandardMaterial({color:'#e5e3d9',roughness:1}),avenue.length);
  white.name='whitewashed plane tree bases / unmeasured extent';avenue.forEach((t,i)=>{const h=1.5+t.c*.35;dummy.position.set(t.x,BASE+h/2,t.z);dummy.rotation.set(0,0,0);dummy.scale.set(t.r/3.6*1.06,h,t.r/3.6*1.06);dummy.updateMatrix();white.setMatrixAt(i,dummy.matrix);});white.computeBoundingSphere();group.add(white);
- let last=new THREE.Vector3(Infinity,Infinity,Infinity),lastTime=-Infinity;
+ let last=new THREE.Vector3(Infinity,Infinity,Infinity),lastTime=-Infinity,mobileMode=mobile;
+ const setMobile=(next)=>{
+  if(mobileMode===!!next)return;
+  mobileMode=!!next;lastTime=-Infinity;last.set(Infinity,Infinity,Infinity);
+  // The old LOD hysteresis belongs to the previous viewport threshold.
+  classification.fill(-1);
+  for(const batch of batches)for(const mesh of [batch.trunk,batch.crown])
+   mesh.castShadow=!mobileMode&&batch.detail==='near';
+ };
  const update=(camera,now=performance.now(),force=false)=>{
   if(!force&&now-lastTime<260)return;
   if(!force&&camera.position.distanceToSquared(last)<9)return;
   lastTime=now;last.copy(camera.position);
-  const cutoff=mobile?VEGETATION_LOD.mobile:VEGETATION_LOD.desktop;
+  const cutoff=mobileMode?VEGETATION_LOD.mobile:VEGETATION_LOD.desktop;
   let changed=false;
   trees.forEach((t,i)=>{const d=Math.hypot(t.x-last.x,t.z-last.z,last.y-(BASE+t.h*.7));const threshold=cutoff+(classification[i]===1?VEGETATION_LOD.hysteresis:0);const next=d<threshold?1:0;if(next!==classification[i])changed=true;classification[i]=next;});
   // Rebuilding every matrix, color and bounding sphere is unnecessary when a
@@ -181,5 +189,5 @@ export function createCampusVegetation(trees,{mobile=false}={}){
   group.userData.nearTrees=[...classification].filter(n=>n===1).length;group.userData.farTrees=trees.length-group.userData.nearTrees;
  };
  group.userData={version:'leaf-sprays-r6',positions:'existing procedural coordinates, not a tree survey',species:'avenue plane-tree class / conifer-like groves; exact species unverified',originalTexture:true,treeCount:trees.length,clearanceAdjustedTrees:trees.filter(t=>t.clearanceAdjusted).length,lod:VEGETATION_LOD};
- return{group,update};
+ return{group,update,setMobile};
 }
