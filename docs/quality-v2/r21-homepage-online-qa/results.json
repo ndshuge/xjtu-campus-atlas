@@ -1,0 +1,33 @@
+{
+  "site": "https://ndshuge.github.io/xjtu-campus-atlas/",
+  "date": "2026-10-31T21:07:19.290Z",
+  "results": [
+    {
+      "name": "desktop",
+      "site": "https://ndshuge.github.io/xjtu-campus-atlas/",
+      "pass": true,
+      "road": "梧桐东道",
+      "junctionPads": 6,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "phone-portrait",
+      "site": "https://ndshuge.github.io/xjtu-campus-atlas/",
+      "pass": true,
+      "road": "梧桐东道",
+      "junctionPads": 6,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "phone-landscape",
+      "site": "https://ndshuge.github.io/xjtu-campus-atlas/",
+      "pass": true,
+      "road": "梧桐东道",
+      "junctionPads": 6,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}

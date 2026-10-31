@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-31T21:07:24.221Z",
+  "base": "https://ndshuge.github.io/xjtu-campus-atlas/r21-campus-free-drive-20261101/",
+  "results": [
+    {
+      "name": "desktop-1440",
+      "freeDriveSpeed": 39.25355213975473,
+      "passed": true,
+      "terrainBodies": 1,
+      "stadiumStart": [
+        192.36725,
+        1.668712042000678,
+        -67.960625
+      ],
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "portrait-390",
+      "freeDriveSpeed": 28.951051346980428,
+      "passed": true,
+      "terrainBodies": 1,
+      "stadiumStart": [
+        192.36725,
+        1.668712042000678,
+        -67.960625
+      ],
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "landscape-844",
+      "freeDriveSpeed": 47.152252441232655,
+      "passed": true,
+      "terrainBodies": 1,
+      "stadiumStart": [
+        192.36725,
+        1.668712042000678,
+        -67.960625
+      ],
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}

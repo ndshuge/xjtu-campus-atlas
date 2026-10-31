@@ -27,3 +27,12 @@
 - 真实 iPhone Safari 未连接，仍为 NOT_TESTED；手机浏览器目前是 Edge 触摸模拟。
 - 南部和北部建筑照片专项仍由其他独立工作线承担，等待照片证据和模块后由主线集成。
 - Pages 正式发布、根首页工具栏入口及公开线上验收完成后补充实际发布 SHA 和网址。
+
+## Public deployment (verified)
+- Source feature SHA: `a4fcd8cc0dfb1704bf13d128245def984bb521ce`.
+- Pages SHA: `b29e9ba179699db3788209b47630dea8eea13257`.
+- New preview: https://ndshuge.github.io/xjtu-campus-atlas/r21-campus-free-drive-20261101/?drive=1
+- Root homepage updated as part of the same scoped Pages deployment. Previous R20 floating racing banner was removed and replaced with a compact CTA within the existing bottom toolbar. Historical preview directories remain unchanged.
+- Online Edge Playwright: homepage entry -> R21 real vehicle spawn -> mode exit, desktop 1440x900 / phone emulation 390x844 / landscape 844x390 all passed, 0 JS errors and 0 HTTP errors: `docs/quality-v2/r21-homepage-online-qa/results.json`.
+- Online Edge Playwright: choose verified OSM eastern athletic-field grass as off-road spawn, four wheel contacts, physics acceleration, switch back to campus road then exit. Three viewport profiles passed, 0 JS errors and 0 HTTP errors: `docs/quality-v2/r21-free-drive-online-qa/results.json`.
+- These tests use desktop Edge browser emulation, not physical iPhone Safari. Actual non-flat campus topography is NOT implemented. Oval lanes are visually informed by OSM geometry and official references, not survey-grade reconstruction.
