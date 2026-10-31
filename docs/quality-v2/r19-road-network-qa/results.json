@@ -1,0 +1,198 @@
+{
+  "date": "2026-10-31T20:00:16.685Z",
+  "url": "http://127.0.0.1:18988/",
+  "results": [
+    {
+      "name": "desktop-1440",
+      "viewport": [
+        1440,
+        900
+      ],
+      "actions": [
+        {
+          "southbound": -12.91647967837242,
+          "speedKmh": 60.441729137177454,
+          "handbrakeSpeedKmh": 50.26072023231569,
+          "resetStress": 5
+        },
+        {
+          "roadPickerWest": "way/263483674/0",
+          "roadPickerReturn": true
+        }
+      ],
+      "startStats": {
+        "collisions": {
+          "roadSlabs": 24,
+          "buildingEdges": 35,
+          "trunks": 90,
+          "activeBodies": 149,
+          "swaps": 1
+        },
+        "networkRoads": 110,
+        "networkMeters": 15967.003814674421,
+        "render": {
+          "fps": 152,
+          "drawCalls": 376,
+          "canvasPixels": 1296000
+        }
+      },
+      "routeOptions": [
+        {
+          "label": "梧桐东道",
+          "value": "way/148313517/0"
+        },
+        {
+          "label": "梧桐西道",
+          "value": "way/263483674/0"
+        },
+        {
+          "label": "文治路",
+          "value": "way/148313518/0"
+        },
+        {
+          "label": "思源路",
+          "value": "way/148313743/0"
+        },
+        {
+          "label": "彭康路",
+          "value": "way/148313744/0"
+        },
+        {
+          "label": "学森路",
+          "value": "way/263483675/0"
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "portrait-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "actions": [
+        {
+          "southbound": -10.184370508462838,
+          "speedKmh": 54.58203156655786,
+          "reverse": 6.022546201002272,
+          "fps": 137
+        },
+        {
+          "roadPickerWest": "way/263483674/0",
+          "roadPickerReturn": true
+        }
+      ],
+      "startStats": {
+        "collisions": {
+          "roadSlabs": 24,
+          "buildingEdges": 35,
+          "trunks": 90,
+          "activeBodies": 149,
+          "swaps": 1
+        },
+        "networkRoads": 110,
+        "networkMeters": 15967.003814674421,
+        "render": {
+          "fps": 141,
+          "drawCalls": 136,
+          "canvasPixels": 740610
+        }
+      },
+      "routeOptions": [
+        {
+          "label": "梧桐东道",
+          "value": "way/148313517/0"
+        },
+        {
+          "label": "梧桐西道",
+          "value": "way/263483674/0"
+        },
+        {
+          "label": "文治路",
+          "value": "way/148313518/0"
+        },
+        {
+          "label": "思源路",
+          "value": "way/148313743/0"
+        },
+        {
+          "label": "彭康路",
+          "value": "way/148313744/0"
+        },
+        {
+          "label": "学森路",
+          "value": "way/263483675/0"
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "landscape-844",
+      "viewport": [
+        844,
+        390
+      ],
+      "actions": [
+        {
+          "southbound": -9.608260120169776,
+          "speedKmh": 53.13646298351768,
+          "reverse": 5.995549390750977,
+          "fps": 110
+        },
+        {
+          "roadPickerWest": "way/263483674/0",
+          "roadPickerReturn": true
+        }
+      ],
+      "startStats": {
+        "collisions": {
+          "roadSlabs": 24,
+          "buildingEdges": 35,
+          "trunks": 90,
+          "activeBodies": 149,
+          "swaps": 1
+        },
+        "networkRoads": 110,
+        "networkMeters": 15967.003814674421,
+        "render": {
+          "fps": 112,
+          "drawCalls": 382,
+          "canvasPixels": 1066338
+        }
+      },
+      "routeOptions": [
+        {
+          "label": "梧桐东道",
+          "value": "way/148313517/0"
+        },
+        {
+          "label": "梧桐西道",
+          "value": "way/263483674/0"
+        },
+        {
+          "label": "文治路",
+          "value": "way/148313518/0"
+        },
+        {
+          "label": "思源路",
+          "value": "way/148313743/0"
+        },
+        {
+          "label": "彭康路",
+          "value": "way/148313744/0"
+        },
+        {
+          "label": "学森路",
+          "value": "way/263483675/0"
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}

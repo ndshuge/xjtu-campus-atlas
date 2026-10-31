@@ -1,7 +1,9 @@
 import {createGameModeHost} from './game-mode-host.js'
 import {createRacingPhysics} from './racing/physics.js'
 import {createSyntheticTrack} from './racing/track.js'
-import {createCampusDriveTrack,planCampusDrive} from './racing/campus-track.js'
+import {planCampusDrive} from './racing/campus-track.js'
+import {createCampusRoadNetwork,listDriveStartingRoads} from './racing/road-network.js'
+import {createStreamedRoadColliders} from './racing/network-physics.js'
 import {createDesktopInput,createTouchInput} from './racing/controls.js'
 import {loadVehicleVisuals} from './racing/visuals.js'
 import {createDriveCameraRig} from './racing/camera-rig.js'
@@ -16,7 +18,7 @@ function makeControls(){
  node.id='racing-overlay'
  node.setAttribute('aria-label','真实物理赛车实验场')
  node.innerHTML=`
- <div class="race-top"><div class="race-brand"><strong>ATLAS <em>DRIVE</em></strong><span id="race-place">校园道路 · 梧桐东道</span><button type="button" id="race-switch">切换至独立练车场</button></div>
+ <div class="race-top"><div class="race-brand"><strong>ATLAS <em>DRIVE</em></strong><span id="race-place">校园道路 · 梧桐东道</span><label class="race-road-picker">起点 <select id="race-road" aria-label="选择校园驾驶道路"></select></label><button type="button" id="race-switch">切换至独立练车场</button></div>
  <div class="race-actions"><button id="race-camera" type="button">切换视角 <kbd>C</kbd></button><button id="race-reset" type="button">复位 <kbd>R</kbd></button><button id="race-exit" type="button">返回校园 <kbd>Esc</kbd></button></div></div>
  <div class="race-speed"><strong id="race-speed-number">000</strong><small>km/h</small><p>悬挂接地 <span id="race-contact">0/4</span></p></div>
  <div class="race-hint">真实四轮 RaycastVehicle 物理 · 校园道路高程与宽度未经实测，仅供虚拟驾驶<br/>WASD / 方向键 · Space 手刹 · S 低速倒车</div>
@@ -64,15 +66,22 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
    const ui=makeControls();document.body.append(ui)
    onCleanup(()=>ui.remove())
    const practice=options.arena==='practice'
-   const course=practice?null:planCampusDrive(world.data)
+   const course=practice?null:planCampusDrive(world.data,{roadId:options.roadId})
+   const network=practice?null:createCampusRoadNetwork(world.data)
    const spawn=practice?PRACTICE_SPAWN:course.spawn
    const sim=createRacingPhysics({spawn,heading:course?.heading??0})
    onCleanup(()=>sim.destroy())
    const track=practice?
     createSyntheticTrack({physics:sim,scene:world.scene,origin:PRACTICE_ORIGIN}):
-    createCampusDriveTrack({physics:sim,data:world.data,course,trees:world.treePositions||[]})
+    createStreamedRoadColliders({physics:sim,data:world.data,network,trees:world.treePositions||[]})
    onCleanup(()=>track.destroy())
-   ui.querySelector('#race-place').textContent=practice?'独立合成练车场 · 实验场景':'校园实景 · 梧桐东道｜平面高程模拟'
+   if(!practice){
+    track.update(spawn)
+    const picker=ui.querySelector('#race-road')
+    for(const road of listDriveStartingRoads(network))picker.add(new Option(road.name,road.id,false,road.id===course.roadId))
+    picker.addEventListener('change',()=>{if(picker.value!==course.roadId)void switchArena('campus',picker.value)})
+   }else ui.querySelector('.race-road-picker').hidden=true
+   ui.querySelector('#race-place').textContent=practice?'独立合成练车场 · 实验场景':'校园路网 · 110 条连通道路｜平面高程模拟'
    ui.querySelector('#race-switch').textContent=practice?'返回校园道路':'切换至独立练车场'
    const cameraRig=createDriveCameraRig(world.camera)
    cameraRig.reset()
@@ -135,11 +144,21 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
    document.addEventListener('visibilitychange',safety)
    window.addEventListener('blur',safety)
    onCleanup(()=>{document.removeEventListener('visibilitychange',safety);window.removeEventListener('blur',safety)})
+   let lastRoad=null,roadTick=0
    this.onTick=dt=>{
     if(document.hidden)return
+    if(!practice)track.update([sim.body.position.x,sim.body.position.y,sim.body.position.z])
     accumulator=Math.min(accumulator+Math.min(dt,.055),.055)
     for(let n=0;n<4&&accumulator>=FIXED;n++){sim.stepFixed(FIXED);accumulator-=FIXED}
-    const state=sim.getState()
+    let state=sim.getState()
+    if(!practice&&state.position[1]<-4){
+     sim.reset(spawn);state=sim.getState()
+     notify('车辆偏离建模道路，已返回梧桐东道起点')
+    }
+    if(!practice&&roadTick++%22===0){
+     lastRoad=track.nearest(state.position)
+     ui.querySelector('#race-place').textContent='校园路网 · '+(lastRoad?.name||'校园内部道路')+'｜平面高程模拟'
+    }
     visuals.update(state)
     cameraRig.update(state,dt)
     ui.querySelector('#race-speed-number').textContent=String(Math.round(state.speedKmh)).padStart(3,'0')
@@ -147,7 +166,9 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
     window.__atlasRacingDiagnostics={speedKmh:state.speedKmh,position:state.position,contacts:state.wheels.filter(w=>w.contact).length,
      bodies:sim.world.bodies.length,visualWheels:visuals.wheels.length,
      arena:practice?'practice':'campus',routeId:course?.roadId??null,
-     roadName:course?.name??null,roadWidth:course?.width??null,
+     roadName:lastRoad?.name??course?.name??null,roadWidth:lastRoad?.width??course?.width??null,
+     nearbyRoadId:lastRoad?.roadId??null,distanceToRoad:lastRoad?.distance??null,
+     networkRoads:network?.roads?.length??0,networkMeters:network?.lengthMeters??0,
      collisionStats:track.collisionStats??null,worldCamera:world.camera.position.toArray()}
    }
    onCleanup(()=>{this.onTick=null;delete window.__atlasRacingDiagnostics})
@@ -163,9 +184,9 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
   if(result.reason)notify('赛车加载失败，已恢复校园地图')
   return result
  }
- async function switchArena(arena){
+ async function switchArena(arena,roadId){
   await exit()
-  return enter({arena})
+  return enter({arena,roadId})
  }
  async function exit(){
   if(loading){exitRequested=true;await loading;return host.exitMode()}

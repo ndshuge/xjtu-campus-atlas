@@ -10,6 +10,10 @@ body.racing-mode .building-label,body.racing-mode .map-label,body.racing-mode #t
 #racing-overlay .race-brand strong{font-size:clamp(15px,2vw,24px);letter-spacing:.14em;font-weight:760}
 #racing-overlay .race-brand em{color:#cce2b3;font-style:normal}
 #racing-overlay .race-brand span{font-size:11px;color:#fff;opacity:.91}
+#racing-overlay .race-road-picker[hidden]{display:none!important}
+#racing-overlay .race-road-picker{display:flex;gap:8px;align-items:center;font-size:11px;color:#f5fcf5;pointer-events:auto}
+#racing-overlay .race-road-picker select{max-width:156px;padding:7px 8px;border-radius:10px;border:1px solid #ffffff5c;background:#193346;color:#fff;font:inherit;font-size:12px;touch-action:manipulation}
+#racing-overlay .race-road-picker select:focus-visible{outline:2px solid #d4f5a6}
 #racing-overlay .race-brand #race-switch{padding:7px 10px;border-radius:9px;align-self:start;font-size:11px;background:#e1edce;color:#20382f;border-color:#f7ffe4;margin-top:3px}
 #racing-overlay .race-actions{display:flex;gap:8px}
 #racing-overlay button{border:1px solid #ffffff55;border-radius:14px;background:#12232fc9;backdrop-filter:blur(18px);color:white;font:inherit;font-size:13px;font-weight:600;padding:12px 15px;box-shadow:0 3px 18px #0005}
