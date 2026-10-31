@@ -1,0 +1,181 @@
+{
+  "origin": "http://127.0.0.1:19115/roof-after-20261031/",
+  "testedAt": "2026-10-31T15:39:08.190Z",
+  "results": [
+    {
+      "pose": "home",
+      "url": "http://127.0.0.1:19115/roof-after-20261031/?__qa_pose=home-390",
+      "width": 390,
+      "height": 844,
+      "file": "home-390.png",
+      "elapsedMs": 9151,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:19115/roof-after-20261031/assets/index-UMvKLf3P.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 39,
+        "viewAngles": {
+          "yaw": 0.5150231990769747,
+          "pitch": -0.6915682028467576
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 0,
+          "farTrees": 2092
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 44.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 367,
+        "triangles": 520669,
+        "geometries": 376,
+        "textures": 31,
+        "fps": 188,
+        "frameStats": {
+          "p50Ms": 5.3,
+          "p95Ms": 6.2
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 5934,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          790,
+          1370,
+          1390
+        ],
+        "target": [
+          -25.000000000000004,
+          0,
+          -50.00000000000001
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 0,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 5934,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": [],
+      "interactions": {
+        "panMetres": 141.26931993772237,
+        "pinchDistanceBefore": 2148.1910995067456,
+        "pinchDistanceAfter": 1644.5416346842885,
+        "pageScale": 1,
+        "labelSampleCount": 0,
+        "labelDriftPx": 0,
+        "walkMetres": 4.345999999940773,
+        "walkFromSpawn": 4.345999999940773,
+        "walkEntrySettled": true,
+        "walkCameraBefore": [
+          -31,
+          3.099999999999909,
+          -520
+        ],
+        "walkCameraAfter": [
+          -31,
+          3.1,
+          -515.6540000000592
+        ],
+        "walkSpawn": [
+          -31,
+          -520
+        ],
+        "cancelDriftMetres": 0,
+        "pointerCancelStable": true,
+        "walkMode": "walk",
+        "returnMode": "orbit",
+        "passed": true
+      }
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

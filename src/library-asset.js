@@ -286,7 +286,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    const height=p=>zone.top+Math.min(rise,Math.min(...edges.map(e=>pointSegment(p,e.a,e.b).distance))*.15);
    for(let x=bb[0];x<bb[2];x+=4)for(let z=bb[1];z<bb[3];z+=4){
     for(const ps of zone.cells.map(c=>clipCell(c,[x,z,Math.min(x+4,bb[2]),Math.min(z+4,bb[3])])).filter(c=>c.length>2))
-     for(let j=1;j<ps.length-1;j++){const t=[ps[0],ps[j+1],ps[j]];positions('roof',t.flatMap(p=>[p[0],baseY+height(p),p[1]]),t.flatMap(p=>[p[0]/6,p[1]/6]));}
+     for(let j=1;j<ps.length-1;j++){const t=[ps[0],ps[j+1],ps[j]];positions(!gray&&isNorth?'reveal':'roof',t.flatMap(p=>[p[0],baseY+height(p),p[1]]),t.flatMap(p=>[p[0]/6,p[1]/6]));}
    }
   }
  }
@@ -354,7 +354,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southCurtainMasonry,southGardenParapets,southPodiumMassing,southCrownWindows,clockCrown,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,northRoofPhoto:gray?null:{source:'library-aerial-2025.jpg',estimated:true,zone:'north-reading-block',description:'Photo-informed gray weathered north-reading-block roof; retained OSM outline and roof pitch'},southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southCurtainMasonry,southGardenParapets,southPodiumMassing,southCrownWindows,clockCrown,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],
