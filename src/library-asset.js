@@ -47,17 +47,17 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    positions(kind,t.flatMap(p=>[p[0],baseY+y,p[1]]),t.flatMap(p=>[p[0]/6,p[1]/6]));
   }
  };
- function regularWall(e,bottom,top,rows,kind='wall',from=0,to=e.length,{narrowRows=[]}={}){
+ function regularWall(e,bottom,top,rows,kind='wall',from=0,to=e.length,{narrowRows=[],crownShort=false}={}){
   if(gray){wallRect(kind,e,from,to,bottom,top);return;}
   const length=to-from,floor=(top-bottom)/rows;
   if(length<2.4||floor<2.2){wallRect(kind,e,from,to,bottom,top);return;}
   for(let row=0;row<rows;row++){
-   const narrow=narrowRows.includes(row),count=Math.max(1,Math.floor(length/(narrow?1.65:3.5)));
-   const bay=length/count,recess=narrow?.28:.11;
-   const floorY=bottom+row*floor,low=floorY+Math.min(.85,floor*.23),high=floorY+floor-.48;
+   const narrow=narrowRows.includes(row),count=Math.max(1,Math.floor(length/(crownShort?2.55:(narrow?1.65:3.5))));
+   const bay=length/count,recess=(narrow||crownShort)?.28:.11;
+   const floorY=bottom+row*floor,low=floorY+(crownShort?1.65:Math.min(.85,floor*.23)),high=floorY+floor-(crownShort?1.35:.48);
    wallRect(kind,e,from,to,floorY,low);wallRect(kind,e,from,to,high,floorY+floor);
    for(let col=0;col<count;col++){
-   const x=from+col*bay,w=Math.min(narrow?.92:1.85,bay*(narrow?.56:.62)),left=x+(bay-w)/2,right=left+w;
+   const x=from+col*bay,w=Math.min(crownShort?1.15:(narrow?.92:1.85),bay*(crownShort?.50:(narrow?.56:.62))),left=x+(bay-w)/2,right=left+w;
    if(col===0)wallRect(kind,e,from,left,low,high);
    wallRect(kind,e,right,col===count-1?to:from+(col+1)*bay+(bay-w)/2,low,high);
    // Genuine apertures in the wall plane, with inset opaque glazing and reveals.
@@ -97,6 +97,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  let southPortal=null;
  let southPodiumMassing=null;
  const southGardenParapets=gray?null:[];
+ const southCrownWindows=gray?null:{photoInformed:true,estimated:true,course:'south-course-5',bottomStoneHeight:1.65,topStoneHeight:1.35,approxWindowWidth:1.15,reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  const southFacadeRibs=gray?null:{photoInformed:true,estimated:true,
   courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
@@ -180,7 +181,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     }
     regularWall(e,zone.bottom,zone.top,zone.rows,kind,mid+half,e.length,narrowSouthWing);
    }else{
-    regularWall(e,zone.bottom,zone.top,zone.rows,kind);
+    regularWall(e,zone.bottom,zone.top,zone.rows,kind,0,e.length,{crownShort:zone.id==='south-course-5'&&e.nz>.9&&!gray});
    }
    if(!gray)strip(kind,e,e.length/2,zone.top-.22,e.length,.25,.42,-.04);
   }
@@ -283,7 +284,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,southPodiumMassing,clockCrown,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,southPodiumMassing,southCrownWindows,clockCrown,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],
