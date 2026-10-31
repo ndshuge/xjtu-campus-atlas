@@ -32,7 +32,9 @@ function twig(a,b,r0,r1,sides=6){
 }
 export function treeGeometry(kind='plane',detail='near',seed=1956){
  const rand=rng(seed),near=detail==='near',conifer=kind==='cedar',stems=[],leaves=[];
- const branch=(a,b,r0,r1)=>twig(a,b,r0,r1,near?6:4);
+ // Distant woody branches are subpixel at panorama scale: use a triangular
+ // cylinder section; keep the original six-sided near branches untouched.
+ const branch=(a,b,r0,r1)=>twig(a,b,r0,r1,near?6:3);
  const fork=conifer?7:4.4;
  stems.push(branch([0,0,0],[.08,fork,0],.28,.16));
  const limbs=conifer?7:4;
