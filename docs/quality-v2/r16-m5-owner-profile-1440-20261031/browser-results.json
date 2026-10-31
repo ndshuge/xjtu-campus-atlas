@@ -1,0 +1,488 @@
+{
+  "origin": "http://127.0.0.1:18978/r16-owner/",
+  "testedAt": "2026-10-31T02:24:23.584Z",
+  "results": [
+    {
+      "pose": "library-south-detail",
+      "url": "http://127.0.0.1:18978/r16-owner/?__qa_pose=library-south-detail-1440&__qa_owner=1&inspection=library-south-detail",
+      "width": 1440,
+      "height": 900,
+      "file": "library-south-detail-1440.png",
+      "elapsedMs": 8228,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:18978/r16-owner/assets/index-BMEGdbCm.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 50,
+        "viewAngles": {
+          "yaw": 0,
+          "pitch": -0.09691762779436314
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 274,
+          "farTrees": 1818
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 44.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 361,
+        "triangles": 849307,
+        "geometries": 300,
+        "textures": 23,
+        "fps": 101,
+        "frameStats": {
+          "p50Ms": 6,
+          "p95Ms": 6.1
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 4276,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -29.113,
+          33.10000000000001,
+          -16.796999999999997
+        ],
+        "target": [
+          -29.113,
+          26.1,
+          -88.797
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 4276,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": [],
+      "ownerProfile": {
+        "baseline": {
+          "drawCalls": 361,
+          "triangles": 849307
+        },
+        "restored": {
+          "drawCalls": 361,
+          "triangles": 849307
+        },
+        "owners": [
+          {
+            "index": 1,
+            "name": "(unnamed)",
+            "type": "DirectionalLight",
+            "owner": null,
+            "calls": 162,
+            "triangles": 234370,
+            "childCount": 0
+          },
+          {
+            "index": 90,
+            "name": "(unnamed)",
+            "type": "Group",
+            "owner": null,
+            "calls": 105,
+            "triangles": 9016,
+            "childCount": 7
+          },
+          {
+            "index": 89,
+            "name": "Four Great Inventions / four corner installations",
+            "type": "Group",
+            "owner": null,
+            "calls": 54,
+            "triangles": 12660,
+            "childCount": 63
+          },
+          {
+            "index": 85,
+            "name": "Eight official corridors / mapped hardscape details",
+            "type": "Group",
+            "owner": null,
+            "calls": 52,
+            "triangles": 3410,
+            "childCount": 93
+          },
+          {
+            "index": 84,
+            "name": "Wutong East Road / resurfaced asphalt and porous sidewalks (interpretive width)",
+            "type": "Group",
+            "owner": null,
+            "calls": 31,
+            "triangles": 1926,
+            "childCount": 35
+          },
+          {
+            "index": 101,
+            "name": "plane tree branching / photo-inspired, positions approximate",
+            "type": "Group",
+            "owner": null,
+            "calls": 19,
+            "triangles": 628732,
+            "childCount": 13
+          },
+          {
+            "index": 91,
+            "name": "Qian Xuesen Library R12 / complete owned asset",
+            "type": "Group",
+            "owner": "library-asset.js",
+            "calls": 17,
+            "triangles": 47594,
+            "childCount": 11
+          },
+          {
+            "index": 92,
+            "name": "Qian Xuesen Library / image-guided round entrance forecourt",
+            "type": "Group",
+            "owner": null,
+            "calls": 14,
+            "triangles": 6076,
+            "childCount": 14
+          },
+          {
+            "index": 99,
+            "name": "Historic east teaching buildings",
+            "type": "Group",
+            "owner": "east-historic-asset.js",
+            "calls": 7,
+            "triangles": 27836,
+            "childCount": 4
+          },
+          {
+            "index": 98,
+            "name": "West 1 / photo-guided exterior",
+            "type": "Group",
+            "owner": "west-one-asset.js",
+            "calls": 7,
+            "triangles": 10622,
+            "childCount": 4
+          },
+          {
+            "index": 97,
+            "name": "Historic central buildings / single owned group",
+            "type": "Group",
+            "owner": "central-buildings-asset.js",
+            "calls": 6,
+            "triangles": 13648,
+            "childCount": 4
+          },
+          {
+            "index": 7,
+            "name": "Xingqing campus perimeter / schematic enclosure with verified gate openings",
+            "type": "Group",
+            "owner": null,
+            "calls": 5,
+            "triangles": 49008,
+            "childCount": 5
+          },
+          {
+            "index": 93,
+            "name": "Siyuan student centre / single owned exterior",
+            "type": "Group",
+            "owner": "siyuan-center-asset.js",
+            "calls": 5,
+            "triangles": 336,
+            "childCount": 7
+          },
+          {
+            "index": 94,
+            "name": "Westward relocation museum / single owned exterior",
+            "type": "Group",
+            "owner": "relocation-museum-asset.js",
+            "calls": 5,
+            "triangles": 120,
+            "childCount": 7
+          },
+          {
+            "index": 96,
+            "name": "Main A-E / complete owned building group",
+            "type": "Group",
+            "owner": "main-complex-asset.js",
+            "calls": 4,
+            "triangles": 11727,
+            "childCount": 5
+          },
+          {
+            "index": 95,
+            "name": "Yifu Science Hall / complete owned main, low link and pitched annex",
+            "type": "Group",
+            "owner": "science-hall-asset.js",
+            "calls": 4,
+            "triangles": 3447,
+            "childCount": 5
+          },
+          {
+            "index": 78,
+            "name": "Four Inventions / courtyard paving inferred from open OSM ground",
+            "type": "Group",
+            "owner": null,
+            "calls": 4,
+            "triangles": 8,
+            "childCount": 16
+          },
+          {
+            "index": 86,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 2,
+            "triangles": 5128,
+            "childCount": 0
+          },
+          {
+            "index": 88,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 2,
+            "triangles": 2280,
+            "childCount": 0
+          },
+          {
+            "index": 102,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 2,
+            "triangles": 840,
+            "childCount": 0
+          },
+          {
+            "index": 104,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 3708,
+            "childCount": 0
+          },
+          {
+            "index": 83,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 2856,
+            "childCount": 0
+          },
+          {
+            "index": 103,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 2060,
+            "childCount": 0
+          },
+          {
+            "index": 79,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 1888,
+            "childCount": 0
+          },
+          {
+            "index": 80,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 1708,
+            "childCount": 0
+          },
+          {
+            "index": 82,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 1300,
+            "childCount": 0
+          },
+          {
+            "index": 74,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 378,
+            "childCount": 0
+          },
+          {
+            "index": 75,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 313,
+            "childCount": 0
+          },
+          {
+            "index": 5,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 232,
+            "childCount": 0
+          },
+          {
+            "index": 81,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 180,
+            "childCount": 0
+          },
+          {
+            "index": 77,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 176,
+            "childCount": 0
+          },
+          {
+            "index": 76,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 80,
+            "childCount": 0
+          },
+          {
+            "index": 3,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 12,
+            "childCount": 0
+          },
+          {
+            "index": 4,
+            "name": "(unnamed)",
+            "type": "Mesh",
+            "owner": null,
+            "calls": 1,
+            "triangles": 2,
+            "childCount": 0
+          },
+          {
+            "index": 6,
+            "name": "(unnamed)",
+            "type": "LineSegments",
+            "owner": null,
+            "calls": 1,
+            "triangles": 0,
+            "childCount": 0
+          },
+          {
+            "index": 87,
+            "name": "(unnamed)",
+            "type": "LineSegments",
+            "owner": null,
+            "calls": 1,
+            "triangles": 0,
+            "childCount": 0
+          }
+        ],
+        "note": "Diagnostic-only temporary build with an opt-in world reference; no production source or runtime change"
+      }
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}
