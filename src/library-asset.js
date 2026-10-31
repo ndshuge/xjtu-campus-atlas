@@ -9,7 +9,7 @@ import {bounds,pointSegment} from './geo.js';
 export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms={},stage='material'}={}){
  const plan=libraryAssetPlan(building),gray=stage==='massing';
  const materials={
-  wall:stoneMaterial('#c8b2a2',.72),north:stoneMaterial('#c8ccc9',.72),
+  wall:stoneMaterial('#c3bdb3',.72),north:stoneMaterial('#c8ccc9',.72),
   glass:glassMaterial('#344c58'),frame:new THREE.MeshStandardMaterial({color:'#746f66',roughness:.66,metalness:.24}),
   roof:stoneMaterial('#89887c',.65),reveal:new THREE.MeshStandardMaterial({color:'#646660',roughness:1}),
   groundcover:new THREE.MeshStandardMaterial({color:'#647c45',roughness:1})

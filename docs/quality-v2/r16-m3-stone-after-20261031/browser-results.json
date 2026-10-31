@@ -1,0 +1,295 @@
+{
+  "origin": "http://127.0.0.1:18912/r16-m3-stone-after-20261031/",
+  "testedAt": "2026-10-31T01:27:45.335Z",
+  "results": [
+    {
+      "pose": "library-south-detail",
+      "url": "http://127.0.0.1:18912/r16-m3-stone-after-20261031/?__qa_pose=library-south-detail-1440&inspection=library-south-detail",
+      "width": 1440,
+      "height": 900,
+      "file": "library-south-detail-1440.png",
+      "elapsedMs": 7352,
+      "metrics": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "canvasWidth": 1440,
+        "overflow": false,
+        "script": "http://127.0.0.1:18912/r16-m3-stone-after-20261031/assets/index-BGgrp1H4.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 50,
+        "viewAngles": {
+          "yaw": 0,
+          "pitch": -0.09691762779436314
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 274,
+          "farTrees": 1818
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 44.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 361,
+        "triangles": 849307,
+        "geometries": 300,
+        "textures": 23,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.3
+        },
+        "quality": "high",
+        "renderPixelRatio": 1,
+        "canvasPixels": 1296000,
+        "sceneLoadMs": 3589,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -29.113,
+          33.10000000000001,
+          -16.796999999999997
+        ],
+        "target": [
+          -29.113,
+          26.1,
+          -88.797
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 9,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3589,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "pose": "library-south-detail",
+      "url": "http://127.0.0.1:18912/r16-m3-stone-after-20261031/?__qa_pose=library-south-detail-390&inspection=library-south-detail",
+      "width": 390,
+      "height": 844,
+      "file": "library-south-detail-390.png",
+      "elapsedMs": 5857,
+      "metrics": {
+        "width": 390,
+        "height": 844,
+        "dpr": 1,
+        "canvasWidth": 390,
+        "overflow": false,
+        "script": "http://127.0.0.1:18912/r16-m3-stone-after-20261031/assets/index-BGgrp1H4.js",
+        "scale": 1
+      },
+      "gpu": "ANGLE (NVIDIA, NVIDIA GeForce RTX 5060 Laptop GPU (0x00002D59) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "requestedPowerPreference": "product default",
+      "runtime": {
+        "fieldOfView": 67,
+        "viewAngles": {
+          "yaw": 0,
+          "pitch": -0.1407301939902253
+        },
+        "buildings": 139,
+        "roads": 384,
+        "surfaces": 115,
+        "trees": 2092,
+        "vegetation": {
+          "version": "leaf-sprays-r6",
+          "positions": "existing procedural coordinates, not a tree survey",
+          "species": "avenue plane-tree class / conifer-like groves; exact species unverified",
+          "originalTexture": true,
+          "treeCount": 2092,
+          "clearanceAdjustedTrees": 642,
+          "lod": {
+            "desktop": 170,
+            "mobile": 110,
+            "hysteresis": 22
+          },
+          "nearTrees": 86,
+          "farTrees": 2006
+        },
+        "foliageCoverageMaterials": 3,
+        "libraryMassing": {
+          "source": "R11 unified asset",
+          "zones": [
+            {
+              "id": "north-reading-block",
+              "levels": 4,
+              "height": 14
+            },
+            {
+              "id": "north-book-stack",
+              "levels": 5,
+              "height": 17.5
+            },
+            {
+              "id": "south-east-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-west-wing",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-II-podium",
+              "levels": 3,
+              "height": 13
+            },
+            {
+              "id": "south-course-1",
+              "levels": 2,
+              "height": 20
+            },
+            {
+              "id": "south-course-2",
+              "levels": 2,
+              "height": 26
+            },
+            {
+              "id": "south-course-3",
+              "levels": 2,
+              "height": 33
+            },
+            {
+              "id": "south-course-4",
+              "levels": 1,
+              "height": 39
+            },
+            {
+              "id": "south-course-5",
+              "levels": 1,
+              "height": 44.75
+            }
+          ],
+          "footprintUnchanged": true
+        },
+        "drawCalls": 221,
+        "triangles": 558016,
+        "geometries": 216,
+        "textures": 28,
+        "fps": 240,
+        "frameStats": {
+          "p50Ms": 4.2,
+          "p95Ms": 4.3
+        },
+        "quality": "low",
+        "renderPixelRatio": 1,
+        "canvasPixels": 329160,
+        "sceneLoadMs": 3022,
+        "mode": "orbit",
+        "walkTransition": false,
+        "cameraFlight": false,
+        "walkStart": null,
+        "light": "day",
+        "selected": null,
+        "webgl": "WebGL 2",
+        "camera": [
+          -29.113,
+          43.1,
+          31.203000000000003
+        ],
+        "target": [
+          -29.113,
+          26.1,
+          -88.797
+        ],
+        "contextLost": false,
+        "walkSpawn": null,
+        "visibleLabels": 3,
+        "reducedMotion": false,
+        "finiteGeometry": true,
+        "totalLoadMs": 3022,
+        "dataTimestamp": "2026-10-24T16:27:10Z",
+        "errors": [],
+        "overflow": false
+      },
+      "frameSample": null,
+      "errors": [],
+      "httpErrors": []
+    }
+  ],
+  "deviceCaveat": "Desktop Edge headless at CSS widths; not iPhone Safari hardware acceptance."
+}

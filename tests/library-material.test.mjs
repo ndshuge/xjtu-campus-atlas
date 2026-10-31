@@ -22,7 +22,7 @@ test('library stone stays warm and selected/hovered focus uses a restrained Fres
  try{
   const wall=asset.children.find(mesh=>mesh.isMesh&&mesh.name.endsWith('/ wall'));
   assert.ok(wall,'The library must retain its batched wall material');
-  assert.equal(wall.material.color.getHexString(),'c8b2a2');
+  assert.equal(wall.material.color.getHexString(),'c3bdb3','2021 south photo supports a lower-chroma warm-gray stone, not orange-beige');
   assert.equal(wall.material.roughness,.84);
   assert.equal(wall.material.transparent,false);
 
