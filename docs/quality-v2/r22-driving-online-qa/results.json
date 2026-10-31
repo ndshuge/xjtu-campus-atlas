@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-31T21:31:06.087Z",
+  "base": "https://ndshuge.github.io/xjtu-campus-atlas/r22-campus-drive-safety-20261101/",
+  "results": [
+    {
+      "name": "desktop-1440",
+      "freeDriveSpeed": 56.91297724665484,
+      "passed": true,
+      "terrainBodies": 1,
+      "stadiumStart": [
+        192.36725,
+        1.668712042000678,
+        -67.960625
+      ],
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "portrait-390",
+      "freeDriveSpeed": 21.00543290126667,
+      "passed": true,
+      "terrainBodies": 1,
+      "stadiumStart": [
+        192.36725,
+        1.668712042000678,
+        -67.960625
+      ],
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "landscape-844",
+      "freeDriveSpeed": 46.10469539602062,
+      "passed": true,
+      "terrainBodies": 1,
+      "stadiumStart": [
+        192.36725,
+        1.668712042000678,
+        -67.960625
+      ],
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}
