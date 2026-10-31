@@ -30,7 +30,7 @@ export function architectureBatch(name,materials){
  return{group,add,box,beam,finish};
 }
 
-export function stoneMaterial(color,scale=1.15){
+export function stoneMaterial(color,scale=1.15,{jointWidth=.015,jointContrast=.05}={}){
  const m=new THREE.MeshStandardMaterial({color,roughness:.84});
  m.onBeforeCompile=s=>{
   s.vertexShader='varying vec3 vStonePos;\n'+s.vertexShader;
@@ -39,11 +39,11 @@ export function stoneMaterial(color,scale=1.15){
   s.fragmentShader=s.fragmentShader.replace('#include <color_fragment>',`#include <color_fragment>
    vec2 tileCoord=vec2(vStonePos.x+vStonePos.z,vStonePos.y)*${scale.toFixed(3)};
    vec2 tileCell=fract(tileCoord);vec2 aa=max(fwidth(tileCoord),vec2(.001));
-   vec2 joints=smoothstep(vec2(.015)-aa,vec2(.015)+aa,min(tileCell,1.-tileCell));
+   vec2 joints=smoothstep(vec2(${jointWidth.toFixed(3)})-aa,vec2(${jointWidth.toFixed(3)})+aa,min(tileCell,1.-tileCell));
    float grain=fract(sin(dot(floor(tileCoord),vec2(12.9898,78.233)))*43758.5453);
-   diffuseColor.rgb*=.95+grain*.08;diffuseColor.rgb*=.95+.05*min(joints.x,joints.y);
+   diffuseColor.rgb*=.95+grain*.08;diffuseColor.rgb*=${(1-jointContrast).toFixed(3)}+${jointContrast.toFixed(3)}*min(joints.x,joints.y);
   `);
- };m.customProgramCacheKey=()=>`campus-stone-${scale}`;return m;
+ };m.customProgramCacheKey=()=>`campus-stone-${scale}${jointWidth!==.015||jointContrast!==.05?'-west1-tiles-'+jointWidth+'-'+jointContrast:''}`;return m;
 }
 
 export function glassMaterial(color='#36525e'){

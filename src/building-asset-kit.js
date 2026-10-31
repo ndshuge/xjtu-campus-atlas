@@ -4,9 +4,9 @@ import {planCells,cellBoundary} from './library-asset-plan.js';
 
 // Small extension of the existing architecture batch: accumulate raw attributes
 // before creating buffers. Each visible triangle keeps its original building ID.
-export function ownedArchitecture(name,{baseY=1.1,stage='material',uniforms={},extraMaterials={}}={}){
+export function ownedArchitecture(name,{baseY=1.1,stage='material',uniforms={},extraMaterials={},stoneTileScale=.72,stoneTileOptions={}}={}){
  const gray=stage==='massing',mode={value:0};
- const materials={stone:stoneMaterial('#c8c0b3',.72),glass:glassMaterial('#344e60'),
+ const materials={stone:stoneMaterial('#c8c0b3',stoneTileScale,stoneTileOptions),glass:glassMaterial('#344e60'),
   frame:new THREE.MeshStandardMaterial({color:'#828986',roughness:.55,metalness:.3}),
   roof:new THREE.MeshStandardMaterial({color:'#96988e',roughness:.95}),
   dark:new THREE.MeshStandardMaterial({color:'#404d51',roughness:.78}),...extraMaterials};

@@ -50,11 +50,11 @@ export const WEST_ONE_APPROX_HEIGHT = 21;
 // visible levels; height, individual wings and unphotographed faces are estimates.
 export function createWestOneAsset({building,buildingIndex,baseY=1.1,uniforms={},stage='material'}={}){
  if(building?.osmId!==WEST_ONE_ID)throw new Error('West 1 requires its mapped building');
- const a=ownedArchitecture('West 1 / photo-guided exterior',{baseY,uniforms,stage});
+ const a=ownedArchitecture('West 1 / photo-guided exterior',{baseY,uniforms,stage,stoneTileScale:3.2,stoneTileOptions:{jointWidth:.035,jointContrast:.17}});
  if(!a.gray){a.materials.stone.color.set('#d9d8d0');a.materials.glass.color.set('#71878b');a.materials.roof.color.set('#c2c3bd');a.materials.dark.color.set('#a9b1ad');}
  a.shell(building.points,{top:WEST_ONE_APPROX_HEIGHT,rows:6,index:buildingIndex,height:WEST_ONE_APPROX_HEIGHT,bayWidth:3.25});
  const photoFacadeAC=a.gray?null:addPhotoFacadeAC(a,building,buildingIndex);
- return a.finish({owner:'west-one-asset.js',osmIds:[WEST_ONE_ID],photoFacadeAC,sourceDataUnchanged:true,
+ return a.finish({owner:'west-one-asset.js',osmIds:[WEST_ONE_ID],photoFacadeAC,photoTileGrid:a.gray?null:{source:'https://xjtu.party/photos',estimated:true,approxTileMetres:1/3.2,materialOnly:true},sourceDataUnchanged:true,
   evidence:'https://commons.wikimedia.org/wiki/File:XJTU_West_1_Office_Building.jpg',
   unknown:'2013 photograph; estimated height, roof, side/rear facades and current appearance'});
 }
