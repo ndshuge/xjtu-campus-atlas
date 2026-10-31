@@ -1,0 +1,121 @@
+{
+  "schema": "atlas-r20-device-qa-v1",
+  "verification": "UNVERIFIED_NEEDS_DEVICE_REVIEW",
+  "platform": "other",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+  "startedAt": 1793478062961,
+  "endedAt": 1793478065963,
+  "durationMs": 3002,
+  "touch": {
+    "downs": 3,
+    "ups": 3,
+    "cancels": 2,
+    "maxConcurrent": 2
+  },
+  "samples": [
+    {
+      "timeMs": 2,
+      "arena": "none",
+      "fps": 1,
+      "speedKmh": null,
+      "contacts": null,
+      "roadName": null,
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 504,
+      "arena": "campus",
+      "fps": 3,
+      "speedKmh": 0,
+      "contacts": 0,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 1010,
+      "arena": "campus",
+      "fps": 8,
+      "speedKmh": 4.6,
+      "contacts": 4,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 1508,
+      "arena": "campus",
+      "fps": 63,
+      "speedKmh": 22.7,
+      "contacts": 4,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 2013,
+      "arena": "campus",
+      "fps": 98,
+      "speedKmh": 39.9,
+      "contacts": 4,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 2503,
+      "arena": "campus",
+      "fps": 93,
+      "speedKmh": 46.8,
+      "contacts": 1,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    }
+  ],
+  "events": [
+    {
+      "timeMs": 861,
+      "type": "pointer",
+      "action": "down",
+      "target": "race-stick-knob"
+    },
+    {
+      "timeMs": 862,
+      "type": "pointer",
+      "action": "down",
+      "target": "race-gas"
+    },
+    {
+      "timeMs": 2178,
+      "type": "pointer",
+      "action": "cancel",
+      "target": "race-stick"
+    },
+    {
+      "timeMs": 2178,
+      "type": "pointer",
+      "action": "cancel",
+      "target": "race-gas"
+    },
+    {
+      "timeMs": 2908,
+      "type": "pointer",
+      "action": "down",
+      "target": "race-exit"
+    }
+  ]
+}

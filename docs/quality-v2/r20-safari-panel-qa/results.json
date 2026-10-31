@@ -1,0 +1,26 @@
+{
+  "url": "http://127.0.0.1:18989/",
+  "environment": "Edge mobile emulation, NOT an actual iPhone Safari",
+  "steps": [
+    "opt-in-device-panel-running",
+    {
+      "junctionPads": 6,
+      "roadSlabs": 24
+    },
+    {
+      "physicsSpeedKmh": 47.13998412181401
+    },
+    {
+      "samples": 6,
+      "touch": {
+        "downs": 3,
+        "ups": 3,
+        "cancels": 2,
+        "maxConcurrent": 2
+      },
+      "verification": "UNVERIFIED_NEEDS_DEVICE_REVIEW"
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

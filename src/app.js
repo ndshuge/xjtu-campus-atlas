@@ -167,5 +167,15 @@ function bindUI(){
 }
 async function init(){try{const start=performance.now();const res=await fetch('./data/campus.json');if(!res.ok)throw Error('校园数据加载失败：'+res.status);data=await res.json();$('#loading-text').textContent=`正在种下梧桐，点亮 ${data.buildings.length} 处建筑…`;places=allPlaces();world=new CampusWorld($('#scene'),data,{select:selectPlace,notify:toast,changeMode,ready:()=>{$('#loading').classList.add('done');setTimeout(()=>$('#loading').hidden=true,650);}});bindUI();renderList();window.campusDiagnostics=()=>({...world.diagnostics(),totalLoadMs:Math.round(world.loadMs),dataTimestamp:data.metadata.osmTimestamp,errors:[...errors],overflow:document.documentElement.scrollWidth>innerWidth});
  const hash=decodeURIComponent(location.hash.slice(1));const params=new URLSearchParams(location.search);const p=places.find(p=>p.id===hash||p.name===hash);if(p)selectPlace(p,!params.has('walk'));if(p&&params.has('group'))world.showBuildingGroup(p);if(p&&params.has('details'))setDetailExpanded(true);if(p&&params.has('photos'))showRealPhoto();if(params.has('walk'))world.enterWalk(p||null);window.__campusReady=true;
+ // Direct drive links from the Pages homepage must open a real vehicle, not another old map.
+ if(params.get('drive')==='1')requestAnimationFrame(()=>$('#race-entry-btn')?.click());
+ if(params.get('safariQa')==='1'){
+  void import('./racing/safari-qa.js')
+   .then(({installSafariQaPanel})=>installSafariQaPanel({
+    getCampus:()=>window.campusDiagnostics?.(),
+    getRace:()=>window.__atlasRacingDiagnostics
+   }))
+   .catch(e=>console.error('Safari QA diagnostics failed:',e))
+ }
  }catch(e){errors.push(String(e));console.error(e);$('#loading').hidden=true;$('#fallback').hidden=false;$('#fallback').append(safe('p',String(e),'error-detail'));}}
 init();
