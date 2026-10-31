@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-31T18:58:17.488Z",
+  "base": "https://ndshuge.github.io/xjtu-campus-atlas/r17-campus-racing-20261101/",
+  "results": [
+    {
+      "profile": "desktop-1440",
+      "viewport": [
+        1440,
+        900
+      ],
+      "steps": [
+        {
+          "keyboardSpeedKmh": 29.508997589723645,
+          "resetPosition": [
+            1800,
+            1.8874296985970367,
+            1782
+          ]
+        }
+      ],
+      "passed": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "profile": "portrait-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "steps": [
+        {
+          "multitouchSpeedKmh": 34.584220933454745,
+          "reverseDisplacement": -0.8707707334731367
+        }
+      ],
+      "passed": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "profile": "landscape-844",
+      "viewport": [
+        844,
+        390
+      ],
+      "steps": [
+        {
+          "multitouchSpeedKmh": 23.306964177210823,
+          "reverseDisplacement": -1.3091826871627745
+        }
+      ],
+      "passed": true,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}

@@ -3,10 +3,11 @@ import {mkdir,writeFile} from 'node:fs/promises'
 import assert from 'node:assert/strict'
 const browser=await chromium.launch({
  executablePath:'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
- headless:true,args:['--use-gl=angle','--enable-webgl']
+ headless:true,args:['--use-gl=angle','--enable-webgl'],
+ proxy:process.env.CAMPUS_QA_PROXY?{server:process.env.CAMPUS_QA_PROXY}:undefined
 })
 const base=process.env.CAMPUS_QA_URL||'http://127.0.0.1:18986/'
-const folder='docs/quality-v2/r17-racing-qa'
+const folder=process.env.CAMPUS_QA_OUTPUT||'docs/quality-v2/r17-racing-qa'
 await mkdir(folder,{recursive:true})
 const reports=[]
 const diag=page=>page.evaluate(()=>window.__atlasRacingDiagnostics)

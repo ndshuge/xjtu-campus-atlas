@@ -32,3 +32,13 @@
 - 目标 Pages 子路径 `r17-campus-racing-20261101/`；先核对最新 `gh-pages` 远端提交，仅新增此目录，保持其他历史文件。
 - 源码发布前与发布后必须记录确切源码 Git SHA、Pages 部署 SHA、线上 URL；线上必须完成 JS/GLB/CSS 资源与交互的实际检查。
 - 回退仅需撤除新预览入口（若经授权）；历史预览与原始赛车独立工程不改动。主校园普通模式不加载赛车代码。
+
+## GitHub Pages 已发布且线上确认（2026-11-01 约 02:58 CST）
+- 本轮已发布的功能源码 Git SHA：`69535aad81f32f071757bceae4a4cba0829df2bf`；包含已核实的校园基线 `00ea14c` 与赛车 R8 模块。
+- Pages 独立部署 SHA：`2b52c902c34e52fc836205f1ac2109336c1dc991`。发布时从远端 gh-pages `83bccc064152d262103359390a1d46412c7a25db` 更新，**只新增** `r17-campus-racing-20261101/` 目录（28 个新文件）。
+- 正式公开网址：https://ndshuge.github.io/xjtu-campus-atlas/r17-campus-racing-20261101/
+- 线上 HTTP 实测：页面、race.glb、wheel-racing.glb、colormap.png、独立动态 JS/CSS、r17-lab.html 均 HTTP 200；旧 R17 预览与 Pages 首页仍 HTTP 200。
+- 线上 Microsoft Edge Playwright 完整退出码 0，三组测试记录均 `passed:true`：桌面 1440×900，手机竖屏模拟 390×844，手机横屏模拟 844×390。包括首次进入真实四轮物理驾驶、W 加速或手机双触控转向+加速、真实物理倒车、复位、退出后的相机/模式恢复、重复进入退出、页面错误和 HTTP 资源错误检测；JS 错误数 0、HTTP 错误数 0。
+- 线上测试报告：`docs/quality-v2/r17-racing-online-qa/browser-results.json`。屏幕证据：同目录 `desktop-1440-*.png`、`portrait-390-*.png`、`landscape-844-*.png`。已目视检查最终三类屏幕；校园主页页眉不再覆盖驾驶界面。
+- 页面在真实 iPhone Safari 尚未验收，线上 Edge 手机设备模拟并不等于真机测试。合成练车场仍按非真实校园道路标注，校园 OSM 源数据没改。
+- 此后如有 QA 测试脚本/记录补充提交，不改变上述已发布功能源码和 Pages SHA；主项目原有未提交文件继续保留。
