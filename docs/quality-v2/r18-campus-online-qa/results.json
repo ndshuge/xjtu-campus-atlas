@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-31T19:29:41.756Z",
+  "url": "https://ndshuge.github.io/xjtu-campus-atlas/r18-campus-drive-20261101/",
+  "results": [
+    {
+      "name": "desktop-1440",
+      "viewport": [
+        1440,
+        900
+      ],
+      "actions": [
+        {
+          "southbound": -6.419745440459745,
+          "speedKmh": 42.61103099008029,
+          "handbrakeSpeedKmh": 32.63543618828892,
+          "resetStress": 5
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "portrait-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "actions": [
+        {
+          "southbound": -4.65407152244801,
+          "speedKmh": 36.341461087493286,
+          "reverse": 2.5786804823584033
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "landscape-844",
+      "viewport": [
+        844,
+        390
+      ],
+      "actions": [
+        {
+          "southbound": -5.591969368610476,
+          "speedKmh": 40.10077559979631,
+          "reverse": 2.295185813264937
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}
