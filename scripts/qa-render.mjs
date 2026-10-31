@@ -2,6 +2,7 @@ import {spawn} from 'node:child_process';
 import fs from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
+import {waitForWalkReady, measureWalkDisplacement, measurePostCancelDrift} from './qa-walk-settle.mjs';
 const origin=process.argv[2]||'http://127.0.0.1:18906/';
 const comparisonOrigin=process.argv.find(a=>a.startsWith('--compare='))?.slice('--compare='.length);
 const out=path.resolve(process.argv[3]||'docs/quality-v2/canopy-r6');
@@ -56,14 +57,20 @@ async function inspectInteractions(){
  const labelSamples=[];
  for(let i=0;i<6;i++){labelSamples.push(await evaluate('[...document.querySelectorAll(".label")].filter(e=>!e.hidden).map(e=>({name:e.textContent,x:parseFloat(e.style.left),y:parseFloat(e.style.top)}))'));await sleep(100);}
  const labelDrift=Math.max(0,...labelSamples[0].map(a=>Math.max(0,...labelSamples.map(s=>s.find(b=>b.name===a.name)).filter(Boolean).map(b=>Math.hypot(a.x-b.x,a.y-b.y)))));
- await tap('#walk-btn');await sleep(1250);const walkBefore=await evaluate('window.campusDiagnostics()');
+ await tap('#walk-btn');
+ const walkBefore=await waitForWalkReady(()=>evaluate('window.campusDiagnostics()'),sleep);
  const p=await evaluate('(()=>{const r=document.querySelector("[data-move=forward]").getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2}})()');
  await touch('touchStart',[[p.x,p.y,1]]);await sleep(850);await touch('touchEnd');await sleep(150);
- const walkAfter=await evaluate('window.campusDiagnostics()');await tap('#exit-walk');await sleep(300);
+ const walkAfter=await evaluate('window.campusDiagnostics()');
+ await touch('touchStart',[[p.x,p.y,1]]);await sleep(180);await touch('touchCancel');await sleep(100);
+ const cancelBefore=await evaluate('window.campusDiagnostics()');await sleep(400);
+ const cancelAfter=await evaluate('window.campusDiagnostics()');
+ const cancelDriftMetres=measurePostCancelDrift(cancelBefore,cancelAfter);
+ await tap('#exit-walk');await sleep(300);
  const panMetres=Math.hypot(...pan.target.map((v,i)=>v-initial.target[i]));
- const walkMetres=Math.hypot(...walkAfter.camera.map((v,i)=>v-walkBefore.camera[i]));
- const result={panMetres,pinchDistanceBefore:distance(pan),pinchDistanceAfter:distance(pinch),pageScale:scale,labelSampleCount:labelSamples[0].length,labelDriftPx:labelDrift,walkMetres,walkMode:walkAfter.mode,returnMode:(await evaluate('window.campusDiagnostics()')).mode};
- result.passed=panMetres>1&&distance(pinch)<distance(pan)*.98&&scale===1&&labelSamples.every(sample=>sample.length<=3)&&labelDrift<=2&&walkAfter.mode==='walk'&&walkMetres>1&&walkMetres<25&&result.returnMode==='orbit';
+ const walkMotion=measureWalkDisplacement(walkBefore,walkAfter),walkMetres=walkMotion.metres;
+ const result={panMetres,pinchDistanceBefore:distance(pan),pinchDistanceAfter:distance(pinch),pageScale:scale,labelSampleCount:labelSamples[0].length,labelDriftPx:labelDrift,walkMetres,walkFromSpawn:walkMotion.fromSpawn,walkEntrySettled:true,walkCameraBefore:walkBefore.camera,walkCameraAfter:walkAfter.camera,walkSpawn:walkBefore.walkStart,cancelDriftMetres,pointerCancelStable:cancelDriftMetres<.35,walkMode:walkAfter.mode,returnMode:(await evaluate('window.campusDiagnostics()')).mode};
+ result.passed=panMetres>1&&distance(pinch)<distance(pan)*.98&&scale===1&&labelSamples.every(sample=>sample.length<=3)&&labelDrift<=2&&walkAfter.mode==='walk'&&walkMetres>1&&walkMetres<25&&result.pointerCancelStable&&result.returnMode==='orbit';
  return result;
 }
 async function mouseClick(selector){
@@ -85,7 +92,7 @@ async function inspectDesktopInteractions(){
  await mouseClick('#toggle-trees');await mouseClick('#layers-btn');
  await mouseClick('#search');await send('Input.insertText',{text:searchPlace||'钱学森'});await sleep(300);await mouseClick('#place-list button');await sleep(1700);
  const selected=await evaluate('window.campusDiagnostics()');
- const result={rotationMetres:Math.hypot(...rotated.camera.map((v,i)=>v-initial.camera[i])),distanceBeforeWheel:distance(rotated),distanceAfterWheel:distance(zoomed),treeLayerTrianglesBefore:zoomed.triangles,treeLayerTrianglesHidden:hidden.triangles,selected:selected.selected};
+ const result={rotationMetres:Math.hypot(...rotated.camera.map((v,i)=>v-initial.camera[i])),distanceBeforeWheel:distance(rotated),distanceAfterWheel:distance(zoomed),treeLayerTrianglesBefore:zoomed.triangles,treeLayerTrianglesHidden:hidden.triangles,treeLayerDrawCallsBefore:zoomed.drawCalls,treeLayerDrawCallsHidden:hidden.drawCalls,selected:selected.selected};
  result.passed=result.rotationMetres>2&&distance(zoomed)<distance(rotated)*.98&&hidden.triangles<zoomed.triangles*.8&&selected.selected===(searchPlace||'钱学森图书馆');return result;
 }
 async function inspectViewOrb(width){
@@ -210,6 +217,20 @@ try{
   const file=pose.replace(/[^\p{L}\p{N}-]/gu,'_')+'-'+width+'.png';
   const png=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await fs.writeFile(path.join(out,file),Buffer.from(png.result.data,'base64'));
   const r={pose,url:url.href,width,height,file,elapsedMs:Date.now()-start,metrics,gpu,requestedPowerPreference:process.argv.includes('--low-power-gpu')?'low-power':'product default',runtime,frameSample,errors:errors.slice(errorStart),httpErrors:httpErrors.slice(httpStart)};
+  if(process.argv.includes('--profile-layers')){
+   r.layerProfile=await evaluate(`(async()=>{
+    const checkbox=document.querySelector('#toggle-trees');
+    if(!checkbox)return {error:'Tree-layer control unavailable'};
+    const snap=()=>{const d=window.campusDiagnostics();return {drawCalls:d.drawCalls,triangles:d.triangles,geometries:d.geometries,textures:d.textures};};
+    const frame=()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+    const before=snap();
+    const was=checkbox.checked;let treesOff;try{checkbox.checked=false;checkbox.dispatchEvent(new Event('change',{bubbles:true}));await frame();treesOff=snap();}finally{checkbox.checked=was;checkbox.dispatchEvent(new Event('change',{bubbles:true}));await frame();}
+    // Scene ownership stays private; only the existing tree-layer UI is toggled.
+    return {before,treesOff,restored:snap(),note:'Tree visibility is a controlled A/B; library asset geometry is independently verified'};
+   })()`);
+   if(r.layerProfile.error)throw Error('Layer profile failed: '+JSON.stringify(r.layerProfile));
+   console.log(JSON.stringify({layerProfile:r.layerProfile,pose,width}));
+  }
   if(process.argv.includes('--detail-layout')&&pose.startsWith('place:')){
    r.detailLayout=await evaluate(`(()=>{const a=document.querySelector('#view-navigation').getBoundingClientRect(),b=document.querySelector('#detail').getBoundingClientRect(),c=document.querySelector('.toolbar').getBoundingClientRect();const overlap=(x,y)=>x.left<y.right&&x.right>y.left&&x.top<y.bottom&&x.bottom>y.top;return {visible:a.width>0&&a.height>0,detailOverlap:overlap(a,b),toolbarOverlap:overlap(a,c),viewport:a.top>=0&&a.bottom<=innerHeight};})()`);
    if(!r.detailLayout.visible||r.detailLayout.detailOverlap||r.detailLayout.toolbarOverlap||!r.detailLayout.viewport)throw Error('Detail obscures view controls: '+JSON.stringify(r.detailLayout));
