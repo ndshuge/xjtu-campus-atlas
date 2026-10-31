@@ -33,4 +33,8 @@
 - 现有手机控件继续支持多点触控，UI 作为功能阶段已验收；最终视觉审美、驾驶手感仍应经用户实际体验反馈。
 
 ## GitHub Pages
-- 独立预览计划 `/r19-campus-road-network-20261101/`。只有当本机验证、源文件提交、Scoped Pages 目录推送及**公开网页真实驾驶**通过后，才写为已发布。
+- **已正式发布，公开确认**：https://ndshuge.github.io/xjtu-campus-atlas/r19-campus-road-network-20261101/
+- 功能源码 SHA：`28ae6c051bb63f49fb2d71dd3caa18d8236f0e04`。Pages 新目录发布 SHA：`40b3addc8d03d4aded8374ea82d449ee96b5eafc`；基于远端 `gh-pages` `95f7a206157554e8e2bcee0c11d4cb13e8c6789a`，仅增加 `r19-campus-road-network-20261101/` 共 28 个文件，原首页及 R17/R18 HTTP 200。
+- 公网静态文件已确认：入口 HTML、车模 race.glb、wheel-racing.glb、材质 PNG、按需加载的赛车 JS/CSS、r17-lab.html 均 HTTP 200。
+- **真实线上 Edge 自动化验收 exit 0**：1440×900 桌面、390×844 手机竖屏模拟、844×390 手机横屏模拟三档 `ok=true`，JS/HTTP 错误全为 0。包括六个具名起点的下拉显示、实际梧桐西道切换再返回、实际赛车加速/制动/倒车/复位/出入练车场/返回地图状态恢复、桌面重复 5 次复位。
+- 完整 JSON 与三种设备的校园/驾驶/退出截图：`docs/quality-v2/r19-road-network-online-qa/`。已直接查看线上的桌面及竖屏驾驶画面；GPU 性能与审美仍需要真机和用户体验反馈。
