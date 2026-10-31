@@ -102,6 +102,18 @@ export function createCampusPerimeter(boundaries, gates, baseY=1.1, roads=[],bui
  batch(middle,'perimeter schematic middle guide / NOT verified rail',iron);
  batch(upper,'perimeter schematic upper guide / NOT verified roofline',iron);
  batch(bars,'perimeter schematic uprights / NOT verified infill',iron);
+ // Keep actual OSM boundary and passage collision data at all distances.
+ // Schematic rail details cannot be resolved in the high-altitude overview;
+ // use altitude hysteresis without regenerating any geometry or colliders.
+ const rails=group.children.filter(o=>!o.name.includes('masonry plinth'));
+ let detailVisible=true;
+ group.updateDetailLOD=(camera)=>{
+  const y=camera?.position?.y;
+  if(!Number.isFinite(y))return;
+  const next=detailVisible?y<=520:y<340;
+  if(next===detailVisible)return;
+  detailVisible=next;for(const rail of rails)rail.visible=next;
+ };
  group.userData={
   accuracy:'OSM footprint only; wall details illustrative and NOT verified by photographs',
   referenceGate:'https://news.xjtu.edu.cn/info/1033/11054.htm',

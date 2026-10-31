@@ -1,0 +1,723 @@
+{
+  "origin": "http://127.0.0.1:19142/lod-after-20261101/",
+  "rows": [
+    {
+      "width": 390,
+      "base": {
+        "calls": 367,
+        "triangles": 475515
+      },
+      "trees": {
+        "label": "vegetation all",
+        "removedCalls": 7,
+        "removedTriangles": 321644,
+        "objectType": "Group",
+        "childCount": 13
+      },
+      "treeDetails": [
+        {
+          "label": "vegetation/grove branching near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/grove leaf sprays near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/grove branching far",
+          "removedCalls": 1,
+          "removedTriangles": 135920,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/grove leaf sprays far",
+          "removedCalls": 1,
+          "removedTriangles": 115532,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar branching near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar leaf sprays near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar branching far",
+          "removedCalls": 1,
+          "removedTriangles": 17536,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar leaf sprays far",
+          "removedCalls": 1,
+          "removedTriangles": 6576,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane branching near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane leaf sprays near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane branching far",
+          "removedCalls": 1,
+          "removedTriangles": 20480,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane leaf sprays far",
+          "removedCalls": 1,
+          "removedTriangles": 17408,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/whitewashed plane tree bases / unmeasured extent",
+          "removedCalls": 1,
+          "removedTriangles": 8192,
+          "objectType": "Mesh",
+          "childCount": 0
+        }
+      ],
+      "perimeterDetails": [
+        {
+          "label": "perimeter/perimeter masonry plinth / schematic guide, NOT surveyed",
+          "removedCalls": 1,
+          "removedTriangles": 14352,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter sparse markers / NOT surveyed piers",
+          "removedCalls": 1,
+          "removedTriangles": 2220,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter schematic middle guide / NOT verified rail",
+          "removedCalls": 1,
+          "removedTriangles": 14352,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter schematic upper guide / NOT verified roofline",
+          "removedCalls": 1,
+          "removedTriangles": 14352,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter schematic uprights / NOT verified infill",
+          "removedCalls": 1,
+          "removedTriangles": 3732,
+          "objectType": "Mesh",
+          "childCount": 0
+        }
+      ],
+      "roots": [
+        {
+          "label": "root_99/plane tree branching / photo-inspired, positions approximate",
+          "removedCalls": 7,
+          "removedTriangles": 321644,
+          "objectType": "Group",
+          "childCount": 13
+        },
+        {
+          "label": "root_6/Xingqing campus perimeter / schematic enclosure with verified gate openings",
+          "removedCalls": 5,
+          "removedTriangles": 49008,
+          "objectType": "Group",
+          "childCount": 5
+        },
+        {
+          "label": "root_97/Historic east teaching buildings",
+          "removedCalls": 4,
+          "removedTriangles": 15454,
+          "objectType": "Group",
+          "childCount": 4
+        },
+        {
+          "label": "root_94/Main A-E / complete owned building group",
+          "removedCalls": 5,
+          "removedTriangles": 13571,
+          "objectType": "Group",
+          "childCount": 5
+        },
+        {
+          "label": "root_87/Four Great Inventions / four corner installations",
+          "removedCalls": 72,
+          "removedTriangles": 12696,
+          "objectType": "Group",
+          "childCount": 63
+        },
+        {
+          "label": "root_89/Qian Xuesen Library R12 / complete owned asset",
+          "removedCalls": 11,
+          "removedTriangles": 11437,
+          "objectType": "Group",
+          "childCount": 11
+        },
+        {
+          "label": "root_96/West 1 / photo-guided exterior",
+          "removedCalls": 4,
+          "removedTriangles": 7309,
+          "objectType": "Group",
+          "childCount": 4
+        },
+        {
+          "label": "root_90/Qian Xuesen Library / image-guided round entrance forecourt",
+          "removedCalls": 14,
+          "removedTriangles": 6340,
+          "objectType": "Group",
+          "childCount": 14
+        },
+        {
+          "label": "root_83/Eight official corridors / mapped hardscape details",
+          "removedCalls": 93,
+          "removedTriangles": 5732,
+          "objectType": "Group",
+          "childCount": 93
+        },
+        {
+          "label": "root_95/Historic central buildings / single owned group",
+          "removedCalls": 3,
+          "removedTriangles": 5640,
+          "objectType": "Group",
+          "childCount": 4
+        },
+        {
+          "label": "root_93/Yifu Science Hall / complete owned main, low link and pitched annex",
+          "removedCalls": 5,
+          "removedTriangles": 4163,
+          "objectType": "Group",
+          "childCount": 5
+        },
+        {
+          "label": "root_102/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 3708,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_81/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 2856,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_84/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 2564,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_82/Wutong East Road / resurfaced asphalt and porous sidewalks (interpretive width)",
+          "removedCalls": 35,
+          "removedTriangles": 2312,
+          "objectType": "Group",
+          "childCount": 35
+        },
+        {
+          "label": "root_101/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 2060,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_77/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 1888,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_78/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 1708,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_80/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 1300,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_86/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 1140,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_100/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 420,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_88/Group",
+          "removedCalls": 20,
+          "removedTriangles": 382,
+          "objectType": "Group",
+          "childCount": 7
+        },
+        {
+          "label": "root_72/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 378,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_91/Siyuan student centre / single owned exterior",
+          "removedCalls": 7,
+          "removedTriangles": 344,
+          "objectType": "Group",
+          "childCount": 7
+        },
+        {
+          "label": "root_73/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 313,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_4/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 232,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_76/Four Inventions / courtyard paving inferred from open OSM ground",
+          "removedCalls": 17,
+          "removedTriangles": 230,
+          "objectType": "Group",
+          "childCount": 17
+        },
+        {
+          "label": "root_79/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 180,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_75/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 176,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_92/Westward relocation museum / single owned exterior",
+          "removedCalls": 7,
+          "removedTriangles": 124,
+          "objectType": "Group",
+          "childCount": 7
+        }
+      ],
+      "near": 0,
+      "far": 2092,
+      "totalTreeInstances": 2092
+    },
+    {
+      "width": 1440,
+      "base": {
+        "calls": 512,
+        "triangles": 538765
+      },
+      "trees": {
+        "label": "vegetation all",
+        "removedCalls": 7,
+        "removedTriangles": 321644,
+        "objectType": "Group",
+        "childCount": 13
+      },
+      "treeDetails": [
+        {
+          "label": "vegetation/grove branching near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/grove leaf sprays near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/grove branching far",
+          "removedCalls": 1,
+          "removedTriangles": 135920,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/grove leaf sprays far",
+          "removedCalls": 1,
+          "removedTriangles": 115532,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar branching near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar leaf sprays near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar branching far",
+          "removedCalls": 1,
+          "removedTriangles": 17536,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/cedar leaf sprays far",
+          "removedCalls": 1,
+          "removedTriangles": 6576,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane branching near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane leaf sprays near",
+          "removedCalls": 0,
+          "removedTriangles": 0,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane branching far",
+          "removedCalls": 1,
+          "removedTriangles": 20480,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/plane leaf sprays far",
+          "removedCalls": 1,
+          "removedTriangles": 17408,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "vegetation/whitewashed plane tree bases / unmeasured extent",
+          "removedCalls": 1,
+          "removedTriangles": 8192,
+          "objectType": "Mesh",
+          "childCount": 0
+        }
+      ],
+      "perimeterDetails": [
+        {
+          "label": "perimeter/perimeter masonry plinth / schematic guide, NOT surveyed",
+          "removedCalls": 1,
+          "removedTriangles": 14352,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter sparse markers / NOT surveyed piers",
+          "removedCalls": 1,
+          "removedTriangles": 2220,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter schematic middle guide / NOT verified rail",
+          "removedCalls": 1,
+          "removedTriangles": 14352,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter schematic upper guide / NOT verified roofline",
+          "removedCalls": 1,
+          "removedTriangles": 14352,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "perimeter/perimeter schematic uprights / NOT verified infill",
+          "removedCalls": 1,
+          "removedTriangles": 3732,
+          "objectType": "Mesh",
+          "childCount": 0
+        }
+      ],
+      "roots": [
+        {
+          "label": "root_100/plane tree branching / photo-inspired, positions approximate",
+          "removedCalls": 7,
+          "removedTriangles": 321644,
+          "objectType": "Group",
+          "childCount": 13
+        },
+        {
+          "label": "root_1/DirectionalLight",
+          "removedCalls": 122,
+          "removedTriangles": 63074,
+          "objectType": "DirectionalLight",
+          "childCount": 0
+        },
+        {
+          "label": "root_7/Xingqing campus perimeter / schematic enclosure with verified gate openings",
+          "removedCalls": 5,
+          "removedTriangles": 49008,
+          "objectType": "Group",
+          "childCount": 5
+        },
+        {
+          "label": "root_98/Historic east teaching buildings",
+          "removedCalls": 7,
+          "removedTriangles": 27836,
+          "objectType": "Group",
+          "childCount": 4
+        },
+        {
+          "label": "root_88/Four Great Inventions / four corner installations",
+          "removedCalls": 126,
+          "removedTriangles": 25356,
+          "objectType": "Group",
+          "childCount": 63
+        },
+        {
+          "label": "root_95/Main A-E / complete owned building group",
+          "removedCalls": 9,
+          "removedTriangles": 25298,
+          "objectType": "Group",
+          "childCount": 5
+        },
+        {
+          "label": "root_90/Qian Xuesen Library R12 / complete owned asset",
+          "removedCalls": 17,
+          "removedTriangles": 20032,
+          "objectType": "Group",
+          "childCount": 11
+        },
+        {
+          "label": "root_97/West 1 / photo-guided exterior",
+          "removedCalls": 7,
+          "removedTriangles": 13172,
+          "objectType": "Group",
+          "childCount": 4
+        },
+        {
+          "label": "root_96/Historic central buildings / single owned group",
+          "removedCalls": 5,
+          "removedTriangles": 8912,
+          "objectType": "Group",
+          "childCount": 4
+        },
+        {
+          "label": "root_94/Yifu Science Hall / complete owned main, low link and pitched annex",
+          "removedCalls": 9,
+          "removedTriangles": 7610,
+          "objectType": "Group",
+          "childCount": 5
+        },
+        {
+          "label": "root_91/Qian Xuesen Library / image-guided round entrance forecourt",
+          "removedCalls": 16,
+          "removedTriangles": 6364,
+          "objectType": "Group",
+          "childCount": 14
+        },
+        {
+          "label": "root_84/Eight official corridors / mapped hardscape details",
+          "removedCalls": 93,
+          "removedTriangles": 5732,
+          "objectType": "Group",
+          "childCount": 93
+        },
+        {
+          "label": "root_85/Mesh",
+          "removedCalls": 2,
+          "removedTriangles": 5128,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_103/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 3708,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_82/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 2856,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_83/Wutong East Road / resurfaced asphalt and porous sidewalks (interpretive width)",
+          "removedCalls": 35,
+          "removedTriangles": 2312,
+          "objectType": "Group",
+          "childCount": 35
+        },
+        {
+          "label": "root_87/Mesh",
+          "removedCalls": 2,
+          "removedTriangles": 2280,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_102/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 2060,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_78/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 1888,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_79/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 1708,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_81/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 1300,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_89/Group",
+          "removedCalls": 63,
+          "removedTriangles": 1050,
+          "objectType": "Group",
+          "childCount": 7
+        },
+        {
+          "label": "root_101/Mesh",
+          "removedCalls": 2,
+          "removedTriangles": 840,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_92/Siyuan student centre / single owned exterior",
+          "removedCalls": 12,
+          "removedTriangles": 680,
+          "objectType": "Group",
+          "childCount": 7
+        },
+        {
+          "label": "root_73/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 378,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_74/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 313,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_93/Westward relocation museum / single owned exterior",
+          "removedCalls": 12,
+          "removedTriangles": 244,
+          "objectType": "Group",
+          "childCount": 7
+        },
+        {
+          "label": "root_5/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 232,
+          "objectType": "Mesh",
+          "childCount": 0
+        },
+        {
+          "label": "root_77/Four Inventions / courtyard paving inferred from open OSM ground",
+          "removedCalls": 17,
+          "removedTriangles": 230,
+          "objectType": "Group",
+          "childCount": 17
+        },
+        {
+          "label": "root_80/Mesh",
+          "removedCalls": 1,
+          "removedTriangles": 180,
+          "objectType": "Mesh",
+          "childCount": 0
+        }
+      ],
+      "near": 0,
+      "far": 2092,
+      "totalTreeInstances": 2092
+    }
+  ]
+}
