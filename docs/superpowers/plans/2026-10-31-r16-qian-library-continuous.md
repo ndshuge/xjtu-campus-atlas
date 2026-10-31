@@ -25,13 +25,13 @@
 ### [x] M0 — establish documented R16 authoring baseline
 Completed before this plan: south course 1–3 narrow vertical bays, south entrance, piers, center curtain lower levels; visual and browser evidence recorded in existing handoff. Existing work is NOT a finished high-fidelity asset.
 
-### [ ] M1 — central upper curtain of south-course-3
+### [x] M1 — central upper curtain of south-course-3
 **Files:** `src/library-asset.js`, focused `tests/library-south-course3-curtain.test.mjs` (or equivalent), `package.json` only to enroll new test, existing R16 quality handoff.
-- [ ] Re-open 2021 frontal photo and fixed 1440/390 previous captures; assess whether upper glass needs a different bay count/stone course (not automatically clone tier 2).
-- [ ] Write a failing structural regression on intended window count, recess, spandrel depth and neutral gray/massing mode; run RED and keep failure output.
-- [ ] Author only the supported central tier-3 glazing/mullion/stone relation, using existing shared buffers and estimated metadata.
-- [ ] Verify GREEN; run library+picking+LOD+full verify, static subpath build and four same-view captures (detail/selected × desktop/mobile), with renderer and interaction diagnostics.
-- [ ] Compare critically and record next most material defect; commit verified owned files.
+- [x] Re-open 2021 frontal photo and fixed 1440/390 previous captures; assess whether upper glass needs a different bay count/stone course (not automatically clone tier 2).
+- [x] Write a failing structural regression on intended window count, recess, spandrel depth and neutral gray/massing mode; run RED and keep failure output.
+- [x] Author only the supported central tier-3 glazing/mullion/stone relation, using existing shared buffers and estimated metadata.
+- [x] Verify GREEN; run library+picking+LOD+full verify, static subpath build and four same-view captures (detail/selected × desktop/mobile), with renderer and interaction diagnostics.
+- [x] Compare critically and record next most material defect; commit verified owned files.
 
 ### [ ] M2 — architecture-wide near-view silhouette review (not more decorative windows)
 **Files:** `src/library-asset-plan.js` / `src/library-asset.js` only if evidence warrants, matched tests and handoff.
