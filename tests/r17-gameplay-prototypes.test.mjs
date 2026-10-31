@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createRaceSandbox} from '../src/modes/race-sandbox.js';
+import {createTargetPractice} from '../src/modes/target-practice.js';
+test('race laps require ordered checkpoints, monotonic time and explicit restart',()=>{
+ const race=createRaceSandbox({checkpoints:['gate-a','gate-b'],lapCount:2});
+ assert.equal(race.pass('gate-b',100),false);
+ assert.equal(race.pass('gate-a',10),true);
+ assert.equal(race.pass('gate-b',30),true);
+ assert.equal(race.pass('gate-a',35),true);
+ assert.equal(race.pass('gate-b',70),true);
+ assert.equal(race.completed,true);
+ assert.equal(race.elapsedMs,60);
+ race.reset();
+ assert.equal(race.completed,false);
+ assert.equal(race.elapsedMs,null);
+});
+test('target practice only accepts registered practice targets; pause and reset isolate score',()=>{
+ const p=createTargetPractice({targetIds:['board-1','board-2']});
+ assert.equal(p.hit('real-campus-building'),false);
+ assert.equal(p.score,0);
+ assert.equal(p.hit('board-1'),true);
+ assert.equal(p.score,1);
+ p.pause();
+ assert.equal(p.hit('board-2'),false);
+ p.resume();
+ assert.equal(p.hit('board-2'),true);
+ assert.equal(p.score,2);
+ p.reset();
+ assert.equal(p.score,0);
+});

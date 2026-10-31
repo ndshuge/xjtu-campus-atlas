@@ -1,0 +1,48 @@
+{
+  "schema": "r17-evidence-v1",
+  "policy": "Structure-only photos and historical descriptions must never be promoted to surveyed geometry. Coordinates remain OSM original footprint.",
+  "entries": [
+    {
+      "objectId": "library-forecourt",
+      "geomType": "multilevel-courtyard",
+      "evidenceUri": "https://news.xjtu.edu.cn/info/1079/52073.htm",
+      "license": "reference-only",
+      "capturedAt": "2016-04-08",
+      "coordSystem": "campus-local-xz",
+      "elevationDatum": "unknown",
+      "sourceKind": "official-photo",
+      "confidence": "structure-only",
+      "acceptedBy": "R17 source audit",
+      "measuredDepthM": null,
+      "notes": "University image shows a visually lowered circular court; no surveyed depth or verified connecting stairs in available local documentation."
+    },
+    {
+      "objectId": "263624481-south-face",
+      "geomType": "facade-photo",
+      "evidenceUri": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E5%AE%89%E4%BA%A4%E9%80%9A%E5%A4%A7%E5%AD%A6_%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86%E5%92%8C%E5%9B%9B%E5%A4%A7%E5%8F%91%E6%98%8E%E5%B9%BF%E5%9C%BA.jpg",
+      "license": "CC BY-SA 4.0",
+      "capturedAt": "2021-09-06",
+      "coordSystem": "campus-local-xz",
+      "elevationDatum": "unknown",
+      "sourceKind": "commons-photo",
+      "confidence": "photo-observed",
+      "acceptedBy": "R17 source audit",
+      "measuredDepthM": null,
+      "notes": "Photographer Liuxingy. Local licensed 960px preview public/assets/reference/library-front-2021.jpg; visual geometry and colors only."
+    },
+    {
+      "objectId": "263624481-roofs",
+      "geomType": "roof-photo",
+      "evidenceUri": "https://commons.wikimedia.org/wiki/File:%E8%A5%BF%E4%BA%A4%E5%85%B4%E5%BA%86%E4%B9%8B%E4%BF%AF%E8%A7%86%E9%92%B1%E5%AD%A6%E6%A3%AE%E5%9B%BE%E4%B9%A6%E9%A6%86.jpg",
+      "license": "CC BY-SA 4.0",
+      "capturedAt": "2025-07-25",
+      "coordSystem": "campus-local-xz",
+      "elevationDatum": "unknown",
+      "sourceKind": "commons-photo",
+      "confidence": "photo-observed",
+      "acceptedBy": "R17 source audit",
+      "measuredDepthM": null,
+      "notes": "Photographer Liuxingy. Local licensed preview public/assets/reference/library-aerial-2025.jpg; roof form reference not height survey."
+    }
+  ]
+}
