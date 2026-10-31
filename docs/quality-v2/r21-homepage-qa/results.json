@@ -1,0 +1,33 @@
+{
+  "site": "http://127.0.0.1:18993/",
+  "date": "2026-10-31T21:06:15.838Z",
+  "results": [
+    {
+      "name": "desktop",
+      "site": "http://127.0.0.1:18993/",
+      "pass": true,
+      "road": "梧桐东道",
+      "junctionPads": 6,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "phone-portrait",
+      "site": "http://127.0.0.1:18993/",
+      "pass": true,
+      "road": "梧桐东道",
+      "junctionPads": 6,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "phone-landscape",
+      "site": "http://127.0.0.1:18993/",
+      "pass": true,
+      "road": "梧桐东道",
+      "junctionPads": 6,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}
