@@ -76,6 +76,12 @@ export class CampusWorld{
     if(plan){const pose=librarySouthInspectionPose(plan,BASE,this.isMobile);
       this.camera.fov=pose.fov;this.camera.updateProjectionMatrix();
       this.camera.position.set(...pose.eye);this.controls.target.set(...pose.look);this.controls.update();}
+  }else if(inspection==='plaza-photo-inlays'){
+    // QA-only camera, looking north across the photographed open paving.
+    this.camera.fov=this.isMobile?65:50;this.camera.updateProjectionMatrix();
+    // High oblique/plan view avoids the adjacent south tower obscuring the square.
+    this.camera.position.set(-31.5,BASE+(this.isMobile?190:125),-6);
+    this.controls.target.set(-31.5,BASE,-16);this.controls.update();
   }else if(inspection==='stadium-east'){
     // QA-only oblique camera: compare the OSM athletics track and its infield.
     this.camera.fov=this.isMobile?64:48;this.camera.updateProjectionMatrix();

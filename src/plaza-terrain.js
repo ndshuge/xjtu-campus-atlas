@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {BASE} from './geo.js';
+import {createPhotoPavingGeometry} from './plaza-photo-inlays.js';
 
 // Interpretive paving only within the empty corridor confirmed by the
 // campus OSM footprint grid. NOT an as-built survey or contour elevation.
@@ -67,6 +68,15 @@ export function buildFourInventionsPaving(scene){
  for(const xx of [left+5.7,right-5.7])for(const zz of [-31,-1]){
   slab('Perimeter lawn / interpretive planting pocket',xx,zz,8.4,13.5,grass,BASE+.120);
  }
+ // The 2021 licensed front photo shows dark rectangular stone inlays across
+ // the broad central paving. Use a single, grouped strip mesh and avoid all
+ // four sculpture pads and the peripheral grass. Position/width estimated.
+ const photoInlays=new THREE.Mesh(createPhotoPavingGeometry(BASE+.128),
+  new THREE.MeshStandardMaterial({color:'#77736d',roughness:.95}));
+ photoInlays.name='2021 photo-informed central rectangular stone inlays';
+ photoInlays.castShadow=false;photoInlays.receiveShadow=true;
+ photoInlays.userData={source:'library-front-2021.jpg',license:'CC BY-SA 4.0',estimated:true,notTerrain:true};
+ group.add(photoInlays);
  // Fine joint pattern with an intentional surface offset to prevent z-fighting.
  // The four interpreted sculpture locations must have complete, level
  // landing pads. Their 2D centres match campus.json + four-inventions.js.
