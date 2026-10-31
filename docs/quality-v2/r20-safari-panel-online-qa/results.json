@@ -1,0 +1,26 @@
+{
+  "url": "https://ndshuge.github.io/xjtu-campus-atlas/r20-campus-junction-20261101/",
+  "environment": "Edge mobile emulation, NOT an actual iPhone Safari",
+  "steps": [
+    "opt-in-device-panel-running",
+    {
+      "junctionPads": 6,
+      "roadSlabs": 24
+    },
+    {
+      "physicsSpeedKmh": 48.99720892910021
+    },
+    {
+      "samples": 8,
+      "touch": {
+        "downs": 3,
+        "ups": 3,
+        "cancels": 2,
+        "maxConcurrent": 2
+      },
+      "verification": "UNVERIFIED_NEEDS_DEVICE_REVIEW"
+    }
+  ],
+  "errors": [],
+  "pass": true
+}

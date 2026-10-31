@@ -1,0 +1,145 @@
+{
+  "schema": "atlas-r20-device-qa-v1",
+  "verification": "UNVERIFIED_NEEDS_DEVICE_REVIEW",
+  "platform": "other",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+  "startedAt": 1793478946748,
+  "endedAt": 1793478950523,
+  "durationMs": 3775,
+  "touch": {
+    "downs": 3,
+    "ups": 3,
+    "cancels": 2,
+    "maxConcurrent": 2
+  },
+  "samples": [
+    {
+      "timeMs": 1,
+      "arena": "none",
+      "fps": 221,
+      "speedKmh": null,
+      "contacts": null,
+      "roadName": null,
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 574,
+      "arena": "none",
+      "fps": 222,
+      "speedKmh": null,
+      "contacts": null,
+      "roadName": null,
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 1005,
+      "arena": "none",
+      "fps": 199,
+      "speedKmh": null,
+      "contacts": null,
+      "roadName": null,
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 1502,
+      "arena": "campus",
+      "fps": 215,
+      "speedKmh": 0,
+      "contacts": 0,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 2006,
+      "arena": "campus",
+      "fps": 240,
+      "speedKmh": 11.5,
+      "contacts": 4,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 2502,
+      "arena": "campus",
+      "fps": 240,
+      "speedKmh": 30.7,
+      "contacts": 4,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 3006,
+      "arena": "campus",
+      "fps": 240,
+      "speedKmh": 49.3,
+      "contacts": 3,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    },
+    {
+      "timeMs": 3502,
+      "arena": "campus",
+      "fps": 240,
+      "speedKmh": 48.3,
+      "contacts": 1,
+      "roadName": "梧桐东道",
+      "canvasPixels": 740610,
+      "width": 390,
+      "height": 844,
+      "orientation": "portrait"
+    }
+  ],
+  "events": [
+    {
+      "timeMs": 1652,
+      "type": "pointer",
+      "action": "down",
+      "target": "race-stick-knob"
+    },
+    {
+      "timeMs": 1653,
+      "type": "pointer",
+      "action": "down",
+      "target": "race-gas"
+    },
+    {
+      "timeMs": 2976,
+      "type": "pointer",
+      "action": "cancel",
+      "target": "race-stick"
+    },
+    {
+      "timeMs": 2976,
+      "type": "pointer",
+      "action": "cancel",
+      "target": "race-gas"
+    },
+    {
+      "timeMs": 3702,
+      "type": "pointer",
+      "action": "down",
+      "target": "race-exit"
+    }
+  ]
+}
