@@ -16,6 +16,7 @@ import {createCentralBuildingsAsset,CENTRAL_IDS} from './central-buildings-asset
 import {createWestOneAsset} from './west-one-asset.js';
 import {createEastHistoricAsset,EAST_HISTORIC_IDS} from './east-historic-asset.js';
 import {makeGroundPattern} from './ground-pattern.js';
+import {createStadiumTrackGeometry} from './stadium-infield.js';
 import {createCampusVegetation,fitTreeToBuildings} from './campus-vegetation.js';
 import {createSurfaceTexture} from './surface-textures.js';
 import {addAvenuePaving} from './avenue-paving.js';
@@ -75,6 +76,11 @@ export class CampusWorld{
     if(plan){const pose=librarySouthInspectionPose(plan,BASE,this.isMobile);
       this.camera.fov=pose.fov;this.camera.updateProjectionMatrix();
       this.camera.position.set(...pose.eye);this.controls.target.set(...pose.look);this.controls.update();}
+  }else if(inspection==='stadium-east'){
+    // QA-only oblique camera: compare the OSM athletics track and its infield.
+    this.camera.fov=this.isMobile?64:48;this.camera.updateProjectionMatrix();
+    this.camera.position.set(this.isMobile?460:395,BASE+(this.isMobile?210:165),this.isMobile?115:95);
+    this.controls.target.set(195,BASE,-66);this.controls.update();
   }else if(inspection==='science-west'){
     const science=this.data.buildings.find(b=>b.osmId===263632364);
     if(science){const [cx,cz]=science.center;this.camera.fov=this.isMobile?65:48;this.camera.updateProjectionMatrix();this.camera.position.set(cx-(this.isMobile?240:180),BASE+(this.isMobile?78:62),cz+95);this.controls.target.set(cx-10,BASE+11,cz+10);this.controls.update();}
@@ -129,12 +135,12 @@ export class CampusWorld{
   const rect=(x,z,rw,rd)=>{const p=rectangle(x,z,rw,rd);for(let i=1;i<p.length;i++)line(p[i-1],p[i]);};
   const circle=(x,z,r,n=48)=>{for(let i=0;i<n;i++)line([x+Math.cos(i/n*Math.PI*2)*r,z+Math.sin(i/n*Math.PI*2)*r],[x+Math.cos((i+1)/n*Math.PI*2)*r,z+Math.sin((i+1)/n*Math.PI*2)*r]);};
   if(s.name==='东田径场'){
-   // The surveyed perimeter determines the stadium footprint; lane striping is schematic.
-   this.mesh(flat(s.points,BASE+.065),this.mat('#b87661',{polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1}));
-   const fw=w*.64,fd=d*.67;this.mesh(flat(rectangle(cx,cz,fw,fd),BASE+.115),this.mat('#789a65'));
+   // The original OSM outer footprint remains authoritative; lane striping is schematic.
+   this.mesh(createStadiumTrackGeometry(s,this.data.surfaces,BASE+.065),this.mat('#b87661'));
+   const fw=w*.64,fd=d*.67; // The nested OSM soccer pitch owns the grass; no duplicate rectangle.
    const r=fw/2+3,straight=Math.max(0,(fd-fw)/2);for(let k=0;k<6;k++){const rr=r+k*1.65;const half=[];for(let i=0;i<=48;i++){const t=i/48*Math.PI;half.push([cx+Math.cos(t)*rr,cz+straight+Math.sin(t)*rr]);}for(let i=1;i<half.length;i++)line(half[i-1],half[i]);const lower=[];for(let i=0;i<=48;i++){const t=Math.PI+i/48*Math.PI;lower.push([cx+Math.cos(t)*rr,cz-straight+Math.sin(t)*rr]);}line(half[half.length-1],lower[0]);for(let i=1;i<lower.length;i++)line(lower[i-1],lower[i]);line(lower[lower.length-1],half[0]);}
-   rect(cx,cz,fw*.88,fd*.89);line([cx-fw*.44,cz],[cx+fw*.44,cz]);circle(cx,cz,fw*.11);
-   rect(cx,cz-fd*.34,fw*.5,fd*.2);rect(cx,cz+fd*.34,fw*.5,fd*.2);
+   // The independent soccer surface owns the goal boxes and centre line.
+
    for(let j=0;j<4;j++)this.mesh(boxGeometry(cx+w*.45,BASE+1+j*1.1,cz,3.2,1.15,d*.72),this.mat(j%2?'#c0c7b1':'#d3d6c3'));
   }else if(s.sport==='soccer'){
    for(let j=0;j<8;j++)if(j%2===0)this.mesh(flat(rectangle(cx,z0+(j+.5)*d/8,w*.93,d/8),BASE+.115),this.mat('#8da876'));
