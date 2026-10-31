@@ -2,7 +2,7 @@ import {createGameModeHost} from './game-mode-host.js'
 import {createRacingPhysics} from './racing/physics.js'
 import {createSyntheticTrack} from './racing/track.js'
 import {planCampusDrive} from './racing/campus-track.js'
-import {planFreeRoamSpawn} from './racing/free-roam.js'
+import {planFreeRoamSpawn,createDriveSafetyGuard} from './racing/free-roam.js'
 import {createCampusRoadNetwork,listDriveStartingRoads} from './racing/road-network.js'
 import {createStreamedRoadColliders} from './racing/network-physics.js'
 import {createDesktopInput,createTouchInput} from './racing/controls.js'
@@ -71,6 +71,9 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
    const network=practice?null:createCampusRoadNetwork(world.data)
    const spawn=practice?PRACTICE_SPAWN:course.spawn
    const sim=createRacingPhysics({spawn,heading:course?.heading??0})
+   const zoneGuard=practice?null:createDriveSafetyGuard(world.data,{spawn,notify:reason=>{
+    notify(reason==='water'?'已进入未建模水面，车辆返回起点':'已驶出校园模型边界，车辆返回起点')
+   }})
    onCleanup(()=>sim.destroy())
    const track=practice?
     createSyntheticTrack({physics:sim,scene:world.scene,origin:PRACTICE_ORIGIN}):
@@ -152,6 +155,8 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
     if(!practice)track.update([sim.body.position.x,sim.body.position.y,sim.body.position.z])
     accumulator=Math.min(accumulator+Math.min(dt,.055),.055)
     for(let n=0;n<4&&accumulator>=FIXED;n++){sim.stepFixed(FIXED);accumulator-=FIXED}
+    const recovered=zoneGuard?.recover(sim)
+    if(recovered?.recovered)accumulator=0
     let state=sim.getState()
     if(!practice&&state.position[1]<-4){
      sim.reset(spawn);state=sim.getState()
@@ -172,6 +177,8 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
      roadName:lastRoad?.name??course?.name??null,roadWidth:lastRoad?.width??course?.width??null,
      nearbyRoadId:lastRoad?.roadId??null,distanceToRoad:lastRoad?.distance??null,
      isOffRoad:!!(lastRoad&&lastRoad.distance>lastRoad.width/2+2),
+     surfaceZone:zoneGuard?.classify(state.position).reason??'practice',
+     lastSafetyRecovery:recovered?.recovered?recovered.reason:null,
      networkRoads:network?.roads?.length??0,networkMeters:network?.lengthMeters??0,
      collisionStats:track.collisionStats??null,worldCamera:world.camera.position.toArray()}
    }
