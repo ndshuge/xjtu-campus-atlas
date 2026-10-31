@@ -18,3 +18,14 @@ test('reject undocumentable color or empty provenance; returned profiles cannot 
  p.families.wall='bright-magenta';
  assert.equal(getBuildingMaterialProfile(263624481).families.wall,'stone');
 });
+test('six photo-reference-supported landmark material records are distinct and attributable',()=>{
+ const ids=[263624481,263624057,263632364,263624056,263625085,1167525875];
+ const records=ids.map(id=>getBuildingMaterialProfile(id));
+ assert.equal(records.filter(Boolean).length,6);
+ assert.ok(new Set(records.map(r=>r.osmId)).size===6);
+ for(const r of records){
+  assert.doesNotThrow(()=>validateMaterialProfile(r));
+  assert.equal(r.confidence,'photo-estimated');
+  assert.ok(r.license?.length>5);
+ }
+});

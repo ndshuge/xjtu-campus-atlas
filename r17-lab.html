@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>兴庆 3D · R17 模式实验室</title><link rel="icon" href="data:,">
+<style>
+:root{font-family:system-ui,-apple-system,"Microsoft YaHei",sans-serif;color-scheme:dark;background:#111a1b;color:#e9ede5}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;}body{display:grid;grid-template-rows:auto 1fr;min-height:100dvh}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px clamp(16px,4vw,42px);background:#162324;border-bottom:1px solid #415451}
+h1{margin:0;font-size:clamp(17px,2vw,22px);font-weight:650}small{display:block;font-weight:400;color:#aebcba;font-size:11px}
+nav{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+button{font:inherit;border:1px solid #627b75;background:#223637;border-radius:999px;color:#e9ede5;padding:10px 14px;min-height:42px;cursor:pointer}
+button[aria-pressed=true]{background:#d1e1bc;border-color:#d1e1bc;color:#14201b}
+a{color:#cde0ce}main{position:relative;min-height:450px;overflow:hidden}
+canvas{display:block;width:100%;height:100%;min-height:450px;touch-action:none}
+.panel{position:absolute;left:clamp(12px,3vw,35px);bottom:clamp(18px,3vw,35px);z-index:1;max-width:min(390px,calc(100% - 24px));padding:17px;border-radius:17px;background:#132322dd;backdrop-filter:blur(18px);border:1px solid #57736f;color:#e7efe7}
+.panel strong{font-size:14px}.panel p{margin:9px 0 0;font-size:13px;line-height:1.55;color:#c4d5ce}
+#touch-controls{display:none;position:absolute;right:14px;bottom:26px;z-index:2;gap:7px}
+#touch-controls button{width:55px;height:55px;border-radius:16px;font-size:20px;touch-action:none}
+#touch-controls[hidden]{display:none!important}
+@media (pointer:coarse),(max-width:700px){header{align-items:flex-start}.panel{bottom:112px;max-width:calc(100% - 28px)}#touch-controls:not([hidden]){display:flex}}
+</style></head>
+<body><header><h1>兴庆 3D · R17 模式实验室<small>独立合成场景 · 非校园实测地形 · 未发布功能</small></h1>
+<nav aria-label="实验模式"><button id="mode-explore" aria-pressed="true">浏览</button><button id="mode-race" aria-pressed="false">封闭路线</button><button id="mode-target" aria-pressed="false">靶标练习</button><a href="./index.html">返回校园地图</a></nav></header>
+<main><canvas id="lab-canvas" aria-label="独立三维实验场景"></canvas>
+<div class="panel" role="status" aria-live="polite"><strong id="mode-name">浏览模式</strong><p id="mode-instructions">测试双层空间。请注意：这里的数字高度和道路均是人工测试数据。</p><p id="mode-score">原地图不受影响。</p></div>
+<div id="touch-controls" hidden><button id="drive-left" aria-label="左转">◀</button><button id="drive-forward" aria-label="前进">▲</button><button id="drive-right" aria-label="右转">▶</button></div>
+</main><script type="module" src="./src/r17-lab.js"></script></body></html>

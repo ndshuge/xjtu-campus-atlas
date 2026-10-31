@@ -1,6 +1,6 @@
 # R17 兴庆校区真实空间与未来玩法兼容｜调研设计书
 
-> 状态：RESEARCH / PLANNING ONLY，2026-10-31。已在本机检查源码和历史高德实验；本文是待实施设计，不代表 R17 地形、游戏系统或高德生产功能已经实现。R16 已发布预览继续作为稳定对照；未经单独授权不部署。
+> 状态：R17 FOUNDATION + ISOLATED GAME LAB VERIFIED / P6 FINAL ACCEPTANCE PENDING，2026-10-31。基础空间数据、六栋建筑材质证据、高德桥接、游戏模式接口与合成场景玩法实验已有本机提交与测试；真实校园地形开挖、高德生产接入及完整游戏未上线。R16 已发布预览继续作为稳定对照；未经单独授权不部署。
 > 唯一实施任务清单：docs/superpowers/plans/2026-10-31-r17-campus-reality-game-ready.md。
 > 本次编制基础：feature/r16-qian-library-asset-20261030 @ 094d935；工作树 E:\CHATGPT\work\xjtu-r15-unified-quality-20261030；git status 中已有其他写者的 JSON、图像、R16_ENTRY 和 .superpowers 均不属于本计划。
 
