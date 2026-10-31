@@ -1,0 +1,49 @@
+body.racing-mode .topbar,body.racing-mode .intro,body.racing-mode .map-controls,body.racing-mode #labels,
+body.racing-mode #explorer,body.racing-mode #detail,body.racing-mode #map-extra,body.racing-mode #map-search-launch,
+body.racing-mode .toolbar,body.racing-mode .mini-panel,body.racing-mode .view-title,body.racing-mode .view-navigation,
+body.racing-mode .walk-hud,body.racing-mode .tour-hud,body.racing-mode .layers,body.racing-mode footer,
+body.racing-mode .building-label,body.racing-mode .map-label,body.racing-mode #tooltip {display:none!important}
+#racing-overlay{position:fixed;inset:0;z-index:240;pointer-events:none;color:#f4f8f4;font-family:system-ui,-apple-system,sans-serif}
+#racing-overlay button,#racing-overlay .race-steer{pointer-events:auto;touch-action:none;-webkit-user-select:none;user-select:none}
+#racing-overlay .race-top{position:absolute;left:clamp(14px,3vw,44px);right:clamp(14px,3vw,44px);top:calc(17px + env(safe-area-inset-top));display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+#racing-overlay .race-brand{display:flex;flex-direction:column;gap:4px;text-shadow:0 2px 10px #000a;background:#102936b8;backdrop-filter:blur(14px);padding:10px 13px;border:1px solid #ffffff33;border-radius:15px}
+#racing-overlay .race-brand strong{font-size:clamp(15px,2vw,24px);letter-spacing:.14em;font-weight:760}
+#racing-overlay .race-brand em{color:#cce2b3;font-style:normal}
+#racing-overlay .race-brand span{font-size:11px;color:#fff;opacity:.91}
+#racing-overlay .race-actions{display:flex;gap:8px}
+#racing-overlay button{border:1px solid #ffffff55;border-radius:14px;background:#12232fc9;backdrop-filter:blur(18px);color:white;font:inherit;font-size:13px;font-weight:600;padding:12px 15px;box-shadow:0 3px 18px #0005}
+#racing-overlay button:focus-visible{outline:2px solid #d4f5a6;outline-offset:3px}
+#racing-overlay #race-exit{background:#f1f6e9;color:#18302d;border-color:#fff}
+#racing-overlay .race-speed{position:absolute;left:clamp(14px,3vw,44px);bottom:calc(65px + env(safe-area-inset-bottom));text-shadow:0 2px 8px #000a}
+#racing-overlay .race-speed strong{font-size:58px;font-weight:750;letter-spacing:-.08em;font-variant-numeric:tabular-nums}
+#racing-overlay .race-speed small{font-size:12px;margin-left:12px}
+#racing-overlay .race-speed p{margin:0;font-size:12px;opacity:.94}
+#racing-overlay .race-hint{position:absolute;bottom:calc(30px + env(safe-area-inset-bottom));right:3vw;text-align:right;font-size:12px;line-height:1.6;text-shadow:0 2px 6px #000e}
+#racing-overlay .race-mobile{display:none}
+@media (pointer:coarse),(max-width:700px){
+ #racing-overlay .race-top{top:calc(9px + env(safe-area-inset-top));left:12px;right:12px}
+ #racing-overlay .race-brand strong{font-size:16px}
+ #racing-overlay .race-brand span{font-size:9px;max-width:170px;line-height:1.4}
+ #racing-overlay .race-actions{gap:5px}
+ #racing-overlay button{padding:11px 10px;font-size:11px;border-radius:12px}
+ #racing-overlay kbd{display:none}
+ #racing-overlay .race-speed{top:calc(78px + env(safe-area-inset-top));left:13px;bottom:auto}
+ #racing-overlay .race-speed strong{font-size:34px}
+ #racing-overlay .race-hint{display:none}
+ #racing-overlay .race-mobile{position:absolute;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:end;gap:15px}
+ #racing-overlay .race-steer{width:clamp(116px,31vw,185px);height:clamp(108px,25vh,155px);border:1px solid #ffffff59;border-radius:40px;background:#1a3445bc;backdrop-filter:blur(14px);display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 4px 24px #0006;gap:10px}
+ #racing-overlay .race-steer span{font-size:12px;opacity:.82}
+ #racing-overlay #race-stick-knob{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 28% 24%,#d7ead9,#6f9b91);border:2px solid #ebfff5aa;box-shadow:0 5px 22px #0005}
+ #racing-overlay .race-pedals{display:grid;grid-template-columns:repeat(2,minmax(64px,1fr));gap:7px;max-width:215px}
+ #racing-overlay .race-pedals button{min-height:58px;font-size:12px;background:#243b4edb}
+ #racing-overlay #race-gas{background:#d1edab;color:#213b2b}
+ #racing-overlay #race-brake{background:#e5bcaa;color:#512b23}
+}
+@media (max-height:460px) and (pointer:coarse),(max-height:460px) and (max-width:700px){
+ #racing-overlay .race-brand span{max-width:170px}
+ #racing-overlay .race-speed{top:75px}
+ #racing-overlay .race-speed strong{font-size:25px}
+ #racing-overlay .race-steer{height:97px;width:125px;border-radius:28px}
+ #racing-overlay #race-stick-knob{width:39px;height:39px}
+ #racing-overlay .race-pedals button{min-height:42px}
+}

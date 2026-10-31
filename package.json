@@ -16,9 +16,11 @@
     "start": "node scripts/serve.mjs"
   },
   "dependencies": {
+    "cannon-es": "0.20.0",
     "three": "0.186.1"
   },
   "devDependencies": {
+    "playwright-core": "^1.56.1",
     "vite": "8.3.5"
   }
 }

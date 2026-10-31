@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-31T18:50:41.209Z",
+  "base": "http://127.0.0.1:18986/",
+  "results": [
+    {
+      "profile": "desktop-1440",
+      "viewport": [
+        1440,
+        900
+      ],
+      "steps": [
+        {
+          "keyboardSpeedKmh": 40.139461059987745,
+          "resetPosition": [
+            1800,
+            1.8520221259183816,
+            1782
+          ]
+        }
+      ],
+      "passed": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "profile": "portrait-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "steps": [
+        {
+          "multitouchSpeedKmh": 22.444565057974312,
+          "reverseDisplacement": -3.6621369475617485
+        }
+      ],
+      "passed": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "profile": "landscape-844",
+      "viewport": [
+        844,
+        390
+      ],
+      "steps": [
+        {
+          "multitouchSpeedKmh": 35.653990037455465,
+          "reverseDisplacement": -0.8707707334731367
+        }
+      ],
+      "passed": true,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}

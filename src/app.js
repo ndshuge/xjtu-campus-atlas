@@ -135,6 +135,23 @@ function setupMapChrome(){
 }
 function bindUI(){
  const chrome=setupMapChrome();
+ // The campus stays the default. Physics and car assets load only on demand.
+ const driveButton=document.createElement('button');
+ driveButton.type='button';driveButton.id='race-entry-btn';
+ driveButton.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16 6 10 9 8h6l3 2 2 6v3h-3v-2H7v2H4z"/><circle cx="8" cy="16" r="1.5"/><circle cx="16" cy="16" r="1.5"/></svg><span>赛车</span>';
+ driveButton.setAttribute('aria-label','进入真实物理赛车合成练车场');
+ $('#walk-btn').after(driveButton);
+ let racing=null;
+ driveButton.addEventListener('click',async()=>{
+  if(driveButton.disabled)return;
+  driveButton.disabled=true;
+  try{
+   if(!racing){const module=await import('./racing-mode.js');racing=module.createAtlasRacingMode(world,{notify:toast})}
+   const result=await racing.enter();
+   if(result.mode!=='race')toast('赛车模式未能进入，校园地图已恢复');
+  }catch(error){errors.push(String(error));console.error(error);toast('赛车初始化失败，校园功能不受影响')}
+  finally{driveButton.disabled=false}
+ });
  $('#search').addEventListener('input',renderList);document.querySelectorAll('[data-cat]').forEach(btn=>btn.addEventListener('click',()=>{category=btn.dataset.cat;document.querySelectorAll('[data-cat]').forEach(b=>b.classList.toggle('active',b===btn));renderList();}));
  $('#home-btn').onclick=()=>{closeDetail();world.home();$('#orbit-btn').classList.remove('active');$('#orbit-btn').setAttribute('aria-pressed','false');};$('#top-btn').onclick=()=>world.top();$('#north-btn').onclick=()=>world.north();attachViewOrb(world);
  $('#orbit-btn').onclick=()=>{const val=world.setAuto(!world.auto);$('#orbit-btn').classList.toggle('active',val);$('#orbit-btn').setAttribute('aria-pressed',String(val));};$('#walk-btn').onclick=()=>world.mode==='walk'?world.exitWalk():world.enterWalk(selected);$('#exit-walk').onclick=()=>world.exitWalk();
