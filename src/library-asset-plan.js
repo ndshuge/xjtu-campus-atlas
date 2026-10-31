@@ -81,7 +81,7 @@ export function libraryAssetPlan(building){
  let bottom=13;
  const courses=LIBRARY_TIERS.map((tier,i)=>{
   const rect=[cx-tier.w/2,cz-tier.d/2,cx+tier.w/2,cz+tier.d/2],top=13+tier.h;
-  const course={id:'south-course-'+(i+1),points:south,rect,bottom,top,rows:[2,2,2,1,1][i],glass:tier.glass,cells:planCells(south,rect)};
+  const course={id:'south-course-'+(i+1),points:south,rect,bottom,top,rows:[2,2,2,1,1][i],glass:i===3?21.5:tier.glass,cells:planCells(south,rect)}; // 2021 front photo: course-4 glass ~2/3 of width (estimated).
   bottom=top;return course;
  });
  zones.push(...courses);
