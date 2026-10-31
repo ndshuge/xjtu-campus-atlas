@@ -224,12 +224,16 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  // or courtyard earthworks are introduced by this asset.
  // Supported clock: its old generic 12x7x13m box and duplicate round face are
  // not part of this model. North and south faces are visible in the references.
- const cx=plan.centerX,cz=plan.steppedCenterZ+6.5;
- batch.box('roof',cx,baseY+42.75,cz,5.8,.7,4.3);
- batch.box('wall',cx,baseY+43.45,cz,4.7,4.2,3.25);
- batch.box('roof',cx,baseY+47.65,cz,5.2,.35,3.8);
- const cap=new THREE.ConeGeometry(2.9,1.18,4);cap.rotateY(Math.PI/4);cap.translate(cx,baseY+48.59,cz);batch.add('roof',cap);
- const finial=new THREE.CylinderGeometry(.12,.17,.57,8);finial.translate(cx,baseY+49.465,cz);batch.add('frame',finial);
+ // Photo-informed estimated: broader final stone shoulder and compact clock; keep 49.75m cap.
+ const cx=plan.centerX,cz=plan.steppedCenterZ+6.5,clockBase=plan.courses.at(-1).top;
+ const clockCrown=gray?null:{photoInformed:true,estimated:true,supportRoofY:clockBase,
+  clockHeight:plan.maxHeight-clockBase,stoneShoulderWidth:21,
+  reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
+ batch.box('roof',cx,baseY+clockBase,cz,5.8,.5,4.3);
+ batch.box('wall',cx,baseY+clockBase+.5,cz,4.7,2.95,3.25);
+ batch.box('roof',cx,baseY+clockBase+3.45,cz,5.2,.25,3.8);
+ const cap=new THREE.ConeGeometry(2.9,.95,4);cap.rotateY(Math.PI/4);cap.translate(cx,baseY+clockBase+4.175,cz);batch.add('roof',cap);
+ const finial=new THREE.CylinderGeometry(.12,.17,.35,8);finial.translate(cx,baseY+clockBase+4.825,cz);batch.add('frame',finial);
  for(const [bucket,target] of [[pending.main,batch],[pending.detail,detailBatch]])for(const [kind,a] of Object.entries(bucket)){
   const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(a.p,3));g.setAttribute('uv',new THREE.Float32BufferAttribute(a.uv,2));g.computeVertexNormals();target.add(kind,g);
  }
@@ -262,7 +266,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    c.lineWidth=8;c.beginPath();c.moveTo(128,53);c.lineTo(128,128);c.lineTo(178,151);c.stroke();
    const map=new THREE.CanvasTexture(canvas);map.colorSpace=THREE.SRGBColorSpace;
    const m=new THREE.MeshStandardMaterial({map,roughness:.85});
-   for(const side of [-1,1]){const face=new THREE.Mesh(new THREE.PlaneGeometry(3.9,3.5),m);face.position.set(cx,baseY+45.55,cz+side*1.63);face.rotation.y=side<0?Math.PI:0;face.name='Library R11 / '+(side<0?'north':'south')+' clock face';asset.add(face);}
+   for(const side of [-1,1]){const face=new THREE.Mesh(new THREE.PlaneGeometry(3.9,2.55),m);face.position.set(cx,baseY+clockBase+1.975,cz+side*1.63);face.rotation.y=side<0?Math.PI:0;face.name='Library R11 / '+(side<0?'north':'south')+' clock face';asset.add(face);}
   }
  }
  const mode={value:0},modeColor={value:new THREE.Color('#dbc080')};
@@ -279,7 +283,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,southPodiumMassing,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,southPodiumMassing,clockCrown,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],

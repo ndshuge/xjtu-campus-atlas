@@ -9,7 +9,7 @@ import {facadeEdges,addFacadeBacking} from './building-envelope.js';
 export const LIBRARY_TIERS=[
  {w:85,d:35,h:7,glass:16.6},{w:68,d:31,h:13,glass:15.6},
  {w:49,d:28,h:20,glass:15},{w:32,d:25,h:26,glass:13.5},
- {w:17,d:20,h:29.75,glass:0}
+ {w:21,d:20,h:31.75,glass:0}
 ];
 export function createLibraryFacade({centerX,stairFrontZ,steppedCenterZ,baseY,footprint=[]}){
  const mat={glass:glassMaterial('#557f95'),mullion:new THREE.MeshStandardMaterial({color:'#59646a',metalness:.35,roughness:.48}),stone:stoneMaterial('#cfbfae'),roof:stoneMaterial('#a79e92'),steps:stoneMaterial('#b2afa7')};
