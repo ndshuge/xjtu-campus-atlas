@@ -100,8 +100,23 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   }else if(southUpperRelief||southCrownRelief){
    // Photo-informed but estimated: real separation of the dark central glass fields.
    const mid=(bottom+top)/2,recess=southCrownRelief?.29:.30,halfGap=southCrownRelief?.16:.14;
-   wallRect('glass',e,from,to,bottom+.22,mid-halfGap,-recess);
-   wallRect('glass',e,from,to,mid+halfGap,top-.55,-recess);
+   if(southCrownRelief){
+    // 2021 front photo: two pale masonry islands interrupt the otherwise
+    // continuous dark central curtain. Carve the panes instead of covering
+    // an uninterrupted glass sheet with a decorative box.
+    const center=(from+to)/2,halfStone=.88;
+    for(const [low,high] of [[bottom+.22,mid-halfGap],[mid+halfGap,top-.55]]){
+     const stoneLow=(low+high)/2-.83,stoneHigh=(low+high)/2+.83;
+     wallRect('glass',e,from,to,low,stoneLow,-recess);
+     wallRect('glass',e,from,center-halfStone,stoneLow,stoneHigh,-recess);
+     wallRect('glass',e,center+halfStone,to,stoneLow,stoneHigh,-recess);
+     wallRect('glass',e,from,to,stoneHigh,high,-recess);
+     strip('wall',e,center,stoneLow,halfStone*2,stoneHigh-stoneLow,.44,.10);
+    }
+   }else{
+    wallRect('glass',e,from,to,bottom+.22,mid-halfGap,-recess);
+    wallRect('glass',e,from,to,mid+halfGap,top-.55,-recess);
+   }
    strip('frame',e,(from+to)/2,mid-halfGap,to-from,halfGap*2,southCrownRelief?.32:.30,southCrownRelief?.10:.09);
   }else wallRect('glass',e,from,to,bottom+.22,top-.55,-.22);
   for(let i=0;i<=columns;i++)strip(north?kind:'frame',e,from+i*(to-from)/columns,bottom+.12,north?.65:.11,top-bottom-.5,north?.72:(southRelief?.28:((southUpperRelief||southCrownRelief)?.22:.18)),north?.1:(southRelief?.01:((southUpperRelief||southCrownRelief)?-.02:-.08)));
@@ -121,6 +136,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  const southUpperCurtain=gray?null:{photoInformed:true,estimated:true,courses:['south-course-2'],mullionColumns:6,spandrelHeight:.24,spandrelProjection:.24,glassRecess:.30,reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
  const southCrownCurtain=gray?null:{photoInformed:true,estimated:true,courses:['south-course-3'],mullionColumns:6,spandrelHeight:.32,spandrelProjection:.26,glassRecess:.29,reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
+ const southCurtainMasonry=gray?null:{photoInformed:true,estimated:true,source:'library-front-2021.jpg',license:'CC BY-SA 4.0',course:'south-course-3',count:2,approxWidth:1.76,description:'Two pale stone panels replacing actual glazed areas, dimensions from photograph only'};
  const southCurtainRelief=gray?null:{photoInformed:true,estimated:true,courses:['south-course-1'],
   stoneTransomHeight:.38,stoneProjection:.33,glassRecess:.36,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
@@ -338,7 +354,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,southPodiumMassing,southCrownWindows,clockCrown,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southCurtainMasonry,southGardenParapets,southPodiumMassing,southCrownWindows,clockCrown,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],

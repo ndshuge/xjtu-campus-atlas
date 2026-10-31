@@ -22,7 +22,9 @@ test('south-course-3 center curtain has recessed upper/lower glazing split by a 
   const frame=asset.children.find(m=>m.isMesh&&m.name.endsWith('/ frame'));
   const glass=asset.children.find(m=>m.isMesh&&m.name.endsWith('/ glass'));
   assert.ok(frame&&glass);
-  const front=tier.rect[3],x=plan.centerX+.2,mid=(tier.bottom+tier.top)/2;
+  // Sample beside the photograph-backed central stone inserts; the separate
+  // masonry test checks that glass is physically absent at the centre.
+  const front=tier.rect[3],x=plan.centerX+2.4,mid=(tier.bottom+tier.top)/2;
   const ray=new THREE.Raycaster();
   const hit=(mesh,y)=>{
    ray.set(new THREE.Vector3(x,1.1+y,front+25),new THREE.Vector3(0,0,-1));
