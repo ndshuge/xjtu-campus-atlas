@@ -49,12 +49,14 @@ export function treeGeometry(kind='plane',detail='near',seed=1956){
    const b=a+(j?1:-1)*.5;stems.push(branch(end,[end[0]+Math.cos(b)*1.1,end[1]+1.4,end[2]+Math.sin(b)*1.1],.05,.015));
   }
  }
- const clusters=conifer?(near?68:32):(near?92:45);
+ // Distant foliage owns most of the mobile panorama's triangles. Preserve
+ // near crowns and compensate for fewer far cards with slightly wider sprays.
+ const clusters=conifer?(near?68:24):(near?92:34);
  for(let i=0;i<clusters;i++){
   const a=i*2.399963+(rand()-.5)*.31,rad=conifer?(.35+rand()*.65)*(1-i/clusters)*3.2:Math.sqrt((i+.5)/clusters)*3.5*(.84+rand()*.31);
   const y=conifer?3.0+i/clusters*7.7:6.8+Math.sqrt(Math.max(0,1-rad*rad/13))*2.4+(rand()-.5)*1.9;
   // Reduce over-wide flat cards; preserve existing crown points and triangle budget.
-  const size=(conifer?.95:1.25)*(near?.90:1.16)*(0.8+rand()*.4);
+  const size=(conifer?.95:1.25)*(near?.90:1.33)*(0.8+rand()*.4);
   const g=new THREE.PlaneGeometry(size*1.8,size,1,1);
   // Staggered sprays with holes and lobed leaf margins, not closed crown spheres.
   g.rotateX((rand()-.5)*Math.PI);g.rotateY(a+rand());g.rotateZ((rand()-.5)*1.0);
