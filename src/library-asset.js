@@ -95,6 +95,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  }
  const fronts=[];
  let southPortal=null;
+ const southGardenParapets=gray?null:[];
  const southFacadeRibs=gray?null:{photoInformed:true,estimated:true,
   courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
   reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
@@ -163,7 +164,17 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    }
    if(!gray)strip(kind,e,e.length/2,zone.top-.22,e.length,.25,.42,-.04);
   }
-  if(zone.section){roof(zone.cells,zone.top,gray?'roof':'groundcover');
+  if(zone.section){
+   roof(zone.cells,zone.top,gray?'roof':'groundcover');
+   if(!gray&&['south-east-wing','south-west-wing'].includes(zone.id)){
+    // The licensed 2025 aerial shows pale raised edges around these roof gardens.
+    // Photo-informed estimated upstand, inset within the original OSM roof ring.
+    const edges=cellBoundary(zone.cells).filter(e=>!plan.internalSeams.some(([a,b])=>
+     [e.a,e.b].every(p=>pointSegment(p,a,b).distance<.002)));
+    for(const e of edges)strip('wall',e,e.length/2,zone.top-.08,e.length,.48,.30,-.15);
+    southGardenParapets.push({id:zone.id,photoInformed:true,estimated:true,outerEdges:edges.length,height:.48,depth:.30,
+     reference:'library-aerial-2025.jpg (Liuxingy, CC BY-SA 4.0)'});
+   }
   }else if(zone.id==='south-II-podium'){
    const inner=plan.courses[0].rect;
    const bb=[-1e4,-1e4,1e4,1e4];
@@ -248,7 +259,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],
