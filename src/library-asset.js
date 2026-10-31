@@ -95,6 +95,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
  }
  const fronts=[];
  let southPortal=null;
+ let southPodiumMassing=null;
  const southGardenParapets=gray?null:[];
  const southFacadeRibs=gray?null:{photoInformed:true,estimated:true,
   courses:['south-course-2','south-course-3','south-course-4'],countPerCourse:2,width:.62,depth:.66,
@@ -112,6 +113,15 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
   const kind=isNorth||isStack?'north':'wall';
   const boundary=cellBoundary(zone.cells),southEdges=zone.id==='south-II-podium'?boundary.filter(e=>e.nz>.9&&Math.max(e.a[1],e.b[1])>-76):[];
   const southMin=Math.min(...southEdges.flatMap(e=>[e.a[0],e.b[0]])),southMax=Math.max(...southEdges.flatMap(e=>[e.a[0],e.b[0]])),southMid=(southMin+southMax)/2;
+  if(!gray&&zone.id==='south-II-podium'){
+   // The licensed 2021 frontal photo has a broad stone base with a central
+   // glazed entrance, not an uninterrupted glass wall across all three OSM bays.
+   // Ratios are visually estimated, not facade measurements.
+   const width=southMax-southMin;
+   southPodiumMassing={photoInformed:true,estimated:true,glassWidthRatio:.56,stoneWingEachRatio:.22,
+    glassBounds:[southMin+width*.22,southMax-width*.22],
+    reference:'library-front-2021.jpg (Liuxingy, CC BY-SA 4.0)'};
+  }
   for(const e of boundary){
    if(zone.top===13&&plan.internalSeams.some(([a,b])=>[e.a,e.b].every(p=>pointSegment(p,a,b).distance<.002)))continue;
    const northFront=isNorth&&e.nz<-.9&&Math.min(e.a[1],e.b[1])<-218;
@@ -124,7 +134,17 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
     fronts.push({kind:'north',edge:e,mid,y:zone.top-2.3});
    }else if(southFront){
     const start=Math.abs(e.a[0]-southMax)<.01?1.3:0,end=Math.abs(e.b[0]-southMin)<.01?e.length-1.3:e.length;
-    curtain(e,0,11.9,start,end,{columns:Math.max(1,Math.round((end-start)/3.4)),rows:zone.rows});
+    const [xLeft,xRight]=southPodiumMassing?.glassBounds||[southMin,southMax];
+    const sLeft=(xLeft-e.a[0])/e.ux,sRight=(xRight-e.a[0])/e.ux;
+    const glassFrom=Math.max(start,Math.min(sLeft,sRight));
+    const glassTo=Math.min(end,Math.max(sLeft,sRight));
+    const stoneWing={narrowRows:[0,1,2]};
+    if(gray)curtain(e,0,11.9,start,end,{columns:Math.max(1,Math.round((end-start)/3.4)),rows:zone.rows});
+    else if(glassTo>glassFrom+.2){
+     regularWall(e,0,11.9,zone.rows,kind,start,glassFrom,stoneWing);
+     curtain(e,0,11.9,glassFrom,glassTo,{columns:Math.max(1,Math.round((glassTo-glassFrom)/3.4)),rows:zone.rows});
+     regularWall(e,0,11.9,zone.rows,kind,glassTo,end,stoneWing);
+    }else regularWall(e,0,11.9,zone.rows,kind,start,end,stoneWing);
     wallRect(kind,e,0,start,0,13);wallRect(kind,e,end,e.length,0,13);
     wallRect(kind,e,start,end,11.9,13);
     if(Math.min(e.a[0],e.b[0])<=southMid&&Math.max(e.a[0],e.b[0])>southMid){
@@ -259,7 +279,7 @@ export function createLibraryAsset({building,baseY=1.1,buildingIndex=-1,uniforms
    if(!gray&&m===materials.glass)shader.fragmentShader=shader.fragmentShader.replace('#include <emissivemap_fragment>','#include <emissivemap_fragment>\n totalEmissiveRadiance+=vec3(.22,.16,.08)*uLibNight;');
   };m.customProgramCacheKey=()=>previousKey()+'-library-r16-focus-'+buildingIndex;
  });
- asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,
+ asset.userData={owner:'library-asset.js',version:'R12',osmId:LIBRARY_OSM_ID,buildingId:building.id,stage,plan,southPortal,southFacadeRibs,southNarrowBays,southCurtainRelief,southUpperCurtain,southCrownCurtain,southGardenParapets,southPodiumMassing,
   ownership:{structure:'this asset',facade:'this asset',clock:'this asset',greenRoofs:'this asset',forecourt:'existing library-forecourt.js; unchanged'},
   retiredVisuals:['generic buildingMesh library faces','world.addClock library plane','libraryFacade','libraryClock','libraryGreenRoofs','buildingSilhouettes northLibrary'],
   estimated:true,entrances:fronts.map(f=>({side:f.kind,center:[f.edge.a[0]+f.edge.ux*f.mid,baseY+f.y,f.edge.a[1]+f.edge.uz*f.mid]})),sourceDates:['2016-11-21','2017-05-18','2021-09-06','2025-07-25'],
