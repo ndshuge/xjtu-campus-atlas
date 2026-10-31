@@ -34,6 +34,7 @@ Completed before this plan: south course 1–3 narrow vertical bays, south entra
 - [x] Compare critically and record next most material defect; commit verified owned files.
 
 ### [ ] M2 — architecture-wide near-view silhouette review (not more decorative windows)
+**Progress:** first supporting architectural roof-edge increment committed as `342d02e` (south garden parapets). Photo-grounded but subtle in real screenshots; main structural silhouette task remains incomplete. Continue with clock-supporting south tower crown/stepped roof near-oblique A/B, not more trim.
 **Files:** `src/library-asset-plan.js` / `src/library-asset.js` only if evidence warrants, matched tests and handoff.
 - [ ] Compare photographed north/south/tower/roof volumes and shadow separations at fixed near and oblique views, prioritizing a visible structural mismatch over small trim.
 - [ ] Fix ONE photo-supported volume, setback or roof silhouette mismatch test-first; reject uncertain reverse/hidden elevations.
