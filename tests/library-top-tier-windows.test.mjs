@@ -28,7 +28,9 @@ test('top south tier has short photo-informed windows and taller physical stone 
   const glassAt=(x,y)=>{
    ray.set(new THREE.Vector3(x,1.1+y,front+12),new THREE.Vector3(0,0,-1));
    const gh=ray.intersectObject(glass,false)[0],wh=ray.intersectObject(wall,false)[0];
-   return Boolean(gh&&Math.abs(gh.point.z-(front-.28))<.1&&(!wh||wh.point.z<gh.point.z-.005));
+   // The roof glazing now sits in actual pitched facets, so its Z depth
+   // varies with height. Do not accept unrelated glazing behind this roof.
+   return Boolean(gh&&gh.point.z<front-.3&&gh.point.z>front-1.5&&(!wh||wh.point.z<gh.point.z-.005));
   };
   const scan=y=>{
    let count=0,last=false;
