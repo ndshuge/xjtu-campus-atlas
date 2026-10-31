@@ -57,6 +57,7 @@ export function attachViewOrb(world){
  for(const type of ['pointerup','pointercancel','lostpointercapture'])orb.addEventListener(type,release);
  orb.addEventListener('dblclick',e=>{e.preventDefault();world.resetViewLook();});
  orb.addEventListener('keydown',e=>{
+  if(world.racingActive)return; // Let racing controls own R and steering keys.
   stopInertia();
   const step=e.shiftKey ? .16 : .07,turns={ArrowLeft:[step,0],ArrowRight:[-step,0],ArrowUp:[0,step],ArrowDown:[0,-step]};
   if(turns[e.key]){e.preventDefault();e.stopPropagation();world.beginViewLook();world.turnView(...turns[e.key]);}

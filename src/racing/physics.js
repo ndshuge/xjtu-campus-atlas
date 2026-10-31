@@ -16,7 +16,8 @@ const validatedPosition=(position)=>{
   return [...position]
 }
 
-export function createRacingPhysics({ spawn=START }={}) {
+export function createRacingPhysics({ spawn=START, heading=0 }={}) {
+  if(!Number.isFinite(heading))throw new RangeError('finite heading required')
   const spawnPosition=validatedPosition(spawn)
   const world=new CANNON.World({gravity:new CANNON.Vec3(0,-9.82,0)})
   world.allowSleep=false
@@ -56,7 +57,7 @@ export function createRacingPhysics({ spawn=START }={}) {
   let wheelRollAngles=[0,0,0,0]
   let lastContact=[false,false,false,false]
   let destroyed=false
-  const spawnQuaternion=new CANNON.Quaternion()
+  const spawnQuaternion=new CANNON.Quaternion().setFromAxisAngle(UP,heading)
   const setInput=(next={})=>{
     input={throttle:clamp(next.throttle??0,-1,1),steer:clamp(next.steer??0,-1,1),
       brake:clamp(next.brake??0,0,1),handbrake:next.handbrake===true}

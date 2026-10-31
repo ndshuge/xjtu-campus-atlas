@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-31T19:26:00.097Z",
+  "url": "http://127.0.0.1:18987/",
+  "results": [
+    {
+      "name": "desktop-1440",
+      "viewport": [
+        1440,
+        900
+      ],
+      "actions": [
+        {
+          "southbound": -6.436926319781035,
+          "speedKmh": 42.66855837916224,
+          "handbrakeSpeedKmh": 32.69230084745794,
+          "resetStress": 5
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "portrait-390",
+      "viewport": [
+        390,
+        844
+      ],
+      "actions": [
+        {
+          "southbound": -4.494397012792789,
+          "speedKmh": 35.683354825103606,
+          "reverse": 1.698251823712071
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    },
+    {
+      "name": "landscape-844",
+      "viewport": [
+        844,
+        390
+      ],
+      "actions": [
+        {
+          "southbound": -4.337259963470066,
+          "speedKmh": 35.02514906714132,
+          "reverse": 2.776889579132365
+        }
+      ],
+      "ok": true,
+      "errors": [],
+      "httpErrors": []
+    }
+  ]
+}

@@ -1,13 +1,14 @@
 import {createGameModeHost} from './game-mode-host.js'
 import {createRacingPhysics} from './racing/physics.js'
 import {createSyntheticTrack} from './racing/track.js'
+import {createCampusDriveTrack,planCampusDrive} from './racing/campus-track.js'
 import {createDesktopInput,createTouchInput} from './racing/controls.js'
 import {loadVehicleVisuals} from './racing/visuals.js'
 import {createDriveCameraRig} from './racing/camera-rig.js'
 import './racing-mode.css'
 
-const ORIGIN=[1800,0,1800]
-const SPAWN=[1800,2.1,1782]
+const PRACTICE_ORIGIN=[1800,0,1800]
+const PRACTICE_SPAWN=[1800,2.1,1782]
 const FIXED=1/60
 const touchLayout=()=>matchMedia('(pointer: coarse)').matches||innerWidth<700
 function makeControls(){
@@ -15,10 +16,10 @@ function makeControls(){
  node.id='racing-overlay'
  node.setAttribute('aria-label','真实物理赛车实验场')
  node.innerHTML=`
- <div class="race-top"><div class="race-brand"><strong>ATLAS <em>DRIVE</em></strong><span>独立合成练车场 · 非真实校园道路</span></div>
+ <div class="race-top"><div class="race-brand"><strong>ATLAS <em>DRIVE</em></strong><span id="race-place">校园道路 · 梧桐东道</span><button type="button" id="race-switch">切换至独立练车场</button></div>
  <div class="race-actions"><button id="race-camera" type="button">切换视角 <kbd>C</kbd></button><button id="race-reset" type="button">复位 <kbd>R</kbd></button><button id="race-exit" type="button">返回校园 <kbd>Esc</kbd></button></div></div>
  <div class="race-speed"><strong id="race-speed-number">000</strong><small>km/h</small><p>悬挂接地 <span id="race-contact">0/4</span></p></div>
- <div class="race-hint">真实四轮 RaycastVehicle 物理 · 平路 / 坡道 / 路缘 / 障碍物<br/>键盘 WASD / 方向键 · Space 手刹 · S 低速倒车</div>
+ <div class="race-hint">真实四轮 RaycastVehicle 物理 · 校园道路高程与宽度未经实测，仅供虚拟驾驶<br/>WASD / 方向键 · Space 手刹 · S 低速倒车</div>
  <div class="race-mobile"><div class="race-steer" id="race-stick"><span>左右转向</span><div id="race-stick-knob"></div></div>
  <div class="race-pedals"><button id="race-handbrake">手刹</button><button id="race-reverse">倒车</button><button id="race-brake">制动</button><button id="race-gas">油门</button></div></div>`
  return node
@@ -52,7 +53,7 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
  })
  host.registerMode({
   id:'race',
-  async onEnter({onCleanup}){
+  async onEnter({options,onCleanup}){
    // Register cleanup immediately: async GLB failure must restore the map.
    world.racingActive=true;world.driveModeHost=host
    document.body.classList.add('racing-mode')
@@ -62,13 +63,20 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
    for(const item of world.labelItems)item.el.hidden=true
    const ui=makeControls();document.body.append(ui)
    onCleanup(()=>ui.remove())
-   const sim=createRacingPhysics({spawn:SPAWN})
+   const practice=options.arena==='practice'
+   const course=practice?null:planCampusDrive(world.data)
+   const spawn=practice?PRACTICE_SPAWN:course.spawn
+   const sim=createRacingPhysics({spawn,heading:course?.heading??0})
    onCleanup(()=>sim.destroy())
-   const track=createSyntheticTrack({physics:sim,scene:world.scene,origin:ORIGIN})
+   const track=practice?
+    createSyntheticTrack({physics:sim,scene:world.scene,origin:PRACTICE_ORIGIN}):
+    createCampusDriveTrack({physics:sim,data:world.data,course,trees:world.treePositions||[]})
    onCleanup(()=>track.destroy())
+   ui.querySelector('#race-place').textContent=practice?'独立合成练车场 · 实验场景':'校园实景 · 梧桐东道｜平面高程模拟'
+   ui.querySelector('#race-switch').textContent=practice?'返回校园道路':'切换至独立练车场'
    const cameraRig=createDriveCameraRig(world.camera)
    cameraRig.reset()
-   world.camera.position.set(SPAWN[0],SPAWN[1]+4,SPAWN[2]-9)
+   world.camera.position.set(spawn[0]-Math.sin(course?.heading??0)*9,spawn[1]+4,spawn[2]-Math.cos(course?.heading??0)*9)
    world.camera.near=.1;world.camera.updateProjectionMatrix()
    const base=new URL('models/racing/',document.baseURI)
    const visuals=await loadVehicleVisuals(world.scene,{
@@ -98,7 +106,7 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
     }else{
      input=createDesktopInput({
       windowTarget:window,documentTarget:document,
-      onInput:setInput,onReset:()=>sim.reset(SPAWN),onCamera:cycle,onExit:()=>{void exit()}
+      onInput:setInput,onReset:()=>sim.reset(spawn),onCamera:cycle,onExit:()=>{void exit()}
      })
     }
    }
@@ -111,7 +119,8 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
    const resetButton=ui.querySelector('#race-reset')
    const exitButton=ui.querySelector('#race-exit')
    cameraButton.addEventListener('click',cycle)
-   resetButton.addEventListener('click',()=>sim.reset(SPAWN))
+   resetButton.addEventListener('click',()=>sim.reset(spawn))
+   ui.querySelector('#race-switch').addEventListener('click',()=>{void switchArena(practice?'campus':'practice')})
    exitButton.addEventListener('click',()=>{void exit()})
    // Rotate the chase camera with a mouse drag; the Atlas canvas remains owned by Atlas.
    let drag=null
@@ -136,20 +145,27 @@ export function createAtlasRacingMode(world,{notify=()=>{}}={}){
     ui.querySelector('#race-speed-number').textContent=String(Math.round(state.speedKmh)).padStart(3,'0')
     ui.querySelector('#race-contact').textContent=state.wheels.filter(w=>w.contact).length+'/4'
     window.__atlasRacingDiagnostics={speedKmh:state.speedKmh,position:state.position,contacts:state.wheels.filter(w=>w.contact).length,
-     bodies:sim.world.bodies.length,visualWheels:visuals.wheels.length,origin:ORIGIN}
+     bodies:sim.world.bodies.length,visualWheels:visuals.wheels.length,
+     arena:practice?'practice':'campus',routeId:course?.roadId??null,
+     roadName:course?.name??null,roadWidth:course?.width??null,
+     collisionStats:track.collisionStats??null,worldCamera:world.camera.position.toArray()}
    }
    onCleanup(()=>{this.onTick=null;delete window.__atlasRacingDiagnostics})
   }
  })
- async function enter(){
+ async function enter(options={}){
   if(loading)return loading
   if(host.mode==='race')return {mode:'race'}
   exitRequested=false
-  loading=host.enterMode('race')
+  loading=host.enterMode('race',options)
   const result=await loading;loading=null
   if(exitRequested&&result.mode==='race')await host.exitMode()
   if(result.reason)notify('赛车加载失败，已恢复校园地图')
   return result
+ }
+ async function switchArena(arena){
+  await exit()
+  return enter({arena})
  }
  async function exit(){
   if(loading){exitRequested=true;await loading;return host.exitMode()}

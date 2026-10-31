@@ -10,6 +10,7 @@ body.racing-mode .building-label,body.racing-mode .map-label,body.racing-mode #t
 #racing-overlay .race-brand strong{font-size:clamp(15px,2vw,24px);letter-spacing:.14em;font-weight:760}
 #racing-overlay .race-brand em{color:#cce2b3;font-style:normal}
 #racing-overlay .race-brand span{font-size:11px;color:#fff;opacity:.91}
+#racing-overlay .race-brand #race-switch{padding:7px 10px;border-radius:9px;align-self:start;font-size:11px;background:#e1edce;color:#20382f;border-color:#f7ffe4;margin-top:3px}
 #racing-overlay .race-actions{display:flex;gap:8px}
 #racing-overlay button{border:1px solid #ffffff55;border-radius:14px;background:#12232fc9;backdrop-filter:blur(18px);color:white;font:inherit;font-size:13px;font-weight:600;padding:12px 15px;box-shadow:0 3px 18px #0005}
 #racing-overlay button:focus-visible{outline:2px solid #d4f5a6;outline-offset:3px}
@@ -27,7 +28,7 @@ body.racing-mode .building-label,body.racing-mode .map-label,body.racing-mode #t
  #racing-overlay .race-actions{gap:5px}
  #racing-overlay button{padding:11px 10px;font-size:11px;border-radius:12px}
  #racing-overlay kbd{display:none}
- #racing-overlay .race-speed{top:calc(78px + env(safe-area-inset-top));left:13px;bottom:auto}
+ #racing-overlay .race-speed{top:calc(150px + env(safe-area-inset-top));left:13px;bottom:auto}
  #racing-overlay .race-speed strong{font-size:34px}
  #racing-overlay .race-hint{display:none}
  #racing-overlay .race-mobile{position:absolute;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;justify-content:space-between;align-items:end;gap:15px}
@@ -41,7 +42,7 @@ body.racing-mode .building-label,body.racing-mode .map-label,body.racing-mode #t
 }
 @media (max-height:460px) and (pointer:coarse),(max-height:460px) and (max-width:700px){
  #racing-overlay .race-brand span{max-width:170px}
- #racing-overlay .race-speed{top:75px}
+ #racing-overlay .race-speed{top:calc(135px + env(safe-area-inset-top))}
  #racing-overlay .race-speed strong{font-size:25px}
  #racing-overlay .race-steer{height:97px;width:125px;border-radius:28px}
  #racing-overlay #race-stick-knob{width:39px;height:39px}
