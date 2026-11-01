@@ -1,0 +1,93 @@
+{
+  "site": "http://127.0.0.1:19026/",
+  "date": "2026-11-01T07:57:59.928Z",
+  "results": [
+    {
+      "name": "desktop",
+      "buildings": [
+        {
+          "id": 263625090,
+          "overview": 220,
+          "near": 87,
+          "dropPercent": 60,
+          "drawCalls": 334
+        },
+        {
+          "id": 264108763,
+          "overview": 221,
+          "near": 87,
+          "dropPercent": 61,
+          "drawCalls": 277
+        },
+        {
+          "id": 263808679,
+          "overview": 188,
+          "near": 65,
+          "dropPercent": 66,
+          "drawCalls": 561
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "portrait-390",
+      "buildings": [
+        {
+          "id": 263625090,
+          "overview": 220,
+          "near": 112,
+          "dropPercent": 49,
+          "drawCalls": 68
+        },
+        {
+          "id": 264108763,
+          "overview": 221,
+          "near": 112,
+          "dropPercent": 49,
+          "drawCalls": 49
+        },
+        {
+          "id": 263808679,
+          "overview": 188,
+          "near": 82,
+          "dropPercent": 57,
+          "drawCalls": 252
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "landscape-844",
+      "buildings": [
+        {
+          "id": 263625090,
+          "overview": 220,
+          "near": 87,
+          "dropPercent": 60,
+          "drawCalls": 340
+        },
+        {
+          "id": 264108763,
+          "overview": 221,
+          "near": 87,
+          "dropPercent": 61,
+          "drawCalls": 293
+        },
+        {
+          "id": 263808679,
+          "overview": 188,
+          "near": 65,
+          "dropPercent": 66,
+          "drawCalls": 576
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    }
+  ]
+}

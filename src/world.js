@@ -10,6 +10,7 @@ import {createScienceHallAsset,SCIENCE_ID} from './science-hall-asset.js';
 import {createBuildingSilhouettes} from './building-silhouettes.js';
 import {createTengfeiTower,createSiyuanStele} from './axis-monuments.js';
 import {buildingGroupFrame,libraryEntranceFrame,landmarkEntranceFrame} from './building-views.js';
+import {planBuildingCloseView} from './building-near-camera.js';
 import {createSiyuanCenterAsset,SIYUAN_ID} from './siyuan-center-asset.js';
 import {createRelocationMuseumAsset,RELOCATION_MUSEUM_ID} from './relocation-museum-asset.js';
 import {createCentralBuildingsAsset,CENTRAL_IDS} from './central-buildings-asset.js';
@@ -377,6 +378,13 @@ export class CampusWorld{
   if(this.viewTransition){const q=this.viewTransition,t=q.duration?Math.min(1,(now-q.start)/q.duration):1,e=t*t*(3-2*t);this.setViewAngles(q.yaw+q.delta*e,q.pitch+(q.toPitch-q.pitch)*e);if(t===1)this.viewTransition=null;}
   if(this.viewZoomTransition){const q=this.viewZoomTransition,t=Math.min(1,(now-q.start)/q.duration),e=t*t*(3-2*t);this.camera.fov=q.from+(q.to-q.from)*e;this.camera.updateProjectionMatrix();if(t===1)this.viewZoomTransition=null;}
   if(this.viewZoomButtons){const f=this.viewZoomTransition?.to??this.camera.fov,buttons=this.viewZoomButtons;if(buttons.in.disabled!==(f<=20.01))buttons.in.disabled=f<=20.01;if(buttons.out.disabled!==(f>=84.99))buttons.out.disabled=f>=84.99;}
+ }
+ focusNear(p){
+  const frame=planBuildingCloseView({building:p,currentEye:this.camera.position.toArray(),viewport:{width:this.width,height:this.height},baseY:BASE})
+  if(!frame){this.focus(p);return}
+  // Keep source selection, hover, and category behaviors; only change camera distance.
+  this.focus(p,false)
+  this.fly(frame.position,frame.target,1150)
  }
  focus(p,fly=true){const previousFov=this.camera.fov;const i=this.data.buildings.indexOf(p);this.selected=i;this.selectedPlace=p;this.selection.value=i;this.labelItems.forEach(l=>l.el.classList.toggle('selected',l.place.id===p.id));const c=p.center||p.position,h=p.displayHeight||p.height||18;const dim=p.points?bounds(p.points):null;const size=dim?Math.max(dim[2]-dim[0],dim[3]-dim[1]):35;const dist=Math.max(120,size*1.6,h*2.2);this.setAuto(false);if(fly){const gate=p.name==='北门'||p.name==='南门';const sideGate=p.gateType==='osm-point';const sidePos=sideGate?visualGatePosition(p):c;this.camera.fov=this.isMobile&&p.name==='南门'?48:gate&&this.isMobile?65:39;this.camera.updateProjectionMatrix();const exterior=p.name==='北门'?-1:1;const plaza=p.id==='interpretive/four-inventions';const library=p.osmId===263624481;const libraryFrame=library?libraryEntranceFrame(p,this.data.buildings,this.width,this.height):null;const landmarkFrame=landmarkEntranceFrame(p,this.width,this.height);if(plaza&&this.isMobile){this.camera.fov=70;this.camera.updateProjectionMatrix();}if(libraryFrame||landmarkFrame){this.camera.fov=(libraryFrame||landmarkFrame).fov;this.camera.updateProjectionMatrix();}const position=landmarkFrame?landmarkFrame.position:sideGate?[sidePos[0]+(/东/.test(p.name)?33:-33),BASE+(this.isMobile?19:23),sidePos[1]+25]:gate?(this.isMobile?[c[0],p.name==='南门'?22:30,c[1]+exterior*(p.name==='南门'?124:150)]:[c[0]+24,30,c[1]+exterior*135]):plaza?(this.isMobile?[c[0]+56,57,c[1]-96]:[c[0]+56,57,c[1]-96]) :libraryFrame?libraryFrame.position:[c[0]+dist*.8,Math.max(h+dist*.65,80),c[1]+dist*1.1];const target=landmarkFrame?landmarkFrame.target:sideGate?[sidePos[0],BASE+2,sidePos[1]]:gate?[c[0],7.7,c[1]]:plaza?[c[0]+(this.isMobile?-7:0),2.0,c[1]] :libraryFrame?libraryFrame.target:[c[0],h*.25,c[1]];this.fly(position,target,1400);if(this.flight){this.flight.fovFrom=previousFov;this.flight.fovTo=this.camera.fov;this.camera.fov=previousFov;this.camera.updateProjectionMatrix();}}}
  clearSelection(){this.selection.value=-1;this.selected=-1;this.selectedPlace=null;this.labelItems.forEach(l=>l.el.classList.remove('selected'));}
