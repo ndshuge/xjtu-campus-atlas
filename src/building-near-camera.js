@@ -1,7 +1,7 @@
 // R26: close-up framing for a selected OSM building.
 // Pure math; it never moves the camera or edits OSM, and does not alter overview framing.
 const finite2=p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)
-export function planBuildingCloseView({building,currentEye,viewport={width:1440,height:900},baseY=1.1}={}){
+export function planBuildingCloseView({building,currentEye,viewport={width:1440,height:900},baseY=1.1,preferredFace=null}={}){
  if(!building||!finite2(building.center)||!Array.isArray(building.points)||building.points.length<3||
   !building.points.every(finite2)||!Array.isArray(currentEye)||currentEye.length!==3||
   !currentEye.every(Number.isFinite)||!Number.isFinite(baseY))return null
@@ -20,5 +20,17 @@ export function planBuildingCloseView({building,currentEye,viewport={width:1440,
  const vertical=distance*.32,horizontal=Math.sqrt(distance*distance-vertical*vertical)
  const target=[building.center[0],baseY+height*.42,building.center[1]]
  const position=[target[0]+nx*horizontal,target[1]+vertical,target[2]+nz*horizontal]
+ const face=preferredFace
+ if(face&&Array.isArray(face.center)&&face.center.length===3&&face.center.every(Number.isFinite)&&
+    finite2(face.normal)&&Math.hypot(...face.normal)>.001){
+  const len=Math.hypot(...face.normal),fx=face.normal[0]/len,fz=face.normal[1]/len
+  const frontTarget=[face.center[0],Math.max(baseY+1,face.center[1]),face.center[2]]
+  const horizontal=distance*.95,vertical=Math.sqrt(distance*distance-horizontal*horizontal)
+  const side=.12,normalizer=Math.sqrt(1+side*side)
+  const frontEye=[frontTarget[0]+horizontal*(fx+fz*side)/normalizer,
+   frontTarget[1]+vertical,
+   frontTarget[2]+horizontal*(fz-fx*side)/normalizer]
+  return {position:frontEye,target:frontTarget,distance,footprint:[width,depth],height,coverage:'photo-facade-direction',evidenceDirection:'provisional'}
+ }
  return {position,target,distance,footprint:[width,depth],height,coverage:narrow?'portrait-cropped-detail':'close-facade'}
 }
