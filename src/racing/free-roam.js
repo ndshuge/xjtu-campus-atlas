@@ -5,7 +5,7 @@ import {findStadiumInfield} from '../stadium-infield.js'
 // Keeps the schematic campus game from appearing to drive across mapped
 // water or beyond the published Atlas boundary. Outside the road network
 // but *inside* the campus, the car is always free to drive on flat ground.
-export function createDriveSafetyGuard(data,{spawn,edgeTolerance=2,notify=()=>{}}={}){
+export function createDriveAreaClassifier(data,{edgeTolerance=2}={}){
  const polygons=data?.boundary?.filter(poly=>Array.isArray(poly)&&poly.length>=3&&
   poly.every(p=>Array.isArray(p)&&p.length===2&&p.every(Number.isFinite)))||[]
  if(!polygons.length)throw Error('Mapped campus boundary required')
@@ -24,6 +24,11 @@ export function createDriveSafetyGuard(data,{spawn,edgeTolerance=2,notify=()=>{}
   if(water.some(s=>pointIn(p,s.points)))return {allowed:false,reason:'water'}
   return {allowed:true,reason:'campus'}
  }
+ return classify
+}
+
+export function createDriveSafetyGuard(data,{spawn,edgeTolerance=2,notify=()=>{}}={}){
+ const classify=createDriveAreaClassifier(data,{edgeTolerance})
  if(!Array.isArray(spawn)||spawn.length!==3||!spawn.every(Number.isFinite)||!classify(spawn).allowed)
   throw RangeError('verified campus spawn required')
  function recover(physics){

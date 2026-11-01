@@ -6,6 +6,7 @@
 import * as CANNON from 'cannon-es'
 import {BASE,pointSegment} from '../geo.js'
 import {mountRoadCollisionProxies} from './track.js'
+import {createDriveAreaClassifier} from './free-roam.js'
 
 export const CAMPUS_ROUTE_ID='way/148313517/0'
 const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1])
@@ -26,10 +27,19 @@ export function planCampusDrive(data,{roadId=CAMPUS_ROUTE_ID}={}){
   segments.push({a:[...a],b:[...b],length})
  }
  if(!segments.length||lengthMeters<25)throw Error('Road too short for measured vehicle mode')
- const first=segments[0]
- const at=.48
- const spawn=[first.a[0]+(first.b[0]-first.a[0])*at,BASE+1.2,first.a[1]+(first.b[1]-first.a[1])*at]
- const heading=Math.atan2(first.b[0]-first.a[0],first.b[1]-first.a[1])
+ const classify=createDriveAreaClassifier(data)
+ // Keep existing valid starts; choose a verified interior segment if the tip crosses the boundary.
+ let chosen=null,spawn=null
+ for(const seg of segments){
+  for(const at of [.48,.65,.35,.8,.2]){
+   const p=[seg.a[0]+(seg.b[0]-seg.a[0])*at,BASE+1.2,
+    seg.a[1]+(seg.b[1]-seg.a[1])*at]
+   if(classify(p).allowed){chosen=seg;spawn=p;break}
+  }
+  if(chosen)break
+ }
+ if(!chosen)throw Error('No playable campus spawn on selected roadway')
+ const heading=Math.atan2(chosen.b[0]-chosen.a[0],chosen.b[1]-chosen.a[1])
  return {roadId:road.id,name:road.name||'OSM 校园道路',width:road.width,
   segments,lengthMeters,spawn,heading,roadClass:road.kind,elevation:'unmeasured-flat-proxy'}
 }
