@@ -1,0 +1,93 @@
+{
+  "site": "https://ndshuge.github.io/xjtu-campus-atlas/r29-unoccluded-camera-20261101/",
+  "date": "2026-11-01T12:55:08.204Z",
+  "results": [
+    {
+      "name": "desktop",
+      "buildings": [
+        {
+          "id": 263633887,
+          "overview": 216,
+          "near": 86,
+          "dropPercent": 60,
+          "drawCalls": 496
+        },
+        {
+          "id": 263625677,
+          "overview": 500,
+          "near": 132,
+          "dropPercent": 74,
+          "drawCalls": 280
+        },
+        {
+          "id": 263625090,
+          "overview": 220,
+          "near": 87,
+          "dropPercent": 60,
+          "drawCalls": 588
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "portrait-390",
+      "buildings": [
+        {
+          "id": 263633887,
+          "overview": 216,
+          "near": 110,
+          "dropPercent": 49,
+          "drawCalls": 107
+        },
+        {
+          "id": 263625677,
+          "overview": 500,
+          "near": 132,
+          "dropPercent": 74,
+          "drawCalls": 44
+        },
+        {
+          "id": 263625090,
+          "overview": 220,
+          "near": 112,
+          "dropPercent": 49,
+          "drawCalls": 227
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "landscape-844",
+      "buildings": [
+        {
+          "id": 263633887,
+          "overview": 216,
+          "near": 86,
+          "dropPercent": 60,
+          "drawCalls": 537
+        },
+        {
+          "id": 263625677,
+          "overview": 500,
+          "near": 132,
+          "dropPercent": 74,
+          "drawCalls": 290
+        },
+        {
+          "id": 263625090,
+          "overview": 220,
+          "near": 87,
+          "dropPercent": 60,
+          "drawCalls": 608
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    }
+  ]
+}
