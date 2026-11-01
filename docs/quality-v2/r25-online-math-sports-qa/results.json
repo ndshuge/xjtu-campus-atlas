@@ -1,0 +1,84 @@
+{
+  "site": "https://ndshuge.github.io/xjtu-campus-atlas/r25-photo-math-sports-20261101/",
+  "date": "2026-11-01T07:26:25.262Z",
+  "results": [
+    {
+      "name": "desktop",
+      "buildings": [
+        {
+          "id": 263625090,
+          "name": "理学院 数学与统计学院",
+          "drawCalls": 367,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 264108763,
+          "name": "大学生文体教育中心",
+          "drawCalls": 314,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 495,
+          "photoBuildingCount": 11
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "portrait-390",
+      "buildings": [
+        {
+          "id": 263625090,
+          "name": "理学院 数学与统计学院",
+          "drawCalls": 76,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 264108763,
+          "name": "大学生文体教育中心",
+          "drawCalls": 49,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 234,
+          "photoBuildingCount": 11
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "landscape-844",
+      "buildings": [
+        {
+          "id": 263625090,
+          "name": "理学院 数学与统计学院",
+          "drawCalls": 387,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 264108763,
+          "name": "大学生文体教育中心",
+          "drawCalls": 325,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 506,
+          "photoBuildingCount": 11
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    }
+  ]
+}
