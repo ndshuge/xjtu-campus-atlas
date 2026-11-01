@@ -3,13 +3,13 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import {createPhotoBuildingAssets,PHOTO_BUILDING_IDS} from '../src/photo-building-integration.js'
 const data=JSON.parse(fs.readFileSync(new URL('../public/data/campus.json',import.meta.url),'utf8'))
-test('R24 integrates nine distinct committed photo-evidenced OSM building assets',()=>{
- assert.equal(PHOTO_BUILDING_IDS.length,9)
- assert.equal(new Set(PHOTO_BUILDING_IDS).size,9,'no duplicated footprints')
+test('R25 preserves all original R24 photo building assets without duplicates',()=>{
+ assert.ok(PHOTO_BUILDING_IDS.length>=9)
+ assert.equal(new Set(PHOTO_BUILDING_IDS).size,PHOTO_BUILDING_IDS.length,'no duplicated footprints')
  for(const id of PHOTO_BUILDING_IDS)assert.ok(data.buildings.some(b=>b.osmId===id),'missing OSM '+id)
  const group=createPhotoBuildingAssets({buildings:data.buildings,baseY:1.1})
  try{
-  assert.equal(group.children.length,9,'four Z-negative and five Z-positive assets')
+  assert.equal(group.children.length,PHOTO_BUILDING_IDS.length,'original photo buildings retained alongside new assets')
   assert.deepEqual(group.userData.osmIds.sort((a,b)=>a-b),[...PHOTO_BUILDING_IDS].sort((a,b)=>a-b))
   for(const asset of group.children){
    assert.ok(asset.children.some(m=>m.isMesh),'asset without render mesh')

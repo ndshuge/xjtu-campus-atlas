@@ -1,0 +1,84 @@
+{
+  "site": "http://127.0.0.1:19025/",
+  "date": "2026-11-01T07:09:13.237Z",
+  "results": [
+    {
+      "name": "desktop",
+      "buildings": [
+        {
+          "id": 263625090,
+          "name": "理学院 数学与统计学院",
+          "drawCalls": 367,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 264108763,
+          "name": "大学生文体教育中心",
+          "drawCalls": 306,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 495,
+          "photoBuildingCount": 11
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "portrait-390",
+      "buildings": [
+        {
+          "id": 263625090,
+          "name": "理学院 数学与统计学院",
+          "drawCalls": 76,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 264108763,
+          "name": "大学生文体教育中心",
+          "drawCalls": 47,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 234,
+          "photoBuildingCount": 11
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "landscape-844",
+      "buildings": [
+        {
+          "id": 263625090,
+          "name": "理学院 数学与统计学院",
+          "drawCalls": 387,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 264108763,
+          "name": "大学生文体教育中心",
+          "drawCalls": 324,
+          "photoBuildingCount": 11
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 506,
+          "photoBuildingCount": 11
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    }
+  ]
+}
