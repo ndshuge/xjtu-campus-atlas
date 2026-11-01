@@ -1,0 +1,84 @@
+{
+  "site": "https://ndshuge.github.io/xjtu-campus-atlas/r24-photo-buildings-20261101/",
+  "date": "2026-11-01T05:03:13.654Z",
+  "results": [
+    {
+      "name": "desktop",
+      "buildings": [
+        {
+          "id": 264738603,
+          "name": "西安交通大学招生办公室",
+          "drawCalls": 310,
+          "photoBuildingCount": 9
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 481,
+          "photoBuildingCount": 9
+        },
+        {
+          "id": 263807970,
+          "name": "彭康书院 东18 19 20舍",
+          "drawCalls": 368,
+          "photoBuildingCount": 9
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "portrait-390",
+      "buildings": [
+        {
+          "id": 264738603,
+          "name": "西安交通大学招生办公室",
+          "drawCalls": 64,
+          "photoBuildingCount": 9
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 234,
+          "photoBuildingCount": 9
+        },
+        {
+          "id": 263807970,
+          "name": "彭康书院 东18 19 20舍",
+          "drawCalls": 119,
+          "photoBuildingCount": 9
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "landscape-844",
+      "buildings": [
+        {
+          "id": 264738603,
+          "name": "西安交通大学招生办公室",
+          "drawCalls": 322,
+          "photoBuildingCount": 9
+        },
+        {
+          "id": 263808679,
+          "name": "南洋书院 东8舍",
+          "drawCalls": 492,
+          "photoBuildingCount": 9
+        },
+        {
+          "id": 263807970,
+          "name": "彭康书院 东18 19 20舍",
+          "drawCalls": 378,
+          "photoBuildingCount": 9
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    }
+  ]
+}
