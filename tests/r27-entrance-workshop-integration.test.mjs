@@ -6,8 +6,8 @@ import {EAST_HISTORIC_IDS} from '../src/east-historic-asset.js'
 const data=JSON.parse(readFileSync(new URL('../public/data/campus.json',import.meta.url),'utf8'))
 const baseline=JSON.stringify(data)
 test('R27 integrates one new photo-guided building without double-owning existing East One',()=>{
- assert.equal(PHOTO_BUILDING_IDS.length,12)
- assert.equal(new Set(PHOTO_BUILDING_IDS).size,12)
+ assert.ok(PHOTO_BUILDING_IDS.length>=12,'all earlier R27 buildings retained')
+ assert.equal(new Set(PHOTO_BUILDING_IDS).size,PHOTO_BUILDING_IDS.length)
  assert.equal(isPhotoBuilding(263633887),true,'Workshop A now has its own geometry')
  assert.equal(isPhotoBuilding(264420412),false,'Workshop B is a separate structure')
  assert.equal(isPhotoBuilding(263625677),false,'East One is ALREADY owned by the historic shell, overlay only')
@@ -15,7 +15,7 @@ test('R27 integrates one new photo-guided building without double-owning existin
  assert.ok(EAST_HISTORIC_IDS.includes(263625677))
  const g=createPhotoBuildingAssets({buildings:data.buildings,baseY:1.1})
  try{
-  assert.equal(g.children.length,12)
+  assert.equal(g.children.length,PHOTO_BUILDING_IDS.length)
   const a=g.children.find(x=>x.userData?.osmIds?.includes(263633887))
   assert.ok(a,'Workshop A must load')
   assert.equal(a.userData.otherWorkshopIdExcluded,264420412)

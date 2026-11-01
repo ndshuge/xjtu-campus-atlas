@@ -10,6 +10,7 @@ import {createNanyangEast8Asset,NANYANG_EAST8_ID} from './assets/north/nanyang-e
 import {createNanyangEast9Asset,NANYANG_EAST9_ID} from './assets/north/nanyang-east9-asset.js'
 import {createPengkangCompoundAsset,PENGKANG_COMPOUND_ID} from './assets/north/pengkang-compound-asset.js'
 import {createKangqiaoDiningAsset,KANGQIAO_DINING_ID} from './assets/north/kangqiao-dining-asset.js'
+import {UNIFIED_BUILDING_REPLACEMENTS} from './building-unification.js'
 
 const additionalSouthFactories=Object.freeze([
  [MATH_BUILDING_ID,createMathBuildingAsset],
@@ -23,7 +24,7 @@ const northFactories=Object.freeze([
  [PENGKANG_COMPOUND_ID,createPengkangCompoundAsset],
  [KANGQIAO_DINING_ID,createKangqiaoDiningAsset]
 ])
-export const PHOTO_BUILDING_IDS=Object.freeze([...Z_NEGATIVE_ASSET_IDS,...additionalSouthFactories.map(x=>x[0]),...northFactories.map(x=>x[0])])
+export const PHOTO_BUILDING_IDS=Object.freeze([...Z_NEGATIVE_ASSET_IDS,...additionalSouthFactories.map(x=>x[0]),...northFactories.map(x=>x[0]),...UNIFIED_BUILDING_REPLACEMENTS.map(x=>x.osmId)])
 const owned=new Set(PHOTO_BUILDING_IDS)
 export const isPhotoBuilding=id=>owned.has(id)
 
@@ -58,7 +59,7 @@ export function createPhotoBuildingAssets({buildings,baseY=1.1,uniforms={},stage
  const southern=createZNegativeBuildingAssets({buildings,baseY,uniforms,stage})
  for(const asset of southern.children.slice()){southern.remove(asset);group.add(asset)}
  // Individual branch assets own geometry and dispose methods.
- for(const [id,create] of [...additionalSouthFactories,...northFactories]){
+ for(const [id,create] of [...additionalSouthFactories,...northFactories,...UNIFIED_BUILDING_REPLACEMENTS.map(s=>[s.osmId,s.create])]){
   const building=buildings.find(b=>b.osmId===id)
   if(!building)continue
   group.add(create({building,buildingIndex:buildings.indexOf(building),baseY,uniforms,stage}))

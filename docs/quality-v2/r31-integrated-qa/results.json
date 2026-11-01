@@ -1,0 +1,142 @@
+{
+  "site": "http://127.0.0.1:19031/",
+  "date": "2026-11-01T14:03:59.271Z",
+  "results": [
+    {
+      "name": "desktop",
+      "buildings": [
+        {
+          "id": 264106085,
+          "overview": 209,
+          "near": 83,
+          "dropPercent": 60,
+          "drawCalls": 391
+        },
+        {
+          "id": 263808681,
+          "overview": 188,
+          "near": 61,
+          "dropPercent": 68,
+          "drawCalls": 710
+        },
+        {
+          "id": 263808685,
+          "overview": 191,
+          "near": 81,
+          "dropPercent": 57,
+          "drawCalls": 635
+        },
+        {
+          "id": 1288039224,
+          "overview": 191,
+          "near": 81,
+          "dropPercent": 57,
+          "drawCalls": 314
+        },
+        {
+          "id": 264106102,
+          "overview": 186,
+          "near": 62,
+          "dropPercent": 67,
+          "drawCalls": 477
+        },
+        {
+          "id": 263633896,
+          "overview": 197,
+          "near": 79,
+          "dropPercent": 60,
+          "drawCalls": 303
+        },
+        {
+          "id": 263625088,
+          "overview": 166,
+          "near": 107,
+          "dropPercent": 36,
+          "drawCalls": 632
+        },
+        {
+          "id": 263633887,
+          "overview": 216,
+          "near": 86,
+          "dropPercent": 60,
+          "drawCalls": 585
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "portrait-390",
+      "buildings": [
+        {
+          "id": 264106085,
+          "overview": 209,
+          "near": 106,
+          "dropPercent": 49,
+          "drawCalls": 61
+        },
+        {
+          "id": 263808681,
+          "overview": 188,
+          "near": 77,
+          "dropPercent": 59,
+          "drawCalls": 209
+        },
+        {
+          "id": 1288039224,
+          "overview": 191,
+          "near": 86,
+          "dropPercent": 55,
+          "drawCalls": 51
+        },
+        {
+          "id": 263633887,
+          "overview": 216,
+          "near": 110,
+          "dropPercent": 49,
+          "drawCalls": 107
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    },
+    {
+      "name": "landscape-844",
+      "buildings": [
+        {
+          "id": 264106085,
+          "overview": 209,
+          "near": 83,
+          "dropPercent": 60,
+          "drawCalls": 420
+        },
+        {
+          "id": 263808681,
+          "overview": 188,
+          "near": 61,
+          "dropPercent": 68,
+          "drawCalls": 730
+        },
+        {
+          "id": 1288039224,
+          "overview": 191,
+          "near": 81,
+          "dropPercent": 57,
+          "drawCalls": 330
+        },
+        {
+          "id": 263633887,
+          "overview": 216,
+          "near": 86,
+          "dropPercent": 60,
+          "drawCalls": 640
+        }
+      ],
+      "errors": [],
+      "http": [],
+      "passed": true
+    }
+  ]
+}
